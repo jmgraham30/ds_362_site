@@ -25,7 +25,7 @@
     "href": "syllabus.html#required-readings",
     "title": "Syllabus",
     "section": "Required Readings",
-    "text": "Required Readings\n\nAn Introduction to Statistical Learning 2nd Ed. by James, Witten, Hastie, and Tibshirani, freely available online here.\nElements of Statistical Learning 2nd Ed. by Hastie, Tibshirani, and Friedman, freely available online here.\nStatistical Learning with Math and R by Joe Suzuki, available online through the Weinberg Library here."
+    "text": "Required Readings\n\nAn Introduction to Statistical Learning 2nd Ed. by James, Witten, Hastie, and Tibshirani, freely available online here.\nStatistical Learning with Math and R by Joe Suzuki, available online through the Weinberg Library here.\nTidy Modeling with R by Max Kuhn & Julia Silge, freely available online here."
   },
   {
     "objectID": "syllabus.html#r-references",
@@ -39,6 +39,6 @@
     "href": "syllabus.html#additional-readings",
     "title": "Syllabus",
     "section": "Additional Readings",
-    "text": "Additional Readings\n\nStatistical Learning from a Regression Perspective by Richard A. Berk, available online through the Weinberg Library here."
+    "text": "Additional Readings\n\nElements of Statistical Learning 2nd Ed. by Hastie, Tibshirani, and Friedman, freely available online here.\nStatistical Learning from a Regression Perspective by Richard A. Berk, available online through the Weinberg Library here."
   }
 ]
