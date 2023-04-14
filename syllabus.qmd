@@ -23,7 +23,7 @@ library(kableExtra)
 
 * **Phone:** (570) 941-7491
 
-* **Course Page:** [link](https://intro-ds.netlify.app/)
+* **Course Page:** [link](https://knowledge-discovery.netlify.app/)
 
 # Course Materials
 
