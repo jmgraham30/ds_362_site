@@ -35,7 +35,10 @@ library(kableExtra)
 
 * Statistical Learning with Math and R by Joe Suzuki, available online through the Weinberg Library [here](https://link-springer-com.ezp.scranton.edu/book/10.1007/978-981-15-7568-6).
 
+## Additional Readings
+
 * Statistical Learning from a Regression Perspective by Richard A. Berk, available online through the Weinberg Library [here](https://link-springer-com.ezp.scranton.edu/book/10.1007/978-3-030-40189-4).
+
 
 ## R References
 
