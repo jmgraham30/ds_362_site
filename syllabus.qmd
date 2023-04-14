@@ -1,0 +1,44 @@
+---
+title: "Syllabus"
+---
+
+```{r}
+#| label: package-loads
+#| include: false
+#| message: false
+library(kableExtra)
+```
+
+# DS 362 Data-Driven Knowledge Discovery
+
+
+# Instructor Information
+
+* **Instructor:** Dr. Jason M. Graham
+
+* **Office:** LSC 319A 
+    + **Office Hours:** TBD You may also make an appointment to meet with us outside of scheduled office hours. Appointments are not necessary for regularly scheduled office hours.
+
+* **Email:** <jason.graham@scranton.edu>
+
+* **Phone:** (570) 941-7491
+
+* **Course Page:** [link](https://intro-ds.netlify.app/)
+
+# Course Materials
+
+## Required Readings
+
+* An Introduction to Statistical Learning 2nd Ed. by James, Witten, Hastie, and Tibshirani, freely available online [here](https://www.statlearning.com/).
+
+* Elements of Statistical Learning 2nd Ed. by Hastie, Tibshirani, and Friedman, freely available online [here](https://hastie.su.domains/ElemStatLearn/).
+
+* Statistical Learning with Math and R by Joe Suzuki, available online through the Weinberg Library [here](https://link-springer-com.ezp.scranton.edu/book/10.1007/978-981-15-7568-6).
+
+* Statistical Learning from a Regression Perspective by Richard A. Berk, available online through the Weinberg Library [here](https://link-springer-com.ezp.scranton.edu/book/10.1007/978-3-030-40189-4).
+
+## R References
+
+* Hands-On Programming with R by Garrett Grolemund, freely available online [here](https://rstudio-education.github.io/hopr/).
+
+* R for Data Science by Hadley Wickham & Garrett Grolemund, freely available online [here](https://r4ds.had.co.nz/index.html).
