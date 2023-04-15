@@ -36,9 +36,11 @@ library(kableExtra)
 * Tidy Modeling with R by
 Max Kuhn & Julia Silge, freely available online [here](https://www.tmwr.org/).
 
-## Additional Readings
+## Recommended Readings
 
 * Elements of Statistical Learning 2nd Ed. by Hastie, Tibshirani, and Friedman, freely available online [here](https://hastie.su.domains/ElemStatLearn/).
+
+* Tree-Based Methods for Statistical Learning by Brandon M. Greenwell, freely available online [here](https://bgreenwell.github.io/treebook/).
 
 * Statistical Learning from a Regression Perspective by Richard A. Berk, available online through the Weinberg Library [here](https://link-springer-com.ezp.scranton.edu/book/10.1007/978-3-030-40189-4).
 
