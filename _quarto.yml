@@ -9,6 +9,10 @@ website:
         text: Home
       - href: syllabus.qmd
         text: Syllabus
+    right:
+      - icon: github
+        href: https://github.com/jmgraham30/ds_362_site
+        aria-label: GitHub
 
 format:
   html:
