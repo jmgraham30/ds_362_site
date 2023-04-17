@@ -38,6 +38,10 @@ Max Kuhn & Julia Silge, freely available online [here](https://www.tmwr.org/).
 
 ## Recommended Readings
 
+* Telling Stories with Data by Rohan Alexander, freely available online [here](https://tellingstorieswithdata.com/).
+
+* Data Science: A First Introduction by Tiffany Timbers, Trevor Campbell, and Melissa Lee, freely available online [here](https://datasciencebook.ca/).
+
 * Elements of Statistical Learning 2nd Ed. by Hastie, Tibshirani, and Friedman, freely available online [here](https://hastie.su.domains/ElemStatLearn/).
 
 * Tree-Based Methods for Statistical Learning by Brandon M. Greenwell, freely available online [here](https://bgreenwell.github.io/treebook/).
