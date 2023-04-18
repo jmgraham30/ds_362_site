@@ -42,11 +42,13 @@ Max Kuhn & Julia Silge, freely available online [here](https://www.tmwr.org/).
 
 * Data Science: A First Introduction by Tiffany Timbers, Trevor Campbell, and Melissa Lee, freely available online [here](https://datasciencebook.ca/).
 
-* Elements of Statistical Learning 2nd Ed. by Hastie, Tibshirani, and Friedman, freely available online [here](https://hastie.su.domains/ElemStatLearn/).
-
 * Tree-Based Methods for Statistical Learning by Brandon M. Greenwell, freely available online [here](https://bgreenwell.github.io/treebook/).
 
 * Statistical Learning from a Regression Perspective by Richard A. Berk, available online through the Weinberg Library [here](https://link-springer-com.ezp.scranton.edu/book/10.1007/978-3-030-40189-4).
+
+## Further Reading
+
+* Elements of Statistical Learning 2nd Ed. by Hastie, Tibshirani, and Friedman, freely available online [here](https://hastie.su.domains/ElemStatLearn/).
 
 
 ## R References
@@ -54,3 +56,5 @@ Max Kuhn & Julia Silge, freely available online [here](https://www.tmwr.org/).
 * Hands-On Programming with R by Garrett Grolemund, freely available online [here](https://rstudio-education.github.io/hopr/).
 
 * R for Data Science by Hadley Wickham & Garrett Grolemund, freely available online [here](https://r4ds.had.co.nz/index.html).
+
+*  Data Visualization A Practical Introduction by Healy, freely available online [here](https://socviz.co/index.html#preface).
