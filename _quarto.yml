@@ -9,6 +9,8 @@ website:
         text: Home
       - href: syllabus.qmd
         text: Syllabus
+      - href: links.qmd
+        text: Links
     right:
       - icon: github
         href: https://github.com/jmgraham30/ds_362_site

@@ -54,5 +54,19 @@
     "title": "Syllabus",
     "section": "Further Reading",
     "text": "Further Reading\n\nElements of Statistical Learning 2nd Ed. by Hastie, Tibshirani, and Friedman, freely available online here."
+  },
+  {
+    "objectID": "links.html",
+    "href": "links.html",
+    "title": "Links",
+    "section": "",
+    "text": "From Data to Viz website on visualizing data, link here."
+  },
+  {
+    "objectID": "links.html#texts",
+    "href": "links.html#texts",
+    "title": "Links",
+    "section": "Texts",
+    "text": "Texts\n\nDeep Learning and Scientific Computing with R torch available here."
   }
 ]

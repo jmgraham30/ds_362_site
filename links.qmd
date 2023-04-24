@@ -1,0 +1,13 @@
+---
+title: "Links"
+---
+
+## Websites
+
+* From Data to Viz website on visualizing data, link [here](https://www.data-to-viz.com/#explore).
+
+## Texts
+
+* Deep Learning and Scientific Computing with R torch available [here](https://skeydan.github.io/Deep-Learning-and-Scientific-Computing-with-R-torch/).
+
+
