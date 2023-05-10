@@ -4,6 +4,8 @@ title: "Links"
 
 ## Websites
 
+* Tidy Tuesday data repository, link [here](https://github.com/rfordatascience/tidytuesday/tree/master).
+
 * From Data to Viz website on visualizing data, link [here](https://www.data-to-viz.com/#explore).
 
 ## Texts

@@ -60,7 +60,7 @@
     "href": "links.html",
     "title": "Links",
     "section": "",
-    "text": "From Data to Viz website on visualizing data, link here."
+    "text": "Tidy Tuesday data repository, link here.\nFrom Data to Viz website on visualizing data, link here."
   },
   {
     "objectID": "links.html#texts",
@@ -68,5 +68,19 @@
     "title": "Links",
     "section": "Texts",
     "text": "Texts\n\nDeep Learning and Scientific Computing with R torch available here."
+  },
+  {
+    "objectID": "index.html#welcome",
+    "href": "index.html#welcome",
+    "title": "DS 362: Data-Driven Knowledge Discovery",
+    "section": "",
+    "text": "Welcome to the course website for DS 362: Data-Driven Knowledge Discovery for Fall 2023.\nThis course is offered at the University of Scranton and is being taught by Jason M. Graham (Mathematics Department) during the Fall 2023 semester."
+  },
+  {
+    "objectID": "links.html#websites",
+    "href": "links.html#websites",
+    "title": "Links",
+    "section": "",
+    "text": "Tidy Tuesday data repository, link here.\nFrom Data to Viz website on visualizing data, link here."
   }
 ]
