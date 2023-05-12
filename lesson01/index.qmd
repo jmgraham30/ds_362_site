@@ -1,0 +1,69 @@
+---
+title: "Lesson 1"
+subtitle: "Basic Concepts and Terminology"
+author: "JMG"
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+    toc: true
+    toc-location: left
+bibliography: lesson01.bib
+---
+
+```{r}
+#| echo: true
+#| message: false
+#| warning: false
+
+# load packages used in document
+library(tidyverse)
+```
+
+
+## Learning Objectives
+
+
+
+
+## Readings, etc.
+
+[@TT]
+
+
+
+## References
+
+::: {#refs}
+:::
+
+
+:::{.callout-tip collapse="true"}
+## Expand for Session Info
+```{r}
+#| echo: false
+
+
+library(sessioninfo)
+# save the session info as an object
+pkg_sesh <- session_info(pkgs = "attached")
+
+# get the quarto version
+quarto_version <- system("quarto --version", intern = TRUE)
+
+# inject the quarto info
+pkg_sesh$platform$quarto <- paste(
+  system("quarto --version", intern = TRUE), 
+  "@", 
+  quarto::quarto_path()
+  )
+
+# print it out
+pkg_sesh
+```
+
+:::
+
+
+
+
