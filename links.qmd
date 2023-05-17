@@ -1,6 +1,14 @@
 ---
 title: "Links"
 ---
+  
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+library(tidyverse)
+```
 
 ## Websites
 
@@ -13,3 +21,13 @@ title: "Links"
 * Deep Learning and Scientific Computing with R torch available [here](https://skeydan.github.io/Deep-Learning-and-Scientific-Computing-with-R-torch/).
 
 
+## Videos
+
+*  Getting started with Quarto YouTube video, link [here](https://youtu.be/YK6IjJkjkiI).
+  
+```{r}
+#| echo: false
+
+vembedr::embed_youtube(id="_f3latmOhew",height=450) %>%
+  vembedr::use_align("center")
+```
