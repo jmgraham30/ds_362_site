@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.475">
+<meta name="generator" content="quarto-1.3.353">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,7 +17,7 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
 </style>
@@ -61,6 +61,9 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -76,31 +79,35 @@ ul.task-list li input[type="checkbox"] {
     <span class="navbar-title">DS 362</span>
     </a>
   </div>
+            <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html">
+    <a class="nav-link" href="./index.html" rel="" target="">
  <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./syllabus.html" aria-current="page">
+    <a class="nav-link active" href="./syllabus.html" rel="" target="" aria-current="page">
  <span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./links.html" rel="" target="">
+ <span class="menu-text">Links</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/jmgraham30/ds_362_site"><i class="bi bi-github" role="img" aria-label="GitHub">
+    <a class="nav-link" href="https://github.com/jmgraham30/ds_362_site" rel="" target=""><i class="bi bi-github" role="img" aria-label="GitHub">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
 </ul>
-              <div class="quarto-toggle-container">
-                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
-              </div>
-              <div id="quarto-search" class="" title="Search"></div>
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
@@ -122,6 +129,41 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#recommended-readings" id="toc-recommended-readings" class="nav-link" data-scroll-target="#recommended-readings">Recommended Readings</a></li>
   <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">Further Reading</a></li>
   <li><a href="#r-references" id="toc-r-references" class="nav-link" data-scroll-target="#r-references">R References</a></li>
+  </ul></li>
+  <li><a href="#course-information" id="toc-course-information" class="nav-link" data-scroll-target="#course-information">Course Information</a>
+  <ul class="collapse">
+  <li><a href="#course-description" id="toc-course-description" class="nav-link" data-scroll-target="#course-description">Course Description</a>
+  <ul class="collapse">
+  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link" data-scroll-target="#prerequisites">Prerequisites</a></li>
+  </ul></li>
+  <li><a href="#student-learning-objectives-and-assessment" id="toc-student-learning-objectives-and-assessment" class="nav-link" data-scroll-target="#student-learning-objectives-and-assessment">Student Learning Objectives and Assessment:</a></li>
+  </ul></li>
+  <li><a href="#course-policies-and-procedures" id="toc-course-policies-and-procedures" class="nav-link" data-scroll-target="#course-policies-and-procedures">Course Policies and Procedures</a>
+  <ul class="collapse">
+  <li><a href="#grading" id="toc-grading" class="nav-link" data-scroll-target="#grading">Grading</a>
+  <ul class="collapse">
+  <li><a href="#grade-policy" id="toc-grade-policy" class="nav-link" data-scroll-target="#grade-policy">Grade Policy</a></li>
+  <li><a href="#grade-scale" id="toc-grade-scale" class="nav-link" data-scroll-target="#grade-scale">Grade Scale</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#assignments" id="toc-assignments" class="nav-link" data-scroll-target="#assignments">Assignments</a></li>
+  <li><a href="#course-timeline" id="toc-course-timeline" class="nav-link" data-scroll-target="#course-timeline">Course Timeline</a>
+  <ul class="collapse">
+  <li><a href="#weekly-schedule" id="toc-weekly-schedule" class="nav-link" data-scroll-target="#weekly-schedule">Weekly Schedule</a></li>
+  <li><a href="#important-dates" id="toc-important-dates" class="nav-link" data-scroll-target="#important-dates">Important Dates</a></li>
+  </ul></li>
+  <li><a href="#university-resources-for-students-and-academic-honesty" id="toc-university-resources-for-students-and-academic-honesty" class="nav-link" data-scroll-target="#university-resources-for-students-and-academic-honesty">University Resources for Students and Academic Honesty</a>
+  <ul class="collapse">
+  <li><a href="#students-with-disabilities" id="toc-students-with-disabilities" class="nav-link" data-scroll-target="#students-with-disabilities">Students with Disabilities</a></li>
+  <li><a href="#writing-center-services" id="toc-writing-center-services" class="nav-link" data-scroll-target="#writing-center-services">Writing Center Services</a></li>
+  <li><a href="#academic-honesty-and-integrity" id="toc-academic-honesty-and-integrity" class="nav-link" data-scroll-target="#academic-honesty-and-integrity">Academic Honesty and Integrity</a></li>
+  <li><a href="#my-reporting-obligation-as-a-responsible-employee" id="toc-my-reporting-obligation-as-a-responsible-employee" class="nav-link" data-scroll-target="#my-reporting-obligation-as-a-responsible-employee">My Reporting Obligation as a Responsible Employee</a></li>
+  <li><a href="#non-discrimination-statement" id="toc-non-discrimination-statement" class="nav-link" data-scroll-target="#non-discrimination-statement">Non-discrimination Statement</a>
+  <ul class="collapse">
+  <li><a href="#about-pronouns" id="toc-about-pronouns" class="nav-link" data-scroll-target="#about-pronouns">About Pronouns</a></li>
+  </ul></li>
+  <li><a href="#student-mental-health-suggestions-and-resources" id="toc-student-mental-health-suggestions-and-resources" class="nav-link" data-scroll-target="#student-mental-health-suggestions-and-resources">Student Mental Health: Suggestions and Resources</a></li>
+  <li><a href="#final-note" id="toc-final-note" class="nav-link" data-scroll-target="#final-note">Final Note</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -194,6 +236,246 @@ ul.task-list li input[type="checkbox"] {
 <li><p>R for Data Science by Hadley Wickham &amp; Garrett Grolemund, freely available online <a href="https://r4ds.had.co.nz/index.html">here</a>.</p></li>
 <li><p>Data Visualization A Practical Introduction by Healy, freely available online <a href="https://socviz.co/index.html#preface">here</a>.</p></li>
 </ul>
+</section>
+</section>
+<section id="course-information" class="level1">
+<h1>Course Information</h1>
+<section id="course-description" class="level2">
+<h2 class="anchored" data-anchor-id="course-description">Course Description</h2>
+<section id="prerequisites" class="level3">
+<h3 class="anchored" data-anchor-id="prerequisites">Prerequisites</h3>
+</section>
+</section>
+<section id="student-learning-objectives-and-assessment" class="level2">
+<h2 class="anchored" data-anchor-id="student-learning-objectives-and-assessment">Student Learning Objectives and Assessment:</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-objectives" class="anchored">
+<table class="lightable-paper lightable-hover table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>Table&nbsp;1: Course objectives and assessment.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Course SLO</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Assessment</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left; width: 25em;">After completing this course, students will be able to import, format, and transform common data-set types programmatically and build effective visualizations of data</td>
+<td style="text-align: left; width: 25em;">Homework, Data Package Assignment, and Project</td>
+</tr>
+<tr class="even">
+<td style="text-align: left; width: 25em;">After completing this course, students will be able to apply appropriate exploration and modeling techniques to learn from data.</td>
+<td style="text-align: left; width: 25em;">Homework and Project</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; width: 25em;">After completing this course, students will be able to present and communicate results obtained via data analysis in an effective manner.</td>
+<td style="text-align: left; width: 25em;">Homework, Data Package Assignment, and Project</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</div>
+</div>
+</section>
+</section>
+<section id="course-policies-and-procedures" class="level1">
+<h1>Course Policies and Procedures</h1>
+<section id="grading" class="level2">
+<h2 class="anchored" data-anchor-id="grading">Grading</h2>
+<section id="grade-policy" class="level3">
+<h3 class="anchored" data-anchor-id="grade-policy">Grade Policy</h3>
+</section>
+<section id="grade-scale" class="level3">
+<h3 class="anchored" data-anchor-id="grade-scale">Grade Scale</h3>
+<p>Letter grades will be assigned based on the following scale:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-grades" class="anchored">
+<table class="lightable-paper lightable-hover table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>Table&nbsp;2: Letter grade scale.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Grade Range</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Letter Grade</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">94-100</td>
+<td style="text-align: left;">A</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">90-93</td>
+<td style="text-align: left;">A-</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">87-89</td>
+<td style="text-align: left;">B+</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">83-86</td>
+<td style="text-align: left;">B</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">80-82</td>
+<td style="text-align: left;">B-</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">76-79</td>
+<td style="text-align: left;">C+</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">72-75</td>
+<td style="text-align: left;">C</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">69-71</td>
+<td style="text-align: left;">C-</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">65-68</td>
+<td style="text-align: left;">D+</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">60-64</td>
+<td style="text-align: left;">D</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&lt;60</td>
+<td style="text-align: left;">F</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="assignments" class="level1">
+<h1>Assignments</h1>
+</section>
+<section id="course-timeline" class="level1">
+<h1>Course Timeline</h1>
+<section id="weekly-schedule" class="level2">
+<h2 class="anchored" data-anchor-id="weekly-schedule">Weekly Schedule</h2>
+<ul>
+<li><p>Week 1:</p></li>
+<li><p>Week 2:</p></li>
+<li><p>Week 3:</p></li>
+<li><p>Week 4:</p></li>
+<li><p>Week 5:</p></li>
+<li><p>Week 6:</p></li>
+<li><p>Week 7:</p></li>
+<li><p>Week 8:</p></li>
+<li><p>Week 9:</p></li>
+<li><p>Week 10:</p></li>
+<li><p>Week 11:</p></li>
+<li><p>Week 12:</p></li>
+<li><p>Week 13:</p></li>
+<li><p>Week 14:</p></li>
+<li><p>Week 15:</p></li>
+</ul>
+</section>
+<section id="important-dates" class="level2">
+<h2 class="anchored" data-anchor-id="important-dates">Important Dates</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div id="tbl-dates" class="anchored">
+<table class="lightable-paper lightable-hover table table-sm table-striped small" data-quarto-postprocess="true">
+<caption>Table&nbsp;3: Important dates.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Event</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Date</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left; width: 30em; border-left: 1px solid; border-right: 1px solid;">Classes begin</td>
+<td style="text-align: left; width: 30em; border-right: 1px solid;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; width: 30em; border-left: 1px solid; border-right: 1px solid;">Drop (no grade)</td>
+<td style="text-align: left; width: 30em; border-right: 1px solid;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; width: 30em; border-left: 1px solid; border-right: 1px solid;">Fall break</td>
+<td style="text-align: left; width: 30em; border-right: 1px solid;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; width: 30em; border-left: 1px solid; border-right: 1px solid;">Mid-semester</td>
+<td style="text-align: left; width: 30em; border-right: 1px solid;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; width: 30em; border-left: 1px solid; border-right: 1px solid;">Thanksgiving break</td>
+<td style="text-align: left; width: 30em; border-right: 1px solid;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left; width: 30em; border-left: 1px solid; border-right: 1px solid;">Last week</td>
+<td style="text-align: left; width: 30em; border-right: 1px solid;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left; width: 30em; border-left: 1px solid; border-right: 1px solid;">Finals</td>
+<td style="text-align: left; width: 30em; border-right: 1px solid;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+</div>
+</div>
+</section>
+</section>
+<section id="university-resources-for-students-and-academic-honesty" class="level1">
+<h1>University Resources for Students and Academic Honesty</h1>
+<section id="students-with-disabilities" class="level2">
+<h2 class="anchored" data-anchor-id="students-with-disabilities">Students with Disabilities</h2>
+<p>Reasonable academic accommodations may be provided to students who submit relevant and current documentation of their disability. Students are encouraged to contact the Center for Teaching and Learning Excellence (CTLE) at <a href="mailto:disabilityservices@scranton.edu" class="email">disabilityservices@scranton.edu</a> or (570) 941-4038 if they have or think they may have a disability and wish to determine eligibility for any accommodations. For more information, please visit <a href="http://www.scranton.edu/disabilities" class="uri">http://www.scranton.edu/disabilities</a>.</p>
+</section>
+<section id="writing-center-services" class="level2">
+<h2 class="anchored" data-anchor-id="writing-center-services">Writing Center Services</h2>
+<p>The Writing Center focuses on helping students become better writers. Consultants will work one-on-one with students to discuss students’ work and provide feedback at any stage of the writing process. Scheduling appointments early in the writing progress is encouraged.</p>
+<p>To meet with a writing consultant, call (570) 941-6147 to schedule an appointment, or send an email with your available meeting times, the course for which you need assistance, and your phone number to: <a href="mailto:writing-center@scranton.edu" class="email">writing-center@scranton.edu</a>. The Writing Center does offer online appointments for our distance learning students.</p>
+</section>
+<section id="academic-honesty-and-integrity" class="level2">
+<h2 class="anchored" data-anchor-id="academic-honesty-and-integrity">Academic Honesty and Integrity</h2>
+<p>Each student is expected to do their own work. It is also expected that each student respect and abide by the Academic Code of Honesty as set forth in the University of Scranton student handbook. Conduct that violates the Academic Code of Honesty includes plagiarism, duplicate submission of the same work, collusion, providing false information, unauthorized use of computers, theft and destruction of property, and unauthorized possession of tests and other materials. Steps taken in response to suspected violations may include a discussion with the instructor, an informal meeting with the dean of the college, and a hearing before the Academic Dishonesty Hearing Board. Students who are found to have violated the Code will ordinarily be assigned the grade F by the instructor and may face other sanctions. The complete Academic Code of Honesty is located on the University website at <a href="https://www.scranton.edu/academics/wml/acad-integ/acad-code-honesty.shtml" class="uri">https://www.scranton.edu/academics/wml/acad-integ/acad-code-honesty.shtml</a>.</p>
+</section>
+<section id="my-reporting-obligation-as-a-responsible-employee" class="level2">
+<h2 class="anchored" data-anchor-id="my-reporting-obligation-as-a-responsible-employee">My Reporting Obligation as a Responsible Employee</h2>
+<p>As a faculty member, I am deeply invested in the well-being of each student I teach. I am here to assist you with your work in this course. Additionally, if you come to me with other non-course-related concerns, I will do my best to help. It is important for you to know that all faculty members are required to report incidents of sexual harassment or sexual misconduct involving students. This means that I cannot keep information about sexual harassment, sexual assault, sexual exploitation, intimate partner violence or stalking confidential if you share that information with me. I will keep the information as private as I can but am required to bring it to the attention of the University’s Title IX Coordinator, Elizabeth M. Garcia, or Deputy Title IX Coordinator, Diana M. Collins, who, in conversation with you, will explain available support, resources, and options. I will not report anything to anybody without first letting you know and discussing choices as to how to proceed. The University’s Counseling Center (570-941-7620) is available to you as a confidential resource; counselors (in the counseling center) do not have an obligation to report to the Title IX Coordinator.</p>
+</section>
+<section id="non-discrimination-statement" class="level2">
+<h2 class="anchored" data-anchor-id="non-discrimination-statement">Non-discrimination Statement</h2>
+<p>The University is committed to providing an educational, residential, and working environment that is free from harassment and discrimination. Members of the University community, applicants for employment or admissions, guests, and visitors have the right to be free from harassment or discrimination based on race, color, religion, ancestry, gender, sex, pregnancy, sexual orientation, gender identity or expression, age, disability, genetic information, national origin, veteran status, or any other status protected by applicable law.</p>
+<p>Students who believe they have been subject to harassment or discrimination based on any of the above class of characteristics, or experience sexual harassment, sexual misconduct or gender discrimination should contact Elizabeth M. Garcia, Title IX Coordinator, (570) 941-6645 <a href="mailto:elizabeth.garcia2@scranton.edu" class="email">elizabeth.garcia2@scranton.edu</a>, Deputy Title IX Coordinators Diana M. Collins (570) 941-6645 <a href="mailto:diana.collins@scranton.edu" class="email">diana.collins@scranton.edu</a>, or Ms.&nbsp;Lauren Rivera, AVP for Student Life and Dean of Students, at (570)941-7680 <a href="mailto:lauren.rivera@scranton.edu" class="email">lauren.rivera@scranton.edu</a>. The United States Department of Education’s Office for Civil Rights (OCR) enforces Title IX. Information regarding OCR may be found at &lt;www.ed.gov/about/offices/list/ocr/index.html&gt;</p>
+<p>The University of Scranton Sexual Harassment and Sexual Misconduct Policy can be found online at <a href="https://www.scranton.edu/diversity" class="uri">https://www.scranton.edu/diversity</a>. All reporting options and resources are available at <a href="https://www.scranton.edu/CARE" class="uri">https://www.scranton.edu/CARE</a>.</p>
+<section id="about-pronouns" class="level3">
+<h3 class="anchored" data-anchor-id="about-pronouns">About Pronouns</h3>
+<p>It is easy to make assumptions about an individual’s pronouns, but we try not to! Please tell us in class or via a private email if you would like to let us know what your pronouns are, if/when you would like us (and others) to use them, and certainly feel free to correct us or others if we make a mistake. Using the pronouns that a person has indicated they prefer is considered both professional and polite, and as such we ask that all members of our class use the appropriate pronouns.</p>
+<p>If you have questions about this, please feel free to look up more information here (<a href="https://www.mypronouns.org/" class="uri">https://www.mypronouns.org/</a>) or email <a href="mailto:jason.graham@scranton.edu" class="email">jason.graham@scranton.edu</a> with any questions.</p>
+</section>
+</section>
+<section id="student-mental-health-suggestions-and-resources" class="level2">
+<h2 class="anchored" data-anchor-id="student-mental-health-suggestions-and-resources">Student Mental Health: Suggestions and Resources</h2>
+<p>Many students experience mental health challenges at some point in college. Struggles vary and might be related to academics, anxiety, depression, relationships, grief/loss, substance abuse, and other challenges. There are resources to help you and getting help is the smart and courageous thing to do.</p>
+<ul>
+<li><p>Counseling Center (6th Floor O’Hara Hall; 570-941-7620) – Free, confidential individual and group counseling is available on campus.</p></li>
+<li><p>Teletherapy – For students who wish to access therapy via video, phone, and/or chat, the University offers a teletherapy resource. Please contact the Counseling Center (570-941-7620) to inquire about teletherapy.</p></li>
+<li><p><a href="https://www.scranton.edu/studentlife/studentaffairs/chew/mental-health-screenings-.shtml">Mental Health Screenings</a> – Confidential, online “check up from your neck up” to help you determine if you should connect with a mental health professional.</p></li>
+<li><p>Dean of Students Office (201 DeNaples Center; 570-941-7680) – Private support and guidance for students navigating personal challenges that may impact success at the University</p></li>
+</ul>
+</section>
+<section id="final-note" class="level2">
+<h2 class="anchored" data-anchor-id="final-note">Final Note</h2>
+<p>The instructor reserve the right to modify this syllabus; students will immediately be notified of any such changes and an updated syllabus will be made available to the class via the course learning management system.</p>
 
 
 </section>
@@ -342,9 +624,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -409,6 +705,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
