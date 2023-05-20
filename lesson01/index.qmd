@@ -9,7 +9,7 @@ format:
     toc: true
     toc-location: left
 bibliography: lesson01.bib
-license: "CC BY-SA"
+license: "CC BY-NC-SA 4.0"
 ---
 
 ```{r}
