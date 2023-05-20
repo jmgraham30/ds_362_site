@@ -24,13 +24,16 @@ library(tidyverse)
 
 ## Learning Objectives
 
-
+After this lesson, students will be able to:
 
 
 ## Readings, etc.
 
 [@TT]
 
+
+
+## Preparation for the next lesson
 
 
 ## References
