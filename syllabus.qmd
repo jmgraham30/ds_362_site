@@ -1,5 +1,6 @@
 ---
 title: "Syllabus"
+license: "CC BY-SA"
 ---
 
 ```{r}
