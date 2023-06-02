@@ -40,3 +40,12 @@ vembedr::embed_youtube(id="_f3latmOhew",height=450) %>%
 vembedr::embed_youtube(id="R7s7_T4yXak",height=450) %>%
   vembedr::use_align("center")
 ```
+
+* Exploratory data analysis worked example video by Hadley Wickham, link [here](https://youtu.be/go5Au01Jrvs).
+
+```{r}
+#| echo: false
+
+vembedr::embed_youtube(id="go5Au01Jrvs",height=450) %>%
+  vembedr::use_align("center")
+```
