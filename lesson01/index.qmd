@@ -42,6 +42,39 @@ While we will refer often to several texts (most of which have been published on
 
 [^1]: The notebooks are created using [Quarto](https://quarto.org/) and [R markdown](https://rmarkdown.rstudio.com/), topics that we will cover in more detail later.  
 
+## Review of the Data Science Workflow
+
+Before starting our exploration of machine learning, let's review the basic data science workflow as covered in an introductory level data science course. Generally, the steps in the workflow are:
+
+1) Gather data with the goal of using it to gain insight to answer questions or address problems in a specific domain of application. If you're going to use machine learning as part of your data analysis, this is a good place to make sure that you have enough data and also to split your data into a training set and test set.  
+
+2) Document the data and data collection process. 
+
+    * It is important to think carefully about the type of data that is collected and how the data is generated and collected. Data is often generated or collected in such a way that it will contain or reflect biases, misinformation, incomplete information, or other problematic features. When you use data or models to make a decision, the problematic features of the data may influence the decision made with unforeseen negative consequences. See *The Alignment Problem* by Brian Christian for a thoughtful discussion on the issues related to these types of considerations [@christian2020alignment].  
+
+3) Import the data for analysis. If you have not already, you may want to split your data into a training set and test set.
+
+4) Explore and clean the data. Data visualization is essential at this step. 
+
+5) Generate initial insight or more detailed questions. 
+
+6) Decide what type(s) of analysis or analyses are to be performed. This is the stage at which machine learning enters into the process.  
+
+    * Make sure to clearly state what the goals of an analysis are. There are several different types of analyses of data that are common to conduct. See [Table 1.1](https://datasciencebook.ca/intro.html#tab:questions-table) from [@timbers2022data] for a list of these typical analysis types with corresponding examples of questions appropriate for a particular type of analysis, link to table [here](https://datasciencebook.ca/intro.html#tab:questions-table).
+
+7) Assess the analysis. In particular, use an appropriate metric to estimate model error. 
+
+8) At this stage, it may be necessary to repeat steps 1 - 7.
+
+9) Report your findings/results documenting each step in the analysis, and state your conclusions in the context of the question, problem, or application that motivated your analysis. 
+
+
+It is essential the our data science workflow be **reproducible** and **auditable**. That is, each step in a data analysis should be accessible and understandable to others (auditability) and anyone with access to your analysis should be able to re-run the analysis from start to finish and get the same result you did (reproducibility).  @fig-reproducible illustrates the concept of reproducibility. 
+
+[![Artwork by Allison Horst](https://github.com/allisonhorst/stats-illustrations/blob/main/rstats-artwork/reproducibility_court.png?raw=1){#fig-reproducible fig-alt="An illustration of the concept of reproducibility."}](https://allisonhorst.com/)
+
+
+
 ## Preparation for the next lesson
 
 
