@@ -37,6 +37,8 @@ library(kableExtra)
 * Tidy Modeling with R by
 Max Kuhn & Julia Silge, freely available online [here](https://www.tmwr.org/).
 
+* Feature Engineering and Selection: A Practical Approach for Predictive Models by Max Kuhn and Kjell Johnson, freely available online [here]().
+
 ## Recommended Readings
 
 * Telling Stories with Data by Rohan Alexander, freely available online [here](https://tellingstorieswithdata.com/).

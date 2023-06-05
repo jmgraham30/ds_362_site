@@ -25,7 +25,7 @@
     "href": "syllabus.html#required-readings",
     "title": "Syllabus",
     "section": "Required Readings",
-    "text": "Required Readings\n\nAn Introduction to Statistical Learning 2nd Ed. by James, Witten, Hastie, and Tibshirani, freely available online here.\nStatistical Learning with Math and R by Joe Suzuki, available online through the Weinberg Library here.\nTidy Modeling with R by Max Kuhn & Julia Silge, freely available online here."
+    "text": "Required Readings\n\nAn Introduction to Statistical Learning 2nd Ed. by James, Witten, Hastie, and Tibshirani, freely available online here.\nStatistical Learning with Math and R by Joe Suzuki, available online through the Weinberg Library here.\nTidy Modeling with R by Max Kuhn & Julia Silge, freely available online here.\nFeature Engineering and Selection: A Practical Approach for Predictive Models by Max Kuhn and Kjell Johnson, freely available online here."
   },
   {
     "objectID": "syllabus.html#r-references",
