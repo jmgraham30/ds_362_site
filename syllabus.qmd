@@ -24,43 +24,43 @@ library(kableExtra)
 
 * **Phone:** (570) 941-7491
 
-* **Course Page:** [link](https://knowledge-discovery.netlify.app/)
+* **Course Page:** [View course webpage](https://knowledge-discovery.netlify.app/)
 
 # Course Materials
 
 ## Required Readings
 
-* An Introduction to Statistical Learning 2nd Ed. by James, Witten, Hastie, and Tibshirani, freely available online [here](https://www.statlearning.com/).
+* An Introduction to Statistical Learning 2nd Ed. by James, Witten, Hastie, and Tibshirani, [view the free online version of the text](https://www.statlearning.com/).
 
-* Statistical Learning with Math and R by Joe Suzuki, available online through the Weinberg Library [here](https://link-springer-com.ezp.scranton.edu/book/10.1007/978-981-15-7568-6).
+* Statistical Learning with Math and R by Joe Suzuki, available online through the Weinberg Library, [view the text](https://link-springer-com.ezp.scranton.edu/book/10.1007/978-981-15-7568-6).
 
 * Tidy Modeling with R by
-Max Kuhn & Julia Silge, freely available online [here](https://www.tmwr.org/).
+Max Kuhn & Julia Silge, [view the free online version of the text](https://www.tmwr.org/).
 
-* Feature Engineering and Selection: A Practical Approach for Predictive Models by Max Kuhn and Kjell Johnson, freely available online [here]().
+* Feature Engineering and Selection: A Practical Approach for Predictive Models by Max Kuhn and Kjell Johnson, [view the free online version of the text](http://www.feat.engineering/).
 
 ## Recommended Readings
 
-* Telling Stories with Data by Rohan Alexander, freely available online [here](https://tellingstorieswithdata.com/).
+* Telling Stories with Data by Rohan Alexander,  [view the free online version of the text](https://tellingstorieswithdata.com/).
 
-* Data Science: A First Introduction by Tiffany Timbers, Trevor Campbell, and Melissa Lee, freely available online [here](https://datasciencebook.ca/).
+* Data Science: A First Introduction by Tiffany Timbers, Trevor Campbell, and Melissa Lee,  [view the free online version of the text](https://datasciencebook.ca/).
 
-* Tree-Based Methods for Statistical Learning by Brandon M. Greenwell, freely available online [here](https://bgreenwell.github.io/treebook/).
+* Tree-Based Methods for Statistical Learning by Brandon M. Greenwell, [view the free online version of the text](https://bgreenwell.github.io/treebook/).
 
-* Statistical Learning from a Regression Perspective by Richard A. Berk, available online through the Weinberg Library [here](https://link-springer-com.ezp.scranton.edu/book/10.1007/978-3-030-40189-4).
+* Statistical Learning from a Regression Perspective by Richard A. Berk. Available online through the Weinberg Library, [view the text](https://link-springer-com.ezp.scranton.edu/book/10.1007/978-3-030-40189-4).
 
 ## Further Reading
 
-* Elements of Statistical Learning 2nd Ed. by Hastie, Tibshirani, and Friedman, freely available online [here](https://hastie.su.domains/ElemStatLearn/).
+* Elements of Statistical Learning 2nd Ed. by Hastie, Tibshirani, and Friedman, [view the free online version of the text](https://hastie.su.domains/ElemStatLearn/).
 
 
 ## R References
 
-* Hands-On Programming with R by Garrett Grolemund, freely available online [here](https://rstudio-education.github.io/hopr/).
+* Hands-On Programming with R by Garrett Grolemund, [view the free online version of the text](https://rstudio-education.github.io/hopr/).
 
-* R for Data Science by Hadley Wickham & Garrett Grolemund, freely available online [here](https://r4ds.had.co.nz/index.html).
+* R for Data Science by Hadley Wickham & Garrett Grolemund,  [view the free online version of the text](https://r4ds.had.co.nz/index.html).
 
-*  Data Visualization A Practical Introduction by Healy, freely available online [here](https://socviz.co/index.html#preface).
+*  Data Visualization A Practical Introduction by Healy,  [view the free online version of the text](https://socviz.co/index.html#preface).
 
 # Course Information
 

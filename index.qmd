@@ -6,7 +6,7 @@ title: "DS 362: Data-Driven Knowledge Discovery"
 
 Welcome to the course website for DS 362: Data-Driven Knowledge Discovery for Fall 2023.
 
-This course is offered at the [University of Scranton](https://www.scranton.edu/) and is being taught by [Jason M. Graham](https://sites.google.com/site/jasonmgrahamus/) ([Mathematics Department](https://www.scranton.edu/academics/cas/math/index.shtml)) during the Fall 2023 semester.
+This course is offered at the [University of Scranton](https://www.scranton.edu/) and is being taught by [Mathematics Department](https://www.scranton.edu/academics/cas/math/index.shtml) faculty member [Jason M. Graham](https://sites.google.com/site/jasonmgrahamus/) during the Fall 2023 semester.
 
 
 

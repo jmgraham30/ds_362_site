@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "DS 362: Data-Driven Knowledge Discovery",
     "section": "",
-    "text": "Welcome to the course website for DS 362: Data-Driven Knowledge Discovery for Fall 2023.\nThis course is offered at the University of Scranton and is being taught by Jason M. Graham (Mathematics Department) during the Fall 2023 semester."
+    "text": "Welcome to the course website for DS 362: Data-Driven Knowledge Discovery for Fall 2023.\nThis course is offered at the University of Scranton and is being taught by Mathematics Department faculty member Jason M. Graham during the Fall 2023 semester."
   },
   {
     "objectID": "index.html#license",
@@ -25,14 +25,14 @@
     "href": "syllabus.html#required-readings",
     "title": "Syllabus",
     "section": "Required Readings",
-    "text": "Required Readings\n\nAn Introduction to Statistical Learning 2nd Ed. by James, Witten, Hastie, and Tibshirani, freely available online here.\nStatistical Learning with Math and R by Joe Suzuki, available online through the Weinberg Library here.\nTidy Modeling with R by Max Kuhn & Julia Silge, freely available online here.\nFeature Engineering and Selection: A Practical Approach for Predictive Models by Max Kuhn and Kjell Johnson, freely available online here."
+    "text": "Required Readings\n\nAn Introduction to Statistical Learning 2nd Ed. by James, Witten, Hastie, and Tibshirani, view the free online version of the text.\nStatistical Learning with Math and R by Joe Suzuki, available online through the Weinberg Library, view the text.\nTidy Modeling with R by Max Kuhn & Julia Silge, view the free online version of the text.\nFeature Engineering and Selection: A Practical Approach for Predictive Models by Max Kuhn and Kjell Johnson, view the free online version of the text."
   },
   {
     "objectID": "syllabus.html#r-references",
     "href": "syllabus.html#r-references",
     "title": "Syllabus",
     "section": "R References",
-    "text": "R References\n\nHands-On Programming with R by Garrett Grolemund, freely available online here.\nR for Data Science by Hadley Wickham & Garrett Grolemund, freely available online here.\nData Visualization A Practical Introduction by Healy, freely available online here."
+    "text": "R References\n\nHands-On Programming with R by Garrett Grolemund, view the free online version of the text.\nR for Data Science by Hadley Wickham & Garrett Grolemund, view the free online version of the text.\nData Visualization A Practical Introduction by Healy, view the free online version of the text."
   },
   {
     "objectID": "syllabus.html#additional-readings",
@@ -46,14 +46,14 @@
     "href": "syllabus.html#recommended-readings",
     "title": "Syllabus",
     "section": "Recommended Readings",
-    "text": "Recommended Readings\n\nTelling Stories with Data by Rohan Alexander, freely available online here.\nData Science: A First Introduction by Tiffany Timbers, Trevor Campbell, and Melissa Lee, freely available online here.\nTree-Based Methods for Statistical Learning by Brandon M. Greenwell, freely available online here.\nStatistical Learning from a Regression Perspective by Richard A. Berk, available online through the Weinberg Library here."
+    "text": "Recommended Readings\n\nTelling Stories with Data by Rohan Alexander, view the free online version of the text.\nData Science: A First Introduction by Tiffany Timbers, Trevor Campbell, and Melissa Lee, view the free online version of the text.\nTree-Based Methods for Statistical Learning by Brandon M. Greenwell, view the free online version of the text.\nStatistical Learning from a Regression Perspective by Richard A. Berk. Available online through the Weinberg Library, view the text."
   },
   {
     "objectID": "syllabus.html#further-reading",
     "href": "syllabus.html#further-reading",
     "title": "Syllabus",
     "section": "Further Reading",
-    "text": "Further Reading\n\nElements of Statistical Learning 2nd Ed. by Hastie, Tibshirani, and Friedman, freely available online here."
+    "text": "Further Reading\n\nElements of Statistical Learning 2nd Ed. by Hastie, Tibshirani, and Friedman, view the free online version of the text."
   },
   {
     "objectID": "links.html",
@@ -74,7 +74,7 @@
     "href": "index.html#welcome",
     "title": "DS 362: Data-Driven Knowledge Discovery",
     "section": "",
-    "text": "Welcome to the course website for DS 362: Data-Driven Knowledge Discovery for Fall 2023.\nThis course is offered at the University of Scranton and is being taught by Jason M. Graham (Mathematics Department) during the Fall 2023 semester."
+    "text": "Welcome to the course website for DS 362: Data-Driven Knowledge Discovery for Fall 2023.\nThis course is offered at the University of Scranton and is being taught by Mathematics Department faculty member Jason M. Graham during the Fall 2023 semester."
   },
   {
     "objectID": "links.html#websites",
