@@ -12,20 +12,20 @@ library(tidyverse)
 
 ## Websites
 
-* Tidy Tuesday data repository, link [here](https://github.com/rfordatascience/tidytuesday/tree/master).
+* Tidy Tuesday data repository, [view the website](https://github.com/rfordatascience/tidytuesday/tree/master).
 
-* From Data to Viz website on visualizing data, link [here](https://www.data-to-viz.com/#explore).
+* From Data to Viz website on visualizing data,  [view the website](https://www.data-to-viz.com/#explore).
 
-* [Julia Silge's](https://juliasilge.com/) blog posts (mostly) on TidyTuesday data analyses, link [here](https://juliasilge.com/blog/).
+* [Julia Silge's](https://juliasilge.com/) blog posts (mostly) on TidyTuesday data analyses, [view the website](https://juliasilge.com/blog/).
 
 ## Texts
 
-* Deep Learning and Scientific Computing with R torch available [here](https://skeydan.github.io/Deep-Learning-and-Scientific-Computing-with-R-torch/).
+* Deep Learning and Scientific Computing with R torch, [view the free online version of the text](https://skeydan.github.io/Deep-Learning-and-Scientific-Computing-with-R-torch/).
 
 
 ## Videos
 
-*  Getting started with Quarto YouTube video, link [here](https://youtu.be/YK6IjJkjkiI).
+*  Getting started with Quarto YouTube video, [watch video on YouTube](https://youtu.be/YK6IjJkjkiI).
   
 ```{r}
 #| echo: false
