@@ -30,7 +30,7 @@ library(kableExtra)
 
 ## Required Readings
 
-* An Introduction to Statistical Learning 2nd Ed. by James, Witten, Hastie, and Tibshirani, [view the free online version of the text](https://www.statlearning.com/).
+* An Introduction to Statistical Learning 2nd Ed. by James, Witten, Hastie, and Tibshirani, [view the free online version of the text](https://www.statlearning.com/). There is a set of lecture videos associated with this text. [View these videos on YouTube](https://www.youtube.com/playlist?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e).
 
 * Statistical Learning with Math and R by Joe Suzuki, available online through the Weinberg Library, [view the text](https://link-springer-com.ezp.scranton.edu/book/10.1007/978-981-15-7568-6).
 

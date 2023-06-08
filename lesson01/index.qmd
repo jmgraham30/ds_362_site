@@ -27,9 +27,32 @@ library(tidyverse)
 After this lesson, students will be able to:
 
 
+
+
 ## Readings, etc.
 
 [@TT]
+
+The following two video lectures are also recommended:
+
+* Motivating problems for machine (statistical) learning. [Watch video on YouTube](https://youtu.be/LvySJGj-88U).
+  
+```{r}
+#| echo: false
+
+vembedr::embed_youtube(id="LvySJGj-88U",height=450) %>%
+  vembedr::use_align("center")
+```
+
+
+* Supervised and unsupervised learning. [Watch video on YouTube](https://youtu.be/B9s8rpdNxU0).
+  
+```{r}
+#| echo: false
+
+vembedr::embed_youtube(id="B9s8rpdNxU0",height=450) %>%
+  vembedr::use_align("center")
+```
 
 
 ## Course Overview
