@@ -31,9 +31,9 @@ After this lesson, students will be able to:
 
 ## Readings, etc.
 
-[@TT]
+1) Read Chapter 1 of *An Introduction to Statistical Learning* [@tibshirani2017introduction]. 
 
-The following two video lectures are also recommended:
+2) The following two video lectures are also recommended:
 
 * Motivating problems for machine (statistical) learning. [Watch video on YouTube](https://youtu.be/LvySJGj-88U).
   
@@ -54,6 +54,7 @@ vembedr::embed_youtube(id="B9s8rpdNxU0",height=450) %>%
   vembedr::use_align("center")
 ```
 
+3) Skim the README for the [Tidy Tuesday data repository](https://github.com/rfordatascience/tidytuesday) [@TT]. [View the repository.](https://github.com/rfordatascience/tidytuesday) Throughout the semester, we will use example data from the Tidy Tuesday data repository.
 
 ## Course Overview
 
@@ -99,6 +100,19 @@ It is essential the our data science workflow be **reproducible** and **auditabl
 
 
 ## Preparation for the next lesson
+
+For next time:
+
+* Read section 2.1 from of *An Introduction to Statistical Learning* [@tibshirani2017introduction].
+
+* Watch the corresponding video lecture on regression. [View on YouTube](https://youtu.be/ox0cKk7h4o0).
+
+```{r}
+#| echo: false
+
+vembedr::embed_youtube(id="ox0cKk7h4o0",height=450) %>%
+  vembedr::use_align("center")
+```
 
 
 ## References
