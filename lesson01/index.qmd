@@ -21,6 +21,11 @@ license: "CC BY-NC-SA 4.0"
 library(tidyverse)
 library(tidytuesdayR)
 library(ISLR2)
+
+theme_set(theme_minimal(base_size = 13))
+
+egg_prod_df  <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-04-11/egg-production.csv')
+cage_free_df <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-04-11/cage-free-percentages.csv')
 ```
 
 ## Learning Objectives
@@ -134,7 +139,7 @@ This informs us that to load data from the TidyTuesday Github, we need to input 
 
 ```{r}
 #| code-fold: false
-#| message: false
+#| eval: false
 
 tt_data_examp <- tt_load("2023-04-11")
 ```
@@ -143,6 +148,7 @@ tt_data_examp <- tt_load("2023-04-11")
  
 ```{r}
 #| code-fold: false
+#| eval: false
 
 egg_prod_df <- tt_data_examp$`egg-production`
 ```
@@ -164,6 +170,34 @@ Let's use the `glimpse` function to get a quick sense of what's in this data:
 
 glimpse(egg_prod_df)
 ```
+
+
+**Question:** What are some initial questions we might want to address using the egg production data? Read through the repository for the egg production data [view repository](https://github.com/rfordatascience/tidytuesday/blob/master/data/2023/2023-04-11/readme.md). Further, [see the report summary](https://thehumaneleague.org/article/E008R01-us-egg-production-data) by [The Human League](https://thehumaneleague.org/) project. What do the researchers report based on an analysis of the data? 
+
+**Exercise:** Examine the data downloaded as `cage-free-percentages.csv`. What information does it contain? 
+
+The following R code essentially reproduces Figure 2 from the egg production report by [The Human League](https://thehumaneleague.org/), [see the report](https://assets.ctfassets.net/ww1ie0z745y7/5x4LpTMoZLQbGpYSaZXpY3/24e96497c51f7398f03776790e9a1b9d/E008R01-us-egg-production-data.pdf):
+
+```{r}
+#| label: fig-egg_report
+#| fig-cap: Reproducing Figure 2 from The Human League report on egg production. 
+#| fig-alt: Plot of percent of US hens in cage-free housing per year . Plots shows that the percent of US hens in cage-free housing has increasing significantly over time. 
+
+cage_free_df %>%
+  mutate(year=lubridate::year(observed_month)) %>%
+  group_by(year) %>%
+  summarise(percent_hens=mean(percent_hens)) %>%
+  ggplot(aes(x=year,y=percent_hens)) + 
+  geom_point() + 
+  geom_line() + 
+  scale_x_continuous(breaks=2007:2021) + 
+  scale_y_continuous(breaks=seq(0,30,by=5),labels=paste0(as.character(seq(0,30,by=5)),"%")) + 
+  labs(x="Date (year)",y="Percentage of US hens in cage-free housing")
+```
+
+**Question:** What does the plot in @fig-egg_report show? 
+
+**Exercise:** Carefully examine the code used to make @fig-egg_report. What does each line of the code do? 
 
 ## Overview of data mining and machine learning
 

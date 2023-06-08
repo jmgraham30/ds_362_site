@@ -313,15 +313,10 @@ div.csl-indent {
 <p>This informs us that to load data from the TidyTuesday Github, we need to input a character corresponding to the date for that particular data set. For example,</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>tt_data_examp <span class="ot">&lt;-</span> <span class="fu">tt_load</span>(<span class="st">"2023-04-11"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Downloading file 1 of 2: `egg-production.csv`
-    Downloading file 2 of 2: `cage-free-percentages.csv`</code></pre>
-</div>
 </div>
 <p>downloads two data files, <code>egg-production.csv</code> and <code>cage-free-percentages.csv</code> from the April 11, 2023 Tidy Tuesday post. We can access the egg production data as a data frame as follows:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>egg_prod_df <span class="ot">&lt;-</span> tt_data_examp<span class="sc">$</span><span class="st">`</span><span class="at">egg-production</span><span class="st">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>egg_prod_df <span class="ot">&lt;-</span> tt_data_examp<span class="sc">$</span><span class="st">`</span><span class="at">egg-production</span><span class="st">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The first few rows of this data set look as follows:</p>
 <div class="cell">
@@ -394,7 +389,7 @@ div.csl-indent {
 </div>
 <p>Let’s use the <code>glimpse</code> function to get a quick sense of what’s in this data:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(egg_prod_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(egg_prod_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 220
 Columns: 6
@@ -406,6 +401,34 @@ $ n_eggs         &lt;dbl&gt; 1147000000, 1142700000, 1093300000, 1126700000, 109
 $ source         &lt;chr&gt; "ChicEggs-09-23-2016.pdf", "ChicEggs-10-21-2016.pdf", "…</code></pre>
 </div>
 </div>
+<p><strong>Question:</strong> What are some initial questions we might want to address using the egg production data? Read through the repository for the egg production data <a href="https://github.com/rfordatascience/tidytuesday/blob/master/data/2023/2023-04-11/readme.md">view repository</a>. Further, <a href="https://thehumaneleague.org/article/E008R01-us-egg-production-data">see the report summary</a> by <a href="https://thehumaneleague.org/">The Human League</a> project. What do the researchers report based on an analysis of the data?</p>
+<p><strong>Exercise:</strong> Examine the data downloaded as <code>cage-free-percentages.csv</code>. What information does it contain?</p>
+<p>The following R code essentially reproduces Figure 2 from the egg production report by <a href="https://thehumaneleague.org/">The Human League</a>, <a href="https://assets.ctfassets.net/ww1ie0z745y7/5x4LpTMoZLQbGpYSaZXpY3/24e96497c51f7398f03776790e9a1b9d/E008R01-us-egg-production-data.pdf">see the report</a>:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>cage_free_df <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">year=</span>lubridate<span class="sc">::</span><span class="fu">year</span>(observed_month)) <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">percent_hens=</span><span class="fu">mean</span>(percent_hens)) <span class="sc">%&gt;%</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>year,<span class="at">y=</span>percent_hens)) <span class="sc">+</span> </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks=</span><span class="dv">2007</span><span class="sc">:</span><span class="dv">2021</span>) <span class="sc">+</span> </span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">30</span>,<span class="at">by=</span><span class="dv">5</span>),<span class="at">labels=</span><span class="fu">paste0</span>(<span class="fu">as.character</span>(<span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">30</span>,<span class="at">by=</span><span class="dv">5</span>)),<span class="st">"%"</span>)) <span class="sc">+</span> </span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Date (year)"</span>,<span class="at">y=</span><span class="st">"Percentage of US hens in cage-free housing"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-egg_report" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="index_files/figure-html/fig-egg_report-1.png" class="img-fluid figure-img" alt="Plot of percent of US hens in cage-free housing per year . Plots shows that the percent of US hens in cage-free housing has increasing significantly over time." width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;1: Reproducing Figure 2 from The Human League report on egg production.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Question:</strong> What does the plot in <a href="#fig-egg_report">Figure&nbsp;1</a> show?</p>
+<p><strong>Exercise:</strong> Carefully examine the code used to make <a href="#fig-egg_report">Figure&nbsp;1</a>. What does each line of the code do?</p>
 </section>
 </section>
 <section id="overview-of-data-mining-and-machine-learning" class="level2">
@@ -430,11 +453,11 @@ $ source         &lt;chr&gt; "ChicEggs-09-23-2016.pdf", "ChicEggs-10-21-2016.pdf
 <li><p>At this stage, it may be necessary to repeat steps 1 - 7.</p></li>
 <li><p>Report your findings/results documenting each step in the analysis, and state your conclusions in the context of the question, problem, or application that motivated your analysis.</p></li>
 </ol>
-<p>It is essential the our data science workflow be <strong>reproducible</strong> and <strong>auditable</strong>. That is, each step in a data analysis should be accessible and understandable to others (auditability) and anyone with access to your analysis should be able to re-run the analysis from start to finish and get the same result you did (reproducibility). <a href="#fig-reproducible">Figure&nbsp;1</a> illustrates the concept of reproducibility.</p>
+<p>It is essential the our data science workflow be <strong>reproducible</strong> and <strong>auditable</strong>. That is, each step in a data analysis should be accessible and understandable to others (auditability) and anyone with access to your analysis should be able to re-run the analysis from start to finish and get the same result you did (reproducibility). <a href="#fig-reproducible">Figure&nbsp;2</a> illustrates the concept of reproducibility.</p>
 <div id="fig-reproducible" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><a href="https://allisonhorst.com/"><img src="https://github.com/allisonhorst/stats-illustrations/blob/main/rstats-artwork/reproducibility_court.png?raw=1" class="img-fluid figure-img" alt="An illustration of the concept of reproducibility."></a></p>
-<figcaption class="figure-caption">Figure&nbsp;1: Artwork by Allison Horst</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;2: Artwork by Allison Horst</figcaption>
 </figure>
 </div>
 </section>
