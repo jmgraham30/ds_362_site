@@ -39,7 +39,7 @@ After this lesson, students will be able to:
 
 3) State in general terms what we mean by **data mining** and **machine learning**, also known as **statistical learning**.
 
-4) Recognize where data mining and machine learning fit in the basic data science workflow.
+4) Recognize where data mining and machine learning fit into the basic data science workflow.
 
 
 ## Readings, etc.
