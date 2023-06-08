@@ -142,7 +142,14 @@ div.csl-indent {
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
   <li><a href="#readings-etc." id="toc-readings-etc." class="nav-link" data-scroll-target="#readings-etc.">Readings, etc.</a></li>
   <li><a href="#course-overview" id="toc-course-overview" class="nav-link" data-scroll-target="#course-overview">Course Overview</a></li>
+  <li><a href="#overview-of-data-mining-and-machine-learning" id="toc-overview-of-data-mining-and-machine-learning" class="nav-link" data-scroll-target="#overview-of-data-mining-and-machine-learning">Overview of data mining and machine learning</a>
+  <ul class="collapse">
   <li><a href="#review-of-the-data-science-workflow" id="toc-review-of-the-data-science-workflow" class="nav-link" data-scroll-target="#review-of-the-data-science-workflow">Review of the Data Science Workflow</a></li>
+  </ul></li>
+  <li><a href="#an-refresher" id="toc-an-refresher" class="nav-link" data-scroll-target="#an-refresher">An <svg viewbox="0 0 581 512" style="position:relative;display:inline-block;top:.1em;fill:steelblue;height:2em;" xmlns="http://www.w3.org/2000/svg"> <path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg> refresher</a>
+  <ul class="collapse">
+  <li><a href="#why-r" id="toc-why-r" class="nav-link" data-scroll-target="#why-r">Why R?</a></li>
+  </ul></li>
   <li><a href="#preparation-for-the-next-lesson" id="toc-preparation-for-the-next-lesson" class="nav-link" data-scroll-target="#preparation-for-the-next-lesson">Preparation for the next lesson</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
@@ -158,7 +165,7 @@ div.csl-indent {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Lesson 1</h1>
-<p class="subtitle lead">Basic Concepts and Terminology</p>
+<p class="subtitle lead">Overview of Data Mining and Machine Learning</p>
 </div>
 
 
@@ -223,8 +230,10 @@ div.csl-indent {
 <p>There is a website for the course, <a href="https://knowledge-discovery.netlify.app/">view the website</a>. For course logistics, see the official course syllabus, <a href="https://knowledge-discovery.netlify.app/syllabus.html">view the syllabus</a>. Assignments and other information specific to the course in a given semester will be posted on the course learning management system. The course website provides links to many additional resources, <a href="https://knowledge-discovery.netlify.app/links.html">view the links</a>.</p>
 <p>While we will refer often to several texts (most of which have been published online as open access materials) throughout the course, most of the content will be delivered via ``notebooks’’ like the one you’re reading now<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> that intermix text, mathematical notation, figures, programming language code, and web links. In some cases, you will be asked to go through the notebooks on your own and some times we will go through the notebooks together. Either way, anytime you encounter code in a notebook, it is expected that you will take the time to run any code (mostly by copying and pasting) for yourself. The only way to master the material is through active participation.</p>
 </section>
-<section id="review-of-the-data-science-workflow" class="level2">
-<h2 class="anchored" data-anchor-id="review-of-the-data-science-workflow">Review of the Data Science Workflow</h2>
+<section id="overview-of-data-mining-and-machine-learning" class="level2">
+<h2 class="anchored" data-anchor-id="overview-of-data-mining-and-machine-learning">Overview of data mining and machine learning</h2>
+<section id="review-of-the-data-science-workflow" class="level3">
+<h3 class="anchored" data-anchor-id="review-of-the-data-science-workflow">Review of the Data Science Workflow</h3>
 <p>Before starting our exploration of machine learning, let’s review the basic data science workflow as covered in an introductory level data science course. Generally, the steps in the workflow are:</p>
 <ol type="1">
 <li><p>Gather data with the goal of using it to gain insight to answer questions or address problems in a specific domain of application. If you’re going to use machine learning as part of your data analysis, this is a good place to make sure that you have enough data and also to split your data into a training set and test set.</p></li>
@@ -250,6 +259,28 @@ div.csl-indent {
 <figcaption class="figure-caption">Figure&nbsp;1: Artwork by Allison Horst</figcaption>
 </figure>
 </div>
+</section>
+</section>
+<section id="an-refresher" class="level2">
+<h2 class="anchored" data-anchor-id="an-refresher">An <svg viewbox="0 0 581 512" style="position:relative;display:inline-block;top:.1em;fill:steelblue;height:2em;" xmlns="http://www.w3.org/2000/svg"> <path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg> refresher</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://allisonhorst.com/"><img src="https://github.com/allisonhorst/stats-illustrations/blob/main/rstats-artwork/exploder.gif?raw=1" class="img-fluid figure-img" alt="A gif showing the logo for the R language for statistical computing."></a></p>
+<figcaption class="figure-caption">Artwork by Allison Horst</figcaption>
+</figure>
+</div>
+<section id="why-r" class="level3">
+<h3 class="anchored" data-anchor-id="why-r">Why R?</h3>
+<p>The <a href="https://www.r-project.org/">R language</a> <span class="citation" data-cites="r2023">(<a href="#ref-r2023" role="doc-biblioref"><strong>r2023?</strong></a>)</span> for statistical computing is one of the most popular computing tools for data science, among the other <a href="https://www.datacamp.com/blog/top-programming-languages-for-data-scientists-in-2022">most popular</a> are <a href="https://www.python.org/">Python</a> and <a href="https://julialang.org/">Julia</a>. Some of the strengths of R include</p>
+<ul>
+<li><p>free and open source which facilitates reproducibility and auditability,</p></li>
+<li><p>ecosystem of packages that greatly extend the functionality of R,</p></li>
+<li><p><a href="https://rmarkdown.rstudio.com/">rmarkdown</a> <span class="citation" data-cites="rmarkdown2020">(<a href="#ref-rmarkdown2020" role="doc-biblioref"><strong>rmarkdown2020?</strong></a>)</span> and <a href="https://quarto.org/">Quarto</a> frameworks for <a href="https://en.wikipedia.org/wiki/Literate_programming">literate programming</a> enable presentation and communication of data analyses and facilitate reproducibility and auditability,</p></li>
+<li><p><a href="https://posit.co/download/rstudio-desktop/">RStudio</a> <a href="https://en.wikipedia.org/wiki/Integrated_development_environment">integrated development environment</a> (IDE) by <a href="https://posit.co/">Posit</a> enhances programming, RStudio also supports other languages like Python and Julia making it possible to work across different languages,</p></li>
+<li><p>a strong and collaborative user community, see R Community Explorer website, <a href="https://r-community.org/usergroups/">view the website.</a>.</p></li>
+</ul>
+<p>As the course progresses, we will learn a lot of R. For this lesson, we will start with something very simple, that is, doing basic calculations with R.</p>
+</section>
 </section>
 <section id="preparation-for-the-next-lesson" class="level2">
 <h2 class="anchored" data-anchor-id="preparation-for-the-next-lesson">Preparation for the next lesson</h2>
@@ -313,18 +344,19 @@ Expand for Session Info
  quarto   1.3.361 @ /usr/local/bin/quarto
 
 ─ Packages ───────────────────────────────────────────────────────────────────
- package     * version date (UTC) lib source
- dplyr       * 1.1.2   2023-04-20 [1] CRAN (R 4.3.0)
- forcats     * 1.0.0   2023-01-29 [1] CRAN (R 4.3.0)
- ggplot2     * 3.4.2   2023-04-03 [1] CRAN (R 4.3.0)
- lubridate   * 1.9.2   2023-02-10 [1] CRAN (R 4.3.0)
- purrr       * 1.0.1   2023-01-10 [1] CRAN (R 4.3.0)
- readr       * 2.1.4   2023-02-10 [1] CRAN (R 4.3.0)
- sessioninfo * 1.2.2   2021-12-06 [1] CRAN (R 4.3.0)
- stringr     * 1.5.0   2022-12-02 [1] CRAN (R 4.3.0)
- tibble      * 3.2.1   2023-03-20 [1] CRAN (R 4.3.0)
- tidyr       * 1.3.0   2023-01-24 [1] CRAN (R 4.3.0)
- tidyverse   * 2.0.0   2023-02-22 [1] CRAN (R 4.3.0)
+ package      * version date (UTC) lib source
+ dplyr        * 1.1.2   2023-04-20 [1] CRAN (R 4.3.0)
+ forcats      * 1.0.0   2023-01-29 [1] CRAN (R 4.3.0)
+ ggplot2      * 3.4.2   2023-04-03 [1] CRAN (R 4.3.0)
+ lubridate    * 1.9.2   2023-02-10 [1] CRAN (R 4.3.0)
+ purrr        * 1.0.1   2023-01-10 [1] CRAN (R 4.3.0)
+ readr        * 2.1.4   2023-02-10 [1] CRAN (R 4.3.0)
+ sessioninfo  * 1.2.2   2021-12-06 [1] CRAN (R 4.3.0)
+ stringr      * 1.5.0   2022-12-02 [1] CRAN (R 4.3.0)
+ tibble       * 3.2.1   2023-03-20 [1] CRAN (R 4.3.0)
+ tidyr        * 1.3.0   2023-01-24 [1] CRAN (R 4.3.0)
+ tidytuesdayR * 1.0.2   2022-02-01 [1] CRAN (R 4.3.0)
+ tidyverse    * 2.0.0   2023-02-22 [1] CRAN (R 4.3.0)
 
  [1] /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library
 

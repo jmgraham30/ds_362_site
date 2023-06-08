@@ -1,6 +1,6 @@
 ---
 title: "Lesson 1"
-subtitle: "Basic Concepts and Terminology"
+subtitle: "Overview of Data Mining and Machine Learning"
 author: "JMG"
 format:
   html:
@@ -19,6 +19,7 @@ license: "CC BY-NC-SA 4.0"
 
 # load packages used in document
 library(tidyverse)
+library(tidytuesdayR)
 ```
 
 
@@ -66,7 +67,11 @@ While we will refer often to several texts (most of which have been published on
 
 [^1]: The notebooks are created using [Quarto](https://quarto.org/) and [R markdown](https://rmarkdown.rstudio.com/), topics that we will cover in more detail later.  
 
-## Review of the Data Science Workflow
+## Overview of data mining and machine learning
+
+
+
+### Review of the Data Science Workflow
 
 Before starting our exploration of machine learning, let's review the basic data science workflow as covered in an introductory level data science course. Generally, the steps in the workflow are:
 
@@ -97,6 +102,26 @@ It is essential the our data science workflow be **reproducible** and **auditabl
 
 [![Artwork by Allison Horst](https://github.com/allisonhorst/stats-illustrations/blob/main/rstats-artwork/reproducibility_court.png?raw=1){#fig-reproducible fig-alt="An illustration of the concept of reproducibility."}](https://allisonhorst.com/)
 
+## An `r icons::icon_style(icons::fontawesome("r-project"),scale=2,fill="steelblue")` refresher
+
+[![Artwork by Allison Horst](https://github.com/allisonhorst/stats-illustrations/blob/main/rstats-artwork/exploder.gif?raw=1){fig-alt="A gif showing the logo for the R language for statistical computing."}](https://allisonhorst.com/)
+
+
+### Why R?
+
+The [R language](https://www.r-project.org/) [@r2023] for statistical computing is one of the most popular computing tools for data science, among the other [most popular](https://www.datacamp.com/blog/top-programming-languages-for-data-scientists-in-2022) are [Python](https://www.python.org/) and [Julia](https://julialang.org/). Some of the strengths of R include
+
+* free and open source which facilitates reproducibility and auditability, 
+
+* ecosystem of packages that greatly extend the functionality of R,
+
+* [rmarkdown](https://rmarkdown.rstudio.com/) [@rmarkdown2020] and [Quarto](https://quarto.org/) frameworks for [literate programming](https://en.wikipedia.org/wiki/Literate_programming) enable presentation and communication of data analyses and facilitate reproducibility and auditability, 
+
+* [RStudio](https://posit.co/download/rstudio-desktop/) [integrated development environment](https://en.wikipedia.org/wiki/Integrated_development_environment) (IDE) by [Posit](https://posit.co/) enhances programming, RStudio also supports other languages like Python and Julia making it possible to work across different languages, 
+
+* a strong and collaborative user community, see R Community Explorer website, [view the website.](https://r-community.org/usergroups/). 
+
+As the course progresses, we will learn a lot of R. For this lesson, we will start with something very simple, that is, doing basic calculations with R. 
 
 
 ## Preparation for the next lesson
