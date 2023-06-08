@@ -32,9 +32,14 @@ cage_free_df <- readr::read_csv('https://raw.githubusercontent.com/rfordatascien
 
 After this lesson, students will be able to:
 
-1) State in general terms what we mean by **data mining** and **machine learning**, also known as **statistical learning**.
+1) Recall how to load, manipulate, and plot data in R. 
 
-2) 
+
+2) Recall the basic data science workflow. 
+
+3) State in general terms what we mean by **data mining** and **machine learning**, also known as **statistical learning**.
+
+4) Recognize where data mining and machine learning fit in the basic data science workflow.
 
 
 ## Readings, etc.
@@ -198,6 +203,8 @@ cage_free_df %>%
 **Question:** What does the plot in @fig-egg_report show? 
 
 **Exercise:** Carefully examine the code used to make @fig-egg_report. What does each line of the code do? Note that these are the types of basic data manipulations and plots you should be comfortable making entering into DS 362. 
+
+**Exercise:** Look at the list of data sets contained in the `ISLR2` package by running the command `data(package="ISLR2")`. Pick two of the data sets and determine what information is contained in your chosen data sets. Make a couple of basic plots using one of the data sets you chose.   
 
 ## Overview of data mining and machine learning
 
