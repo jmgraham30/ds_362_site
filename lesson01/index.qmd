@@ -104,6 +104,8 @@ It is essential the our data science workflow be **reproducible** and **auditabl
 
 ## An `r icons::icon_style(icons::fontawesome("r-project"),scale=2,fill="steelblue")` refresher
 
+For this course, we assume that students have some experience using a programming language like [R](https://www.r-project.org/) or [Python](https://www.python.org/) to analyze data. In particular, it is assumed that students in the course can load, clean and plot data in R or Python. A facility to work with data frames via an R package like [`dplyr`](https://dplyr.tidyverse.org/) or the [`pandas`](https://pandas.pydata.org/) Python library is assumed. We also assume students can use [`ggplot2`](https://ggplot2.tidyverse.org/) in R or [`matplotlib`](https://matplotlib.org/) in Python for making appropriate plots of data.      
+
 [![Artwork by Allison Horst](https://github.com/allisonhorst/stats-illustrations/blob/main/rstats-artwork/exploder.gif?raw=1){fig-alt="A gif showing the logo for the R language for statistical computing."}](https://allisonhorst.com/)
 
 
