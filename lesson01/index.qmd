@@ -197,7 +197,7 @@ cage_free_df %>%
 
 **Question:** What does the plot in @fig-egg_report show? 
 
-**Exercise:** Carefully examine the code used to make @fig-egg_report. What does each line of the code do? 
+**Exercise:** Carefully examine the code used to make @fig-egg_report. What does each line of the code do? Note that these are the types of basic data manipulations and plots you should be comfortable making entering into DS 362. 
 
 ## Overview of data mining and machine learning
 
