@@ -206,13 +206,10 @@ cage_free_df %>%
 
 **Exercise:** Look at the list of data sets contained in the `ISLR2` package by running the command `data(package="ISLR2")`. Pick two of the data sets and determine what information is contained in your chosen data sets. Make a couple of basic plots using one of the data sets you chose.   
 
-## Overview of data mining and machine learning
-
-
 
 ### Review of the Data Science Workflow
 
-Before starting our exploration of machine learning, let's review the basic data science workflow as covered in an introductory level data science course. Generally, the steps in the workflow are:
+Before starting our study of data mining and machine learning, let's review the basic data science workflow as covered in an introductory level data science course. Generally, the steps in the workflow are:
 
 1) Gather data with the goal of using it to gain insight to answer questions or address problems in a specific domain of application. If you're going to use machine learning as part of your data analysis, this is a good place to make sure that you have enough data and also to split your data into a training set and test set.  
 
@@ -222,9 +219,21 @@ Before starting our exploration of machine learning, let's review the basic data
 
 3) Import the data for analysis. If you have not already, you may want to split your data into a training set and test set.
 
-4) Explore and clean the data. Data visualization is essential at this step. 
+4) Explore, clean, and transform the data. Data visualization is essential at this step. Make sure to apply the same manipulations used for cleaning and transformation to both the training and test sets.
 
 5) Generate initial insight or more detailed questions. 
+
+    * Steps 4-5 constitute an exploratory data analysis (EDA). It is typical to conduct EDA before doing any more sophisticated analyses such as machine learning, and this is a habit you should get into. Students are assumed to be familiar with the EDA process from DS 201. If you need a refresher, the following video is recommended: 
+    
+    * Exploratory data analysis worked example video by Hadley Wickham, [watch the video on YouTube](https://youtu.be/go5Au01Jrvs).
+
+```{r}
+#| echo: false
+
+vembedr::embed_youtube(id="go5Au01Jrvs",height=450) %>%
+  vembedr::use_align("center")
+```
+
 
 6) Decide what type(s) of analysis or analyses are to be performed. This is the stage at which machine learning enters into the process.  
 
@@ -240,6 +249,10 @@ Before starting our exploration of machine learning, let's review the basic data
 It is essential the our data science workflow be **reproducible** and **auditable**. That is, each step in a data analysis should be accessible and understandable to others (auditability) and anyone with access to your analysis should be able to re-run the analysis from start to finish and get the same result you did (reproducibility).  @fig-reproducible illustrates the concept of reproducibility. 
 
 [![Artwork by Allison Horst](https://github.com/allisonhorst/stats-illustrations/blob/main/rstats-artwork/reproducibility_court.png?raw=1){#fig-reproducible fig-alt="An illustration of the concept of reproducibility."}](https://allisonhorst.com/)
+
+
+## Overview of data mining and machine learning
+
 
 
 

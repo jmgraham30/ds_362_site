@@ -51,3 +51,4 @@ vembedr::embed_youtube(id="R7s7_T4yXak",height=450) %>%
 vembedr::embed_youtube(id="go5Au01Jrvs",height=450) %>%
   vembedr::use_align("center")
 ```
+
