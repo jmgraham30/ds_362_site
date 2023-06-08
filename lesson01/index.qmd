@@ -147,6 +147,16 @@ tt_data_examp <- tt_load("2023-04-11")
 egg_prod_df <- tt_data_examp$`egg-production`
 ```
 
+The first few rows of this data set look as follows:
+
+```{r}
+#| echo: false
+
+egg_prod_df %>%
+  head() %>%
+  kableExtra::kable()
+```
+
 Let's use the `glimpse` function to get a quick sense of what's in this data:
 
 ```{r}
