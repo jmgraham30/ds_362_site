@@ -13,21 +13,23 @@ license: "CC BY-NC-SA 4.0"
 ---
 
 ```{r}
-#| echo: false
 #| message: false
 #| warning: false
+#| echo: false
 
 # load packages used in document
 library(tidyverse)
 library(tidytuesdayR)
+library(ISLR2)
 ```
-
 
 ## Learning Objectives
 
 After this lesson, students will be able to:
 
+1) State in general terms what we mean by **data mining** and **machine learning**, also known as **statistical learning**.
 
+2) 
 
 
 ## Readings, etc.
@@ -59,13 +61,99 @@ vembedr::embed_youtube(id="B9s8rpdNxU0",height=450) %>%
 
 ## Course Overview
 
-This course provides a coverage of essential topics in data science at the intermediate level with an emphasis on machine learning. Broadly, we will cover algorithms that are commonly used for gaining insight from data. The things you learn in the class will be applicable in a variety of different areas, professions, and even other classes.
+This course provides coverage of essential topics in data science at the intermediate level with an emphasis on machine learning. Broadly, we will cover algorithms that are commonly used for gaining insight from data. The things you learn in the class will be applicable in a variety of different areas, professions, and even other classes.
 
-There is a website for the course, [view the website](https://knowledge-discovery.netlify.app/). For course logistics, see the official course syllabus, [view the syllabus](https://knowledge-discovery.netlify.app/syllabus.html). Assignments and other information specific to the course in a given semester will be posted on the course learning management system. The course website provides links to many additional resources, [view the links](https://knowledge-discovery.netlify.app/links.html).
+There is a website for the course, [view the website](https://knowledge-discovery.netlify.app/). For course logistics, see the official course syllabus, [view the syllabus](https://knowledge-discovery.netlify.app/syllabus.html). Assignments and other information specific to the course in a given semester will be posted on the course learning management system (LMS). The course website provides links to many additional resources, [view the links](https://knowledge-discovery.netlify.app/links.html).
 
-While we will refer often to several texts (most of which have been published online as open access materials) throughout the course, most of the content will be delivered via ``notebooks'' like the one you're reading now[^1] that intermix text, mathematical notation, figures, programming language code, and web links. In some cases, you will be asked to go through the notebooks on your own and some times we will go through the notebooks together. Either way, anytime you encounter code in a notebook, it is expected that you will take the time to run any code (mostly by copying and pasting) for yourself. The only way to master the material is through active participation.  
+While we will refer often to several texts (most of which have been published online as open access materials) throughout the course, most of the content will be delivered via "notebooks" like the one you're reading now[^1] that intermix text, mathematical notation, figures, programming language code, and web links. In some cases, you will be asked to go through the notebooks on your own and sometimes we will go through the notebooks together. Either way, any time you encounter code in a notebook, it is expected that you will take the time to run any code (mostly by copying and pasting) for yourself. The only way to master the material is through active participation.  
 
 [^1]: The notebooks are created using [Quarto](https://quarto.org/) and [R markdown](https://rmarkdown.rstudio.com/), topics that we will cover in more detail later.  
+
+For this course, we assume that students have some prior experience in using a programming language like [R](https://www.r-project.org/) or [Python](https://www.python.org/) to analyze data. In particular, it is assumed that students in the course can load, clean and plot data in R or Python. A facility in working with data frames via an R package like [`dplyr`](https://dplyr.tidyverse.org/) or the [`pandas`](https://pandas.pydata.org/) Python library is assumed. We also assume students can use [`ggplot2`](https://ggplot2.tidyverse.org/) in R or [`matplotlib`](https://matplotlib.org/) in Python for making appropriate plots of data. A great resource for the assumed programming background is [*R for Data Science*](https://r4ds.had.co.nz/) [@wickham2016r]. [View the online version of *R for Data Science*](https://r4ds.had.co.nz/). You can also review material from the prerequisite course DS 201 *Introduction to Data Science*, [view the DS 201 course website](https://intro-ds.netlify.app/). 
+
+During the course, our preference tends toward using R for examples and application. Coding will be essential for assignments and it is recommended that students use R on coding assignments. However, students may request to use another language such as Python, requests will be granted or denied by the instructor on a case-by-case basis with a rationale for the decision provided.       
+
+### Why R?
+
+The [R language](https://www.r-project.org/) [@r2023] for statistical computing is one of the most popular computing tools for data science, among the other [most popular](https://www.datacamp.com/blog/top-programming-languages-for-data-scientists-in-2022) are [Python](https://www.python.org/) and [Julia](https://julialang.org/). Some of the strengths of R include
+
+* free and open source which facilitates reproducibility and auditability, 
+
+* ecosystem of packages that greatly extend the functionality of R,
+
+* [rmarkdown](https://rmarkdown.rstudio.com/) [@rmarkdown2020] and [Quarto](https://quarto.org/) frameworks for [literate programming](https://en.wikipedia.org/wiki/Literate_programming) enable presentation and communication of data analyses and facilitate reproducibility and auditability, 
+
+* [RStudio](https://posit.co/download/rstudio-desktop/) [integrated development environment](https://en.wikipedia.org/wiki/Integrated_development_environment) (IDE) by [Posit](https://posit.co/) enhances programming, RStudio also supports other languages like Python and Julia making it possible to work across different languages, 
+
+* a strong and collaborative user community, see R Community Explorer website, [view the website.](https://r-community.org/usergroups/). 
+
+### An `r icons::icon_style(icons::fontawesome("r-project"),scale=2,fill="steelblue")` refresher
+
+This section reviews some coding in R with which the student is assumed to have some familiarity such as from the prerequisite course DS 201 *Introduction to Data Science*. 
+
+[![Artwork by Allison Horst](https://github.com/allisonhorst/stats-illustrations/blob/main/rstats-artwork/exploder.gif?raw=1){fig-alt="A gif showing the logo for the R language for statistical computing."}](https://allisonhorst.com/)
+
+Throughout the course, we will make use of many R packages. For example, we will use the `tidyverse` package (which is a meta package that contains packages such as `dplyr` and `ggplot2`), the `tidytuesdayR` package for importing data from the [Tidy Tuesday data repository](https://github.com/rfordatascience/tidytuesday) [@TT], and the `ISLR2` package corresponding to the textbook *An Introduction to Statistical Learning* [@tibshirani2017introduction]. Packages contain data, functions, etc. An R package must be installed before it can be loaded and used. You only need to install a package once, but you have to load packages at each new R session. 
+
+There are two common ways to install packages:
+
+1) If using the RStudio IDE (highly recommended), use the Install button on the Packages tab. All you have to do then is to search for the package you want to install and click the Install option. Note that this is most useful for R packages available through the [Comprehensive R Archive Network](https://cran.r-project.org/web/packages/available_packages_by_name.html) (CRAN). 
+
+2) With the `install.packages` function. For example, 
+
+```{r}
+#| eval: false
+#| code-fold: false
+
+install.packages(c("tidyverse","tidytuesdayR","ISLR2"))
+```
+
+If you want to install a package from some other repository, refer to the documentation, do a web search, or ask the instructor. 
+
+To load packages, use
+
+```{r}
+#| eval: false
+#| code-fold: false
+
+# load packages used in document
+library(tidyverse)
+library(tidytuesdayR)
+library(ISLR2)
+```
+
+Now, functions, data, etc. from these packages will be available for reference by name. For example, we can access the documentation for the `tt_load` function from `tidytuesdayR` package by running the command
+
+```{r}
+#| code-fold: false
+
+?tt_load
+```
+
+This informs us that to load data from the TidyTuesday Github, we need to input a character corresponding to the date for that particular data set. For example, 
+
+```{r}
+#| code-fold: false
+#| message: false
+
+tt_data_examp <- tt_load("2023-04-11")
+```
+
+ downloads two data files, `egg-production.csv` and `cage-free-percentages.csv` from the April 11, 2023 Tidy Tuesday post. We can access the egg production data as a data frame as follows:
+ 
+```{r}
+#| code-fold: false
+
+egg_prod_df <- tt_data_examp$`egg-production`
+```
+
+Let's use the `glimpse` function to get a quick sense of what's in this data:
+
+```{r}
+#| code-fold: false
+
+glimpse(egg_prod_df)
+```
 
 ## Overview of data mining and machine learning
 
@@ -102,28 +190,7 @@ It is essential the our data science workflow be **reproducible** and **auditabl
 
 [![Artwork by Allison Horst](https://github.com/allisonhorst/stats-illustrations/blob/main/rstats-artwork/reproducibility_court.png?raw=1){#fig-reproducible fig-alt="An illustration of the concept of reproducibility."}](https://allisonhorst.com/)
 
-## An `r icons::icon_style(icons::fontawesome("r-project"),scale=2,fill="steelblue")` refresher
 
-For this course, we assume that students have some experience using a programming language like [R](https://www.r-project.org/) or [Python](https://www.python.org/) to analyze data. In particular, it is assumed that students in the course can load, clean and plot data in R or Python. A facility to work with data frames via an R package like [`dplyr`](https://dplyr.tidyverse.org/) or the [`pandas`](https://pandas.pydata.org/) Python library is assumed. We also assume students can use [`ggplot2`](https://ggplot2.tidyverse.org/) in R or [`matplotlib`](https://matplotlib.org/) in Python for making appropriate plots of data.      
-
-[![Artwork by Allison Horst](https://github.com/allisonhorst/stats-illustrations/blob/main/rstats-artwork/exploder.gif?raw=1){fig-alt="A gif showing the logo for the R language for statistical computing."}](https://allisonhorst.com/)
-
-
-### Why R?
-
-The [R language](https://www.r-project.org/) [@r2023] for statistical computing is one of the most popular computing tools for data science, among the other [most popular](https://www.datacamp.com/blog/top-programming-languages-for-data-scientists-in-2022) are [Python](https://www.python.org/) and [Julia](https://julialang.org/). Some of the strengths of R include
-
-* free and open source which facilitates reproducibility and auditability, 
-
-* ecosystem of packages that greatly extend the functionality of R,
-
-* [rmarkdown](https://rmarkdown.rstudio.com/) [@rmarkdown2020] and [Quarto](https://quarto.org/) frameworks for [literate programming](https://en.wikipedia.org/wiki/Literate_programming) enable presentation and communication of data analyses and facilitate reproducibility and auditability, 
-
-* [RStudio](https://posit.co/download/rstudio-desktop/) [integrated development environment](https://en.wikipedia.org/wiki/Integrated_development_environment) (IDE) by [Posit](https://posit.co/) enhances programming, RStudio also supports other languages like Python and Julia making it possible to work across different languages, 
-
-* a strong and collaborative user community, see R Community Explorer website, [view the website.](https://r-community.org/usergroups/). 
-
-As the course progresses, we will learn a lot of R. For this lesson, we will start with something very simple, that is, doing basic calculations with R. 
 
 
 ## Preparation for the next lesson
