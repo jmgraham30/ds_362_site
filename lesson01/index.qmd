@@ -101,9 +101,9 @@ It is essential the our data science workflow be **reproducible** and **auditabl
 
 ## Preparation for the next lesson
 
-For next time:
+For the next lesson:
 
-* Read section 2.1 from of *An Introduction to Statistical Learning* [@tibshirani2017introduction].
+* Read section 2.1 from of *An Introduction to Statistical Learning* [@tibshirani2017introduction]. You may also want to read sections 2.1 and 2.2 of *Statistical Learning with Math and R* [@suzuki2020statistical].
 
 * Watch the corresponding video lecture on regression. [View on YouTube](https://youtu.be/ox0cKk7h4o0).
 
