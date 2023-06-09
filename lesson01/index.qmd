@@ -253,8 +253,18 @@ It is essential the our data science workflow be **reproducible** and **auditabl
 
 ## Overview of data mining and machine learning
 
+In this course, we view [data mining](https://en.wikipedia.org/wiki/Data_mining) as processes that can be implemented as algorithms that can be used to gain useful insights from data. [Machine learning](https://en.wikipedia.org/wiki/Machine_learning), also known as statistical learning uses mathematical models to learn from data. The methods of machine learning provide one approach to data mining, an approach that is currently very popular. Machine learning is also a currently prominent approach to developing artificial intelligence technologies. Of course, what one means by a "useful insight" is highly dependent on the domain of specialization or area of application. Thus, data mining is an inherently interdisciplinary field that intersects with many disciplines such as computer science, data science, mathematics and statistics and a variety of other fields.
 
+One can break the processes of data mining into a number of components including:
 
+1) Data collection - This may involve automating the collection, storage, and maintenance of data. The data collection process should be well-documented.
+
+2) Feature extraction and data cleaning - Real-world data is messy and will rarely be immediately suitable for any meaningful analysis. 
+
+3) Modeling and analysis - Where an attempt is made to gain useful insight from data. This step should include a critical assessment, often via a quantitative
+assessment of results from modeling and analysis. 
+
+As we proceed through the course, we will touch on each of components 1 - 3 in more detail. For the remainder of this lesson, let's look at some problems to motivate our study of machine learning. 
 
 
 ## Preparation for the next lesson
