@@ -152,7 +152,7 @@ This informs us that to load data from the TidyTuesday Github, we need to input 
 tt_data_examp <- tt_load("2023-04-11")
 ```
 
- downloads two data files, `egg-production.csv` and `cage-free-percentages.csv` from the April 11, 2023 Tidy Tuesday post. We can access the egg production data as a data frame as follows:
+downloads two data files, `egg-production.csv` and `cage-free-percentages.csv` from the April 11, 2023 Tidy Tuesday post. We can access the egg production data as a data frame as follows:
  
 ```{r}
 #| code-fold: false
@@ -160,6 +160,17 @@ tt_data_examp <- tt_load("2023-04-11")
 
 egg_prod_df <- tt_data_examp$`egg-production`
 ```
+
+The following line of code is not run but demonstrate how to load a data file such as a [comma-separated values file](https://en.wikipedia.org/wiki/Comma-separated_values) (CSV) 
+
+```{r}
+#| code-fold: false
+#| eval: false
+
+egg_prod_df <- read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-04-11/egg-production.csv')
+```
+
+The previous code uses the `read_csv` function from the `readr` package (part of `tidyverse`) to directly read in the `egg-production.csv` from the specified location.  
 
 The first few rows of this data set look as follows:
 
@@ -267,7 +278,9 @@ One can break the processes of data mining into a number of components including
 3) Modeling and analysis - Where an attempt is made to gain useful insight from data. This step should include a critical assessment, often via a quantitative
 assessment of results from modeling and analysis. 
 
-As we proceed through the course, we will touch on each of components 1 - 3 in more detail. For the remainder of this lesson, let's look at some problems to motivate our study of machine learning. 
+As we proceed through the course, we will touch on each of components 1 - 3 in more detail. For the remainder of this lesson, let's look at some questions about specific data to motivate our study of machine learning. 
+
+
 
 
 ## Preparation for the next lesson
