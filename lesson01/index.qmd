@@ -280,8 +280,85 @@ assessment of results from modeling and analysis.
 
 As we proceed through the course, we will touch on each of components 1 - 3 in more detail. For the remainder of this lesson, let's look at some questions about specific data to motivate our study of machine learning. 
 
+### A Motivating Example 
+
+The Tidy Tuesday entry for January 25, 2022 contains data related to ratings of board games. This data consists of two csv files that contain various information or features on some specific games. [View the data repository](https://github.com/rfordatascience/tidytuesday/tree/master/data/2022/2022-01-25). An obvious question that board game creators or players might be interested in is, what factors contribute to the rating of a board game? 
+
+The first thing we need to do is load the data. In the following code, we download the two csv files and combine them into one common data set:
+
+```{r}
+#| code-fold: false
+#| message: false
+
+# read in data csv files
+ratings <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-01-25/ratings.csv")
+details <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-01-25/details.csv")
+
+# combine into one data frame
+ratings_joined <-
+  ratings %>%
+  left_join(details, by = "id")
+
+# glimpse the data
+glimpse(ratings_joined)
+```
+
+There is a lot of information in this data. For a more specific question, suppose we want to know if/how the number of players, game length, and age recommendations for a game impact the average rating of a game. Let's select those features of primary interest:
+
+```{r}
+#| code-fold: false
+#| message: false
+
+# select relevant features
+ratings_relevant <- ratings_joined %>%
+  select(average,minplayers,maxplayers,playingtime,minage)
+```
+
+Let's see the first few rows of this data:
+
+```{r}
+#| echo: false
+# display first few rows
+ratings_relevant %>%
+  head() %>%
+  kableExtra::kable()
+```
+
+This problem involves *predicting* a *numerical* response variable, that is, `average` based on the value of a number of *predictor* variables. This is a type of *supervised learning* problem known as *regression*. Since the response variable is numerical, even if we include some *categorical* predictor variables, we still have a regression problem. 
 
 
+The data scientist [Julia Silge](https://juliasilge.com/) analyzes the board game data in a blog from post from January 28, 2022. [See the blog post](https://juliasilge.com/blog/board-games/). Throughout the course, we will refer to a number of Silge's posts and data analyses as they provide excellent worked examples of data mining and machine learning.  
+
+### Another Example
+
+Now, consider the [Palmer penguins]() data set available through the [`palmerpenguins`](https://allisonhorst.github.io/palmerpenguins/) package. This data contains information on penguins from the [Palmer Station, Antarctica](https://pallter.marine.rutgers.edu/).
+
+We glimpse the data
+
+```{r}
+#| code-fold: false
+
+# load the library (don't forget to install if necessary)
+library(palmerpenguins)
+# glimpse data
+glimpse(penguins)
+```
+
+and examine the first few rows of the data
+
+```{r}
+#| echo: false
+# display first few rows
+penguins %>%
+  head() %>%
+  kableExtra::kable()
+```
+
+One question we may be interested in is, can the physical measurements of the penguins be used to distinguish the animals in terms of their species? That is, can the physical measurements be used to predict the species of a penguin without having to, say conduct a genetic analysis? Here, our response variable is categorical. This is another type of supervised learning problem know as *classification*  Whenever we have a categorical response, we have a classification problem. 
+
+For both the board game data and the penguins data, there is a response variable that we are interested to predict based on the values of certain predictor variables. Further, the data can be viewed as paired where each set of predictor values (which we denote generically by $X$) has a corresponding known response value (denoted $y$). This data provides a set of examples that can be used to *learn* the relationship between the predictors $X$ and the response $y$. This is why regression and classification problems are called **supervised learning** problems. 
+
+Our next step in the course will be to study some common supervised learning algorithms. There are also situations in which a data set does not consist of a natural pairing between predictors and a response. Unpaired or unlabeled data can by analysed using **unsupervised learning** methods. We will address unsupervised learning problems and algorithms later in the course.   
 
 ## Preparation for the next lesson
 

@@ -117,6 +117,8 @@ div.csl-indent {
 }</script>
 <link href="../site_libs/vembedr-0.1.5/css/vembedr.css" rel="stylesheet">
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -181,7 +183,11 @@ div.csl-indent {
   <li><a href="#an-refresher" id="toc-an-refresher" class="nav-link" data-scroll-target="#an-refresher">An <svg viewbox="0 0 581 512" style="position:relative;display:inline-block;top:.1em;fill:steelblue;height:2em;" xmlns="http://www.w3.org/2000/svg"> <path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg> refresher</a></li>
   <li><a href="#review-of-the-data-science-workflow" id="toc-review-of-the-data-science-workflow" class="nav-link" data-scroll-target="#review-of-the-data-science-workflow">Review of the Data Science Workflow</a></li>
   </ul></li>
-  <li><a href="#overview-of-data-mining-and-machine-learning" id="toc-overview-of-data-mining-and-machine-learning" class="nav-link" data-scroll-target="#overview-of-data-mining-and-machine-learning">Overview of data mining and machine learning</a></li>
+  <li><a href="#overview-of-data-mining-and-machine-learning" id="toc-overview-of-data-mining-and-machine-learning" class="nav-link" data-scroll-target="#overview-of-data-mining-and-machine-learning">Overview of data mining and machine learning</a>
+  <ul class="collapse">
+  <li><a href="#a-motivating-example" id="toc-a-motivating-example" class="nav-link" data-scroll-target="#a-motivating-example">A Motivating Example</a></li>
+  <li><a href="#another-example" id="toc-another-example" class="nav-link" data-scroll-target="#another-example">Another Example</a></li>
+  </ul></li>
   <li><a href="#preparation-for-the-next-lesson" id="toc-preparation-for-the-next-lesson" class="nav-link" data-scroll-target="#preparation-for-the-next-lesson">Preparation for the next lesson</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
@@ -491,6 +497,239 @@ $ source         &lt;chr&gt; "ChicEggs-09-23-2016.pdf", "ChicEggs-10-21-2016.pdf
 <li><p>Modeling and analysis - Where an attempt is made to gain useful insight from data. This step should include a critical assessment, often via a quantitative assessment of results from modeling and analysis.</p></li>
 </ol>
 <p>As we proceed through the course, we will touch on each of components 1 - 3 in more detail. For the remainder of this lesson, let’s look at some questions about specific data to motivate our study of machine learning.</p>
+<section id="a-motivating-example" class="level3">
+<h3 class="anchored" data-anchor-id="a-motivating-example">A Motivating Example</h3>
+<p>The Tidy Tuesday entry for January 25, 2022 contains data related to ratings of board games. This data consists of two csv files that contain various information or features on some specific games. <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2022/2022-01-25">View the data repository</a>. An obvious question that board game creators or players might be interested in is, what factors contribute to the rating of a board game?</p>
+<p>The first thing we need to do is load the data. In the following code, we download the two csv files and combine them into one common data set:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read in data csv files</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>ratings <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-01-25/ratings.csv"</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>details <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-01-25/details.csv"</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># combine into one data frame</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>ratings_joined <span class="ot">&lt;-</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  ratings <span class="sc">%&gt;%</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(details, <span class="at">by =</span> <span class="st">"id"</span>)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co"># glimpse the data</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(ratings_joined)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 21,831
+Columns: 32
+$ num.x                   &lt;dbl&gt; 105, 189, 428, 72, 103, 191, 100, 3, 15, 35, 3…
+$ id                      &lt;dbl&gt; 30549, 822, 13, 68448, 36218, 9209, 178900, 16…
+$ name                    &lt;chr&gt; "Pandemic", "Carcassonne", "Catan", "7 Wonders…
+$ year                    &lt;dbl&gt; 2008, 2000, 1995, 2010, 2008, 2004, 2015, 2016…
+$ rank                    &lt;dbl&gt; 106, 190, 429, 73, 104, 192, 101, 4, 16, 36, 3…
+$ average                 &lt;dbl&gt; 7.59, 7.42, 7.14, 7.74, 7.61, 7.41, 7.60, 8.42…
+$ bayes_average           &lt;dbl&gt; 7.487, 7.309, 6.970, 7.634, 7.499, 7.305, 7.50…
+$ users_rated             &lt;dbl&gt; 108975, 108738, 108024, 89982, 81561, 76171, 7…
+$ url                     &lt;chr&gt; "/boardgame/30549/pandemic", "/boardgame/822/c…
+$ thumbnail               &lt;chr&gt; "https://cf.geekdo-images.com/S3ybV1LAp-8SnHIX…
+$ num.y                   &lt;dbl&gt; 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, …
+$ primary                 &lt;chr&gt; "Pandemic", "Carcassonne", "Catan", "7 Wonders…
+$ description             &lt;chr&gt; "In Pandemic, several virulent diseases have b…
+$ yearpublished           &lt;dbl&gt; 2008, 2000, 1995, 2010, 2008, 2004, 2015, 2016…
+$ minplayers              &lt;dbl&gt; 2, 2, 3, 2, 2, 2, 2, 1, 2, 1, 3, 2, 1, 2, 2, 2…
+$ maxplayers              &lt;dbl&gt; 4, 5, 4, 7, 4, 5, 8, 5, 2, 5, 5, 4, 5, 5, 5, 4…
+$ playingtime             &lt;dbl&gt; 45, 45, 120, 30, 30, 60, 15, 120, 30, 150, 150…
+$ minplaytime             &lt;dbl&gt; 45, 30, 60, 30, 30, 30, 15, 120, 30, 30, 90, 3…
+$ maxplaytime             &lt;dbl&gt; 45, 45, 120, 30, 30, 60, 15, 120, 30, 150, 150…
+$ minage                  &lt;dbl&gt; 8, 7, 10, 10, 13, 8, 14, 12, 10, 12, 12, 10, 1…
+$ boardgamecategory       &lt;chr&gt; "['Medical']", "['City Building', 'Medieval', …
+$ boardgamemechanic       &lt;chr&gt; "['Action Points', 'Cooperative Game', 'Hand M…
+$ boardgamefamily         &lt;chr&gt; "['Components: Map (Global Scale)', 'Component…
+$ boardgameexpansion      &lt;chr&gt; "['Pandemic: Gen Con 2016 Promos – Z-Force Tea…
+$ boardgameimplementation &lt;chr&gt; "['Pandemic Legacy: Season 0', 'Pandemic Legac…
+$ boardgamedesigner       &lt;chr&gt; "['Matt Leacock']", "['Klaus-Jürgen Wrede']", …
+$ boardgameartist         &lt;chr&gt; "['Josh Cappel', 'Christian Hanisch', 'Régis M…
+$ boardgamepublisher      &lt;chr&gt; "['Z-Man Games', 'Albi', 'Asmodee', 'Asmodee I…
+$ owned                   &lt;dbl&gt; 168364, 161299, 167733, 120466, 106956, 105748…
+$ trading                 &lt;dbl&gt; 2508, 1716, 2018, 1567, 2009, 930, 1110, 538, …
+$ wanting                 &lt;dbl&gt; 625, 582, 485, 1010, 655, 692, 340, 2011, 924,…
+$ wishing                 &lt;dbl&gt; 9344, 7383, 5890, 12105, 8621, 6620, 5764, 192…</code></pre>
+</div>
+</div>
+<p>There is a lot of information in this data. For a more specific question, suppose we want to know if/how the number of players, game length, and age recommendations for a game impact the average rating of a game. Let’s select those features of primary interest:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># select relevant features</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>ratings_relevant <span class="ot">&lt;-</span> ratings_joined <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(average,minplayers,maxplayers,playingtime,minage)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s see the first few rows of this data:</p>
+<div class="cell">
+<div class="cell-output-display">
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">average</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">minplayers</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">maxplayers</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">playingtime</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">minage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">7.59</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">8</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">7.42</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: right;">7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7.14</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">120</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">7.74</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7.61</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">13</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">7.41</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">8</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p>This problem involves <em>predicting</em> a <em>numerical</em> response variable, that is, <code>average</code> based on the value of a number of <em>predictor</em> variables. This is a type of <em>supervised learning</em> problem known as <em>regression</em>. Since the response variable is numerical, even if we include some <em>categorical</em> predictor variables, we still have a regression problem.</p>
+<p>The data scientist <a href="https://juliasilge.com/">Julia Silge</a> analyzes the board game data in a blog from post from January 28, 2022. <a href="https://juliasilge.com/blog/board-games/">See the blog post</a>. Throughout the course, we will refer to a number of Silge’s posts and data analyses as they provide excellent worked examples of data mining and machine learning.</p>
+</section>
+<section id="another-example" class="level3">
+<h3 class="anchored" data-anchor-id="another-example">Another Example</h3>
+<p>Now, consider the <a href="">Palmer penguins</a> data set available through the <a href="https://allisonhorst.github.io/palmerpenguins/"><code>palmerpenguins</code></a> package. This data contains information on penguins from the <a href="https://pallter.marine.rutgers.edu/">Palmer Station, Antarctica</a>.</p>
+<p>We glimpse the data</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load the library (don't forget to install if necessary)</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># glimpse data</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 344
+Columns: 8
+$ species           &lt;fct&gt; Adelie, Adelie, Adelie, Adelie, Adelie, Adelie, Adel…
+$ island            &lt;fct&gt; Torgersen, Torgersen, Torgersen, Torgersen, Torgerse…
+$ bill_length_mm    &lt;dbl&gt; 39.1, 39.5, 40.3, NA, 36.7, 39.3, 38.9, 39.2, 34.1, …
+$ bill_depth_mm     &lt;dbl&gt; 18.7, 17.4, 18.0, NA, 19.3, 20.6, 17.8, 19.6, 18.1, …
+$ flipper_length_mm &lt;int&gt; 181, 186, 195, NA, 193, 190, 181, 195, 193, 190, 186…
+$ body_mass_g       &lt;int&gt; 3750, 3800, 3250, NA, 3450, 3650, 3625, 4675, 3475, …
+$ sex               &lt;fct&gt; male, female, female, NA, female, male, female, male…
+$ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007…</code></pre>
+</div>
+</div>
+<p>and examine the first few rows of the data</p>
+<div class="cell">
+<div class="cell-output-display">
+<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">species</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">island</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">bill_length_mm</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">bill_depth_mm</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">flipper_length_mm</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">body_mass_g</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">sex</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Adelie</td>
+<td style="text-align: left;">Torgersen</td>
+<td style="text-align: right;">39.1</td>
+<td style="text-align: right;">18.7</td>
+<td style="text-align: right;">181</td>
+<td style="text-align: right;">3750</td>
+<td style="text-align: left;">male</td>
+<td style="text-align: right;">2007</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Adelie</td>
+<td style="text-align: left;">Torgersen</td>
+<td style="text-align: right;">39.5</td>
+<td style="text-align: right;">17.4</td>
+<td style="text-align: right;">186</td>
+<td style="text-align: right;">3800</td>
+<td style="text-align: left;">female</td>
+<td style="text-align: right;">2007</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Adelie</td>
+<td style="text-align: left;">Torgersen</td>
+<td style="text-align: right;">40.3</td>
+<td style="text-align: right;">18.0</td>
+<td style="text-align: right;">195</td>
+<td style="text-align: right;">3250</td>
+<td style="text-align: left;">female</td>
+<td style="text-align: right;">2007</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Adelie</td>
+<td style="text-align: left;">Torgersen</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: right;">2007</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Adelie</td>
+<td style="text-align: left;">Torgersen</td>
+<td style="text-align: right;">36.7</td>
+<td style="text-align: right;">19.3</td>
+<td style="text-align: right;">193</td>
+<td style="text-align: right;">3450</td>
+<td style="text-align: left;">female</td>
+<td style="text-align: right;">2007</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Adelie</td>
+<td style="text-align: left;">Torgersen</td>
+<td style="text-align: right;">39.3</td>
+<td style="text-align: right;">20.6</td>
+<td style="text-align: right;">190</td>
+<td style="text-align: right;">3650</td>
+<td style="text-align: left;">male</td>
+<td style="text-align: right;">2007</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+<p>One question we may be interested in is, can the physical measurements of the penguins be used to distinguish the animals in terms of their species? That is, can the physical measurements be used to predict the species of a penguin without having to, say conduct a genetic analysis? Here, our response variable is categorical. This is another type of supervised learning problem know as <em>classification</em>&nbsp; Whenever we have a categorical response, we have a classification problem.</p>
+<p>For both the board game data and the penguins data, there is a response variable that we are interested to predict based on the values of certain predictor variables. Further, the data can be viewed as paired where each set of predictor values (which we denote generically by <span class="math inline">\(X\)</span>) has a corresponding known response value (denoted <span class="math inline">\(y\)</span>). This data provides a set of examples that can be used to <em>learn</em> the relationship between the predictors <span class="math inline">\(X\)</span> and the response <span class="math inline">\(y\)</span>. This is why regression and classification problems are called <strong>supervised learning</strong> problems.</p>
+<p>Our next step in the course will be to study some common supervised learning algorithms. There are also situations in which a data set does not consist of a natural pairing between predictors and a response. Unpaired or unlabeled data can by analysed using <strong>unsupervised learning</strong> methods. We will address unsupervised learning problems and algorithms later in the course.</p>
+</section>
 </section>
 <section id="preparation-for-the-next-lesson" class="level2">
 <h2 class="anchored" data-anchor-id="preparation-for-the-next-lesson">Preparation for the next lesson</h2>
@@ -563,20 +802,21 @@ Expand for Session Info
  quarto   1.3.361 @ /usr/local/bin/quarto
 
 ─ Packages ───────────────────────────────────────────────────────────────────
- package      * version date (UTC) lib source
- dplyr        * 1.1.2   2023-04-20 [1] CRAN (R 4.3.0)
- forcats      * 1.0.0   2023-01-29 [1] CRAN (R 4.3.0)
- ggplot2      * 3.4.2   2023-04-03 [1] CRAN (R 4.3.0)
- ISLR2        * 1.3-2   2022-11-20 [1] CRAN (R 4.3.0)
- lubridate    * 1.9.2   2023-02-10 [1] CRAN (R 4.3.0)
- purrr        * 1.0.1   2023-01-10 [1] CRAN (R 4.3.0)
- readr        * 2.1.4   2023-02-10 [1] CRAN (R 4.3.0)
- sessioninfo  * 1.2.2   2021-12-06 [1] CRAN (R 4.3.0)
- stringr      * 1.5.0   2022-12-02 [1] CRAN (R 4.3.0)
- tibble       * 3.2.1   2023-03-20 [1] CRAN (R 4.3.0)
- tidyr        * 1.3.0   2023-01-24 [1] CRAN (R 4.3.0)
- tidytuesdayR * 1.0.2   2022-02-01 [1] CRAN (R 4.3.0)
- tidyverse    * 2.0.0   2023-02-22 [1] CRAN (R 4.3.0)
+ package        * version date (UTC) lib source
+ dplyr          * 1.1.2   2023-04-20 [1] CRAN (R 4.3.0)
+ forcats        * 1.0.0   2023-01-29 [1] CRAN (R 4.3.0)
+ ggplot2        * 3.4.2   2023-04-03 [1] CRAN (R 4.3.0)
+ ISLR2          * 1.3-2   2022-11-20 [1] CRAN (R 4.3.0)
+ lubridate      * 1.9.2   2023-02-10 [1] CRAN (R 4.3.0)
+ palmerpenguins * 0.1.1   2022-08-15 [1] CRAN (R 4.3.0)
+ purrr          * 1.0.1   2023-01-10 [1] CRAN (R 4.3.0)
+ readr          * 2.1.4   2023-02-10 [1] CRAN (R 4.3.0)
+ sessioninfo    * 1.2.2   2021-12-06 [1] CRAN (R 4.3.0)
+ stringr        * 1.5.0   2022-12-02 [1] CRAN (R 4.3.0)
+ tibble         * 3.2.1   2023-03-20 [1] CRAN (R 4.3.0)
+ tidyr          * 1.3.0   2023-01-24 [1] CRAN (R 4.3.0)
+ tidytuesdayR   * 1.0.2   2022-02-01 [1] CRAN (R 4.3.0)
+ tidyverse      * 2.0.0   2023-02-22 [1] CRAN (R 4.3.0)
 
  [1] /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library
 
