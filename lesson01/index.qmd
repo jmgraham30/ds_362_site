@@ -382,7 +382,7 @@ Each row of the matrix representation for $X$ corresponds to an observation and,
 
 [^3]: If one or more of our predictor variables is categorical, then we will use a technique known as **dummy variables** to convert each categorical predictor variable into a sequence of numerical variables. This will add to the number of columns in our matrix representation of our predictors $X$. We will cover the concept of dummy variables later in the course. 
 
-Our next step in the course will be to study some common supervised learning algorithms. There are also situations in which a data set does not consist of a natural pairing between predictors and a response. Unpaired or unlabeled data can by analysed using **unsupervised learning** methods. We will address unsupervised learning problems and algorithms later in the course.   
+Our next step in the course will be to study some common supervised learning algorithms. There are also situations in which a data set does not consist of a natural pairing between predictors and a response. Unpaired or unlabeled data can be analysed using **unsupervised learning** methods. We will address unsupervised learning problems and algorithms later in the course.   
 
 ## Preparation for the next lesson
 
