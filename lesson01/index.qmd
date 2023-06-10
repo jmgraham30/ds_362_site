@@ -358,6 +358,30 @@ One question we may be interested in is, can the physical measurements of the pe
 
 For both the board game data and the penguins data, there is a response variable that we are interested to predict based on the values of certain predictor variables. Further, the data can be viewed as paired where each set of predictor values (which we denote generically by $X$) has a corresponding known response value (denoted $y$). This data provides a set of examples that can be used to *learn* the relationship between the predictors $X$ and the response $y$. This is why regression and classification problems are called **supervised learning** problems. 
 
+#### Some Mathematical Notation
+
+It is convenient to organize our data by using the mathematical notation of vectors and matrices, especially for machine learning problems. Then, many machine learning algorithms can be derived or implemented via the powerful methods of [numerical linear algebra](https://en.wikipedia.org/wiki/Numerical_linear_algebra). Suppose that we have paired data consisting of $n$ observations (think rows) and $p$ numerical predictor variables [^3]. Then our predictor values $X$ can be organized as an $n \times p$ matrix such as
+
+$$
+X = \left[\begin{array}{cccc} x_{11} & x_{12} & \cdots & x_{1p} \\
+x_{21} & x_{22} & \cdots & x_{2p} \\
+\vdots & \cdots &  \ddots & \vdots  \\
+x_{n1} & x_{n2} & \cdots & x_{np}
+\end{array}\right]
+$$
+
+We then view the response variable $y$ as a vector of length $p$, that is, 
+
+$$
+y = \left[\begin{array}{c} y_{1} \\ y_{2} \\ \vdots \\ y_{p} 
+\end{array}\right]
+$$
+
+Each row of the matrix representation for $X$ corresponds to an observation and, in case of supervised learning, is associated with a single entry of $y$. For example, row $j$ of $X$, that is $[\begin{array}{cccc} x_{j1} & x_{j2} & \cdots & x_{jp} 
+\end{array}]$, is labelled by $y_{j}$. 
+
+[^3]: If one or more of our predictor variables is categorical, then we will use a technique known as **dummy variables** to convert each categorical predictor variable into a sequence of numerical variables. This will add to the number of columns in our matrix representation of our predictors $X$. We will cover the concept of dummy variables later in the course. 
+
 Our next step in the course will be to study some common supervised learning algorithms. There are also situations in which a data set does not consist of a natural pairing between predictors and a response. Unpaired or unlabeled data can by analysed using **unsupervised learning** methods. We will address unsupervised learning problems and algorithms later in the course.   
 
 ## Preparation for the next lesson

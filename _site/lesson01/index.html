@@ -728,7 +728,24 @@ $ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 
 </div>
 <p>One question we may be interested in is, can the physical measurements of the penguins be used to distinguish the animals in terms of their species? That is, can the physical measurements be used to predict the species of a penguin without having to, say conduct a genetic analysis? Here, our response variable is categorical. This is another type of supervised learning problem know as <em>classification</em>&nbsp; Whenever we have a categorical response, we have a classification problem.</p>
 <p>For both the board game data and the penguins data, there is a response variable that we are interested to predict based on the values of certain predictor variables. Further, the data can be viewed as paired where each set of predictor values (which we denote generically by <span class="math inline">\(X\)</span>) has a corresponding known response value (denoted <span class="math inline">\(y\)</span>). This data provides a set of examples that can be used to <em>learn</em> the relationship between the predictors <span class="math inline">\(X\)</span> and the response <span class="math inline">\(y\)</span>. This is why regression and classification problems are called <strong>supervised learning</strong> problems.</p>
+<section id="some-mathematical-notation" class="level4">
+<h4 class="anchored" data-anchor-id="some-mathematical-notation">Some Mathematical Notation</h4>
+<p>It is convenient to organize our data by using the mathematical notation of vectors and matrices, especially for machine learning problems. Then, many machine learning algorithms can be derived or implemented via the powerful methods of <a href="https://en.wikipedia.org/wiki/Numerical_linear_algebra">numerical linear algebra</a>. Suppose that we have paired data consisting of <span class="math inline">\(n\)</span> observations (think rows) and <span class="math inline">\(p\)</span> numerical predictor variables <a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. Then our predictor values <span class="math inline">\(X\)</span> can be organized as an <span class="math inline">\(n \times p\)</span> matrix such as</p>
+<p><span class="math display">\[
+X = \left[\begin{array}{cccc} x_{11} &amp; x_{12} &amp; \cdots &amp; x_{1p} \\
+x_{21} &amp; x_{22} &amp; \cdots &amp; x_{2p} \\
+\vdots &amp; \cdots &amp;  \ddots &amp; \vdots  \\
+x_{n1} &amp; x_{n2} &amp; \cdots &amp; x_{np}
+\end{array}\right]
+\]</span></p>
+<p>We then view the response variable <span class="math inline">\(y\)</span> as a vector of length <span class="math inline">\(p\)</span>, that is,</p>
+<p><span class="math display">\[
+y = \left[\begin{array}{c} y_{1} \\ y_{2} \\ \vdots \\ y_{p}
+\end{array}\right]
+\]</span></p>
+<p>Each row of the matrix representation for <span class="math inline">\(X\)</span> corresponds to an observation and, in case of supervised learning, is associated with a single entry of <span class="math inline">\(y\)</span>. For example, row <span class="math inline">\(j\)</span> of <span class="math inline">\(X\)</span>, that is <span class="math inline">\([\begin{array}{cccc} x_{j1} &amp; x_{j2} &amp; \cdots &amp; x_{jp} \end{array}]\)</span>, is labelled by <span class="math inline">\(y_{j}\)</span>.</p>
 <p>Our next step in the course will be to study some common supervised learning algorithms. There are also situations in which a data set does not consist of a natural pairing between predictors and a response. Unpaired or unlabeled data can by analysed using <strong>unsupervised learning</strong> methods. We will address unsupervised learning problems and algorithms later in the course.</p>
+</section>
 </section>
 </section>
 <section id="preparation-for-the-next-lesson" class="level2">
@@ -841,6 +858,7 @@ Expand for Session Info
 <ol>
 <li id="fn1"><p>The notebooks are created using <a href="https://quarto.org/">Quarto</a> and <a href="https://rmarkdown.rstudio.com/">R markdown</a>, topics that we will cover in more detail later.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>Occasionally, there will be a conflict between functions from two different packages. R will issue a warning when such conflicts arise. You can also use the “double colon” notation to reference an object in a package without the need to load the package. For example, <code>dplyr::select</code> references the <code>select</code> function from the <code>dplyr</code> package.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>If one or more of our predictor variables is categorical, then we will use a technique known as <strong>dummy variables</strong> to convert each categorical predictor variable into a sequence of numerical variables. This will add to the number of columns in our matrix representation of our predictors <span class="math inline">\(X\)</span>. We will cover the concept of dummy variables later in the course.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div>CC BY-NC-SA 4.0</div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
