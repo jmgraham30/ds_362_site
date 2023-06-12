@@ -329,7 +329,7 @@ div.csl-indent {
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>egg_prod_df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-04-11/egg-production.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The previous code uses the <code>read_csv</code> function from the <code>readr</code> package (part of <code>tidyverse</code>) to directly read in the <code>egg-production.csv</code> from the specified location.</p>
+<p>The previous code uses the <code>read_csv</code> function from the <code>readr</code> package (part of <code>tidyverse</code>) to directly read in the <code>egg-production.csv</code> from the specified location. An excellent review on reading data into R is provided in <a href="https://datasciencebook.ca/reading.html">Chapter 2</a> of <span class="citation" data-cites="timbers2022data">(<a href="#ref-timbers2022data" role="doc-biblioref">Timbers, Campbell, and Lee 2022</a>)</span>. <a href="https://datasciencebook.ca/reading.html">View the chapter online</a>.</p>
 <p>The first few rows of this data set look as follows:</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -472,7 +472,7 @@ $ source         &lt;chr&gt; "ChicEggs-09-23-2016.pdf", "ChicEggs-10-21-2016.pdf
 <ol start="6" type="1">
 <li><p>Decide what type(s) of analysis or analyses are to be performed. This is the stage at which machine learning enters into the process.</p>
 <ul>
-<li>Make sure to clearly state what the goals of an analysis are. There are several different types of analyses of data that are common to conduct. See <a href="https://datasciencebook.ca/intro.html#tab:questions-table">Table 1.1</a> from <span class="citation" data-cites="timbers2022data">(<a href="#ref-timbers2022data" role="doc-biblioref"><strong>timbers2022data?</strong></a>)</span> for a list of these typical analysis types with corresponding examples of questions appropriate for a particular type of analysis, link to table <a href="https://datasciencebook.ca/intro.html#tab:questions-table">here</a>.</li>
+<li>Make sure to clearly state what the goals of an analysis are. There are several different types of analyses of data that are common to conduct. See <a href="https://datasciencebook.ca/intro.html#tab:questions-table">Table 1.1</a> from <span class="citation" data-cites="timbers2022data">(<a href="#ref-timbers2022data" role="doc-biblioref">Timbers, Campbell, and Lee 2022</a>)</span> for a list of these typical analysis types with corresponding examples of questions appropriate for a particular type of analysis, link to table <a href="https://datasciencebook.ca/intro.html#tab:questions-table">here</a>.</li>
 </ul></li>
 <li><p>Assess the analysis. In particular, use an appropriate metric to estimate model error.</p></li>
 <li><p>At this stage, it may be necessary to repeat steps 1 - 7.</p></li>
@@ -783,6 +783,9 @@ Suzuki, Joe. 2020. <em>Statistical Learning with Math and r</em>. Springer.
 <div id="ref-tibshirani2017introduction" class="csl-entry" role="listitem">
 Tibshirani, Hastie Robert, Gareth James, and Daniela Witten Trevor. 2017. <em>An Introduction to Statistical Learning</em>. springer publication.
 </div>
+<div id="ref-timbers2022data" class="csl-entry" role="listitem">
+Timbers, Tiffany, Trevor Campbell, and Melissa Lee. 2022. <em>Data Science: A First Introduction</em>. CRC Press.
+</div>
 <div id="ref-wickham2016r" class="csl-entry" role="listitem">
 Wickham, Hadley, and Garrett Grolemund. 2016. <em>R for Data Science: Import, Tidy, Transform, Visualize, and Model Data</em>. " O’Reilly Media, Inc.".
 </div>
@@ -814,7 +817,7 @@ Expand for Session Info
  collate  en_US.UTF-8
  ctype    en_US.UTF-8
  tz       America/New_York
- date     2023-06-10
+ date     2023-06-12
  pandoc   3.1.1 @ /Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/ (via rmarkdown)
  quarto   1.3.361 @ /usr/local/bin/quarto
 

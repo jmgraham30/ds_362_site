@@ -170,7 +170,7 @@ The following line of code is not run but demonstrate how to load a data file su
 egg_prod_df <- read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-04-11/egg-production.csv')
 ```
 
-The previous code uses the `read_csv` function from the `readr` package (part of `tidyverse`) to directly read in the `egg-production.csv` from the specified location.  
+The previous code uses the `read_csv` function from the `readr` package (part of `tidyverse`) to directly read in the `egg-production.csv` from the specified location. An excellent review on reading data into R is provided in [Chapter 2](https://datasciencebook.ca/reading.html) of [@timbers2022data]. [View the chapter online](https://datasciencebook.ca/reading.html). 
 
 The first few rows of this data set look as follows:
 
