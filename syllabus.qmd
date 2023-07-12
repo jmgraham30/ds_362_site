@@ -18,7 +18,7 @@ library(kableExtra)
 * **Instructor:** Dr. Jason M. Graham
 
 * **Office:** LSC 319A 
-    + **Office Hours:** TBD You may also make an appointment to meet with me outside of scheduled office hours. Appointments are not necessary for regularly scheduled office hours.
+    + **Office Hours:** Mondays 12:30-1:30, Wednesdays 9:30-10:30 and 12:30-1:30. You may also make an appointment to meet with me outside of scheduled office hours. Appointments are not necessary for regularly scheduled office hours.
 
 * **Email:** <jason.graham@scranton.edu>
 
