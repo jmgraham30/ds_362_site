@@ -37,6 +37,8 @@ library(kableExtra)
 
 ## Recommended Readings
 
+* Hands-On Machine Learning with R, [view the free online version of the text](https://bradleyboehmke.github.io/HOML/).
+
 * Tidy Modeling with R by
 Max Kuhn & Julia Silge, [view the free online version of the text](https://www.tmwr.org/).
 
