@@ -25,7 +25,7 @@
     "href": "syllabus.html#required-readings",
     "title": "Syllabus",
     "section": "Required Readings",
-    "text": "Required Readings\n\nAn Introduction to Statistical Learning 2nd Ed. by James, Witten, Hastie, and Tibshirani, view the free online version of the text. There is a set of lecture videos associated with this text. View these videos on YouTube.\nStatistical Learning with Math and R by Joe Suzuki, available online through the Weinberg Library, view the text.\nTidy Modeling with R by Max Kuhn & Julia Silge, view the free online version of the text.\nFeature Engineering and Selection: A Practical Approach for Predictive Models by Max Kuhn and Kjell Johnson, view the free online version of the text."
+    "text": "Required Readings\n\nAn Introduction to Statistical Learning 2nd Ed. by James, Witten, Hastie, and Tibshirani, view the free online version of the text. There is a set of lecture videos associated with this text, view these videos on YouTube. There is also a version of the text using Python instead of R, view the Python version.\nStatistical Learning with Math and R by Joe Suzuki, available online through the Weinberg Library, view the text. There is also a version of the text using Python instead of R, view the Python version"
   },
   {
     "objectID": "syllabus.html#r-references",
@@ -46,7 +46,7 @@
     "href": "syllabus.html#recommended-readings",
     "title": "Syllabus",
     "section": "Recommended Readings",
-    "text": "Recommended Readings\n\nTelling Stories with Data by Rohan Alexander, view the free online version of the text.\nData Science: A First Introduction by Tiffany Timbers, Trevor Campbell, and Melissa Lee, view the free online version of the text.\nTree-Based Methods for Statistical Learning by Brandon M. Greenwell, view the free online version of the text.\nStatistical Learning from a Regression Perspective by Richard A. Berk. Available online through the Weinberg Library, view the text."
+    "text": "Recommended Readings\n\nTidy Modeling with R by Max Kuhn & Julia Silge, view the free online version of the text.\nFeature Engineering and Selection: A Practical Approach for Predictive Models by Max Kuhn and Kjell Johnson, view the free online version of the text.\nTelling Stories with Data by Rohan Alexander, view the free online version of the text.\nData Science: A First Introduction by Tiffany Timbers, Trevor Campbell, and Melissa Lee, view the free online version of the text.\nTree-Based Methods for Statistical Learning by Brandon M. Greenwell, view the free online version of the text."
   },
   {
     "objectID": "syllabus.html#further-reading",

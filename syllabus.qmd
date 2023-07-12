@@ -30,16 +30,17 @@ library(kableExtra)
 
 ## Required Readings
 
-* An Introduction to Statistical Learning 2nd Ed. by James, Witten, Hastie, and Tibshirani, [view the free online version of the text](https://www.statlearning.com/). There is a set of lecture videos associated with this text. [View these videos on YouTube](https://www.youtube.com/playlist?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e).
+* An Introduction to Statistical Learning 2nd Ed. by James, Witten, Hastie, and Tibshirani, [view the free online version of the text](https://www.statlearning.com/). There is a set of lecture videos associated with this text, [view these videos on YouTube](https://www.youtube.com/playlist?list=PLoROMvodv4rOzrYsAxzQyHb8n_RWNuS1e). There is also a version of the text using Python instead of R, [view the Python version](https://hastie.su.domains/ISLP/ISLP_website.pdf).
 
-* Statistical Learning with Math and R by Joe Suzuki, available online through the Weinberg Library, [view the text](https://link-springer-com.ezp.scranton.edu/book/10.1007/978-981-15-7568-6).
+* Statistical Learning with Math and R by Joe Suzuki, available online through the Weinberg Library, [view the text](https://link-springer-com.ezp.scranton.edu/book/10.1007/978-981-15-7568-6). There is also a version of the text using Python instead of R, [view the Python version](https://link-springer-com.ezp.scranton.edu/book/10.1007/978-981-15-7877-9)
+
+
+## Recommended Readings
 
 * Tidy Modeling with R by
 Max Kuhn & Julia Silge, [view the free online version of the text](https://www.tmwr.org/).
 
 * Feature Engineering and Selection: A Practical Approach for Predictive Models by Max Kuhn and Kjell Johnson, [view the free online version of the text](http://www.feat.engineering/).
-
-## Recommended Readings
 
 * Telling Stories with Data by Rohan Alexander,  [view the free online version of the text](https://tellingstorieswithdata.com/).
 
@@ -47,7 +48,6 @@ Max Kuhn & Julia Silge, [view the free online version of the text](https://www.t
 
 * Tree-Based Methods for Statistical Learning by Brandon M. Greenwell, [view the free online version of the text](https://bgreenwell.github.io/treebook/).
 
-* Statistical Learning from a Regression Perspective by Richard A. Berk. Available online through the Weinberg Library, [view the text](https://link-springer-com.ezp.scranton.edu/book/10.1007/978-3-030-40189-4).
 
 ## Further Reading
 
