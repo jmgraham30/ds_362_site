@@ -55,6 +55,9 @@ Max Kuhn & Julia Silge, [view the free online version of the text](https://www.t
 
 * Elements of Statistical Learning 2nd Ed. by Hastie, Tibshirani, and Friedman, [view the free online version of the text](https://hastie.su.domains/ElemStatLearn/).
 
+* Links to additional resources related to the course material will be posted on the course website. [View the resources link.](https://knowledge-discovery.netlify.app/links.html)
+
+
 
 ## R References
 
@@ -108,6 +111,8 @@ kbl(slos_assess) %>%
 
 ### Grade Policy
 
+The overall course grade will be based on (roughly twelve) weekly homework assignment totaling 30% of the overall course grade, a data package assignment totaling 20% of the overall course grade, and a semester project totaling 50% of the overall course grade. 
+
 
 ### Grade Scale
 
@@ -142,6 +147,20 @@ In particular, it is expected that students will be able to explain independentl
 If you have any doubts about your use of AI, then either ask the instructor if your use of AI is acceptable or just don't use AI.
 
 # Assignments
+
+## Homework Assignments
+
+There will be roughly 12 weekly homework assignments throughout the semester. These assignments with due dates will be posted to the course learning management system. Homework problems will be a mix of hand-written and computer assignments and the problems will relate to the material covered in lectures and readings.   
+
+## Data Package Assignment
+
+
+
+
+## Semester Project
+
+
+
 
 # Course Timeline
 
