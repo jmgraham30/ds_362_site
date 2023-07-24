@@ -130,21 +130,21 @@
     "href": "syllabus.html#student-learning-objectives-and-assessment",
     "title": "Syllabus",
     "section": "Student Learning Objectives and Assessment:",
-    "text": "Student Learning Objectives and Assessment:\n\n\n\n\nTable 1: Course objectives and assessment.\n\n\nCourse SLO\nAssessment\n\n\n\n\nAfter completing this course, students will be able to import, format, and transform common data-set types programmatically and build effective visualizations of data\nHomework, Data Package Assignment, and Project\n\n\nAfter completing this course, students will be able to apply appropriate exploration and modeling techniques to learn from data.\nHomework and Project\n\n\nAfter completing this course, students will be able to present and communicate results obtained via data analysis in an effective manner.\nHomework, Data Package Assignment, and Project"
+    "text": "Student Learning Objectives and Assessment:\n\n\n\n\nTable 1: Course objectives and assessment.\n\n\nCourse SLO\nAssessment\n\n\n\n\nAfter completing this course, students will be able to import, pre-process, and transform common data sets as appropriate for use in machine learning applications.\nHomework, Case Studies, and Project\n\n\nAfter completing this course, students will be able to implement and apply foundational machine learning methods.\nHomework, Case Studies, and Project\n\n\nAfter completing this course, students will be able to present and communicate results obtained via data analysis in an effective manner.\nCase Studies and Project"
   },
   {
     "objectID": "syllabus.html#grading",
     "href": "syllabus.html#grading",
     "title": "Syllabus",
     "section": "Grading",
-    "text": "Grading\n\nGrade Policy\nThe overall course grade will be based on (roughly twelve) weekly homework assignment totaling 30% of the overall course grade, a data package assignment totaling 20% of the overall course grade, and a semester project totaling 50% of the overall course grade.\n\n\nGrade Scale\nLetter grades will be assigned based on the following scale:\n\n\n\n\nTable 2: Letter grade scale.\n\n\nGrade Range\nLetter Grade\n\n\n\n\n94-100\nA\n\n\n90-93\nA-\n\n\n87-89\nB+\n\n\n83-86\nB\n\n\n80-82\nB-\n\n\n76-79\nC+\n\n\n72-75\nC\n\n\n69-71\nC-\n\n\n65-68\nD+\n\n\n60-64\nD\n\n\n&lt;60\nF"
+    "text": "Grading\n\nGrade Policy\nThe overall course grade will be based on (roughly twelve) weekly homework assignment totaling 30% of the overall course grade, two data modeling case study assignments totaling 40% of the overall course grade, and a semester project totaling 30% of the overall course grade.\n\n\nGrade Scale\nLetter grades will be assigned based on the following scale:\n\n\n\n\nTable 2: Letter grade scale.\n\n\nGrade Range\nLetter Grade\n\n\n\n\n94-100\nA\n\n\n90-93\nA-\n\n\n87-89\nB+\n\n\n83-86\nB\n\n\n80-82\nB-\n\n\n76-79\nC+\n\n\n72-75\nC\n\n\n69-71\nC-\n\n\n65-68\nD+\n\n\n60-64\nD\n\n\n&lt;60\nF"
   },
   {
     "objectID": "syllabus.html#weekly-schedule",
     "href": "syllabus.html#weekly-schedule",
     "title": "Syllabus",
     "section": "Weekly Schedule",
-    "text": "Weekly Schedule\n\nWeek 1: Review of background concepts\nWeek 2: Data mining\nWeek 3: Machine learning; Project component 1 due\nWeek 4: Regression\nWeek 5: Classification\nWeek 6: Resampling methods; Project component 2 due\nWeek 7: Model selection and regularization\nWeek 8: CARTs\nWeek 9: Support vector machines; Project component 3 due\nWeek 10: Neural Networks\nWeek 11: Deep learning\nWeek 12: Association rule learning; Project component 4 due\nWeek 13: Unsupervised methods\nWeek 14: Reinforcement\nWeek 15: Ethical considerations; Project final version due"
+    "text": "Weekly Schedule\n\nWeek 1: Review of background concepts\nWeek 2: Data mining\nWeek 3: Machine learning; Project component 1 due\nWeek 4: Regression\nWeek 5: Classification\nWeek 6: Resampling methods; Case Study 1 due\nWeek 7: Model selection and regularization\nWeek 8: CARTs\nWeek 9: Support vector machines\nWeek 10: Neural Networks; Case Study 2 due\nWeek 11: Deep learning\nWeek 12: Association rule learning; Project component 2 due\nWeek 13: Unsupervised methods\nWeek 14: Reinforcement\nWeek 15: Ethical considerations; Project final version due"
   },
   {
     "objectID": "syllabus.html#important-dates",
@@ -270,6 +270,13 @@
     "href": "syllabus.html#semester-project",
     "title": "Syllabus",
     "section": "Semester Project",
-    "text": "Semester Project\nYour project report and presentation should be written as if it is addressed to a stake holder with some subject matter knowledge in the domain of application but not necessarily with a quantitative or programming background."
+    "text": "Semester Project\nYour project report and presentation should be written as if it is addressed to a stake holder with some subject matter knowledge in the domain of application but not necessarily with a quantitative or programming background. Further details on the semester project such as the parameters of the assignment and a grade rubric will be posted on the course learning management system."
+  },
+  {
+    "objectID": "syllabus.html#data-modeling-case-studies",
+    "href": "syllabus.html#data-modeling-case-studies",
+    "title": "Syllabus",
+    "section": "Data Modeling Case Studies",
+    "text": "Data Modeling Case Studies\nOver the course of the semester, you will be asked to complete two data modeling case studies that will form a total of 40% of the overall course grade. Further details on the case study assignments such as the parameters of the assignments and grade rubrics will be posted on the course learning management system."
   }
 ]

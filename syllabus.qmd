@@ -83,9 +83,9 @@ Max Kuhn & Julia Silge, [view the free online version of the text](https://www.t
 #| include: false
 
 
-course_slo <- c("After completing this course, students will be able to import, format, and transform common data-set types programmatically and build effective visualizations of data","After completing this course, students will be able to apply appropriate exploration and modeling techniques to learn from data.","After completing this course, students will be able to present and communicate results obtained via data analysis in an effective manner.")
+course_slo <- c("After completing this course, students will be able to import, pre-process, and transform common data sets as appropriate for use in machine learning applications.","After completing this course, students will be able to implement and apply foundational machine learning methods.","After completing this course, students will be able to present and communicate results obtained via data analysis in an effective manner.")
 ge_objectives <- c("All students will identify and read important texts, placing them both in historical and conceptual contexts, and write analyses and arguments pertaining to these texts.","All students will apply technological and philosophical insights to issues of science and technolo","All students will apply technological and philosophical insights to issues of science and technology in the 20th century. ")
-assessment <- c("Homework, Data Package Assignment, and Project","Homework and Project","Homework, Data Package Assignment, and Project")
+assessment <- c("Homework, Case Studies, and Project","Homework, Case Studies, and Project","Case Studies and Project")
 slos_assess <- tibble::tibble("Course SLO"=course_slo,"Assessment"=assessment)
 ```
 
@@ -111,7 +111,7 @@ kbl(slos_assess) %>%
 
 ### Grade Policy
 
-The overall course grade will be based on (roughly twelve) weekly homework assignment totaling 30% of the overall course grade, a data package assignment totaling 20% of the overall course grade, and a semester project totaling 50% of the overall course grade. 
+The overall course grade will be based on (roughly twelve) weekly homework assignment totaling 30% of the overall course grade, two data modeling case study assignments totaling 40% of the overall course grade, and a semester project totaling 30% of the overall course grade. 
 
 
 ### Grade Scale
@@ -152,14 +152,14 @@ If you have any doubts about your use of AI, then either ask the instructor if y
 
 There will be roughly 12 weekly homework assignments throughout the semester. These assignments with due dates will be posted to the course learning management system. Homework problems will be a mix of hand-written and computer assignments and the problems will relate to the material covered in lectures and readings.   
 
-## Data Package Assignment
+## Data Modeling Case Studies
 
 
-
+Over the course of the semester, you will be asked to complete two data modeling case studies that will form a total of 40% of the overall course grade. Further details on the case study assignments such as the parameters of the assignments and grade rubrics will be posted on the course learning management system.  
 
 ## Semester Project
 
-Your project report and presentation should be written as if it is addressed to a stake holder with some subject matter knowledge in the domain of application but not necessarily with a quantitative or programming background. 
+Your project report and presentation should be written as if it is addressed to a stake holder with some subject matter knowledge in the domain of application but not necessarily with a quantitative or programming background. Further details on the semester project such as the parameters of the assignment and a grade rubric will be posted on the course learning management system. 
 
 
 # Course Timeline
@@ -176,19 +176,19 @@ Your project report and presentation should be written as if it is addressed to 
  
  - Week 5: Classification
  
- - Week 6: Resampling methods; Project component 2 due
+ - Week 6: Resampling methods; Case Study 1 due
  
  - Week 7: Model selection and regularization
  
  - Week 8: CARTs
  
- - Week 9: Support vector machines; Project component 3 due
+ - Week 9: Support vector machines
  
- - Week 10: Neural Networks
+ - Week 10: Neural Networks; Case Study 2 due
  
  - Week 11: Deep learning
  
- - Week 12: Association rule learning; Project component 4 due
+ - Week 12: Association rule learning; Project component 2 due
  
  - Week 13: Unsupervised methods
  
