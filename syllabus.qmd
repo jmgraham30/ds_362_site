@@ -105,8 +105,6 @@ kbl(slos_assess) %>%
 # Course Policies and Procedures
 
 
-
-
 ##  Grading
 
 ### Grade Policy
@@ -150,14 +148,37 @@ If you have any doubts about your use of AI, then either ask the instructor if y
 
 ## Homework Assignments
 
-There will be roughly 12 weekly homework assignments throughout the semester. These assignments with due dates will be posted to the course learning management system. Homework problems will be a mix of hand-written and computer assignments and the problems will relate to the material covered in lectures and readings.   
+There will be roughly 12 weekly homework assignments throughout the semester totaling 30% of the overall course grade. These assignments with due dates will be posted to the course learning management system. Homework problems will be a mix of hand-written and computer assignments and the problems will relate to the material covered in lectures and readings.   
 
 ## Data Modeling Case Studies
 
 
-Over the course of the semester, you will be asked to complete two data modeling case studies that will form a total of 40% of the overall course grade. Further details on the case study assignments such as the parameters of the assignments and grade rubrics will be posted on the course learning management system.  
+Over the course of the semester, you will be asked to complete two data modeling case studies that will form a total of 40% of the overall course grade. For each case study, you will be provided with a data set and then asked to apply and compare multiple methods of analysis on the provided data set. A complete data modeling case study should consist of
+
+- Appropriately documented code implementing appropriate models.
+
+- A GitHub repository with all code. 
+
+- A report developed in Quarto that summarizes your conclusions. 
+
+
+Further details on the case study assignments such as the parameters of the assignments and grade rubrics will be posted on the course learning management system.  
 
 ## Semester Project
+
+The semester project will incorporate all the components of a data analysis covered in the course throughout the semester applied to a particular data set. Various components of the project will be due at different times but you will have the opportunity to revise some components prior to the submission of the final product. 
+
+A complete project, counting for 30% of the overall course grade will consist of the following:
+
+- An initial exploratory data analysis for your data set.  
+
+- An appropriate analysis of your data set with the goal to address a specific research question.  
+
+- A project report developed using Quarto.
+
+- Slides for a presentation summarizing your project. You will not actually present the slides. 
+
+- A GitHub repository containing all code (appropriately documented) written and used in your project.
 
 Your project report and presentation should be written as if it is addressed to a stake holder with some subject matter knowledge in the domain of application but not necessarily with a quantitative or programming background. Further details on the semester project such as the parameters of the assignment and a grade rubric will be posted on the course learning management system. 
 
@@ -170,27 +191,27 @@ Your project report and presentation should be written as if it is addressed to 
  
  - Week 2: Data mining
  
- - Week 3:  Machine learning; Project component 1 due
+ - Week 3:  Machine learning
  
  - Week 4: Regression
  
- - Week 5: Classification
+ - Week 5: Classification; Project component 1 due
  
- - Week 6: Resampling methods; Case Study 1 due
+ - Week 6: Resampling methods
  
- - Week 7: Model selection and regularization
+ - Week 7: Model selection and regularization; Case Study 1 due
  
  - Week 8: CARTs
  
  - Week 9: Support vector machines
  
- - Week 10: Neural Networks; Case Study 2 due
+ - Week 10: Neural Networks
  
- - Week 11: Deep learning
+ - Week 11: Deep learning; Project component 2 due
  
- - Week 12: Association rule learning; Project component 2 due
+ - Week 12: Association rule learning
  
- - Week 13: Unsupervised methods
+ - Week 13: Unsupervised methods; Case Study 2 due
  
  - Week 14: Reinforcement
  

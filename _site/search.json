@@ -144,7 +144,7 @@
     "href": "syllabus.html#weekly-schedule",
     "title": "Syllabus",
     "section": "Weekly Schedule",
-    "text": "Weekly Schedule\n\nWeek 1: Review of background concepts\nWeek 2: Data mining\nWeek 3: Machine learning; Project component 1 due\nWeek 4: Regression\nWeek 5: Classification\nWeek 6: Resampling methods; Case Study 1 due\nWeek 7: Model selection and regularization\nWeek 8: CARTs\nWeek 9: Support vector machines\nWeek 10: Neural Networks; Case Study 2 due\nWeek 11: Deep learning\nWeek 12: Association rule learning; Project component 2 due\nWeek 13: Unsupervised methods\nWeek 14: Reinforcement\nWeek 15: Ethical considerations; Project final version due"
+    "text": "Weekly Schedule\n\nWeek 1: Review of background concepts\nWeek 2: Data mining\nWeek 3: Machine learning\nWeek 4: Regression\nWeek 5: Classification; Project component 1 due\nWeek 6: Resampling methods\nWeek 7: Model selection and regularization; Case Study 1 due\nWeek 8: CARTs\nWeek 9: Support vector machines\nWeek 10: Neural Networks\nWeek 11: Deep learning; Project component 2 due\nWeek 12: Association rule learning\nWeek 13: Unsupervised methods; Case Study 2 due\nWeek 14: Reinforcement\nWeek 15: Ethical considerations; Project final version due"
   },
   {
     "objectID": "syllabus.html#important-dates",
@@ -256,7 +256,7 @@
     "href": "syllabus.html#homework-assignments",
     "title": "Syllabus",
     "section": "Homework Assignments",
-    "text": "Homework Assignments\nThere will be roughly 12 weekly homework assignments throughout the semester. These assignments with due dates will be posted to the course learning management system. Homework problems will be a mix of hand-written and computer assignments and the problems will relate to the material covered in lectures and readings."
+    "text": "Homework Assignments\nThere will be roughly 12 weekly homework assignments throughout the semester totaling 30% of the overall course grade. These assignments with due dates will be posted to the course learning management system. Homework problems will be a mix of hand-written and computer assignments and the problems will relate to the material covered in lectures and readings."
   },
   {
     "objectID": "syllabus.html#data-package-assignment",
@@ -270,13 +270,13 @@
     "href": "syllabus.html#semester-project",
     "title": "Syllabus",
     "section": "Semester Project",
-    "text": "Semester Project\nYour project report and presentation should be written as if it is addressed to a stake holder with some subject matter knowledge in the domain of application but not necessarily with a quantitative or programming background. Further details on the semester project such as the parameters of the assignment and a grade rubric will be posted on the course learning management system."
+    "text": "Semester Project\nThe semester project will incorporate all the components of a data analysis covered in the course throughout the semester applied to a particular data set. Various components of the project will be due at different times but you will have the opportunity to revise some components prior to the submission of the final product.\nA complete project, counting for 30% of the overall course grade will consist of the following:\n\nAn initial exploratory data analysis for your data set.\nAn appropriate analysis of your data set with the goal to address a specific research question.\nA project report developed using Quarto.\nSlides for a presentation summarizing your project. You will not actually present the slides.\nA GitHub repository containing all code (appropriately documented) written and used in your project.\n\nYour project report and presentation should be written as if it is addressed to a stake holder with some subject matter knowledge in the domain of application but not necessarily with a quantitative or programming background. Further details on the semester project such as the parameters of the assignment and a grade rubric will be posted on the course learning management system."
   },
   {
     "objectID": "syllabus.html#data-modeling-case-studies",
     "href": "syllabus.html#data-modeling-case-studies",
     "title": "Syllabus",
     "section": "Data Modeling Case Studies",
-    "text": "Data Modeling Case Studies\nOver the course of the semester, you will be asked to complete two data modeling case studies that will form a total of 40% of the overall course grade. Further details on the case study assignments such as the parameters of the assignments and grade rubrics will be posted on the course learning management system."
+    "text": "Data Modeling Case Studies\nOver the course of the semester, you will be asked to complete two data modeling case studies that will form a total of 40% of the overall course grade. For each case study, you will be provided with a data set and then asked to apply and compare multiple methods of analysis on the provided data set. A complete data modeling case study should consist of\n\nAppropriately documented code implementing appropriate models.\nA GitHub repository with all code.\nA report developed in Quarto that summarizes your conclusions.\n\nFurther details on the case study assignments such as the parameters of the assignments and grade rubrics will be posted on the course learning management system."
   }
 ]
