@@ -14,6 +14,8 @@ library(tidyverse)
 
 * Getting Started with R and RStudio, [view the website](https://ourcodingclub.github.io/tutorials/intro-to-r/).
 
+* How to Use Git/GitHub with R, [view the website](https://rfortherestofus.com/2021/02/how-to-use-git-github-with-r/).
+
 * Tidy Tuesday data repository, [view the website](https://github.com/rfordatascience/tidytuesday/tree/master).
 
 * From Data to Viz website on visualizing data,  [view the website](https://www.data-to-viz.com/#explore).
