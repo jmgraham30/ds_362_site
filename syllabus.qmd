@@ -224,8 +224,8 @@ Your project report and presentation should be written as if it is addressed to 
 #| echo: false
 
 
-events <- c("Classes begin","Drop (no grade)","Fall break","Mid-semester","Thanksgiving break","Last week","Finals")
-event_date <- c(" "," "," "," "," "," "," ")
+events <- c("Classes begin","Last day to add classes","Holiday, no classes","100% tuition refund","Drop (no grade)","Fall break","Mid-semester","Withdraw with W","Thanksgiving break","Last week","Finals")
+event_date <- c("08-28","90-01","09-04","09-06","09-27","10-07 to 10-10","10-18","11-10","11-22 to 11-26","12-05 to 12-11","12-12 to 12-16")
 important_dates_df <- tibble::tibble("Event"=events,"Date"=event_date)
 ```
 

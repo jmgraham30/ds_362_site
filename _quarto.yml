@@ -19,7 +19,7 @@ website:
 format:
   html:
     theme: 
-      dark: cyborg
-      light: flatly
+      light: cosmo
+      dark: vapor
     css: styles.css
     toc: true
