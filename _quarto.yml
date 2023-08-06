@@ -19,7 +19,7 @@ website:
 format:
   html:
     theme: 
-      light: cosmo
+      light: pulse
       dark: vapor
     css: styles.css
     toc: true
