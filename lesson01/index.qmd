@@ -71,7 +71,7 @@ vembedr::embed_youtube(id="B9s8rpdNxU0",height=450) %>%
 
 ## Course Overview
 
-This course provides coverage of essential topics in data science at the intermediate level with an emphasis on machine learning. Broadly, we will cover algorithms that are commonly used for gaining insight from data. The things you learn in the class will be applicable in a variety of different areas, professions, and even other classes.
+This course provides coverage of essential topics in data science at the intermediate level with an emphasis on [machine learning](https://en.wikipedia.org/wiki/Machine_learning). Broadly, we will cover algorithms that are commonly used for gaining insight from data. The things you learn in the class will be applicable in a variety of different areas, professions, and even other classes.
 
 There is a website for the course, [view the website](https://knowledge-discovery.netlify.app/). For course logistics, see the official course syllabus, [view the syllabus](https://knowledge-discovery.netlify.app/syllabus.html). Assignments and other information specific to the course in a given semester will be posted on the course learning management system (LMS). The course website provides links to many additional resources, [view the links](https://knowledge-discovery.netlify.app/links.html).
 
