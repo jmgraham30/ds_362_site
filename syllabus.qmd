@@ -19,6 +19,8 @@ library(kableExtra)
 
 * **Office:** LSC 319A 
     + **Office Hours:** Mondays 12:30-1:30, Wednesdays 9:30-10:30 and 12:30-1:30. You may also make an appointment to meet with me outside of scheduled office hours. Appointments are not necessary for regularly scheduled office hours.
+    
+* **Instructor Schedule:** [View my weekly schedule](https://docs.google.com/spreadsheets/d/1yj1OrNuLHq7CILUpIIgj6uHqQ9IYmA3hiCaiThPXB1Y/edit?usp=sharing)
 
 * **Email:** <jason.graham@scranton.edu>
 
