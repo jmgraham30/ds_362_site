@@ -28,6 +28,7 @@ egg_prod_df  <- readr::read_csv('https://raw.githubusercontent.com/rfordatascien
 cage_free_df <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-04-11/cage-free-percentages.csv')
 ```
 
+
 ## Learning Objectives
 
 After this lesson, students will be able to:
@@ -50,6 +51,7 @@ After this lesson, students will be able to:
 
 * Motivating problems for machine (statistical) learning. [Watch video on YouTube](https://youtu.be/LvySJGj-88U).
   
+
 ```{r}
 #| echo: false
 
@@ -58,14 +60,17 @@ vembedr::embed_youtube(id="LvySJGj-88U",height=450) %>%
 ```
 
 
+
 * Supervised and unsupervised learning. [Watch video on YouTube](https://youtu.be/B9s8rpdNxU0).
   
+
 ```{r}
 #| echo: false
 
 vembedr::embed_youtube(id="B9s8rpdNxU0",height=450) %>%
   vembedr::use_align("center")
 ```
+
 
 3) Skim the README for the [Tidy Tuesday data repository](https://github.com/rfordatascience/tidytuesday) [@TT]. [View the repository.](https://github.com/rfordatascience/tidytuesday) Throughout the semester, we will use example data from the Tidy Tuesday data repository.
 
@@ -111,6 +116,7 @@ There are two common ways to install packages:
 
 2) With the `install.packages` function. For example, 
 
+
 ```{r}
 #| eval: false
 #| code-fold: false
@@ -119,9 +125,11 @@ There are two common ways to install packages:
 install.packages(c("tidyverse","tidytuesdayR","ISLR2"))
 ```
 
+
 If you want to install a package from a repository other than CRAN, refer to the documentation, do a web search, or ask the instructor. 
 
 To load packages, use
+
 
 ```{r}
 #| eval: false
@@ -133,7 +141,9 @@ library(tidytuesdayR)
 library(ISLR2)
 ```
 
+
 Now, functions, data, etc. from these packages will be available for reference by name [^2]. For example, we can access the documentation for the `tt_load` function from `tidytuesdayR` package by running the command
+
 
 ```{r}
 #| code-fold: false
@@ -141,9 +151,11 @@ Now, functions, data, etc. from these packages will be available for reference b
 ?tt_load
 ```
 
+
 [^2]: Occasionally, there will be a conflict between functions from two different packages. R will issue a warning when such conflicts arise. You can also use the "double colon" notation to reference an object in a package without the need to load the package. For example, `dplyr::select` references the `select` function from the `dplyr` package. 
 
 This informs us that to load data from the TidyTuesday Github, we need to input a character corresponding to the date for that particular data set. For example, 
+
 
 ```{r}
 #| code-fold: false
@@ -152,8 +164,10 @@ This informs us that to load data from the TidyTuesday Github, we need to input 
 tt_data_examp <- tt_load("2023-04-11")
 ```
 
+
 downloads two data files, `egg-production.csv` and `cage-free-percentages.csv` from the April 11, 2023 Tidy Tuesday post. We can access the egg production data as a data frame as follows:
  
+
 ```{r}
 #| code-fold: false
 #| eval: false
@@ -161,7 +175,9 @@ downloads two data files, `egg-production.csv` and `cage-free-percentages.csv` f
 egg_prod_df <- tt_data_examp$`egg-production`
 ```
 
+
 The following line of code is not run but demonstrate how to load a data file such as a [comma-separated values file](https://en.wikipedia.org/wiki/Comma-separated_values) (CSV) 
+
 
 ```{r}
 #| code-fold: false
@@ -170,9 +186,11 @@ The following line of code is not run but demonstrate how to load a data file su
 egg_prod_df <- read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-04-11/egg-production.csv')
 ```
 
+
 The previous code uses the `read_csv` function from the `readr` package (part of `tidyverse`) to directly read in the `egg-production.csv` from the specified location. An excellent review on reading data into R is provided in [Chapter 2](https://datasciencebook.ca/reading.html) of [@timbers2022data]. [View the chapter online](https://datasciencebook.ca/reading.html). 
 
 The first few rows of this data set look as follows:
+
 
 ```{r}
 #| echo: false
@@ -182,7 +200,9 @@ egg_prod_df %>%
   kableExtra::kable()
 ```
 
+
 Let's use the `glimpse` function to get a quick sense of what's in this data:
+
 
 ```{r}
 #| code-fold: false
@@ -191,11 +211,13 @@ glimpse(egg_prod_df)
 ```
 
 
+
 **Question:** What are some initial questions we might want to address using the egg production data? Read through the repository for the egg production data [view repository](https://github.com/rfordatascience/tidytuesday/blob/master/data/2023/2023-04-11/readme.md). Further, [see the report summary](https://thehumaneleague.org/article/E008R01-us-egg-production-data) by [The Human League](https://thehumaneleague.org/) project. What do the researchers report based on an analysis of the data? 
 
 **Exercise:** Examine the data downloaded as `cage-free-percentages.csv`. What information does it contain? 
 
 The following R code essentially reproduces Figure 2 from the egg production report by [The Human League](https://thehumaneleague.org/), [see the report](https://assets.ctfassets.net/ww1ie0z745y7/5x4LpTMoZLQbGpYSaZXpY3/24e96497c51f7398f03776790e9a1b9d/E008R01-us-egg-production-data.pdf):
+
 
 ```{r}
 #| label: fig-egg_report
@@ -213,6 +235,7 @@ cage_free_df %>%
   scale_y_continuous(breaks=seq(0,30,by=5),labels=paste0(as.character(seq(0,30,by=5)),"%")) + 
   labs(x="Date (year)",y="Percentage of US hens in cage-free housing")
 ```
+
 
 **Question:** What does the plot in @fig-egg_report show? 
 
@@ -241,12 +264,14 @@ Before starting our study of data mining and machine learning, let's review the 
     
     * Exploratory data analysis worked example video by Hadley Wickham, [watch the video on YouTube](https://youtu.be/go5Au01Jrvs).
 
+
 ```{r}
 #| echo: false
 
 vembedr::embed_youtube(id="go5Au01Jrvs",height=450) %>%
   vembedr::use_align("center")
 ```
+
 
 
 6) Decide what type(s) of analysis or analyses are to be performed. This is the stage at which machine learning enters into the process.  
@@ -286,6 +311,7 @@ The Tidy Tuesday entry for January 25, 2022 contains data related to ratings of 
 
 The first thing we need to do is load the data. In the following code, we download the two csv files and combine them into one common data set:
 
+
 ```{r}
 #| code-fold: false
 #| message: false
@@ -303,7 +329,9 @@ ratings_joined <-
 glimpse(ratings_joined)
 ```
 
+
 There is a lot of information in this data. For a more specific question, suppose we want to know if/how the number of players, game length, and age recommendations for a game impact the average rating of a game. Let's select those features of primary interest:
+
 
 ```{r}
 #| code-fold: false
@@ -314,7 +342,9 @@ ratings_relevant <- ratings_joined %>%
   select(average,minplayers,maxplayers,playingtime,minage)
 ```
 
+
 Let's see the first few rows of this data:
+
 
 ```{r}
 #| echo: false
@@ -323,6 +353,7 @@ ratings_relevant %>%
   head() %>%
   kableExtra::kable()
 ```
+
 
 This problem involves *predicting* a *numerical* response variable, that is, `average` based on the value of a number of *predictor* variables. This is a type of *supervised learning* problem known as *regression*. Since the response variable is numerical, even if we include some *categorical* predictor variables, we still have a regression problem. 
 
@@ -335,6 +366,7 @@ Now, consider the [Palmer penguins]() data set available through the [`palmerpen
 
 We glimpse the data
 
+
 ```{r}
 #| code-fold: false
 
@@ -344,7 +376,9 @@ library(palmerpenguins)
 glimpse(penguins)
 ```
 
+
 and examine the first few rows of the data
+
 
 ```{r}
 #| echo: false
@@ -353,6 +387,7 @@ penguins %>%
   head() %>%
   kableExtra::kable()
 ```
+
 
 One question we may be interested in is, can the physical measurements of the penguins be used to distinguish the animals in terms of their species? That is, can the physical measurements be used to predict the species of a penguin without having to, say conduct a genetic analysis? Here, our response variable is categorical. This is another type of supervised learning problem know as *classification*  Whenever we have a categorical response, we have a classification problem. 
 
@@ -392,12 +427,14 @@ For the next lesson:
 
 * Watch the corresponding video lecture on regression. [View on YouTube](https://youtu.be/ox0cKk7h4o0).
 
+
 ```{r}
 #| echo: false
 
 vembedr::embed_youtube(id="ox0cKk7h4o0",height=450) %>%
   vembedr::use_align("center")
 ```
+
 
 
 ## References
@@ -408,6 +445,7 @@ vembedr::embed_youtube(id="ox0cKk7h4o0",height=450) %>%
 
 :::{.callout-tip collapse="true"}
 ## Expand for Session Info
+
 ```{r}
 #| echo: false
 
@@ -430,8 +468,10 @@ pkg_sesh$platform$quarto <- paste(
 pkg_sesh
 ```
 
+
 :::
 
 
 
 [![](http://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-nc-sa.png?raw=1){fig-align="left" width=15%}](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode)
+
