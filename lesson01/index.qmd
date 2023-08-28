@@ -161,7 +161,7 @@ downloads two data files, `egg-production.csv` and `cage-free-percentages.csv` f
 egg_prod_df <- tt_data_examp$`egg-production`
 ```
 
-The following line of code is not run but demonstrate how to load a data file such as a [comma-separated values file](https://en.wikipedia.org/wiki/Comma-separated_values) (CSV) 
+The following line of code is not run but demonstrates how to load a data file such as a [comma-separated values file](https://en.wikipedia.org/wiki/Comma-separated_values) (CSV) 
 
 ```{r}
 #| code-fold: false
