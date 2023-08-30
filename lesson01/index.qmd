@@ -46,28 +46,8 @@ After this lesson, students will be able to:
 
 1) Read Chapter 1 of *An Introduction to Statistical Learning* [@tibshirani2017introduction]. 
 
-2) The following two video lectures are also recommended:
 
-* Motivating problems for machine (statistical) learning. [Watch video on YouTube](https://youtu.be/LvySJGj-88U).
-  
-```{r}
-#| echo: false
-
-vembedr::embed_youtube(id="LvySJGj-88U",height=450) %>%
-  vembedr::use_align("center")
-```
-
-
-* Supervised and unsupervised learning. [Watch video on YouTube](https://youtu.be/B9s8rpdNxU0).
-  
-```{r}
-#| echo: false
-
-vembedr::embed_youtube(id="B9s8rpdNxU0",height=450) %>%
-  vembedr::use_align("center")
-```
-
-3) Skim the README for the [Tidy Tuesday data repository](https://github.com/rfordatascience/tidytuesday) [@TT]. [View the repository.](https://github.com/rfordatascience/tidytuesday) Throughout the semester, we will use example data from the Tidy Tuesday data repository.
+2) Skim the README for the [Tidy Tuesday data repository](https://github.com/rfordatascience/tidytuesday) [@TT]. [View the repository.](https://github.com/rfordatascience/tidytuesday) Throughout the semester, we will use example data from the Tidy Tuesday data repository.
 
 ## Course Overview
 
@@ -388,14 +368,26 @@ Our next step in the course will be to study some common supervised learning alg
 
 For the next lesson:
 
-* Read section 2.1 from of *An Introduction to Statistical Learning* [@tibshirani2017introduction]. You may also want to read sections 2.1 and 2.2 of *Statistical Learning with Math and R* [@suzuki2020statistical].
+* Read section 2.1 from of *An Introduction to Statistical Learning* [@tibshirani2017introduction].
 
-* Watch the corresponding video lecture on regression. [View on YouTube](https://youtu.be/ox0cKk7h4o0).
+* Watch the corresponding video lectures:
 
+-  Motivating problems for machine (statistical) learning. [Watch video on YouTube](https://youtu.be/LvySJGj-88U).
+  
 ```{r}
 #| echo: false
 
-vembedr::embed_youtube(id="ox0cKk7h4o0",height=450) %>%
+vembedr::embed_youtube(id="LvySJGj-88U",height=450) %>%
+  vembedr::use_align("center")
+```
+
+
+- Supervised and unsupervised learning. [Watch video on YouTube](https://youtu.be/B9s8rpdNxU0).
+  
+```{r}
+#| echo: false
+
+vembedr::embed_youtube(id="B9s8rpdNxU0",height=450) %>%
   vembedr::use_align("center")
 ```
 
