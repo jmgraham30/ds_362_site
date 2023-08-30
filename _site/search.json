@@ -278,5 +278,40 @@
     "title": "Syllabus",
     "section": "Data Modeling Case Studies",
     "text": "Data Modeling Case Studies\nOver the course of the semester, you will be asked to complete two data modeling case studies that will form a total of 40% of the overall course grade. For each case study, you will be provided with a data set and then asked to apply and compare multiple methods of analysis on the provided data set. A complete data modeling case study should consist of\n\nAppropriately documented code implementing appropriate models.\nA GitHub repository with all code.\nA report developed in Quarto that summarizes your conclusions.\n\nFurther details on the case study assignments such as the parameters of the assignments and grade rubrics will be posted on the course learning management system."
+  },
+  {
+    "objectID": "lesson02/index.html",
+    "href": "lesson02/index.html",
+    "title": "Lesson 2",
+    "section": "",
+    "text": "After this lesson, students will be able to:"
+  },
+  {
+    "objectID": "lesson02/index.html#learning-objectives",
+    "href": "lesson02/index.html#learning-objectives",
+    "title": "Lesson 2",
+    "section": "",
+    "text": "After this lesson, students will be able to:"
+  },
+  {
+    "objectID": "lesson02/index.html#readings-etc.",
+    "href": "lesson02/index.html#readings-etc.",
+    "title": "Lesson 2",
+    "section": "Readings, etc.",
+    "text": "Readings, etc.\n\nRead Chapter 2 of An Introduction to Statistical Learning (Tibshirani, James, and Trevor 2017).\nThe following two video lectures are also recommended:\n\n\nMotivating problems for machine (statistical) learning. Watch video on YouTube.\n\n\n\n\n\n\n\n\n\n\n\nSupervised and unsupervised learning. Watch video on YouTube."
+  },
+  {
+    "objectID": "lesson02/index.html#preparation-for-the-next-lesson",
+    "href": "lesson02/index.html#preparation-for-the-next-lesson",
+    "title": "Lesson 2",
+    "section": "Preparation for the next lesson",
+    "text": "Preparation for the next lesson\nFor the next lesson:\n\nRead section 3.1 from of An Introduction to Statistical Learning (Tibshirani, James, and Trevor 2017). You may also want to read sections 2.1 and of Statistical Learning with Math and R (Suzuki 2020).\nWatch the corresponding video lecture on regression. View on YouTube."
+  },
+  {
+    "objectID": "lesson02/index.html#references",
+    "href": "lesson02/index.html#references",
+    "title": "Lesson 2",
+    "section": "References",
+    "text": "References\n\n\nSuzuki, Joe. 2020. Statistical Learning with Math and r. Springer.\n\n\nTibshirani, Hastie Robert, Gareth James, and Daniela Witten Trevor. 2017. An Introduction to Statistical Learning. springer publication.\n\n\n\n\n\n\n\n\nExpand for Session Info\n\n\n\n\n\n\n\n─ Session info ───────────────────────────────────────────────────────────────\n setting  value\n version  R version 4.3.1 (2023-06-16)\n os       macOS Ventura 13.5.1\n system   aarch64, darwin20\n ui       X11\n language (EN)\n collate  en_US.UTF-8\n ctype    en_US.UTF-8\n tz       America/New_York\n date     2023-08-30\n pandoc   3.1.1 @ /Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/ (via rmarkdown)\n quarto   1.3.450 @ /usr/local/bin/quarto\n\n─ Packages ───────────────────────────────────────────────────────────────────\n package      * version date (UTC) lib source\n dplyr        * 1.1.2   2023-04-20 [1] CRAN (R 4.3.0)\n forcats      * 1.0.0   2023-01-29 [1] CRAN (R 4.3.0)\n ggplot2      * 3.4.3   2023-08-14 [1] CRAN (R 4.3.0)\n ISLR2        * 1.3-2   2022-11-20 [1] CRAN (R 4.3.0)\n lubridate    * 1.9.2   2023-02-10 [1] CRAN (R 4.3.0)\n purrr        * 1.0.2   2023-08-10 [1] CRAN (R 4.3.0)\n readr        * 2.1.4   2023-02-10 [1] CRAN (R 4.3.0)\n sessioninfo  * 1.2.2   2021-12-06 [1] CRAN (R 4.3.0)\n stringr      * 1.5.0   2022-12-02 [1] CRAN (R 4.3.0)\n tibble       * 3.2.1   2023-03-20 [1] CRAN (R 4.3.0)\n tidyr        * 1.3.0   2023-01-24 [1] CRAN (R 4.3.0)\n tidytuesdayR * 1.0.2   2022-02-01 [1] CRAN (R 4.3.0)\n tidyverse    * 2.0.0   2023-02-22 [1] CRAN (R 4.3.0)\n\n [1] /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library\n\n──────────────────────────────────────────────────────────────────────────────"
   }
 ]
