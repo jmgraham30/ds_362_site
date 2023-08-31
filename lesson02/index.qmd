@@ -62,18 +62,40 @@ vembedr::embed_youtube(id="B9s8rpdNxU0",height=450) %>%
 
 ## Introduction to Machine (Statistical) Learning
 
+
+### Fitting Supervised Models
+
+#### Regression
+
 ![](https://www.dropbox.com/scl/fi/4zmi7ql5ooxcafkym0csb/2_2.jpg?rlkey=jj0j32tvr43xcn88i2via58jd&dl=1){width=8in height=4in}
+
+
+#### Classification
+
+![](https://www.dropbox.com/scl/fi/qch7u8vzepor8egwgres5/2_15.png?rlkey=uc3vbxxu1tvrb3a92qxo4ssgg&dl=1){width=6in height=6in}
+
+
+### Complexity Vs. Interpretability
 
 ![](https://www.dropbox.com/scl/fi/507z03ox81b15dbxe1pqk/2_7.png?rlkey=vs3rp0x3h5o0qvik8zhjbngsv&dl=1){width=6in height=6in}
 
 
-![](https://www.dropbox.com/scl/fi/1nlczor8v22ron9rd4keh/2_8.png?rlkey=mfd0jzwbdhejomz71qwvlx82c&dl=1){width=8in height=4in}
 
+### Training Error Vs. Test Error
 
 ![](https://www.dropbox.com/scl/fi/1arxit27ttbfmi527iare/2_9.png?rlkey=ohyvt8c4ao38hq0ggaul5ykm8&dl=1){width=8in height=4in}
 
 
+### The Bias-Variance Trade-Off
+
+
 ![](https://www.dropbox.com/scl/fi/nof2kpjta6p5mlg8nxycd/2_12.png?rlkey=3ubpphur6n0h1ics55k0fm38e&dl=1){width=8in height=4in}
+
+
+### Unsupervised Learning
+
+
+![](https://www.dropbox.com/scl/fi/1nlczor8v22ron9rd4keh/2_8.png?rlkey=mfd0jzwbdhejomz71qwvlx82c&dl=1){width=8in height=4in}
 
 
 ## Preparation for the next lesson

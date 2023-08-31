@@ -319,6 +319,6 @@
     "href": "lesson02/index.html#introduction-to-machine-statistical-learning",
     "title": "Lesson 2",
     "section": "Introduction to Machine (Statistical) Learning",
-    "text": "Introduction to Machine (Statistical) Learning"
+    "text": "Introduction to Machine (Statistical) Learning\n\nFitting Supervised Models\n\nRegression\n\n\n\nClassification\n\n\n\n\nComplexity Vs. Interpretability\n\n\n\nTraining Error Vs. Test Error\n\n\n\nThe Bias-Variance Trade-Off\n\n\n\nUnsupervised Learning"
   }
 ]
