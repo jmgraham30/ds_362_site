@@ -105,7 +105,7 @@ Let's consider an illustrative example where ${\bf x}$ represents the years of e
 
 The left panel of @fig-sl-reg shows a scatter plot of our education versus income data while the right panel shows the data again but with a curve corresponding to the graph of a function $\hat{f}$ that passes through the data.
 
-![Illustration of supervised learning through a regression problem.](https://www.dropbox.com/scl/fi/4zmi7ql5ooxcafkym0csb/2_2.jpg?rlkey=jj0j32tvr43xcn88i2via58jd&dl=1){#fig-sl-reg fig-alt="Figure with two panels. The left shows a scatter plot of data while the right shows the same scatter plot but with curve fitted to the data." width="8in" height="4in"}
+![Illustration of supervised learning through a regression problem. Figure from [@tibshirani2017introduction].](https://www.dropbox.com/scl/fi/4zmi7ql5ooxcafkym0csb/2_2.jpg?rlkey=jj0j32tvr43xcn88i2via58jd&dl=1){#fig-sl-reg fig-alt="Figure with two panels. The left shows a scatter plot of data while the right shows the same scatter plot but with curve fitted to the data." width="8in" height="4in"}
 
 How did we come up with the function $\hat{f}$? Basically, minimized the **error** between our predicted and observed response. That is, for each response value ${\bf x}$ we minimized how far $y=f({\bf x})$ can be from $\hat{y}=\hat{f}({\bf x})$. There are three important points that need to be addressed before we can implement regression in a practical situation.
 
@@ -147,7 +147,7 @@ By choosing a good enough family of functions or a good enough learning algorith
 
 For classification problems in supervised machine learning, the response variable is **categorical**. @fig-sl-cl illustrates this, showing a scatter plot of data where coloring is used to distinguish the data points as belonging to one of two different classes.
 
-![Illustration of a classification problem in which the response variable is a binary categorical variable.](https://www.dropbox.com/scl/fi/qch7u8vzepor8egwgres5/2_15.png?rlkey=uc3vbxxu1tvrb3a92qxo4ssgg&dl=1){#fig-sl-cl fig-alt="Figure showing a scatter plot of data where coloring is used to distinguish the data points as belonging to one of two different classes." width="6in" height="6in"}
+![Illustration of a classification problem in which the response variable is a binary categorical variable. Figure from [@tibshirani2017introduction].](https://www.dropbox.com/scl/fi/qch7u8vzepor8egwgres5/2_15.png?rlkey=uc3vbxxu1tvrb3a92qxo4ssgg&dl=1){#fig-sl-cl fig-alt="Figure showing a scatter plot of data where coloring is used to distinguish the data points as belonging to one of two different classes." width="6in" height="6in"}
 
 For classification problems, our goal is still to estimate a functional relationship of the form $y = f({\bf x}) + \epsilon$. However, we can no longer measure error using the squared error because the response values are not numerical. A common method for measuring error in classification problems is **classification error** (CE) defined by
 
@@ -163,7 +163,7 @@ Similar to regression, fitting a classification model involves finding a functio
 
 Another issue that needs to be taken into account when fitting models is the tradeoff between how easy it is to interpret a model versus the maximum degree of accuracy for the model. @fig-mod-complex illustrates this through a representation of the tradeoff between model flexibility and the degree of interpretability of the model. The more flexible the model, the easier it will be to reduce the reducible error. However, highly flexible models tend to be difficult to interpret because they involve many more parameters or possess other types of complexity.
  
-![A representation of the tradeoff between model flexibility and the degree of interpretability of the model. The more flexible the model, the easier it will be to reduce the reducible error. However, highly flexible models tend to be difficult to interpret because they involve many more parameters or possess other types of complexity.](https://www.dropbox.com/scl/fi/507z03ox81b15dbxe1pqk/2_7.png?rlkey=vs3rp0x3h5o0qvik8zhjbngsv&dl=1){#fig-mod-complex fig-alt="" width="6in" height="6in"}
+![A representation of the tradeoff between model flexibility and the degree of interpretability of the model. The more flexible the model, the easier it will be to reduce the reducible error. However, highly flexible models tend to be difficult to interpret because they involve many more parameters or possess other types of complexity. Figure from [@tibshirani2017introduction].](https://www.dropbox.com/scl/fi/507z03ox81b15dbxe1pqk/2_7.png?rlkey=vs3rp0x3h5o0qvik8zhjbngsv&dl=1){#fig-mod-complex fig-alt="" width="6in" height="6in"}
 
 ### Training Error Vs. Test Error
 
@@ -173,7 +173,7 @@ Suppose we want to use a model to make predictions about future unseen values of
 
 How do we build models that generalize well and avoid overfitting? A common approach is to separate data into a training set that is used to fit a model and a test set which is used to assess how well the models generalizes to unseen data via the **test error**.  @fig-bv-trade shows sample data are several different model fits of varying complexity. The right panel shows the corresponding training and test error for each of the different models. The dashed horizontal line is the minimum possible test error. We see that the most complex model massively overfits the training data.
 
-![The left panel shows sample data are several different model fits of varying complexity. The right panel shows the corresponding training and test error for each of the different models. The dashed horizontal line is the minimum possible test error. We see that the most complex model massively overfits the training data.](https://www.dropbox.com/scl/fi/1arxit27ttbfmi527iare/2_9.png?rlkey=ohyvt8c4ao38hq0ggaul5ykm8&dl=1){#fig-bv-trade width="8in" height="4in"}
+![The left panel shows sample data are several different model fits of varying complexity. The right panel shows the corresponding training and test error for each of the different models. The dashed horizontal line is the minimum possible test error. We see that the most complex model massively overfits the training data. Figure from [@tibshirani2017introduction].](https://www.dropbox.com/scl/fi/1arxit27ttbfmi527iare/2_9.png?rlkey=ohyvt8c4ao38hq0ggaul5ykm8&dl=1){#fig-bv-trade width="8in" height="4in"}
 
 While the training/test set approach to fitting accurate models while avoiding overfitting is very good in principle, there are some practical limitations. For example, 
 
@@ -187,11 +187,11 @@ We will spend a lot of time later talking more about these issues and ways to de
 
 ### The Bias-Variance Trade-Off
 
-![](https://www.dropbox.com/scl/fi/nof2kpjta6p5mlg8nxycd/2_12.png?rlkey=3ubpphur6n0h1ics55k0fm38e&dl=1){width="8in" height="4in"}
+![Figure from [@tibshirani2017introduction].](https://www.dropbox.com/scl/fi/nof2kpjta6p5mlg8nxycd/2_12.png?rlkey=3ubpphur6n0h1ics55k0fm38e&dl=1){width="8in" height="4in"}
 
 ### Unsupervised Learning
 
-![](https://www.dropbox.com/scl/fi/1nlczor8v22ron9rd4keh/2_8.png?rlkey=mfd0jzwbdhejomz71qwvlx82c&dl=1){width="8in" height="4in"}
+![Figure from [@tibshirani2017introduction].](https://www.dropbox.com/scl/fi/1nlczor8v22ron9rd4keh/2_8.png?rlkey=mfd0jzwbdhejomz71qwvlx82c&dl=1){width="8in" height="4in"}
 
 ## Preparation for the next lesson
 

@@ -265,7 +265,7 @@ y = f({\bf x}) + \epsilon
 <div id="fig-sl-reg" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="https://www.dropbox.com/scl/fi/4zmi7ql5ooxcafkym0csb/2_2.jpg?rlkey=jj0j32tvr43xcn88i2via58jd&amp;dl=1" style="width:8in;height:4in" alt="Figure with two panels. The left shows a scatter plot of data while the right shows the same scatter plot but with curve fitted to the data." class="figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;1: Illustration of supervised learning through a regression problem.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;1: Illustration of supervised learning through a regression problem. Figure from <span class="citation" data-cites="tibshirani2017introduction">(<a href="#ref-tibshirani2017introduction" role="doc-biblioref">Tibshirani, James, and Trevor 2017</a>)</span>.</figcaption>
 </figure>
 </div>
 <p>How did we come up with the function <span class="math inline">\(\hat{f}\)</span>? Basically, minimized the <strong>error</strong> between our predicted and observed response. That is, for each response value <span class="math inline">\({\bf x}\)</span> we minimized how far <span class="math inline">\(y=f({\bf x})\)</span> can be from <span class="math inline">\(\hat{y}=\hat{f}({\bf x})\)</span>. There are three important points that need to be addressed before we can implement regression in a practical situation.</p>
@@ -304,7 +304,7 @@ y = f({\bf x}) + \epsilon
 <div id="fig-sl-cl" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="https://www.dropbox.com/scl/fi/qch7u8vzepor8egwgres5/2_15.png?rlkey=uc3vbxxu1tvrb3a92qxo4ssgg&amp;dl=1" style="width:6in;height:6in" alt="Figure showing a scatter plot of data where coloring is used to distinguish the data points as belonging to one of two different classes." class="figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;2: Illustration of a classification problem in which the response variable is a binary categorical variable.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;2: Illustration of a classification problem in which the response variable is a binary categorical variable. Figure from <span class="citation" data-cites="tibshirani2017introduction">(<a href="#ref-tibshirani2017introduction" role="doc-biblioref">Tibshirani, James, and Trevor 2017</a>)</span>.</figcaption>
 </figure>
 </div>
 <p>For classification problems, our goal is still to estimate a functional relationship of the form <span class="math inline">\(y = f({\bf x}) + \epsilon\)</span>. However, we can no longer measure error using the squared error because the response values are not numerical. A common method for measuring error in classification problems is <strong>classification error</strong> (CE) defined by</p>
@@ -321,7 +321,7 @@ y = f({\bf x}) + \epsilon
 <div id="fig-mod-complex" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="https://www.dropbox.com/scl/fi/507z03ox81b15dbxe1pqk/2_7.png?rlkey=vs3rp0x3h5o0qvik8zhjbngsv&amp;dl=1" style="width:6in;height:6in" alt="" class="figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;3: A representation of the tradeoff between model flexibility and the degree of interpretability of the model. The more flexible the model, the easier it will be to reduce the reducible error. However, highly flexible models tend to be difficult to interpret because they involve many more parameters or possess other types of complexity.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;3: A representation of the tradeoff between model flexibility and the degree of interpretability of the model. The more flexible the model, the easier it will be to reduce the reducible error. However, highly flexible models tend to be difficult to interpret because they involve many more parameters or possess other types of complexity. Figure from <span class="citation" data-cites="tibshirani2017introduction">(<a href="#ref-tibshirani2017introduction" role="doc-biblioref">Tibshirani, James, and Trevor 2017</a>)</span>.</figcaption>
 </figure>
 </div>
 </section>
@@ -333,7 +333,7 @@ y = f({\bf x}) + \epsilon
 <div id="fig-bv-trade" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="https://www.dropbox.com/scl/fi/1arxit27ttbfmi527iare/2_9.png?rlkey=ohyvt8c4ao38hq0ggaul5ykm8&amp;dl=1" style="width:8in;height:4in" class="figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;4: The left panel shows sample data are several different model fits of varying complexity. The right panel shows the corresponding training and test error for each of the different models. The dashed horizontal line is the minimum possible test error. We see that the most complex model massively overfits the training data.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;4: The left panel shows sample data are several different model fits of varying complexity. The right panel shows the corresponding training and test error for each of the different models. The dashed horizontal line is the minimum possible test error. We see that the most complex model massively overfits the training data. Figure from <span class="citation" data-cites="tibshirani2017introduction">(<a href="#ref-tibshirani2017introduction" role="doc-biblioref">Tibshirani, James, and Trevor 2017</a>)</span>.</figcaption>
 </figure>
 </div>
 <p>While the training/test set approach to fitting accurate models while avoiding overfitting is very good in principle, there are some practical limitations. For example,</p>
@@ -346,11 +346,21 @@ y = f({\bf x}) + \epsilon
 </section>
 <section id="the-bias-variance-trade-off" class="level3">
 <h3 class="anchored" data-anchor-id="the-bias-variance-trade-off">The Bias-Variance Trade-Off</h3>
-<p><img src="https://www.dropbox.com/scl/fi/nof2kpjta6p5mlg8nxycd/2_12.png?rlkey=3ubpphur6n0h1ics55k0fm38e&amp;dl=1" style="width:8in;height:4in"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.dropbox.com/scl/fi/nof2kpjta6p5mlg8nxycd/2_12.png?rlkey=3ubpphur6n0h1ics55k0fm38e&amp;dl=1" style="width:8in;height:4in" class="figure-img"></p>
+<figcaption class="figure-caption">Figure from <span class="citation" data-cites="tibshirani2017introduction">(<a href="#ref-tibshirani2017introduction" role="doc-biblioref">Tibshirani, James, and Trevor 2017</a>)</span>.</figcaption>
+</figure>
+</div>
 </section>
 <section id="unsupervised-learning" class="level3">
 <h3 class="anchored" data-anchor-id="unsupervised-learning">Unsupervised Learning</h3>
-<p><img src="https://www.dropbox.com/scl/fi/1nlczor8v22ron9rd4keh/2_8.png?rlkey=mfd0jzwbdhejomz71qwvlx82c&amp;dl=1" style="width:8in;height:4in"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.dropbox.com/scl/fi/1nlczor8v22ron9rd4keh/2_8.png?rlkey=mfd0jzwbdhejomz71qwvlx82c&amp;dl=1" style="width:8in;height:4in" class="figure-img"></p>
+<figcaption class="figure-caption">Figure from <span class="citation" data-cites="tibshirani2017introduction">(<a href="#ref-tibshirani2017introduction" role="doc-biblioref">Tibshirani, James, and Trevor 2017</a>)</span>.</figcaption>
+</figure>
+</div>
 </section>
 </section>
 <section id="preparation-for-the-next-lesson" class="level2">
