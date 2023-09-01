@@ -29,23 +29,22 @@ theme_set(theme_minimal(base_size = 13))
 
 After this lesson, students will be able to:
 
-* Define machine learning in general terms and distinguish between supervised and unsupervised learning problems. 
+-   Define machine learning in general terms and distinguish between supervised and unsupervised learning problems.
 
-* Distinguish between regression and classification problems.
+-   Distinguish between regression and classification problems.
 
-* Understand the concept of error and the significance of test versus training error. 
+-   Understand the concept of error and the significance of test versus training error.
 
-* Appreciate the trade-off between model flexibility and interpretability, and between bias and variance. 
-
+-   Appreciate the trade-off between model flexibility and interpretability, and between bias and variance.
 
 ## Readings, etc.
 
-1) Read Chapter 2 of *An Introduction to Statistical Learning* [@tibshirani2017introduction]. 
+1)  Read Chapter 2 of *An Introduction to Statistical Learning* [@tibshirani2017introduction].
 
-2) The following two video lectures are also recommended:
+2)  The following two video lectures are also recommended:
 
-* Motivating problems for machine (statistical) learning. [Watch video on YouTube](https://youtu.be/LvySJGj-88U).
-  
+-   Motivating problems for machine (statistical) learning. [Watch video on YouTube](https://youtu.be/LvySJGj-88U).
+
 ```{r}
 #| echo: false
 
@@ -53,9 +52,8 @@ vembedr::embed_youtube(id="LvySJGj-88U",height=450) %>%
   vembedr::use_align("center")
 ```
 
+-   Supervised and unsupervised learning. [Watch video on YouTube](https://youtu.be/B9s8rpdNxU0).
 
-* Supervised and unsupervised learning. [Watch video on YouTube](https://youtu.be/B9s8rpdNxU0).
-  
 ```{r}
 #| echo: false
 
@@ -67,26 +65,25 @@ vembedr::embed_youtube(id="B9s8rpdNxU0",height=450) %>%
 
 [**Machine learning**](https://en.wikipedia.org/wiki/Machine_learning) or statistical learning generally refers to methods or tools that seek to derive insight or understanding from data by using *models*. Here by model we mean a mathematical or computational representation of some part of the real world. In machine learning, we *fit* a model or class of models to data. The goal of fitting models is usually one of the following:
 
-1. **Prediction** - using what is known to make informed (hopefully accurate) claims about what we want to know. 
+1.  **Prediction** - using what is known to make informed (hopefully accurate) claims about what we want to know.
 
-2. **Inference** - using a sample to make informed (hopefully accurate) claims about a larger population. 
+2.  **Inference** - using a sample to make informed (hopefully accurate) claims about a larger population.
 
-For an example of prediction, suppose that we are advertising experts working with a customer that sales video games. Our customer cannot directly control their sales but they can directly control their marketing by deciding how much to invest in advertising. Say for example that our customer has three ways to advertise: via YouTube, via podcasts, or via Spotify. We can use our past knowledge about how much our customer has spent *i.e.*, their advertising budget and the corresponding sales to make predictions using a model about how sales will be in the future depending on how the company changes its advertising in each of the three media. 
+For an example of prediction, suppose that we are advertising experts working with a customer that sales video games. Our customer cannot directly control their sales but they can directly control their marketing by deciding how much to invest in advertising. Say for example that our customer has three ways to advertise: via YouTube, via podcasts, or via Spotify. We can use our past knowledge about how much our customer has spent *i.e.*, their advertising budget and the corresponding sales to make predictions using a model about how sales will be in the future depending on how the company changes its advertising in each of the three media.
 
-For an example of inference, suppose we have data on how a sample of patients respond to a particular drug. We can use this to make claims about how a larger population of patients will respond to this same drug. 
+For an example of inference, suppose we have data on how a sample of patients respond to a particular drug. We can use this to make claims about how a larger population of patients will respond to this same drug.
 
 There are two prominent broad classes of machine learning models:
 
-1. **Supervised** - In supervised learning, data comes in pairs $(y_{i},{\bf x}_{i})$ where we view ${\bf x}_{i}$ (which may be a vector) as a predictor and $y_{i}$ as a response. Often, We the predictors are something we can influence directly like the advertising budget from our earlier example while the response is something we don't have direct control over like the sales from our example. Thus, there is an assumed functional relationship between predictors and the response of the form
+1.  **Supervised** - In supervised learning, data comes in pairs $(y_{i},{\bf x}_{i})$ where we view ${\bf x}_{i}$ (which may be a vector) as a predictor and $y_{i}$ as a response. Often, We the predictors are something we can influence directly like the advertising budget from our earlier example while the response is something we don't have direct control over like the sales from our example. Thus, there is an assumed functional relationship between predictors and the response of the form
 
 $$
 y = f({\bf x}) + \epsilon
-$$
-where we think of $f({\bf x})$ as the mean value for $y$ viewed as a **random variable** and $\epsilon$ as the variance of $y$.
+$$ where we think of $f({\bf x})$ as the mean value for $y$ viewed as a **random variable** and $\epsilon$ as containing the variance of $y$ so that $E[\epsilon] = 0$.
 
-We note that $y$ may be numerical in which case we have a **regression** problem or it may be categorical in which case we have a **classification** problem. 
+We note that $y$ may be numerical in which case we have a **regression** problem or it may be categorical in which case we have a **classification** problem.
 
-2. **Unsupervised** - In unsupervised learning, there is no response variable. Some common unsupervised problems include clustering and density estimation. Both of these essentially seek to discover a pattern in the data. 
+2.  **Unsupervised** - In unsupervised learning, there is no response variable. Some common unsupervised problems include clustering and density estimation. Both of these essentially seek to discover a pattern in the data.
 
 ### Fitting Supervised Models
 
@@ -94,8 +91,7 @@ Fitting an unsupervised learning model typically amounts to estimating the funct
 
 $$
 y = f({\bf x}) + \epsilon
-$$
-between the predictor and response variables. When we estimate $f$ we denote the estimate by $\hat{f}$. Then, we can use $\hat{f}$ to predict the response for each predictor value ${\bf x}$ by computing
+$$ between the predictor and response variables. When we estimate $f$ we denote the estimate by $\hat{f}$. Then, we can use $\hat{f}$ to predict the response for each predictor value ${\bf x}$ by computing
 
 $$
 \hat{y} = \hat{f}({\bf x})
@@ -105,66 +101,89 @@ How do we estimate a function $f$? In machine learning, we use the data together
 
 #### Regression
 
-Let's consider an illustrative example where ${\bf x}$ represents the years of education of some individuals and $y$ is the income they earn in their profession. Thus, both variables are numerical so we are dealing with a regression problem. We are assuming that there is a true but unknown functional relationship between the years of education and the income they earn.  
+Let's consider an illustrative example where ${\bf x}$ represents the years of education of some individuals and $y$ is the income they earn in their profession. Thus, both variables are numerical so we are dealing with a regression problem. We are assuming that there is a true but unknown functional relationship between the years of education and the income they earn.
 
-The left panel of @fig-sl-reg shows a scatter plot of our education versus income data while the right panel shows the data again but with a curve corresponding to the graph of a function $\hat{f}$ that passes through the data. 
+The left panel of @fig-sl-reg shows a scatter plot of our education versus income data while the right panel shows the data again but with a curve corresponding to the graph of a function $\hat{f}$ that passes through the data.
 
-![Illustration of supervised learning through a regression problem.](https://www.dropbox.com/scl/fi/4zmi7ql5ooxcafkym0csb/2_2.jpg?rlkey=jj0j32tvr43xcn88i2via58jd&dl=1){#fig-sl-reg fig-alt="Figure with two panels. The left shows a scatter plot of data while the right shows the same scatter plot but with curve fitted to the data." width=8in height=4in}
+![Illustration of supervised learning through a regression problem.](https://www.dropbox.com/scl/fi/4zmi7ql5ooxcafkym0csb/2_2.jpg?rlkey=jj0j32tvr43xcn88i2via58jd&dl=1){#fig-sl-reg fig-alt="Figure with two panels. The left shows a scatter plot of data while the right shows the same scatter plot but with curve fitted to the data." width="8in" height="4in"}
 
-How did we come up with the function $\hat{f}$? Basically, minimized the **error** between our predicted and observed response. That is, for each response value ${\bf x}$ we minimized how far $y=f({\bf x})$ can be from $\hat{y}=\hat{f}({\bf x})$. There are three important points that need to be addressed before we can implement regression in a practical situation. 
+How did we come up with the function $\hat{f}$? Basically, minimized the **error** between our predicted and observed response. That is, for each response value ${\bf x}$ we minimized how far $y=f({\bf x})$ can be from $\hat{y}=\hat{f}({\bf x})$. There are three important points that need to be addressed before we can implement regression in a practical situation.
 
-1. The set of all functions is too large to work with in practice so we must make some choices that allow us to narrow down the class of functions from which $\hat{f}$ will be taken. For example, we could restrict to only linear functions, or only quadratic functions, or only polynomial functions. These classes of functions are easy to describe because these types of functions are uniquely described by a finite number of parameters. However, sometimes data can not be modeled well by, *e.g.*, polynomials so more sophisticated non-parametric ways of describing  classes of functions have been developed that allow for more flexible modeling. 
+1.  The set of all functions is too large to work with in practice so we must make some choices that allow us to narrow down the class of functions from which $\hat{f}$ will be taken. For example, we could restrict to only linear functions, or only quadratic functions, or only polynomial functions. These classes of functions are easy to describe because these types of functions are uniquely described by a finite number of parameters. However, sometimes data can not be modeled well by, *e.g.*, polynomials so more sophisticated non-parametric ways of describing classes of functions have been developed that allow for more flexible modeling.
 
-2. We must decide on how we will define and measure error. For regression problems, a typical way to measure error is the **squared-error**. Referring back to @fig-sl-reg, we define the $i$-th **residual** $r_{i}$ to be the vertical (signed) distance between the observed response value $y_{i}$ and the corresponding predicted value $\hat{y}_{i} = \hat{f}({\bf x}_{i})$. That is, 
+2.  We must decide on how we will define and measure error. For regression problems, a typical way to measure error is the **squared-error**. Referring back to the right side of @fig-sl-reg, we define the $i$-th **residual** $r_{i}$ to be the vertical (signed) distance between the observed response value $y_{i}$ and the corresponding predicted value $\hat{y}_{i} = \hat{f}({\bf x}_{i})$. That is,
 
 $$
 r_{i} = y_{i} - \hat{y}_{i}
-$$
-Then the squared error (SE) is
+$$ Then the squared error (SE) is
 
 $$
 \text{SE} = \sum_{i=1}^{n}r_{i}^{2} = \sum_{i=1}^{n}(y_{i}-\hat{y}_{i})^{2} = \sum_{i=1}^{n}(y_{i} - \hat{f}({\bf{x}_{i}}))^{2}
 $$
 
-In this case, we take $\hat{f}$ to be the function from some specified class of functions such that it minimizes the corresponding SE. 
+In this case, we take $\hat{f}$ to be the function from some specified class of functions such that it minimizes the corresponding SE.
 
-**Important Point:** A main component of many if not most supervised machine learning problems is solving some kind of optimization problem. Usually when one speaks of a machine learning algorithm (or learning algorithm), what they are actually referring to is some algorithm that is used to solve an appropriate optimization problem.  
+**Important Point:** A main component of many if not most supervised machine learning problems is solving some kind of optimization problem. Usually when one speaks of a machine learning algorithm (or learning algorithm), what they are actually referring to is some algorithm that is used to solve an appropriate optimization problem.
+
+3.  We have to distinguish between *reducible error* and *irreducible error*. No machine learning model will ever be perfect. Suppose that we have an estimate $\hat{f}$ that yields a prediction $\hat{y} = \hat{f}({\bf x})$. Since in reality the response is a random variable
+
+$$
+y = f({\bf x}) + \epsilon
+$$ we have
+
+$$
+\begin{align*}
+\text{E}[(y - \hat{y})^{2}] &= \text{E}[(f({\bf x}) + \epsilon - \hat{f}({\bf x}))^2] \\
+&= \text{E}[((f({\bf x}) - \hat{f}({\bf x})) + \epsilon)^2] \\
+&= \text{E}[(f({\bf x}) - \hat{f}({\bf x}))^2 - 2\epsilon (f({\bf x}) - \hat{f}({\bf x})) + \epsilon^2] \\
+&= \text{E}[(f({\bf x}) - \hat{f}({\bf x}))^2] - 2(f({\bf x}) - \hat{f}({\bf x}))\text{E}[\epsilon] + \text{E}[(\epsilon - 0)^2] \\
+&= \text{E}[(f({\bf x}) - \hat{f}({\bf x}))^2] + \text{Var}[\epsilon]
+\end{align*}
+$$
+
+By choosing a good enough family of functions or a good enough learning algorithm we can reduce $\text{E}[(f({\bf x}) - \hat{f}({\bf x}))^2]$ as much as we want. This corresponds to the **reducible error.** However, we have no control over $\text{Var}[\epsilon]$ and this corresponds to the **irreducible error**.
 
 #### Classification
 
-![](https://www.dropbox.com/scl/fi/qch7u8vzepor8egwgres5/2_15.png?rlkey=uc3vbxxu1tvrb3a92qxo4ssgg&dl=1){width=6in height=6in}
+For classification problems in supervised machine learning, the response variable is **categorical**. @fig-sl-cl illustrates this, showing a scatter plot of data where coloring is used to distinguish the data points as belonging to one of two different classes.
 
+![Illustration of a classification problem in which the response variable is a binary categorical variable.](https://www.dropbox.com/scl/fi/qch7u8vzepor8egwgres5/2_15.png?rlkey=uc3vbxxu1tvrb3a92qxo4ssgg&dl=1){#fig-sl-cl fig-alt="Figure showing a scatter plot of data where coloring is used to distinguish the data points as belonging to one of two different classes." width="6in" height="6in"}
+
+For classification problems, our goal is still to estimate a functional relationship of the form $y = f({\bf x}) + \epsilon$. However, we can no longer measure error using the squared error because the response values are not numerical. A common method for measuring error in classification problems is **classification error** (CE) defined by
+
+$$
+\text{CE} = \sum_{i=1}^{n}I(y_{i} \neq \hat{y}_{i})
+$$
+
+where $I$ is the *indicator function* that is equal to 1 whenever $y_{i} \neq \hat{y}_{i}$ and equal to 0 whenever $y_{i} = \hat{y}_{i}$. Essentially, CE counts the number of misclassifications. 
+
+Similar to regression, fitting a classification model involves finding a function $\hat{f}$ from some specified class of functions such that the corresponding CE is  minimized. 
 
 ### Complexity Vs. Interpretability
 
-![](https://www.dropbox.com/scl/fi/507z03ox81b15dbxe1pqk/2_7.png?rlkey=vs3rp0x3h5o0qvik8zhjbngsv&dl=1){width=6in height=6in}
-
-
+Another issue that needs to be taken into account when fitting models is the tradeoff between how easy it is to interpret a model versus the maximum degree of accuracy for the model. @fig-mod-complex illustrates this through a representation of the tradeoff between model flexibility and the degree of interpretability of the model. The more flexible the model, the easier it will be to reduce the reducible error. However, highly flexible models tend to be difficult to interpret because they involve many more parameters or possess other types of complexity.
+ 
+![A representation of the tradeoff between model flexibility and the degree of interpretability of the model. The more flexible the model, the easier it will be to reduce the reducible error. However, highly flexible models tend to be difficult to interpret because they involve many more parameters or possess other types of complexity.](https://www.dropbox.com/scl/fi/507z03ox81b15dbxe1pqk/2_7.png?rlkey=vs3rp0x3h5o0qvik8zhjbngsv&dl=1){#fig-mod-complex fig-alt="" width="6in" height="6in"}
 
 ### Training Error Vs. Test Error
 
-![](https://www.dropbox.com/scl/fi/1arxit27ttbfmi527iare/2_9.png?rlkey=ohyvt8c4ao38hq0ggaul5ykm8&dl=1){width=8in height=4in}
-
+![](https://www.dropbox.com/scl/fi/1arxit27ttbfmi527iare/2_9.png?rlkey=ohyvt8c4ao38hq0ggaul5ykm8&dl=1){width="8in" height="4in"}
 
 ### The Bias-Variance Trade-Off
 
-
-![](https://www.dropbox.com/scl/fi/nof2kpjta6p5mlg8nxycd/2_12.png?rlkey=3ubpphur6n0h1ics55k0fm38e&dl=1){width=8in height=4in}
-
+![](https://www.dropbox.com/scl/fi/nof2kpjta6p5mlg8nxycd/2_12.png?rlkey=3ubpphur6n0h1ics55k0fm38e&dl=1){width="8in" height="4in"}
 
 ### Unsupervised Learning
 
-
-![](https://www.dropbox.com/scl/fi/1nlczor8v22ron9rd4keh/2_8.png?rlkey=mfd0jzwbdhejomz71qwvlx82c&dl=1){width=8in height=4in}
-
+![](https://www.dropbox.com/scl/fi/1nlczor8v22ron9rd4keh/2_8.png?rlkey=mfd0jzwbdhejomz71qwvlx82c&dl=1){width="8in" height="4in"}
 
 ## Preparation for the next lesson
 
 For the next lesson:
 
-* Read section 3.1 from of *An Introduction to Statistical Learning* [@tibshirani2017introduction]. You may also want to read sections 2.1 and of *Statistical Learning with Math and R* [@suzuki2020statistical].
+-   Read section 3.1 from of *An Introduction to Statistical Learning* [@tibshirani2017introduction]. You may also want to read sections 2.1 and of *Statistical Learning with Math and R* [@suzuki2020statistical].
 
-* Watch the corresponding video lecture on regression. [View on YouTube](https://youtu.be/ox0cKk7h4o0).
+-   Watch the corresponding video lecture on regression. [View on YouTube](https://youtu.be/ox0cKk7h4o0).
 
 ```{r}
 #| echo: false
@@ -173,15 +192,14 @@ vembedr::embed_youtube(id="ox0cKk7h4o0",height=450) %>%
   vembedr::use_align("center")
 ```
 
-
 ## References
 
 ::: {#refs}
 :::
 
-
-:::{.callout-tip collapse="true"}
+::: {.callout-tip collapse="true"}
 ## Expand for Session Info
+
 ```{r}
 #| echo: false
 
@@ -203,9 +221,6 @@ pkg_sesh$platform$quarto <- paste(
 # print it out
 pkg_sesh
 ```
-
 :::
 
-
-
-[![](http://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-nc-sa.png?raw=1){fig-align="left" width=15%}](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode)
+[![](http://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-nc-sa.png?raw=1){fig-align="left" width="15%"}](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode)

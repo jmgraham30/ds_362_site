@@ -243,7 +243,7 @@ div.csl-indent {
 </ol>
 <p><span class="math display">\[
 y = f({\bf x}) + \epsilon
-\]</span> where we think of <span class="math inline">\(f({\bf x})\)</span> as the mean value for <span class="math inline">\(y\)</span> viewed as a <strong>random variable</strong> and <span class="math inline">\(\epsilon\)</span> as the variance of <span class="math inline">\(y\)</span>.</p>
+\]</span> where we think of <span class="math inline">\(f({\bf x})\)</span> as the mean value for <span class="math inline">\(y\)</span> viewed as a <strong>random variable</strong> and <span class="math inline">\(\epsilon\)</span> as containing the variance of <span class="math inline">\(y\)</span> so that <span class="math inline">\(E[\epsilon] = 0\)</span>.</p>
 <p>We note that <span class="math inline">\(y\)</span> may be numerical in which case we have a <strong>regression</strong> problem or it may be categorical in which case we have a <strong>classification</strong> problem.</p>
 <ol start="2" type="1">
 <li><strong>Unsupervised</strong> - In unsupervised learning, there is no response variable. Some common unsupervised problems include clustering and density estimation. Both of these essentially seek to discover a pattern in the data.</li>
@@ -271,7 +271,7 @@ y = f({\bf x}) + \epsilon
 <p>How did we come up with the function <span class="math inline">\(\hat{f}\)</span>? Basically, minimized the <strong>error</strong> between our predicted and observed response. That is, for each response value <span class="math inline">\({\bf x}\)</span> we minimized how far <span class="math inline">\(y=f({\bf x})\)</span> can be from <span class="math inline">\(\hat{y}=\hat{f}({\bf x})\)</span>. There are three important points that need to be addressed before we can implement regression in a practical situation.</p>
 <ol type="1">
 <li><p>The set of all functions is too large to work with in practice so we must make some choices that allow us to narrow down the class of functions from which <span class="math inline">\(\hat{f}\)</span> will be taken. For example, we could restrict to only linear functions, or only quadratic functions, or only polynomial functions. These classes of functions are easy to describe because these types of functions are uniquely described by a finite number of parameters. However, sometimes data can not be modeled well by, <em>e.g.</em>, polynomials so more sophisticated non-parametric ways of describing classes of functions have been developed that allow for more flexible modeling.</p></li>
-<li><p>We must decide on how we will define and measure error. For regression problems, a typical way to measure error is the <strong>squared-error</strong>. Referring back to <a href="#fig-sl-reg">Figure&nbsp;1</a>, we define the <span class="math inline">\(i\)</span>-th <strong>residual</strong> <span class="math inline">\(r_{i}\)</span> to be the vertical (signed) distance between the observed response value <span class="math inline">\(y_{i}\)</span> and the corresponding predicted value <span class="math inline">\(\hat{y}_{i} = \hat{f}({\bf x}_{i})\)</span>. That is,</p></li>
+<li><p>We must decide on how we will define and measure error. For regression problems, a typical way to measure error is the <strong>squared-error</strong>. Referring back to the right side of <a href="#fig-sl-reg">Figure&nbsp;1</a>, we define the <span class="math inline">\(i\)</span>-th <strong>residual</strong> <span class="math inline">\(r_{i}\)</span> to be the vertical (signed) distance between the observed response value <span class="math inline">\(y_{i}\)</span> and the corresponding predicted value <span class="math inline">\(\hat{y}_{i} = \hat{f}({\bf x}_{i})\)</span>. That is,</p></li>
 </ol>
 <p><span class="math display">\[
 r_{i} = y_{i} - \hat{y}_{i}
@@ -281,15 +281,49 @@ r_{i} = y_{i} - \hat{y}_{i}
 \]</span></p>
 <p>In this case, we take <span class="math inline">\(\hat{f}\)</span> to be the function from some specified class of functions such that it minimizes the corresponding SE.</p>
 <p><strong>Important Point:</strong> A main component of many if not most supervised machine learning problems is solving some kind of optimization problem. Usually when one speaks of a machine learning algorithm (or learning algorithm), what they are actually referring to is some algorithm that is used to solve an appropriate optimization problem.</p>
+<ol start="3" type="1">
+<li>We have to distinguish between <em>reducible error</em> and <em>irreducible error</em>. No machine learning model will ever be perfect. Suppose that we have an estimate <span class="math inline">\(\hat{f}\)</span> that yields a prediction <span class="math inline">\(\hat{y} = \hat{f}({\bf x})\)</span>. Since in reality the response is a random variable</li>
+</ol>
+<p><span class="math display">\[
+y = f({\bf x}) + \epsilon
+\]</span> we have</p>
+<p><span class="math display">\[
+\begin{align*}
+\text{E}[(y - \hat{y})^{2}] &amp;= \text{E}[(f({\bf x}) + \epsilon - \hat{f}({\bf x}))^2] \\
+&amp;= \text{E}[((f({\bf x}) - \hat{f}({\bf x})) + \epsilon)^2] \\
+&amp;= \text{E}[(f({\bf x}) - \hat{f}({\bf x}))^2 - 2\epsilon (f({\bf x}) - \hat{f}({\bf x})) + \epsilon^2] \\
+&amp;= \text{E}[(f({\bf x}) - \hat{f}({\bf x}))^2] - 2(f({\bf x}) - \hat{f}({\bf x}))\text{E}[\epsilon] + \text{E}[(\epsilon - 0)^2] \\
+&amp;= \text{E}[(f({\bf x}) - \hat{f}({\bf x}))^2] + \text{Var}[\epsilon]
+\end{align*}
+\]</span></p>
+<p>By choosing a good enough family of functions or a good enough learning algorithm we can reduce <span class="math inline">\(\text{E}[(f({\bf x}) - \hat{f}({\bf x}))^2]\)</span> as much as we want. This corresponds to the <strong>reducible error.</strong> However, we have no control over <span class="math inline">\(\text{Var}[\epsilon]\)</span> and this corresponds to the <strong>irreducible error</strong>.</p>
 </section>
 <section id="classification" class="level4">
 <h4 class="anchored" data-anchor-id="classification">Classification</h4>
-<p><img src="https://www.dropbox.com/scl/fi/qch7u8vzepor8egwgres5/2_15.png?rlkey=uc3vbxxu1tvrb3a92qxo4ssgg&amp;dl=1" style="width:6in;height:6in"></p>
+<p>For classification problems in supervised machine learning, the response variable is <strong>categorical</strong>. <a href="#fig-sl-cl">Figure&nbsp;2</a> illustrates this, showing a scatter plot of data where coloring is used to distinguish the data points as belonging to one of two different classes.</p>
+<div id="fig-sl-cl" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="https://www.dropbox.com/scl/fi/qch7u8vzepor8egwgres5/2_15.png?rlkey=uc3vbxxu1tvrb3a92qxo4ssgg&amp;dl=1" style="width:6in;height:6in" alt="Figure showing a scatter plot of data where coloring is used to distinguish the data points as belonging to one of two different classes." class="figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;2: Illustration of a classification problem in which the response variable is a binary categorical variable.</figcaption>
+</figure>
+</div>
+<p>For classification problems, our goal is still to estimate a functional relationship of the form <span class="math inline">\(y = f({\bf x}) + \epsilon\)</span>. However, we can no longer measure error using the squared error because the response values are not numerical. A common method for measuring error in classification problems is <strong>classification error</strong> (CE) defined by</p>
+<p><span class="math display">\[
+\text{CE} = \sum_{i=1}^{n}I(y_{i} \neq \hat{y}_{i})
+\]</span></p>
+<p>where <span class="math inline">\(I\)</span> is the <em>indicator function</em> that is equal to 1 whenever <span class="math inline">\(y_{i} \neq \hat{y}_{i}\)</span> and equal to 0 whenever <span class="math inline">\(y_{i} = \hat{y}_{i}\)</span>. Essentially, CE counts the number of misclassifications.</p>
+<p>Similar to regression, fitting a classification model involves finding a function <span class="math inline">\(\hat{f}\)</span> from some specified class of functions such that the corresponding CE is minimized.</p>
 </section>
 </section>
 <section id="complexity-vs.-interpretability" class="level3">
 <h3 class="anchored" data-anchor-id="complexity-vs.-interpretability">Complexity Vs. Interpretability</h3>
-<p><img src="https://www.dropbox.com/scl/fi/507z03ox81b15dbxe1pqk/2_7.png?rlkey=vs3rp0x3h5o0qvik8zhjbngsv&amp;dl=1" style="width:6in;height:6in"></p>
+<p>Another issue that needs to be taken into account when fitting models is the tradeoff between how easy it is to interpret a model versus the maximum degree of accuracy for the model. <a href="#fig-mod-complex">Figure&nbsp;3</a> illustrates this through a representation of the tradeoff between model flexibility and the degree of interpretability of the model. The more flexible the model, the easier it will be to reduce the reducible error. However, highly flexible models tend to be difficult to interpret because they involve many more parameters or possess other types of complexity.</p>
+<div id="fig-mod-complex" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="https://www.dropbox.com/scl/fi/507z03ox81b15dbxe1pqk/2_7.png?rlkey=vs3rp0x3h5o0qvik8zhjbngsv&amp;dl=1" style="width:6in;height:6in" alt="" class="figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;3: A representation of the tradeoff between model flexibility and the degree of interpretability of the model. The more flexible the model, the easier it will be to reduce the reducible error. However, highly flexible models tend to be difficult to interpret because they involve many more parameters or possess other types of complexity.</figcaption>
+</figure>
+</div>
 </section>
 <section id="training-error-vs.-test-error" class="level3">
 <h3 class="anchored" data-anchor-id="training-error-vs.-test-error">Training Error Vs. Test Error</h3>
