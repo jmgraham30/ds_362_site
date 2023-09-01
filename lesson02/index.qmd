@@ -23,16 +23,19 @@ library(tidytuesdayR)
 library(ISLR2)
 
 theme_set(theme_minimal(base_size = 13))
-
-egg_prod_df  <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-04-11/egg-production.csv')
-cage_free_df <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-04-11/cage-free-percentages.csv')
 ```
 
 ## Learning Objectives
 
 After this lesson, students will be able to:
 
+* Define machine learning in general terms and distinguish between supervised and unsupervised learning problems. 
 
+* Distinguish between regression and classification problems.
+
+* Understand the concept of error and the significance of test versus training error. 
+
+* Appreciate the trade-off between model flexibility and interpretability, and between bias and variance. 
 
 
 ## Readings, etc.
@@ -62,12 +65,41 @@ vembedr::embed_youtube(id="B9s8rpdNxU0",height=450) %>%
 
 ## Introduction to Machine (Statistical) Learning
 
+[**Machine learning**](https://en.wikipedia.org/wiki/Machine_learning) or statistical learning generally refers to methods or tools that seek to derive insight or understanding from data by using *models*. Here by model we mean a mathematical or computational representation of some part of the real world. In machine learning, we *fit* a model or class of models to data. The goal of fitting models is usually one of the following:
+
+1. **Prediction** - using what is known to make informed (hopefully accurate) claims about what we want to know. 
+
+2. **Inference** - using a sample to make informed (hopefully accurate) claims about a larger population. 
+
+For an example of prediction, suppose that we are advertising experts working with a customer that sales video games. Our customer cannot directly control their sales but they can directly control their marketing by deciding how much to invest in advertising. Say for example that our customer has three ways to advertise: via YouTube, via podcasts, or via Spotify. We can use our past knowledge about how much our customer has spent *i.e.*, their advertising budget and the corresponding sales to make predictions using a model about how sales will be in the future depending on how the company changes its advertising in each of the three media. 
+
+For an example of inference, suppose we have data on how a sample of patients respond to a particular drug. We can use this to make claims about how a larger population of patients will respond to this same drug. 
+
+There are two prominent broad classes of machine learning models:
+
+1. **Supervised** - In supervised learning, data comes in pairs $(y_{i},{\bf x}_{i})$ where we view ${\bf x_{i}}$ (which may be a vector) as a predictor and $y_{i}$ as a response. Often, We the predictors are something we can influence directly like the advertising budget from our earlier example while the response is something we don't have direct control over like the sales from our example. Thus, there is an assumed functional relationship between predictors and the response of the form
+
+$$
+y = f({\bf x}) + \epsilon
+$$
+where we think of $f({\bf x})$ as the mean value for $y$ viewed as a **random variable** and $\epsilon$ as the variance of $y$.
+
+We note that $y$ may be numerical in which case we have a **regression** problem or it may be categorical in which case we have a **classification** problem. 
+
+2. **Unsupervised** - In unsupervised learning, there is no response variable. Some common unsupervised problems include clustering and density estimation. Both of these essentially seek to discover a pattern in the data. 
 
 ### Fitting Supervised Models
 
+Fitting an unsupervised learning model typically amounts to estimating the function $f$ in the assumed relationship
+
+$$
+y = f({\bf x}) + \epsilon
+$$
+between the predictor and response variables. Let's consider an illustrative example. 
+
 #### Regression
 
-![](https://www.dropbox.com/scl/fi/4zmi7ql5ooxcafkym0csb/2_2.jpg?rlkey=jj0j32tvr43xcn88i2via58jd&dl=1){width=8in height=4in}
+![Illustration of supervised learning through a regression problem.](https://www.dropbox.com/scl/fi/4zmi7ql5ooxcafkym0csb/2_2.jpg?rlkey=jj0j32tvr43xcn88i2via58jd&dl=1){#fig-sl-reg fig-alt="Figure with two panels. The left shows a scatter plot of data while the right shows the same scatter plot but with curve fitted to the data." width=8in height=4in}
 
 
 #### Classification
