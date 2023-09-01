@@ -336,6 +336,13 @@ y = f({\bf x}) + \epsilon
 <figcaption class="figure-caption">Figure&nbsp;4: The left panel shows sample data are several different model fits of varying complexity. The right panel shows the corresponding training and test error for each of the different models. The dashed horizontal line is the minimum possible test error. We see that the most complex model massively overfits the training data.</figcaption>
 </figure>
 </div>
+<p>While the training/test set approach to fitting accurate models while avoiding overfitting is very good in principle, there are some practical limitations. For example,</p>
+<ol type="1">
+<li><p>How do we know the training data is sufficiently representative?</p></li>
+<li><p>What if we don’t have a sufficiently large data set to split into a training and a test set?</p></li>
+<li><p>How do we know what the minimum possible test error is?</p></li>
+</ol>
+<p>We will spend a lot of time later talking more about these issues and ways to deal with them.</p>
 </section>
 <section id="the-bias-variance-trade-off" class="level3">
 <h3 class="anchored" data-anchor-id="the-bias-variance-trade-off">The Bias-Variance Trade-Off</h3>

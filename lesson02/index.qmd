@@ -175,6 +175,16 @@ How do we build models that generalize well and avoid overfitting? A common appr
 
 ![The left panel shows sample data are several different model fits of varying complexity. The right panel shows the corresponding training and test error for each of the different models. The dashed horizontal line is the minimum possible test error. We see that the most complex model massively overfits the training data.](https://www.dropbox.com/scl/fi/1arxit27ttbfmi527iare/2_9.png?rlkey=ohyvt8c4ao38hq0ggaul5ykm8&dl=1){#fig-bv-trade width="8in" height="4in"}
 
+While the training/test set approach to fitting accurate models while avoiding overfitting is very good in principle, there are some practical limitations. For example, 
+
+1. How do we know the training data is sufficiently representative? 
+
+2. What if we don't have a sufficiently large data set to split into a training and a test set? 
+
+3. How do we know what the minimum possible test error is? 
+
+We will spend a lot of time later talking more about these issues and ways to deal with them.  
+
 ### The Bias-Variance Trade-Off
 
 ![](https://www.dropbox.com/scl/fi/nof2kpjta6p5mlg8nxycd/2_12.png?rlkey=3ubpphur6n0h1ics55k0fm38e&dl=1){width="8in" height="4in"}
