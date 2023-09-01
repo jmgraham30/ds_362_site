@@ -327,7 +327,15 @@ y = f({\bf x}) + \epsilon
 </section>
 <section id="training-error-vs.-test-error" class="level3">
 <h3 class="anchored" data-anchor-id="training-error-vs.-test-error">Training Error Vs. Test Error</h3>
-<p><img src="https://www.dropbox.com/scl/fi/1arxit27ttbfmi527iare/2_9.png?rlkey=ohyvt8c4ao38hq0ggaul5ykm8&amp;dl=1" style="width:8in;height:4in"></p>
+<p>When we fit a model to data, say by minimizing the error the resulting estimate function we get depends on the data used to fit the model. We refer to this data as the <strong>training data</strong> and the corresponding error as the <strong>training error</strong>. By choosing a sufficiently flexible set of functions from which to fit to the data, we can make the training error as small as we want. This might seem like a great thing, but there is a major problem with it.</p>
+<p>Suppose we want to use a model to make predictions about future unseen values of our predictor <span class="math inline">\({\bf x}\)</span>. If a model is fit too well to the training data, then in general it tends not to be very good at making accurate predictions for future values. One says that models that are <strong>overfit</strong> to the training data are poor at <strong>generalization</strong>.</p>
+<p>How do we build models that generalize well and avoid overfitting? A common approach is to separate data into a training set that is used to fit a model and a test set which is used to assess how well the models generalizes to unseen data via the <strong>test error</strong>. <a href="#fig-bv-trade">Figure&nbsp;4</a> shows sample data are several different model fits of varying complexity. The right panel shows the corresponding training and test error for each of the different models. The dashed horizontal line is the minimum possible test error. We see that the most complex model massively overfits the training data.</p>
+<div id="fig-bv-trade" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="https://www.dropbox.com/scl/fi/1arxit27ttbfmi527iare/2_9.png?rlkey=ohyvt8c4ao38hq0ggaul5ykm8&amp;dl=1" style="width:8in;height:4in" class="figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;4: The left panel shows sample data are several different model fits of varying complexity. The right panel shows the corresponding training and test error for each of the different models. The dashed horizontal line is the minimum possible test error. We see that the most complex model massively overfits the training data.</figcaption>
+</figure>
+</div>
 </section>
 <section id="the-bias-variance-trade-off" class="level3">
 <h3 class="anchored" data-anchor-id="the-bias-variance-trade-off">The Bias-Variance Trade-Off</h3>

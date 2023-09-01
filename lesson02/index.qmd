@@ -167,7 +167,13 @@ Another issue that needs to be taken into account when fitting models is the tra
 
 ### Training Error Vs. Test Error
 
-![](https://www.dropbox.com/scl/fi/1arxit27ttbfmi527iare/2_9.png?rlkey=ohyvt8c4ao38hq0ggaul5ykm8&dl=1){width="8in" height="4in"}
+When we fit a model to data, say by minimizing the error the resulting estimate function we get depends on the  data used to fit the model. We refer to this data as the **training data** and the corresponding error as the **training error**. By choosing a sufficiently flexible set of functions from which to fit to the data, we can make the training error as small as we want. This might seem like a great thing, but there is a major problem with it. 
+
+Suppose we want to use a model to make predictions about future unseen values of our predictor ${\bf x}$. If a model is fit too well to the training data, then in general it tends not to be very good at making accurate predictions for future values. One says that models that are **overfit** to the training data are poor at **generalization**. 
+
+How do we build models that generalize well and avoid overfitting? A common approach is to separate data into a training set that is used to fit a model and a test set which is used to assess how well the models generalizes to unseen data via the **test error**.  @fig-bv-trade shows sample data are several different model fits of varying complexity. The right panel shows the corresponding training and test error for each of the different models. The dashed horizontal line is the minimum possible test error. We see that the most complex model massively overfits the training data.
+
+![The left panel shows sample data are several different model fits of varying complexity. The right panel shows the corresponding training and test error for each of the different models. The dashed horizontal line is the minimum possible test error. We see that the most complex model massively overfits the training data.](https://www.dropbox.com/scl/fi/1arxit27ttbfmi527iare/2_9.png?rlkey=ohyvt8c4ao38hq0ggaul5ykm8&dl=1){#fig-bv-trade width="8in" height="4in"}
 
 ### The Bias-Variance Trade-Off
 
