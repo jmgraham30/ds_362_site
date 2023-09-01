@@ -77,7 +77,7 @@ For an example of inference, suppose we have data on how a sample of patients re
 
 There are two prominent broad classes of machine learning models:
 
-1. **Supervised** - In supervised learning, data comes in pairs $(y_{i},{\bf x}_{i})$ where we view ${\bf x_{i}}$ (which may be a vector) as a predictor and $y_{i}$ as a response. Often, We the predictors are something we can influence directly like the advertising budget from our earlier example while the response is something we don't have direct control over like the sales from our example. Thus, there is an assumed functional relationship between predictors and the response of the form
+1. **Supervised** - In supervised learning, data comes in pairs $(y_{i},{\bf x}_{i})$ where we view ${\bf x}_{i}$ (which may be a vector) as a predictor and $y_{i}$ as a response. Often, We the predictors are something we can influence directly like the advertising budget from our earlier example while the response is something we don't have direct control over like the sales from our example. Thus, there is an assumed functional relationship between predictors and the response of the form
 
 $$
 y = f({\bf x}) + \epsilon
@@ -95,12 +95,40 @@ Fitting an unsupervised learning model typically amounts to estimating the funct
 $$
 y = f({\bf x}) + \epsilon
 $$
-between the predictor and response variables. Let's consider an illustrative example. 
+between the predictor and response variables. When we estimate $f$ we denote the estimate by $\hat{f}$. Then, we can use $\hat{f}$ to predict the response for each predictor value ${\bf x}$ by computing
+
+$$
+\hat{y} = \hat{f}({\bf x})
+$$
+
+How do we estimate a function $f$? In machine learning, we use the data together with some algorithm to construct $\hat{f}$.
 
 #### Regression
 
+Let's consider an illustrative example where ${\bf x}$ represents the years of education of some individuals and $y$ is the income they earn in their profession. Thus, both variables are numerical so we are dealing with a regression problem. We are assuming that there is a true but unknown functional relationship between the years of education and the income they earn.  
+
+The left panel of @fig-sl-reg shows a scatter plot of our education versus income data while the right panel shows the data again but with a curve corresponding to the graph of a function $\hat{f}$ that passes through the data. 
+
 ![Illustration of supervised learning through a regression problem.](https://www.dropbox.com/scl/fi/4zmi7ql5ooxcafkym0csb/2_2.jpg?rlkey=jj0j32tvr43xcn88i2via58jd&dl=1){#fig-sl-reg fig-alt="Figure with two panels. The left shows a scatter plot of data while the right shows the same scatter plot but with curve fitted to the data." width=8in height=4in}
 
+How did we come up with the function $\hat{f}$? Basically, minimized the **error** between our predicted and observed response. That is, for each response value ${\bf x}$ we minimized how far $y=f({\bf x})$ can be from $\hat{y}=\hat{f}({\bf x})$. There are three important points that need to be addressed before we can implement regression in a practical situation. 
+
+1. The set of all functions is too large to work with in practice so we must make some choices that allow us to narrow down the class of functions from which $\hat{f}$ will be taken. For example, we could restrict to only linear functions, or only quadratic functions, or only polynomial functions. These classes of functions are easy to describe because these types of functions are uniquely described by a finite number of parameters. However, sometimes data can not be modeled well by, *e.g.*, polynomials so more sophisticated non-parametric ways of describing  classes of functions have been developed that allow for more flexible modeling. 
+
+2. We must decide on how we will define and measure error. For regression problems, a typical way to measure error is the **squared-error**. Referring back to @fig-sl-reg, we define the $i$-th **residual** $r_{i}$ to be the vertical (signed) distance between the observed response value $y_{i}$ and the corresponding predicted value $\hat{y}_{i} = \hat{f}({\bf x}_{i})$. That is, 
+
+$$
+r_{i} = y_{i} - \hat{y}_{i}
+$$
+Then the squared error (SE) is
+
+$$
+\text{SE} = \sum_{i=1}^{n}r_{i}^{2} = \sum_{i=1}^{n}(y_{i}-\hat{y}_{i})^{2} = \sum_{i=1}^{n}(y_{i} - \hat{f}({\bf{x}_{i}}))^{2}
+$$
+
+In this case, we take $\hat{f}$ to be the function from some specified class of functions such that it minimizes the corresponding SE. 
+
+**Important Point:** A main component of many if not most supervised machine learning problems is solving some kind of optimization problem. Usually when one speaks of a machine learning algorithm (or learning algorithm), what they are actually referring to is some algorithm that is used to solve an appropriate optimization problem.  
 
 #### Classification
 
