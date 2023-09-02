@@ -187,7 +187,17 @@ We will spend a lot of time later talking more about these issues and ways to de
 
 ### The Bias-Variance Trade-Off
 
+Referring back to @fig-bv-trade, notice the distinct U-shape in the curve for the test error. This is more than just a curiosity, it is the result of another type of trade-off known as the **bias-variance** trade-off. 
+
 ![Figure from [@tibshirani2017introduction].](https://www.dropbox.com/scl/fi/nof2kpjta6p5mlg8nxycd/2_12.png?rlkey=3ubpphur6n0h1ics55k0fm38e&dl=1){width="8in" height="4in"}
+
+**Important:** What you should keep in mind as we proceed through the course is the following:
+
+* Simple models tend to have high bias but much lower variance. 
+
+* Complex models tend to have lower bias but much higher variance.
+
+Anytime you choose a particular modeling approach for a specific application or data set, you should take into account the bias-variance trade-off.
 
 ### Unsupervised Learning
 

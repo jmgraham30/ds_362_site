@@ -346,12 +346,19 @@ y = f({\bf x}) + \epsilon
 </section>
 <section id="the-bias-variance-trade-off" class="level3">
 <h3 class="anchored" data-anchor-id="the-bias-variance-trade-off">The Bias-Variance Trade-Off</h3>
+<p>Referring back to <a href="#fig-bv-trade">Figure&nbsp;4</a>, notice the distinct U-shape in the curve for the test error. This is more than just a curiosity, it is the result of another type of trade-off known as the <strong>bias-variance</strong> trade-off.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://www.dropbox.com/scl/fi/nof2kpjta6p5mlg8nxycd/2_12.png?rlkey=3ubpphur6n0h1ics55k0fm38e&amp;dl=1" style="width:8in;height:4in" class="figure-img"></p>
 <figcaption class="figure-caption">Figure from <span class="citation" data-cites="tibshirani2017introduction">(<a href="#ref-tibshirani2017introduction" role="doc-biblioref">Tibshirani, James, and Trevor 2017</a>)</span>.</figcaption>
 </figure>
 </div>
+<p><strong>Important:</strong> What you should keep in mind as we proceed through the course is the following:</p>
+<ul>
+<li><p>Simple models tend to have high bias but much lower variance.</p></li>
+<li><p>Complex models tend to have lower bias but much higher variance.</p></li>
+</ul>
+<p>Anytime you choose a particular modeling approach for a specific application or data set, you should take into account the bias-variance trade-off.</p>
 </section>
 <section id="unsupervised-learning" class="level3">
 <h3 class="anchored" data-anchor-id="unsupervised-learning">Unsupervised Learning</h3>
@@ -414,7 +421,7 @@ Expand for Session Info
  collate  en_US.UTF-8
  ctype    en_US.UTF-8
  tz       America/New_York
- date     2023-09-01
+ date     2023-09-02
  pandoc   3.1.1 @ /Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/ (via rmarkdown)
  quarto   1.3.450 @ /usr/local/bin/quarto
 
