@@ -203,6 +203,10 @@ Anytime you choose a particular modeling approach for a specific application or 
 
 ![Figure from [@tibshirani2017introduction].](https://www.dropbox.com/scl/fi/1nlczor8v22ron9rd4keh/2_8.png?rlkey=mfd0jzwbdhejomz71qwvlx82c&dl=1){width="8in" height="4in"}
 
+## Some Data Sources
+
+Appendix B of the online textbook contains a very helpful list of data sources [@alexandertelling]. [View appendix B](https://tellingstorieswithdata.com/21-datasets.html). Two other very interesting and useful sources of data are the [Tidy Tuesday](https://github.com/rfordatascience/tidytuesday) data repositories and [Kaggle](https://www.kaggle.com/). There are also many R packages that either include data or that can be used to download data. The ROpenSci project is a godo resource for finding R packages that can be used to obtain data, [view the project](https://ropensci.org/).
+
 ## Preparation for the next lesson
 
 For the next lesson:
