@@ -189,7 +189,23 @@ We will spend a lot of time later talking more about these issues and ways to de
 
 Referring back to @fig-bv-trade, notice the distinct U-shape in the curve for the test error. This is more than just a curiosity, it is the result of another type of trade-off known as the **bias-variance** trade-off. 
 
-![Figure from [@tibshirani2017introduction].](https://www.dropbox.com/scl/fi/nof2kpjta6p5mlg8nxycd/2_12.png?rlkey=3ubpphur6n0h1ics55k0fm38e&dl=1){width="8in" height="4in"}
+Let's try to get a sense for this starting with some intuition. Suppose we having a regression problem with a single predictor. If we restrict to the class of linear functions, that is functions with graph that is a straight line in the plane, then any such function is uniquely specified by two parameters, the slope and intercept. Intuitively, such as model is highly biased because it's going to make very rigid predictions. However, linear functions have low variance in the sense than models fit to similar data will have very similar slope and intercept values. On the other hand, a cubic polynomial being described uniquely by four parameters is much less biased than a linear function but will have higher variance. 
+
+It is outside the scope of this course, but it can be shown that the expected squared error for an observed value ${\bf x}_{0}$ can be decomposed as follows:
+
+$$
+\text{E}[(y_{0} - \hat{f}({\bf x}))^2] = \text{Var}(\hat{f}({\bf x}_{0})) + [\text{Bias}(\hat{f}({\bf x}_{0}))]^2 + \text{Var}(\epsilon)
+$$
+
+We refer to the first two terms as 
+
+* the variance of $\hat{f}({\bf x}_{0})$
+
+* the squared bias of $\hat{f}({\bf x}_{0})$
+
+@fig-bv illustrates this formula. 
+
+![Figure from [@tibshirani2017introduction].](https://www.dropbox.com/scl/fi/nof2kpjta6p5mlg8nxycd/2_12.png?rlkey=3ubpphur6n0h1ics55k0fm38e&dl=1){#fig-bv width="8in" height="4in"}
 
 **Important:** What you should keep in mind as we proceed through the course is the following:
 

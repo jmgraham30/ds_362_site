@@ -348,10 +348,21 @@ y = f({\bf x}) + \epsilon
 <section id="the-bias-variance-trade-off" class="level3">
 <h3 class="anchored" data-anchor-id="the-bias-variance-trade-off">The Bias-Variance Trade-Off</h3>
 <p>Referring back to <a href="#fig-bv-trade">Figure&nbsp;4</a>, notice the distinct U-shape in the curve for the test error. This is more than just a curiosity, it is the result of another type of trade-off known as the <strong>bias-variance</strong> trade-off.</p>
-<div class="quarto-figure quarto-figure-center">
+<p>Let’s try to get a sense for this starting with some intuition. Suppose we having a regression problem with a single predictor. If we restrict to the class of linear functions, that is functions with graph that is a straight line in the plane, then any such function is uniquely specified by two parameters, the slope and intercept. Intuitively, such as model is highly biased because it’s going to make very rigid predictions. However, linear functions have low variance in the sense than models fit to similar data will have very similar slope and intercept values. On the other hand, a cubic polynomial being described uniquely by four parameters is much less biased than a linear function but will have higher variance.</p>
+<p>It is outside the scope of this course, but it can be shown that the expected squared error for an observed value <span class="math inline">\({\bf x}_{0}\)</span> can be decomposed as follows:</p>
+<p><span class="math display">\[
+\text{E}[(y_{0} - \hat{f}({\bf x}))^2] = \text{Var}(\hat{f}({\bf x}_{0})) + [\text{Bias}(\hat{f}({\bf x}_{0}))]^2 + \text{Var}(\epsilon)
+\]</span></p>
+<p>We refer to the first two terms as</p>
+<ul>
+<li><p>the variance of <span class="math inline">\(\hat{f}({\bf x}_{0})\)</span></p></li>
+<li><p>the squared bias of <span class="math inline">\(\hat{f}({\bf x}_{0})\)</span></p></li>
+</ul>
+<p><a href="#fig-bv">Figure&nbsp;5</a> illustrates this formula.</p>
+<div id="fig-bv" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="https://www.dropbox.com/scl/fi/nof2kpjta6p5mlg8nxycd/2_12.png?rlkey=3ubpphur6n0h1ics55k0fm38e&amp;dl=1" style="width:8in;height:4in" class="figure-img"></p>
-<figcaption class="figure-caption">Figure from <span class="citation" data-cites="tibshirani2017introduction">(<a href="#ref-tibshirani2017introduction" role="doc-biblioref">Tibshirani, James, and Trevor 2017</a>)</span>.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;5: Figure from <span class="citation" data-cites="tibshirani2017introduction">(<a href="#ref-tibshirani2017introduction" role="doc-biblioref">Tibshirani, James, and Trevor 2017</a>)</span>.</figcaption>
 </figure>
 </div>
 <p><strong>Important:</strong> What you should keep in mind as we proceed through the course is the following:</p>
