@@ -205,7 +205,7 @@ We refer to the first two terms as
 
 @fig-bv illustrates this formula. 
 
-![Figure from [@tibshirani2017introduction].](https://www.dropbox.com/scl/fi/nof2kpjta6p5mlg8nxycd/2_12.png?rlkey=3ubpphur6n0h1ics55k0fm38e&dl=1){#fig-bv width="8in" height="4in"}
+![Squared bias (blue curve), variance (orange curve), Var(ε) (dashed line), and test MSE (red curve). The vertical dotted line indicates the flexibility level corresponding to the smallest test MSE. Figure from [@tibshirani2017introduction].](https://www.dropbox.com/scl/fi/nof2kpjta6p5mlg8nxycd/2_12.png?rlkey=3ubpphur6n0h1ics55k0fm38e&dl=1){#fig-bv width="8in" height="4in"}
 
 **Important:** What you should keep in mind as we proceed through the course is the following:
 
@@ -217,11 +217,15 @@ Anytime you choose a particular modeling approach for a specific application or 
 
 ### Unsupervised Learning
 
-![Figure from [@tibshirani2017introduction].](https://www.dropbox.com/scl/fi/1nlczor8v22ron9rd4keh/2_8.png?rlkey=mfd0jzwbdhejomz71qwvlx82c&dl=1){width="8in" height="4in"}
+In unsupervised learning problems, data is unlabeled in the sense that there are no response values. It's a but tricky to give a general description of all unsupervised learning problems. The most common types of unsupervised learning problems are clustering, dimension reduction, and pattern recognition. @fig-ul illustrates clustering problems.  
+
+![A clustering data set involving three groups. Each group is shown using a different colored symbol. Left: The three groups are well-separated. In this setting, a clustering approach should successfully identify the three groups. Right: There is some overlap among the groups. Now the clustering task is more chal lenging. Figure from [@tibshirani2017introduction].](https://www.dropbox.com/scl/fi/1nlczor8v22ron9rd4keh/2_8.png?rlkey=mfd0jzwbdhejomz71qwvlx82c&dl=1){#fig-ul width="8in" height="4in"}
+
+We will introduce unsupervised learning in more detail later in the course. 
 
 ## Some Data Sources
 
-Appendix B of the online textbook contains a very helpful list of data sources [@alexandertelling]. [View appendix B](https://tellingstorieswithdata.com/21-datasets.html). Two other very interesting and useful sources of data are the [Tidy Tuesday](https://github.com/rfordatascience/tidytuesday) data repositories and [Kaggle](https://www.kaggle.com/). There are also many R packages that either include data or that can be used to download data. The ROpenSci project is a godo resource for finding R packages that can be used to obtain data, [view the project](https://ropensci.org/).
+One thing students often struggle with is finding and picking a good data set for their projects. Appendix B of the online textbook contains a very helpful list of data sources [@alexandertelling]. [View appendix B](https://tellingstorieswithdata.com/21-datasets.html). Two other very interesting and useful sources of data are the [Tidy Tuesday](https://github.com/rfordatascience/tidytuesday) data repositories and [Kaggle](https://www.kaggle.com/). There are also many R packages that either include data or that can be used to download data. The ROpenSci project is a godo resource for finding R packages that can be used to obtain data, [view the project](https://ropensci.org/).
 
 ## Preparation for the next lesson
 

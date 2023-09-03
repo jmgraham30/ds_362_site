@@ -362,7 +362,7 @@ y = f({\bf x}) + \epsilon
 <div id="fig-bv" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="https://www.dropbox.com/scl/fi/nof2kpjta6p5mlg8nxycd/2_12.png?rlkey=3ubpphur6n0h1ics55k0fm38e&amp;dl=1" style="width:8in;height:4in" class="figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;5: Figure from <span class="citation" data-cites="tibshirani2017introduction">(<a href="#ref-tibshirani2017introduction" role="doc-biblioref">Tibshirani, James, and Trevor 2017</a>)</span>.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;5: Squared bias (blue curve), variance (orange curve), Var(ε) (dashed line), and test MSE (red curve). The vertical dotted line indicates the flexibility level corresponding to the smallest test MSE. Figure from <span class="citation" data-cites="tibshirani2017introduction">(<a href="#ref-tibshirani2017introduction" role="doc-biblioref">Tibshirani, James, and Trevor 2017</a>)</span>.</figcaption>
 </figure>
 </div>
 <p><strong>Important:</strong> What you should keep in mind as we proceed through the course is the following:</p>
@@ -374,17 +374,19 @@ y = f({\bf x}) + \epsilon
 </section>
 <section id="unsupervised-learning" class="level3">
 <h3 class="anchored" data-anchor-id="unsupervised-learning">Unsupervised Learning</h3>
-<div class="quarto-figure quarto-figure-center">
+<p>In unsupervised learning problems, data is unlabeled in the sense that there are no response values. It’s a but tricky to give a general description of all unsupervised learning problems. The most common types of unsupervised learning problems are clustering, dimension reduction, and pattern recognition. <a href="#fig-ul">Figure&nbsp;6</a> illustrates clustering problems.</p>
+<div id="fig-ul" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="https://www.dropbox.com/scl/fi/1nlczor8v22ron9rd4keh/2_8.png?rlkey=mfd0jzwbdhejomz71qwvlx82c&amp;dl=1" style="width:8in;height:4in" class="figure-img"></p>
-<figcaption class="figure-caption">Figure from <span class="citation" data-cites="tibshirani2017introduction">(<a href="#ref-tibshirani2017introduction" role="doc-biblioref">Tibshirani, James, and Trevor 2017</a>)</span>.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;6: A clustering data set involving three groups. Each group is shown using a different colored symbol. Left: The three groups are well-separated. In this setting, a clustering approach should successfully identify the three groups. Right: There is some overlap among the groups. Now the clustering task is more chal lenging. Figure from <span class="citation" data-cites="tibshirani2017introduction">(<a href="#ref-tibshirani2017introduction" role="doc-biblioref">Tibshirani, James, and Trevor 2017</a>)</span>.</figcaption>
 </figure>
 </div>
+<p>We will introduce unsupervised learning in more detail later in the course.</p>
 </section>
 </section>
 <section id="some-data-sources" class="level2">
 <h2 class="anchored" data-anchor-id="some-data-sources">Some Data Sources</h2>
-<p>Appendix B of the online textbook contains a very helpful list of data sources <span class="citation" data-cites="alexandertelling">(<a href="#ref-alexandertelling" role="doc-biblioref">Alexander, n.d.</a>)</span>. <a href="https://tellingstorieswithdata.com/21-datasets.html">View appendix B</a>. Two other very interesting and useful sources of data are the <a href="https://github.com/rfordatascience/tidytuesday">Tidy Tuesday</a> data repositories and <a href="https://www.kaggle.com/">Kaggle</a>. There are also many R packages that either include data or that can be used to download data. The ROpenSci project is a godo resource for finding R packages that can be used to obtain data, <a href="https://ropensci.org/">view the project</a>.</p>
+<p>One thing students often struggle with is finding and picking a good data set for their projects. Appendix B of the online textbook contains a very helpful list of data sources <span class="citation" data-cites="alexandertelling">(<a href="#ref-alexandertelling" role="doc-biblioref">Alexander, n.d.</a>)</span>. <a href="https://tellingstorieswithdata.com/21-datasets.html">View appendix B</a>. Two other very interesting and useful sources of data are the <a href="https://github.com/rfordatascience/tidytuesday">Tidy Tuesday</a> data repositories and <a href="https://www.kaggle.com/">Kaggle</a>. There are also many R packages that either include data or that can be used to download data. The ROpenSci project is a godo resource for finding R packages that can be used to obtain data, <a href="https://ropensci.org/">view the project</a>.</p>
 </section>
 <section id="preparation-for-the-next-lesson" class="level2">
 <h2 class="anchored" data-anchor-id="preparation-for-the-next-lesson">Preparation for the next lesson</h2>
