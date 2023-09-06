@@ -159,6 +159,8 @@ where $I$ is the *indicator function* that is equal to 1 whenever $y_{i} \neq \h
 
 Similar to regression, fitting a classification model involves finding a function $\hat{f}$ from some specified class of functions such that the corresponding CE is  minimized. 
 
+Note that it is possible to convert a regression problem to a classification problem by binning or discretizing the response variable in some way.   
+
 ### Complexity Vs. Interpretability
 
 Another issue that needs to be taken into account when fitting models is the tradeoff between how easy it is to interpret a model versus the maximum degree of accuracy for the model. @fig-mod-complex illustrates this through a representation of the tradeoff between model flexibility and the degree of interpretability of the model. The more flexible the model, the easier it will be to reduce the reducible error. However, highly flexible models tend to be difficult to interpret because they involve many more parameters or possess other types of complexity.
