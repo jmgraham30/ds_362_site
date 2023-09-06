@@ -8,7 +8,7 @@ format:
     code-summary: "Show the code"
     toc: true
     toc-location: left
-bibliography: lesson02.bib
+bibliography: lesson03.bib
 license: "CC BY-NC-SA 4.0"
 ---
 
@@ -51,14 +51,14 @@ vembedr::embed_youtube(id="ox0cKk7h4o0",height=450) %>%
 
 For the next lesson:
 
--   Read chapter 4 from of *An Introduction to Statistical Learning* [@tibshirani2017introduction]. You may also want to read sections 2.1 and of *Statistical Learning with Math and R* [@suzuki2020statistical].
+-   Read chapter 4 from of *An Introduction to Statistical Learning* [@tibshirani2017introduction]. You may also want to read chapter 3 of *Statistical Learning with Math and R* [@suzuki2020statistical].
 
--   Watch the corresponding video lecture on regression. [View on YouTube](https://youtu.be/ox0cKk7h4o0).
+-   Watch the corresponding video lecture on classification. [View on YouTube](https://youtu.be/BMJQ3LQ_QKU?si=XvFgGO2jJ5OyR-v4).
 
 ```{r}
 #| echo: false
 
-vembedr::embed_youtube(id="ox0cKk7h4o0",height=450) %>%
+vembedr::embed_youtube(id="BMJQ3LQ_QKU?si=XvFgGO2jJ5OyR-v4",height=450) %>%
   vembedr::use_align("center")
 ```
 

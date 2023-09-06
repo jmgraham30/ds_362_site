@@ -327,5 +327,26 @@
     "title": "Lesson 2",
     "section": "Some Data Sources",
     "text": "Some Data Sources\nOne thing students often struggle with is finding and picking a good data set for their projects. Appendix B of the online textbook contains a very helpful list of data sources (Alexander, n.d.). View appendix B. Two other very interesting and useful sources of data are the Tidy Tuesday data repositories and Kaggle. There are also many R packages that either include data or that can be used to download data. The ROpenSci project is a godo resource for finding R packages that can be used to obtain data, view the project."
+  },
+  {
+    "objectID": "lesson03/index.html#readings-etc.",
+    "href": "lesson03/index.html#readings-etc.",
+    "title": "Lesson 3",
+    "section": "Readings, etc.",
+    "text": "Readings, etc.\nFor this next lesson:\n\nRead chapter 3 from of An Introduction to Statistical Learning (Tibshirani, James, and Trevor 2017). You may also want to read chapter 2 of Statistical Learning with Math and R (Suzuki 2020).\nWatch the corresponding video lecture on regression. View on YouTube."
+  },
+  {
+    "objectID": "lesson03/index.html#preparation-for-the-next-lesson",
+    "href": "lesson03/index.html#preparation-for-the-next-lesson",
+    "title": "Lesson 3",
+    "section": "Preparation for the next lesson",
+    "text": "Preparation for the next lesson\nFor the next lesson:\n\nRead chapter 4 from of An Introduction to Statistical Learning (Tibshirani, James, and Trevor 2017). You may also want to read chapter 3 of Statistical Learning with Math and R (Suzuki 2020).\nWatch the corresponding video lecture on classification. View on YouTube."
+  },
+  {
+    "objectID": "lesson03/index.html#references",
+    "href": "lesson03/index.html#references",
+    "title": "Lesson 3",
+    "section": "References",
+    "text": "References\n\n\nSuzuki, Joe. 2020. Statistical Learning with Math and r. Springer.\n\n\nTibshirani, Hastie Robert, Gareth James, and Daniela Witten Trevor. 2017. An Introduction to Statistical Learning. springer publication.\n\n\n\n\n\n\n\n\nExpand for Session Info\n\n\n\n\n\n\n\n─ Session info ───────────────────────────────────────────────────────────────\n setting  value\n version  R version 4.3.1 (2023-06-16)\n os       macOS Ventura 13.5.1\n system   aarch64, darwin20\n ui       X11\n language (EN)\n collate  en_US.UTF-8\n ctype    en_US.UTF-8\n tz       America/New_York\n date     2023-09-06\n pandoc   3.1.1 @ /Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/ (via rmarkdown)\n quarto   1.3.450 @ /usr/local/bin/quarto\n\n─ Packages ───────────────────────────────────────────────────────────────────\n package      * version date (UTC) lib source\n dplyr        * 1.1.3   2023-09-03 [1] CRAN (R 4.3.0)\n forcats      * 1.0.0   2023-01-29 [1] CRAN (R 4.3.0)\n ggplot2      * 3.4.3   2023-08-14 [1] CRAN (R 4.3.0)\n ISLR2        * 1.3-2   2022-11-20 [1] CRAN (R 4.3.0)\n lubridate    * 1.9.2   2023-02-10 [1] CRAN (R 4.3.0)\n purrr        * 1.0.2   2023-08-10 [1] CRAN (R 4.3.0)\n readr        * 2.1.4   2023-02-10 [1] CRAN (R 4.3.0)\n sessioninfo  * 1.2.2   2021-12-06 [1] CRAN (R 4.3.0)\n stringr      * 1.5.0   2022-12-02 [1] CRAN (R 4.3.0)\n tibble       * 3.2.1   2023-03-20 [1] CRAN (R 4.3.0)\n tidyr        * 1.3.0   2023-01-24 [1] CRAN (R 4.3.0)\n tidytuesdayR * 1.0.2   2022-02-01 [1] CRAN (R 4.3.0)\n tidyverse    * 2.0.0   2023-02-22 [1] CRAN (R 4.3.0)\n\n [1] /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library\n\n──────────────────────────────────────────────────────────────────────────────"
   }
 ]
