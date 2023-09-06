@@ -233,7 +233,7 @@ One thing students often struggle with is finding and picking a good data set fo
 
 For the next lesson:
 
--   Read section 3.1 from of *An Introduction to Statistical Learning* [@tibshirani2017introduction]. You may also want to read sections 2.1 and of *Statistical Learning with Math and R* [@suzuki2020statistical].
+-   Read section 3.1 from of *An Introduction to Statistical Learning* [@tibshirani2017introduction]. You may also want to read section 2.1 of *Statistical Learning with Math and R* [@suzuki2020statistical].
 
 -   Watch the corresponding video lecture on regression. [View on YouTube](https://youtu.be/ox0cKk7h4o0).
 
