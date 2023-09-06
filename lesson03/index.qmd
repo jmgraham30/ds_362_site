@@ -62,8 +62,39 @@ vembedr::embed_youtube(id="ox0cKk7h4o0",height=450) %>%
 ## Overdetermined Systems and $QR$ Factorization
 
 
+### $QR$ Factorization
+
+$$
+\left[\begin{array}{cc} 3 & 1 \\ 4 & 2 \end{array}\right] = \left[\begin{array}{cc} \frac{3}{5} & -\frac{4}{5} \\ \frac{4}{5} & \frac{3}{5} \end{array}\right]\left[\begin{array}{cc} 5 & \frac{11}{5} \\ 0 & \frac{2}{5} \end{array}\right]
+$$
+
+```{r}
+A <- matrix(c(3,1,4,2),2,2,byrow = TRUE)
+A_qr <- qr(A)
+Q <- qr.Q(A_qr)
+R <- qr.R(A_qr)
+```
 
 
+```{r}
+#| code-fold: false
+
+Q %*% R
+```
+
+
+```{r}
+#| code-fold: false
+
+round(Q %*% t(Q),2)
+```
+
+
+```{r}
+#| code-fold: false
+
+round(t(Q) %*% Q,2)
+```
 
 ## Preparation for the next lesson
 

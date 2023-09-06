@@ -375,6 +375,6 @@
     "href": "lesson03/index.html#overdetermined-systems-and-qr-factorization",
     "title": "Lesson 3",
     "section": "Overdetermined Systems and \\(QR\\) Factorization",
-    "text": "Overdetermined Systems and \\(QR\\) Factorization"
+    "text": "Overdetermined Systems and \\(QR\\) Factorization\n\n\\(QR\\) Factorization\n\\[\n\\left[\\begin{array}{cc} 3 & 1 \\\\ 4 & 2 \\end{array}\\right] = \\left[\\begin{array}{cc} \\frac{3}{5} & -\\frac{4}{5} \\\\ \\frac{4}{5} & \\frac{3}{5} \\end{array}\\right]\\left[\\begin{array}{cc} 5 & \\frac{11}{5} \\\\ 0 & \\frac{2}{5} \\end{array}\\right]\n\\]\n\n\nCode\nA &lt;- matrix(c(3,1,4,2),2,2,byrow = TRUE)\nA_qr &lt;- qr(A)\nQ &lt;- qr.Q(A_qr)\nR &lt;- qr.R(A_qr)\n\n\n\nQ %*% R\n\n     [,1] [,2]\n[1,]    3    1\n[2,]    4    2\n\n\n\nround(Q %*% t(Q),2)\n\n     [,1] [,2]\n[1,]    1    0\n[2,]    0    1\n\n\n\nround(t(Q) %*% Q,2)\n\n     [,1] [,2]\n[1,]    1    0\n[2,]    0    1"
   }
 ]
