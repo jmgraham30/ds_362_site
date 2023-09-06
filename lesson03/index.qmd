@@ -57,7 +57,17 @@ vembedr::embed_youtube(id="ox0cKk7h4o0",height=450) %>%
 
 ## Motivation for Linear Regression
 
+```{r}
+set.seed(1287)
+N <- 25
+x <- rnorm(N,mean=72,sd=12)
+y <- 1.2 + 0.75 * x + rnorm(N,sd=2)
+xy_data <- tibble(x=x,y=y)
 
+xy_data %>%
+  ggplot(aes(x=x,y=y)) + 
+  geom_point()
+```
 
 ## Overdetermined Systems and $QR$ Factorization
 

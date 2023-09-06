@@ -368,7 +368,7 @@
     "href": "lesson03/index.html#motivation-for-linear-regression",
     "title": "Lesson 3",
     "section": "Motivation for Linear Regression",
-    "text": "Motivation for Linear Regression"
+    "text": "Motivation for Linear Regression\n\n\nCode\nset.seed(1287)\nN &lt;- 25\nx &lt;- rnorm(N,mean=72,sd=12)\ny &lt;- 1.2 + 0.75 * x + rnorm(N,sd=2)\nxy_data &lt;- tibble(x=x,y=y)\n\nxy_data %&gt;%\n  ggplot(aes(x=x,y=y)) + \n  geom_point()"
   },
   {
     "objectID": "lesson03/index.html#overdetermined-systems-and-qr-factorization",
