@@ -27,6 +27,18 @@ theme_set(theme_minimal(base_size = 13))
 
 ## Learning Objectives
 
+After this lesson, students will be able to:
+
+* Define linear regression and appreciate from the perspective of machine learning.
+
+* Define the norm of a vector. 
+
+* Understand the role of systems of linear equations, matrices, and $QR$ factorization in linear regression. 
+
+* Use R to compute the $QR$ factorization of a matrix. 
+
+* Use the $QR$ factorization to compute the coefficients for linear regression. 
+
 
 ## Readings, etc.
 
@@ -42,6 +54,12 @@ For this next lesson:
 vembedr::embed_youtube(id="ox0cKk7h4o0",height=450) %>%
   vembedr::use_align("center")
 ```
+
+## Motivation for Linear Regression
+
+
+
+## Overdetermined Systems and $QR$ Factorization
 
 
 
