@@ -184,7 +184,11 @@ div.csl-indent {
   <li><a href="#linear-regression-and-linear-least-squares" id="toc-linear-regression-and-linear-least-squares" class="nav-link" data-scroll-target="#linear-regression-and-linear-least-squares">Linear Regression and Linear Least Squares</a></li>
   <li><a href="#qr-factorization" id="toc-qr-factorization" class="nav-link" data-scroll-target="#qr-factorization"><span class="math inline">\(QR\)</span> Factorization</a></li>
   </ul></li>
-  <li><a href="#simple-linear-regression-an-example" id="toc-simple-linear-regression-an-example" class="nav-link" data-scroll-target="#simple-linear-regression-an-example">Simple Linear Regression: An Example</a></li>
+  <li><a href="#simple-linear-regression" id="toc-simple-linear-regression" class="nav-link" data-scroll-target="#simple-linear-regression">Simple Linear Regression</a>
+  <ul class="collapse">
+  <li><a href="#an-example" id="toc-an-example" class="nav-link" data-scroll-target="#an-example">An Example</a></li>
+  </ul></li>
+  <li><a href="#multiple-linear-regression" id="toc-multiple-linear-regression" class="nav-link" data-scroll-target="#multiple-linear-regression">Multiple Linear Regression</a></li>
   <li><a href="#preparation-for-the-next-lesson" id="toc-preparation-for-the-next-lesson" class="nav-link" data-scroll-target="#preparation-for-the-next-lesson">Preparation for the next lesson</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
@@ -485,9 +489,20 @@ x &amp;= 2
 </section>
 </section>
 </section>
-<section id="simple-linear-regression-an-example" class="level2">
-<h2 class="anchored" data-anchor-id="simple-linear-regression-an-example">Simple Linear Regression: An Example</h2>
-<p>Return to the data shown in <a href="#fig-slr">Figure&nbsp;1</a> and <a href="#fig-a-resid">Figure&nbsp;2</a>.</p>
+<section id="simple-linear-regression" class="level2">
+<h2 class="anchored" data-anchor-id="simple-linear-regression">Simple Linear Regression</h2>
+<p>Return to the data shown in <a href="#fig-slr">Figure&nbsp;1</a> and <a href="#fig-a-resid">Figure&nbsp;2</a>. Fitting a line to this data means finding values for the intercept <span class="math inline">\(\hat{\beta}_{0}\)</span> and slope <span class="math inline">\(\hat{\beta}_{1}\)</span> so that for each data point <span class="math inline">\((x_{i},y_{i})\)</span> we have that</p>
+<p><span class="math display">\[
+\hat{\beta}_{0} + \hat{\beta}_{1} x_{i} = \hat{\beta}_{0} \cdot 1 + \hat{\beta}_{1} x_{i}
+\]</span></p>
+<p>is as close as possible to <span class="math inline">\(y_{i}\)</span>. We can rewrite the last expression as a matrix vector product:</p>
+<p><span class="math display">\[
+X {\bf \beta} =  \left[\begin{array}{cc} 1 &amp; x_{1} \\ 1 &amp; x_{2} \\ \vdots &amp; \vdots \\ 1 &amp; x_{n} \end{array}\right]\left[\begin{array}{c} \beta_{0} \\ \beta_{1} \end{array}\right]
+\]</span></p>
+<p>In order to account for the intercept coefficent, we have to add the column of ones. We call the matrix <span class="math inline">\(X\)</span> so formed the <strong>data matrix</strong> and the vector <span class="math inline">\({\bf \beta}\)</span> the parameter vector. Thus, we can write the linear regression problem as a linear least squares problem to minimize the residual <span class="math inline">\({\bf r} = {\bf y} - X{\bf \beta}\)</span>. Minimizing this is the 2-norm is the same as minimizing the squared error. Let’s see this worked out in a computational example.</p>
+<section id="an-example" class="level3">
+<h3 class="anchored" data-anchor-id="an-example">An Example</h3>
+<p>The following R code constructs the data matrix <span class="math inline">\(X\)</span>, computes the <span class="math inline">\(QR\)</span> factorization for <span class="math inline">\(X\)</span>, and then applies the backward substitution algorithm to solve <span class="math inline">\(R{\bf \beta} = Q^{T}{\bf y}\)</span>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>y_vect <span class="ot">&lt;-</span> xy_data <span class="sc">%&gt;%</span> <span class="fu">pull</span>(y)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>y_vect <span class="ot">&lt;-</span> <span class="fu">matrix</span>(y_vect,<span class="at">ncol =</span> <span class="dv">1</span>)</span>
@@ -516,6 +531,11 @@ x &amp;= 2
    1.774549    0.742658 </code></pre>
 </div>
 </div>
+<p>This is what R is doing to compute the slope and intercept for the line in <a href="#fig-a-resid">Figure&nbsp;2</a> and <a href="#fig-resids">Figure&nbsp;3</a>.</p>
+</section>
+</section>
+<section id="multiple-linear-regression" class="level2">
+<h2 class="anchored" data-anchor-id="multiple-linear-regression">Multiple Linear Regression</h2>
 </section>
 <section id="preparation-for-the-next-lesson" class="level2">
 <h2 class="anchored" data-anchor-id="preparation-for-the-next-lesson">Preparation for the next lesson</h2>
