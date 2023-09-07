@@ -158,19 +158,70 @@ However, there is an alternative approach that uses tools from linear algebra su
 
 The next section treats the linear algebra tools we will use for linear regression and the section after that applies linear algebra to do linear regression. 
 
-Linear regression can and often is used even in situations where we do not know *a priori* that $f$ in the relation $y = f(x) + \epsilon$ is linear. 
+**Note:** Linear regression can and often is used even in situations where we do not know *a priori* that $f$ in the relation $y = f(x) + \epsilon$ is linear. 
 
 **Question:** What do you think some of the pros and cons of using linear regression for supervised learning even if the function $f$ in the relationship $y = f(x) + \epsilon$ might not be linear?
 
-## Overdetermined Systems and $QR$ Factorization
+## Overdetermined Linear Systems and $QR$ Factorization
+
+Recall that a system of linear equations is an expression of the form
+
+$$
+\begin{align*}
+a_{11}x_{1} + a_{12}x_{2} + \cdots + a_{1p} x_{p}  &= b_{1} \\
+a_{21}x_{1} + a_{22}x_{2} + \cdots + a_{2p} x_{p} &= b_{2} \\
+ &\vdots \\
+a_{n1}x_{1} + a_{n2}x_{2} + \cdots + a_{np} x_{p} &= b_{n} 
+\end{align*}
+$$
+
+where there are $p$ unknowns $x_{j}$, $n \times p$ coefficients $a_{ij}$, and $n$ given values $b_{i}$. Such a system can be rewritten using matrix notation as
+
+$$
+\left[\begin{array}{cccc} a_{11} & a_{12} & \cdots & a_{1p} \\ a_{21} & a_{22} & \cdots & a_{2p} \\ \vdots & \ddots & \cdots & \vdots \\ a_{n1} & a_{n2} & \cdots & a_{np} \end{array}\right] \left[\begin{array}{c} x_{1} \\ x_{2} \\ \vdots \\ x_{p} \end{array} \right] = \left[\begin{array}{c} b_{1} \\ b_{2} \\ \vdots \\ b_{n} \end{array} \right]
+$$
+
+or even more concisely as 
+
+$$
+A {\bf x} = {\bf b}
+$$
+
+and we say that $A$ is an $n \times p$ matrix. 
+
+**Definition:** A linear system $A {\bf x} = {\bf b}$ is said to be **overdetermined** if there are more equations that unknowns. That is, if $n > p$. 
+
+We will soon see that the problem of linear regression typically corresponds to "solving" an overdetermined linear system. There's a problem though, overdetermined linear systems do not usually have a solution. For example, consider the following linear system:
+
+$$
+\begin{align*}
+x &= 1 \\
+x &= 2
+\end{align*}
+$$
+which is an overdetermined linear system since it has two equations in one unknown. This system clearly does not possess a solution. 
+
+Given an $n \times p$ matrix $A$ and an  $n$-vector ${\bf b}$, for any vector $p$-vector ${\bf x}$ we can always form the residual ${\bf r}$ defined by 
+
+$$
+{\bf r} = {\bf b} - A{\bf x}
+$$
+Note that ${\bf x}$ is a solution to the linear system $A{\bf x} = {\bf b}$ is and only if the residual ${\bf r}$ is the zero vector.
+
+Now, based on the last example we cannot generally make the the residual zero for an overdetermined system. However, we could instead search for a vector ${\bf x}$ that makes the residual as small as possible. In order to do so, we need a way to measure the size of a residual. Vector norms are a mathematical object that allow us to measure the size of residuals. 
 
 
+### Norms: A Technical Tool
+
+**Definition:** 
 
 ### $QR$ Factorization
 
 $$
 \left[\begin{array}{cc} 3 & 1 \\ 4 & 2 \end{array}\right] = \left[\begin{array}{cc} \frac{3}{5} & -\frac{4}{5} \\ \frac{4}{5} & \frac{3}{5} \end{array}\right]\left[\begin{array}{cc} 5 & \frac{11}{5} \\ 0 & \frac{2}{5} \end{array}\right]
 $$
+
+
 
 ```{r}
 A <- matrix(c(3,1,4,2),2,2,byrow = TRUE)
@@ -180,6 +231,7 @@ R <- qr.R(A_qr)
 ```
 
 
+
 ```{r}
 #| code-fold: false
 
@@ -187,11 +239,15 @@ Q %*% R
 ```
 
 
+
+
 ```{r}
 #| code-fold: false
 
 round(Q %*% t(Q),2)
 ```
+
+
 
 
 ```{r}

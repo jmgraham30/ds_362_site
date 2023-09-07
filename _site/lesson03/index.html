@@ -178,8 +178,9 @@ div.csl-indent {
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
   <li><a href="#readings-etc." id="toc-readings-etc." class="nav-link" data-scroll-target="#readings-etc.">Readings, etc.</a></li>
   <li><a href="#motivation-for-linear-regression" id="toc-motivation-for-linear-regression" class="nav-link" data-scroll-target="#motivation-for-linear-regression">Motivation for Linear Regression</a></li>
-  <li><a href="#overdetermined-systems-and-qr-factorization" id="toc-overdetermined-systems-and-qr-factorization" class="nav-link" data-scroll-target="#overdetermined-systems-and-qr-factorization">Overdetermined Systems and <span class="math inline">\(QR\)</span> Factorization</a>
+  <li><a href="#overdetermined-linear-systems-and-qr-factorization" id="toc-overdetermined-linear-systems-and-qr-factorization" class="nav-link" data-scroll-target="#overdetermined-linear-systems-and-qr-factorization">Overdetermined Linear Systems and <span class="math inline">\(QR\)</span> Factorization</a>
   <ul class="collapse">
+  <li><a href="#norms-a-technical-tool" id="toc-norms-a-technical-tool" class="nav-link" data-scroll-target="#norms-a-technical-tool">Norms: A Technical Tool</a></li>
   <li><a href="#qr-factorization" id="toc-qr-factorization" class="nav-link" data-scroll-target="#qr-factorization"><span class="math inline">\(QR\)</span> Factorization</a></li>
   </ul></li>
   <li><a href="#preparation-for-the-next-lesson" id="toc-preparation-for-the-next-lesson" class="nav-link" data-scroll-target="#preparation-for-the-next-lesson">Preparation for the next lesson</a></li>
@@ -347,11 +348,46 @@ L(\beta_{0},\beta_{1}) = \sum_{i=1}^{n}(y_{i} - \beta_{0} - \beta_{1}x_{i})^2
 <li><p>It generalizes well to the situation when we have more than one predictor variable.</p></li>
 </ol>
 <p>The next section treats the linear algebra tools we will use for linear regression and the section after that applies linear algebra to do linear regression.</p>
-<p>Linear regression can and often is used even in situations where we do not know <em>a priori</em> that <span class="math inline">\(f\)</span> in the relation <span class="math inline">\(y = f(x) + \epsilon\)</span> is linear.</p>
+<p><strong>Note:</strong> Linear regression can and often is used even in situations where we do not know <em>a priori</em> that <span class="math inline">\(f\)</span> in the relation <span class="math inline">\(y = f(x) + \epsilon\)</span> is linear.</p>
 <p><strong>Question:</strong> What do you think some of the pros and cons of using linear regression for supervised learning even if the function <span class="math inline">\(f\)</span> in the relationship <span class="math inline">\(y = f(x) + \epsilon\)</span> might not be linear?</p>
 </section>
-<section id="overdetermined-systems-and-qr-factorization" class="level2">
-<h2 class="anchored" data-anchor-id="overdetermined-systems-and-qr-factorization">Overdetermined Systems and <span class="math inline">\(QR\)</span> Factorization</h2>
+<section id="overdetermined-linear-systems-and-qr-factorization" class="level2">
+<h2 class="anchored" data-anchor-id="overdetermined-linear-systems-and-qr-factorization">Overdetermined Linear Systems and <span class="math inline">\(QR\)</span> Factorization</h2>
+<p>Recall that a system of linear equations is an expression of the form</p>
+<p><span class="math display">\[
+\begin{align*}
+a_{11}x_{1} + a_{12}x_{2} + \cdots + a_{1p} x_{p}  &amp;= b_{1} \\
+a_{21}x_{1} + a_{22}x_{2} + \cdots + a_{2p} x_{p} &amp;= b_{2} \\
+&amp;\vdots \\
+a_{n1}x_{1} + a_{n2}x_{2} + \cdots + a_{np} x_{p} &amp;= b_{n}
+\end{align*}
+\]</span></p>
+<p>where there are <span class="math inline">\(p\)</span> unknowns <span class="math inline">\(x_{j}\)</span>, <span class="math inline">\(n \times p\)</span> coefficients <span class="math inline">\(a_{ij}\)</span>, and <span class="math inline">\(n\)</span> given values <span class="math inline">\(b_{i}\)</span>. Such a system can be rewritten using matrix notation as</p>
+<p><span class="math display">\[
+\left[\begin{array}{cccc} a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1p} \\ a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2p} \\ \vdots &amp; \ddots &amp; \cdots &amp; \vdots \\ a_{n1} &amp; a_{n2} &amp; \cdots &amp; a_{np} \end{array}\right] \left[\begin{array}{c} x_{1} \\ x_{2} \\ \vdots \\ x_{p} \end{array} \right] = \left[\begin{array}{c} b_{1} \\ b_{2} \\ \vdots \\ b_{n} \end{array} \right]
+\]</span></p>
+<p>or even more concisely as</p>
+<p><span class="math display">\[
+A {\bf x} = {\bf b}
+\]</span></p>
+<p>and we say that <span class="math inline">\(A\)</span> is an <span class="math inline">\(n \times p\)</span> matrix.</p>
+<p><strong>Definition:</strong> A linear system <span class="math inline">\(A {\bf x} = {\bf b}\)</span> is said to be <strong>overdetermined</strong> if there are more equations that unknowns. That is, if <span class="math inline">\(n &gt; p\)</span>.</p>
+<p>We will soon see that the problem of linear regression typically corresponds to “solving” an overdetermined linear system. There’s a problem though, overdetermined linear systems do not usually have a solution. For example, consider the following linear system:</p>
+<p><span class="math display">\[
+\begin{align*}
+x &amp;= 1 \\
+x &amp;= 2
+\end{align*}
+\]</span> which is an overdetermined linear system since it has two equations in one unknown. This system clearly does not possess a solution.</p>
+<p>Given an <span class="math inline">\(n \times p\)</span> matrix <span class="math inline">\(A\)</span> and an <span class="math inline">\(n\)</span>-vector <span class="math inline">\({\bf b}\)</span>, for any vector <span class="math inline">\(p\)</span>-vector <span class="math inline">\({\bf x}\)</span> we can always form the residual <span class="math inline">\({\bf r}\)</span> defined by</p>
+<p><span class="math display">\[
+{\bf r} = {\bf b} - A{\bf x}
+\]</span> Note that <span class="math inline">\({\bf x}\)</span> is a solution to the linear system <span class="math inline">\(A{\bf x} = {\bf b}\)</span> is and only if the residual <span class="math inline">\({\bf r}\)</span> is the zero vector.</p>
+<p>Now, based on the last example we cannot generally make the the residual zero for an overdetermined system. However, we could instead search for a vector <span class="math inline">\({\bf x}\)</span> that makes the residual as small as possible. In order to do so, we need a way to measure the size of a residual. Vector norms are a mathematical object that allow us to measure the size of residuals.</p>
+<section id="norms-a-technical-tool" class="level3">
+<h3 class="anchored" data-anchor-id="norms-a-technical-tool">Norms: A Technical Tool</h3>
+<p><strong>Definition:</strong></p>
+</section>
 <section id="qr-factorization" class="level3">
 <h3 class="anchored" data-anchor-id="qr-factorization"><span class="math inline">\(QR\)</span> Factorization</h3>
 <p><span class="math display">\[
@@ -443,7 +479,7 @@ Expand for Session Info
  collate  en_US.UTF-8
  ctype    en_US.UTF-8
  tz       America/New_York
- date     2023-09-06
+ date     2023-09-07
  pandoc   3.1.1 @ /Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/ (via rmarkdown)
  quarto   1.3.450 @ /usr/local/bin/quarto
 
