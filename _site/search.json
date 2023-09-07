@@ -410,6 +410,6 @@
     "href": "lesson03/index.html#multiple-linear-regression",
     "title": "Lesson 3",
     "section": "Multiple Linear Regression",
-    "text": "Multiple Linear Regression"
+    "text": "Multiple Linear Regression\nSuppose that we have data of the form \\((y_{i},{\\bf x}_{i}) = (y_{i},x_{i1},x_{i2},\\ldots , x_{ip})\\) so that there are \\(p\\) predictor variables. Then, taking into account the column of ones we can form a \\(n \\times (p + 1)\\) sized data matrix and again use \\(QR\\) factorization to solve the corresponding linear least squares problem for the residual \\({\\bf r} = {\\bf y} - X{\\bf \\beta}\\). Now, our coefficient vector \\({\\bf \\beta}\\) will have length \\(p+1\\)."
   }
 ]
