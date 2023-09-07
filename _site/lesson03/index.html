@@ -181,6 +181,7 @@ div.csl-indent {
   <li><a href="#overdetermined-linear-systems-and-qr-factorization" id="toc-overdetermined-linear-systems-and-qr-factorization" class="nav-link" data-scroll-target="#overdetermined-linear-systems-and-qr-factorization">Overdetermined Linear Systems and <span class="math inline">\(QR\)</span> Factorization</a>
   <ul class="collapse">
   <li><a href="#norms-a-technical-tool" id="toc-norms-a-technical-tool" class="nav-link" data-scroll-target="#norms-a-technical-tool">Norms: A Technical Tool</a></li>
+  <li><a href="#linear-regression-and-linear-least-squares" id="toc-linear-regression-and-linear-least-squares" class="nav-link" data-scroll-target="#linear-regression-and-linear-least-squares">Linear Regression and Linear Least Squares</a></li>
   <li><a href="#qr-factorization" id="toc-qr-factorization" class="nav-link" data-scroll-target="#qr-factorization"><span class="math inline">\(QR\)</span> Factorization</a></li>
   </ul></li>
   <li><a href="#preparation-for-the-next-lesson" id="toc-preparation-for-the-next-lesson" class="nav-link" data-scroll-target="#preparation-for-the-next-lesson">Preparation for the next lesson</a></li>
@@ -386,7 +387,45 @@ x &amp;= 2
 <p>Now, based on the last example we cannot generally make the the residual zero for an overdetermined system. However, we could instead search for a vector <span class="math inline">\({\bf x}\)</span> that makes the residual as small as possible. In order to do so, we need a way to measure the size of a residual. Vector norms are a mathematical object that allow us to measure the size of residuals.</p>
 <section id="norms-a-technical-tool" class="level3">
 <h3 class="anchored" data-anchor-id="norms-a-technical-tool">Norms: A Technical Tool</h3>
-<p><strong>Definition:</strong></p>
+<p><strong>Definition:</strong> A vector norm, denoted by <span class="math inline">\(\|\cdot \|\)</span> is an object that takes as input a vector and returns a real number while satisfying the following properties:</p>
+<ol type="1">
+<li><p>Positivity: For any vector <span class="math inline">\(\|{\bf v}\| \geq 0\)</span> and <span class="math inline">\(\|{\bf v}\| = 0\)</span> if and only if <span class="math inline">\({\bf v}\)</span> is the zero vector.</p></li>
+<li><p>Homogeneity: If <span class="math inline">\(\alpha\)</span> is a number and <span class="math inline">\({\bf v}\)</span> is a vector, then <span class="math inline">\(\|\alpha {\bf v}\| = |\alpha| \|{\bf v}\|\)</span>.</p></li>
+<li><p>Triangle inequality: For any vectors <span class="math inline">\({\bf u}\)</span> and <span class="math inline">\({\bf v}\)</span>, we have</p></li>
+</ol>
+<p><span class="math display">\[
+\|{\bf u} + {\bf v} \| \leq \|{\bf u}\| + \|{\bf v}\|
+\]</span> <strong>Example:</strong> The most relevant example for us, at least in the setting of linear regression is the 2-norm <span class="math inline">\(\|\cdot\|_{2}\)</span> which for a vector <span class="math inline">\({\bf v} = [\begin{array}{cccc} v_{1} &amp; v_{2} &amp; \cdots &amp; v_{n} \end{array}]^{T}\)</span> is defined by</p>
+<p><span class="math display">\[
+\|{\bf v}\|_{2} = \sqrt{v_{1}^2 + v_{2}^{2} + \cdots + v_{n}^{2}}
+\]</span></p>
+<p><strong>Defintion:</strong> Given a vector norm <span class="math inline">\(\|\cdot\|\)</span>, the <strong>distance between two vectors</strong> <span class="math inline">\({\bf u}\)</span> and <span class="math inline">\({\bf v}\)</span> is defined to be <span class="math inline">\(\|{\bf u} - {\bf v}\|\)</span>.</p>
+<p><strong>Note:</strong> It is possible to generalize vector norms to norms on sets of functions. This is also useful in machine learning since this allows us to define a notion of distance between functions.</p>
+</section>
+<section id="linear-regression-and-linear-least-squares" class="level3">
+<h3 class="anchored" data-anchor-id="linear-regression-and-linear-least-squares">Linear Regression and Linear Least Squares</h3>
+<p>The 2-norm allows us to define the <strong>linear least squares problem:</strong></p>
+<blockquote class="blockquote">
+<p>Given an <span class="math inline">\(n \times p\)</span> matrix <span class="math inline">\(A\)</span> and a <span class="math inline">\(n\)</span>-vector <span class="math inline">\({\bf b}\)</span>, find a vector <span class="math inline">\({\bf x}\)</span> that satifies</p>
+</blockquote>
+<p><span class="math display">\[
+\|{\bf b} - A{\bf x}\|_{2} \leq \|{\bf b} - A{\bf \xi}\|_{2} , \ \ \text{for all vectors } {\bf \xi}
+\]</span> That is, the linear least squares problem is to find a vector that minimizes the corresponding residual with respect to the 2-norm.</p>
+<p><strong>Example:</strong> Consider again the linear system</p>
+<p><span class="math display">\[
+\begin{align*}
+x &amp;= 1 \\
+x &amp;= 2
+\end{align*}
+\]</span></p>
+<p>Then the linear least squares problem in this case is to find the value <span class="math inline">\(x\)</span> such that</p>
+<p><span class="math display">\[
+\sqrt{(x-1)^2 + (x-2)^2}
+\]</span></p>
+<p>is as small as possible. Note that this is equivalent to minimizing</p>
+<p><span class="math display">\[
+(x-1)^2 + (x-2)^2 = 2x^2 - 6x + 5
+\]</span></p>
 </section>
 <section id="qr-factorization" class="level3">
 <h3 class="anchored" data-anchor-id="qr-factorization"><span class="math inline">\(QR\)</span> Factorization</h3>

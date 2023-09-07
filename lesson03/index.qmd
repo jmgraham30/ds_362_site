@@ -213,7 +213,60 @@ Now, based on the last example we cannot generally make the the residual zero fo
 
 ### Norms: A Technical Tool
 
-**Definition:** 
+**Definition:** A vector norm, denoted by $\|\cdot \|$ is an object that takes as input a vector and returns a real number while satisfying the following properties:
+
+1. Positivity: For any vector $\|{\bf v}\| \geq 0$ and $\|{\bf v}\| = 0$ if and only if ${\bf v}$ is the zero vector. 
+
+2. Homogeneity: If $\alpha$ is a number and ${\bf v}$ is a vector, then $\|\alpha {\bf v}\| = |\alpha| \|{\bf v}\|$. 
+
+3. Triangle inequality: For any vectors ${\bf u}$ and ${\bf v}$, we have
+
+$$
+\|{\bf u} + {\bf v} \| \leq \|{\bf u}\| + \|{\bf v}\|
+$$
+**Example:** The most relevant example for us, at least in the setting of linear regression is the 2-norm $\|\cdot\|_{2}$ which for a vector ${\bf v} = [\begin{array}{cccc} v_{1} & v_{2} & \cdots & v_{n} \end{array}]^{T}$ is defined by
+
+$$
+\|{\bf v}\|_{2} = \sqrt{v_{1}^2 + v_{2}^{2} + \cdots + v_{n}^{2}}
+$$
+
+**Defintion:** Given a vector norm $\|\cdot\|$, the **distance between two vectors** ${\bf u}$ and ${\bf v}$ is defined to be $\|{\bf u} - {\bf v}\|$.
+
+**Note:** It is possible to generalize vector norms to norms on sets of functions. This is also useful in machine learning since this allows us to define a notion of distance between functions.
+
+
+### Linear Regression and Linear Least Squares
+
+The 2-norm allows us to define the **linear least squares problem:**
+
+> Given an $n \times p$ matrix $A$ and a $n$-vector ${\bf b}$, find a vector ${\bf x}$ that satifies
+
+$$
+\|{\bf b} - A{\bf x}\|_{2} \leq \|{\bf b} - A{\bf \xi}\|_{2} , \ \ \text{for all vectors } {\bf \xi}
+$$
+That is, the linear least squares problem is to find a vector that minimizes the corresponding residual with respect to the 2-norm. 
+
+**Example:** Consider again the linear  system
+
+$$
+\begin{align*}
+x &= 1 \\
+x &= 2
+\end{align*}
+$$
+
+Then the linear least squares problem in this case is to find the value $x$ such that
+
+$$
+\sqrt{(x-1)^2 + (x-2)^2}
+$$
+
+is as small as possible. Note that this is equivalent to minimizing
+
+$$
+(x-1)^2 + (x-2)^2 = 2x^2 - 6x + 5
+$$
+
 
 ### $QR$ Factorization
 
