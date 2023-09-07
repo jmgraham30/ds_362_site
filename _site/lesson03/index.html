@@ -426,12 +426,28 @@ x &amp;= 2
 <p><span class="math display">\[
 (x-1)^2 + (x-2)^2 = 2x^2 - 6x + 5
 \]</span></p>
+<p>In general, minimizing the residual in the 2-norm corresponds to minimizing a multi-variable quadratic function. However, we can use linear algebra instead of calculus to solve the linear least squares problem. The main tool we need is what is known as the <span class="math inline">\(QR\)</span> factorizatoin or decomposition of a matrix.</p>
 </section>
 <section id="qr-factorization" class="level3">
 <h3 class="anchored" data-anchor-id="qr-factorization"><span class="math inline">\(QR\)</span> Factorization</h3>
+<p>Consider the following example that can easily be checked by had.</p>
 <p><span class="math display">\[
 \left[\begin{array}{cc} 3 &amp; 1 \\ 4 &amp; 2 \end{array}\right] = \left[\begin{array}{cc} \frac{3}{5} &amp; -\frac{4}{5} \\ \frac{4}{5} &amp; \frac{3}{5} \end{array}\right]\left[\begin{array}{cc} 5 &amp; \frac{11}{5} \\ 0 &amp; \frac{2}{5} \end{array}\right]
 \]</span></p>
+<p>This has the form <span class="math inline">\(A = QR\)</span> and what is really interesting here is that</p>
+<ol type="1">
+<li><p>The matrix <span class="math inline">\(Q = \left[\begin{array}{cc} \frac{3}{5} &amp; -\frac{4}{5} \\ \frac{4}{5} &amp; \frac{3}{5} \end{array}\right]\)</span> satisfies that <span class="math inline">\(QQ^{t} = I\)</span> and <span class="math inline">\(Q^{T}Q = I\)</span>. We refer to any matrix that satisfies such properties as an <strong>orthogonal</strong> matrix.</p></li>
+<li><p>The matrix <span class="math inline">\(R = \left[\begin{array}{cc} 5 &amp; \frac{11}{5} \\ 0 &amp; \frac{2}{5} \end{array}\right]\)</span> is <strong>upper triangular</strong> since all the entries below the main diagonal are zero.</p></li>
+</ol>
+<p>Every matrix has a <span class="math inline">\(QR\)</span> factorization and it is unique if <span class="math inline">\(n \geq p\)</span> and <span class="math inline">\(A\)</span> is of full rank. Further, the <span class="math inline">\(QR\)</span> factorization can be used to solve the linear least squares problem as follows:</p>
+<ol type="1">
+<li><p>Compute <span class="math inline">\(A = QR\)</span>.</p></li>
+<li><p>Form the vector <span class="math inline">\(Q^{T}{\bf}\)</span>.</p></li>
+<li><p>Solve the linear system <span class="math inline">\(R{\bf x} = Q^{T}{\bf}\)</span>.</p></li>
+</ol>
+<p>The system in point 3 is relatively easy to solve. Since <span class="math inline">\(R\)</span> is upper triangular, the system <span class="math inline">\(R{\bf x} = Q^{T}{\bf}\)</span> can be solved by a simple algorithm known as backwar substitution.</p>
+<section id="computing-the-qr-factorization-with-r" class="level4">
+<h4 class="anchored" data-anchor-id="computing-the-qr-factorization-with-r">Computing the <span class="math inline">\(QR\)</span> Factorization with R</h4>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -465,6 +481,7 @@ x &amp;= 2
 [2,]    0    1</code></pre>
 </div>
 </div>
+</section>
 </section>
 </section>
 <section id="preparation-for-the-next-lesson" class="level2">

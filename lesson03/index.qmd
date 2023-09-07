@@ -267,13 +267,33 @@ $$
 (x-1)^2 + (x-2)^2 = 2x^2 - 6x + 5
 $$
 
+In general, minimizing the residual in the 2-norm corresponds to minimizing a multi-variable quadratic function. However, we can use linear algebra instead of calculus to solve the linear least squares problem. The main tool we need is what is known as the $QR$ factorizatoin or decomposition of a matrix.   
 
 ### $QR$ Factorization
+
+Consider the following example that can easily be checked by had.
 
 $$
 \left[\begin{array}{cc} 3 & 1 \\ 4 & 2 \end{array}\right] = \left[\begin{array}{cc} \frac{3}{5} & -\frac{4}{5} \\ \frac{4}{5} & \frac{3}{5} \end{array}\right]\left[\begin{array}{cc} 5 & \frac{11}{5} \\ 0 & \frac{2}{5} \end{array}\right]
 $$
 
+This has the form $A = QR$ and what is really interesting here is that
+
+1. The matrix $Q = \left[\begin{array}{cc} \frac{3}{5} & -\frac{4}{5} \\ \frac{4}{5} & \frac{3}{5} \end{array}\right]$ satisfies that $QQ^{t} = I$ and $Q^{T}Q = I$. We refer to any matrix that satisfies such properties as an **orthogonal** matrix. 
+
+2. The matrix $R = \left[\begin{array}{cc} 5 & \frac{11}{5} \\ 0 & \frac{2}{5} \end{array}\right]$ is **upper triangular** since all the entries below the main diagonal are zero. 
+
+Every matrix has a $QR$ factorization and it is unique if $n \geq p$ and $A$ is of full rank. Further, the $QR$ factorization can be used to solve the linear least squares problem as follows:
+
+1. Compute $A = QR$.
+
+2. Form the vector $Q^{T}{\bf}$.
+
+3. Solve the linear system $R{\bf x} = Q^{T}{\bf}$.
+
+The system in point 3 is relatively easy to solve. Since $R$ is upper triangular, the system $R{\bf x} = Q^{T}{\bf}$ can be solved by a simple algorithm known as backward substitution. 
+
+#### Computing the $QR$ Factorization with R
 
 
 ```{r}
@@ -308,6 +328,9 @@ round(Q %*% t(Q),2)
 
 round(t(Q) %*% Q,2)
 ```
+
+
+
 
 ## Preparation for the next lesson
 
