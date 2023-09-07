@@ -285,25 +285,30 @@ This has the form $A = QR$ and what is really interesting here is that
 
 Every matrix has a $QR$ factorization and it is unique if $n \geq p$ and $A$ is of full rank. Further, the $QR$ factorization can be used to solve the linear least squares problem as follows:
 
-1. Compute $A = QR$.
+1. Compute $A = QR$, the $QR$ factorization [^1]. There are efficient algorithms for doing this.
 
 2. Form the vector $Q^{T}{\bf}$.
 
-3. Solve the linear system $R{\bf x} = Q^{T}{\bf}$.
+3. Solve the linear system $R{\bf x} = Q^{T}{\bf b}$.
 
-The system in point 3 is relatively easy to solve. Since $R$ is upper triangular, the system $R{\bf x} = Q^{T}{\bf}$ can be solved by a simple algorithm known as backward substitution. 
+The system in point 3 is relatively easy to solve. Since $R$ is upper triangular, the system $R{\bf x} = Q^{T}{\bf b}$ can be solved by a simple algorithm known as backward substitution which is implemented in R by the function `backsolve`. 
+
+[^1]: Technically we are assuming that $A = QR$ is the *reduced* $QR$ factorization meaning that $R$ has size $p \times p$. 
 
 #### Computing the $QR$ Factorization with R
 
+The following R code shows how the create a matrix, compute its $QR$ factorization with the function `qr`, and then extract the matrices $Q$ and $R$:
 
 ```{r}
+#| code-fold: false
+
 A <- matrix(c(3,1,4,2),2,2,byrow = TRUE)
 A_qr <- qr(A)
 Q <- qr.Q(A_qr)
 R <- qr.R(A_qr)
 ```
 
-
+Let's check that $QR = A$:
 
 ```{r}
 #| code-fold: false
@@ -312,7 +317,7 @@ Q %*% R
 ```
 
 
-
+Let's check that $Q$ is an orthogonal matrix:
 
 ```{r}
 #| code-fold: false
@@ -330,7 +335,36 @@ round(t(Q) %*% Q,2)
 ```
 
 
+## Simple Linear Regression: An Example
 
+Return to the data shown in @fig-slr and @fig-a-resid. 
+
+```{r}
+#| code-fold: false
+
+y_vect <- xy_data %>% pull(y)
+y_vect <- matrix(y_vect,ncol = 1)
+X_mat <- xy_data %>% 
+  mutate(int_ones = rep(1,nrow(xy_data))) %>% 
+  select(int_ones,x) %>% 
+  as.matrix()
+
+X_qr <- qr(X_mat)
+R_mat <- qr.R(X_qr) 
+Q_mat <- qr.Q(X_qr)
+(beta_vals <- backsolve(R_mat,t(Q_mat) %*% y_vect))
+```
+
+
+Let's compare this with what R does when we use the function `lm` to fit a linear model.
+
+```{r}
+#| code-fold: false
+
+lm_fit <- lm(y ~ x,data=xy_data)
+
+coefficients(lm_fit)
+```
 
 ## Preparation for the next lesson
 

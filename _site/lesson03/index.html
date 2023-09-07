@@ -184,6 +184,7 @@ div.csl-indent {
   <li><a href="#linear-regression-and-linear-least-squares" id="toc-linear-regression-and-linear-least-squares" class="nav-link" data-scroll-target="#linear-regression-and-linear-least-squares">Linear Regression and Linear Least Squares</a></li>
   <li><a href="#qr-factorization" id="toc-qr-factorization" class="nav-link" data-scroll-target="#qr-factorization"><span class="math inline">\(QR\)</span> Factorization</a></li>
   </ul></li>
+  <li><a href="#simple-linear-regression-an-example" id="toc-simple-linear-regression-an-example" class="nav-link" data-scroll-target="#simple-linear-regression-an-example">Simple Linear Regression: An Example</a></li>
   <li><a href="#preparation-for-the-next-lesson" id="toc-preparation-for-the-next-lesson" class="nav-link" data-scroll-target="#preparation-for-the-next-lesson">Preparation for the next lesson</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
@@ -441,22 +442,21 @@ x &amp;= 2
 </ol>
 <p>Every matrix has a <span class="math inline">\(QR\)</span> factorization and it is unique if <span class="math inline">\(n \geq p\)</span> and <span class="math inline">\(A\)</span> is of full rank. Further, the <span class="math inline">\(QR\)</span> factorization can be used to solve the linear least squares problem as follows:</p>
 <ol type="1">
-<li><p>Compute <span class="math inline">\(A = QR\)</span>.</p></li>
+<li><p>Compute <span class="math inline">\(A = QR\)</span>, the <span class="math inline">\(QR\)</span> factorization <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. There are efficient algorithms for doing this.</p></li>
 <li><p>Form the vector <span class="math inline">\(Q^{T}{\bf}\)</span>.</p></li>
-<li><p>Solve the linear system <span class="math inline">\(R{\bf x} = Q^{T}{\bf}\)</span>.</p></li>
+<li><p>Solve the linear system <span class="math inline">\(R{\bf x} = Q^{T}{\bf b}\)</span>.</p></li>
 </ol>
-<p>The system in point 3 is relatively easy to solve. Since <span class="math inline">\(R\)</span> is upper triangular, the system <span class="math inline">\(R{\bf x} = Q^{T}{\bf}\)</span> can be solved by a simple algorithm known as backwar substitution.</p>
+<p>The system in point 3 is relatively easy to solve. Since <span class="math inline">\(R\)</span> is upper triangular, the system <span class="math inline">\(R{\bf x} = Q^{T}{\bf b}\)</span> can be solved by a simple algorithm known as backward substitution which is implemented in R by the function <code>backsolve</code>.</p>
 <section id="computing-the-qr-factorization-with-r" class="level4">
 <h4 class="anchored" data-anchor-id="computing-the-qr-factorization-with-r">Computing the <span class="math inline">\(QR\)</span> Factorization with R</h4>
+<p>The following R code shows how the create a matrix, compute its <span class="math inline">\(QR\)</span> factorization with the function <code>qr</code>, and then extract the matrices <span class="math inline">\(Q\)</span> and <span class="math inline">\(R\)</span>:</p>
 <div class="cell">
-<details>
-<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">4</span>,<span class="dv">2</span>),<span class="dv">2</span>,<span class="dv">2</span>,<span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>A_qr <span class="ot">&lt;-</span> <span class="fu">qr</span>(A)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>Q <span class="ot">&lt;-</span> <span class="fu">qr.Q</span>(A_qr)</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>R <span class="ot">&lt;-</span> <span class="fu">qr.R</span>(A_qr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
+<p>Let’s check that <span class="math inline">\(QR = A\)</span>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Q <span class="sc">%*%</span> R</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -465,6 +465,7 @@ x &amp;= 2
 [2,]    4    2</code></pre>
 </div>
 </div>
+<p>Let’s check that <span class="math inline">\(Q\)</span> is an orthogonal matrix:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(Q <span class="sc">%*%</span> <span class="fu">t</span>(Q),<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -483,6 +484,38 @@ x &amp;= 2
 </div>
 </section>
 </section>
+</section>
+<section id="simple-linear-regression-an-example" class="level2">
+<h2 class="anchored" data-anchor-id="simple-linear-regression-an-example">Simple Linear Regression: An Example</h2>
+<p>Return to the data shown in <a href="#fig-slr">Figure&nbsp;1</a> and <a href="#fig-a-resid">Figure&nbsp;2</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>y_vect <span class="ot">&lt;-</span> xy_data <span class="sc">%&gt;%</span> <span class="fu">pull</span>(y)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>y_vect <span class="ot">&lt;-</span> <span class="fu">matrix</span>(y_vect,<span class="at">ncol =</span> <span class="dv">1</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>X_mat <span class="ot">&lt;-</span> xy_data <span class="sc">%&gt;%</span> </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">int_ones =</span> <span class="fu">rep</span>(<span class="dv">1</span>,<span class="fu">nrow</span>(xy_data))) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(int_ones,x) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.matrix</span>()</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>X_qr <span class="ot">&lt;-</span> <span class="fu">qr</span>(X_mat)</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>R_mat <span class="ot">&lt;-</span> <span class="fu">qr.R</span>(X_qr) </span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>Q_mat <span class="ot">&lt;-</span> <span class="fu">qr.Q</span>(X_qr)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>(beta_vals <span class="ot">&lt;-</span> <span class="fu">backsolve</span>(R_mat,<span class="fu">t</span>(Q_mat) <span class="sc">%*%</span> y_vect))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         [,1]
+[1,] 1.774549
+[2,] 0.742658</code></pre>
+</div>
+</div>
+<p>Let’s compare this with what R does when we use the function <code>lm</code> to fit a linear model.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>lm_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x,<span class="at">data=</span>xy_data)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coefficients</span>(lm_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept)           x 
+   1.774549    0.742658 </code></pre>
+</div>
+</div>
 </section>
 <section id="preparation-for-the-next-lesson" class="level2">
 <h2 class="anchored" data-anchor-id="preparation-for-the-next-lesson">Preparation for the next lesson</h2>
@@ -573,7 +606,13 @@ Expand for Session Info
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div>CC BY-NC-SA 4.0</div></div></section></div></main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Technically we are assuming that <span class="math inline">\(A = QR\)</span> is the <em>reduced</em> <span class="math inline">\(QR\)</span> factorization meaning that <span class="math inline">\(R\)</span> has size <span class="math inline">\(p \times p\)</span>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div>CC BY-NC-SA 4.0</div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
