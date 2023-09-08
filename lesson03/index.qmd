@@ -123,6 +123,7 @@ xy_data %>%
 #| code-fold: true
 #| message: false
 #| label: fig-resids
+#| fig-cap: The same data as shown in @fig-slr but with a best fit line as well as all residuals also shown.
 
 fitted_linear_model %>%
   ggplot(aes(x=x,y=y)) + 
