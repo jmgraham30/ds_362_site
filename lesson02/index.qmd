@@ -227,7 +227,7 @@ We will introduce unsupervised learning in more detail later in the course.
 
 ## Some Data Sources
 
-One thing students often struggle with is finding and picking a good data set for their projects. Appendix B of the online textbook contains a very helpful list of data sources [@alexandertelling]. [View appendix B](https://tellingstorieswithdata.com/21-datasets.html). Two other very interesting and useful sources of data are the [Tidy Tuesday](https://github.com/rfordatascience/tidytuesday) data repositories and [Kaggle](https://www.kaggle.com/). There are also many R packages that either include data or that can be used to download data. The ROpenSci project is a godo resource for finding R packages that can be used to obtain data, [view the project](https://ropensci.org/).
+One thing students often struggle with is finding and picking a good data set for their projects. Appendix B of the online textbook contains a very helpful list of data sources [@alexandertelling]. [View appendix B](https://tellingstorieswithdata.com/21-datasets.html). Two other very interesting and useful sources of data are the [Tidy Tuesday](https://github.com/rfordatascience/tidytuesday) data repositories and [Kaggle](https://www.kaggle.com/). There are also many R packages that either include data or that can be used to download data. The ROpenSci project is a good resource for finding R packages that can be used to obtain data, [view the project](https://ropensci.org/).
 
 ## Preparation for the next lesson
 
