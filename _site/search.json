@@ -417,6 +417,6 @@
     "href": "lesson03/index.html#linear-regression-in-machine-learning",
     "title": "Lesson 3",
     "section": "Linear Regression in Machine Learning",
-    "text": "Linear Regression in Machine Learning\nThrough our study of linear regression, we have derived and implemented our first supervised machine learning algorithm. We have also seen in our worked our examples how to use tidymodels to apply linear regression as a machine learning algorithm. However, there are several additional considerations we still need to address. For example,"
+    "text": "Linear Regression in Machine Learning\nThrough our study of linear regression, we have derived and implemented our first supervised machine learning algorithm. We have also seen in our worked examples how to use tidymodels to apply linear regression as a machine learning algorithm. In particular, we have seen how to:\n\nAccount for certain types of nonlinearity.\nAccount for categorical predictors.\nSeparate data into a training set and a test set.\nSet up and fit a model.\nUse a model to make predictions.\nAssess model accuracy by computing the root mean square error.\n\nHowever, there are several additional considerations we still need to address. For example,\n\nAssessing model uncertainty.\nChoosing which predictors to include or not in a model.\nDeciding between different classes of models.\n\nWe will take up these issues soon but before doing so, we will first look at a learning algorithm for a classification problem."
   }
 ]

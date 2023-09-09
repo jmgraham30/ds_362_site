@@ -430,9 +430,29 @@ We can use the `lm` function to easily fit multiple linear regression models.  L
 
 ## Linear Regression in Machine Learning
 
-Through our study of linear regression, we have derived and implemented our first supervised machine learning algorithm. We have also seen in our worked our examples how to use `tidymodels` to apply linear regression as a machine learning algorithm. However, there are several additional considerations we still need to address. For example,
+Through our study of linear regression, we have derived and implemented our first supervised machine learning algorithm. We have also seen in our worked examples how to use `tidymodels` to apply linear regression as a machine learning algorithm. In particular, we have seen how to: 
 
+* Account for certain types of nonlinearity. 
 
+* Account for categorical predictors. 
+
+* Separate data into a training set and a test set.
+
+* Set up and fit a model.
+
+* Use a model to make predictions.
+
+* Assess model accuracy by computing the root mean square error. 
+
+However, there are several additional considerations we still need to address. For example,
+
+* Assessing model uncertainty.
+
+* Choosing which predictors to include or not in a model. 
+
+* Deciding between different classes of models. 
+
+We will take up these issues soon but before doing so, we will first look at a learning algorithm for a classification problem. 
 
 ## Preparation for the next lesson
 
