@@ -85,6 +85,10 @@ We note that $y$ may be numerical in which case we have a **regression** problem
 
 2.  **Unsupervised** - In unsupervised learning, there is no response variable. Some common unsupervised problems include clustering and density estimation. Both of these essentially seek to discover a pattern in the data.
 
+@fig-mls illustrates the distinction between supervised and unsupervised learning models. 
+
+![Illustration credit: https://vas3k.com/blog/machine_learning/](https://i.vas3k.blog/7w1.jpg){#fig-mls}
+
 ### Fitting Supervised Models
 
 Fitting an unsupervised learning model typically amounts to estimating the function $f$ in the assumed relationship
