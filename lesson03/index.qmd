@@ -374,6 +374,16 @@ Q_mat <- qr.Q(X_qr)
 (beta_vals <- backsolve(R_mat,t(Q_mat) %*% y_vect))
 ```
 
+Now that we have estimated model coefficients, we can use that information to make predictions with the model. For example,
+
+```{r}
+#| code-fold: false
+
+beta_vals_vect <- matrix(beta_vals,ncol=1,byrow = TRUE)
+X_new <- matrix(c(1,67),1,2,byrow=TRUE)
+(y_pred <- X_new %*% beta_vals_vect)
+```
+
 ### Fitting Linear Models with R
 
 There are many functions in base R and other packages that can be used to fit not only linear models but a variety of many different types of models. In base R, we have a function `lm` that can be used to fit a linear regression model. Let's examine the documentation for `lm`.  We see that the first argument for `lm` is a formula. Many modeling functions in base R and other packages accept utilize a formula to represent the model specification. The easiest way to understand this is to see some examples. 
@@ -389,6 +399,14 @@ coefficients(lm_fit)
 ```
 
 Under the hood, the `lm` function in R is using the $QR$ factorization to compute the slope and intercept for the line in figures like @fig-a-resid and @fig-resids. 
+
+We can also make predictions on new data with `lm` models:
+
+```{r}
+#| code-fold: false
+
+predict(lm_fit,newdata=tibble(x=67))
+```
 
 ## Multiple Linear Regression
 
@@ -409,6 +427,12 @@ Multiple linear regression is a significant generalization of simple linear regr
 The point is, as long as our data can be represented by a data matrix $X$, then we can try to use $QR$ factorization to solve the linear least squares problem to minimize the residuals ${\bf r} = {\bf y} - X{\bf \beta}$. 
 
 We can use the `lm` function to easily fit multiple linear regression models.  Let's work through some examples together. 
+
+## Linear Regression in Machine Learning
+
+Through our study of linear regression, we have derived and implemented our first supervised machine learning algorithm. We have also seen in our worked our examples how to use `tidymodels` to apply linear regression as a machine learning algorithm. However, there are several additional considerations we still need to address. For example,
+
+
 
 ## Preparation for the next lesson
 

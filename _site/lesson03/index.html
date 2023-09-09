@@ -190,6 +190,7 @@ div.csl-indent {
   <li><a href="#fitting-linear-models-with-r" id="toc-fitting-linear-models-with-r" class="nav-link" data-scroll-target="#fitting-linear-models-with-r">Fitting Linear Models with R</a></li>
   </ul></li>
   <li><a href="#multiple-linear-regression" id="toc-multiple-linear-regression" class="nav-link" data-scroll-target="#multiple-linear-regression">Multiple Linear Regression</a></li>
+  <li><a href="#linear-regression-in-machine-learning" id="toc-linear-regression-in-machine-learning" class="nav-link" data-scroll-target="#linear-regression-in-machine-learning">Linear Regression in Machine Learning</a></li>
   <li><a href="#preparation-for-the-next-lesson" id="toc-preparation-for-the-next-lesson" class="nav-link" data-scroll-target="#preparation-for-the-next-lesson">Preparation for the next lesson</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
@@ -522,21 +523,39 @@ X {\bf \beta} =  \left[\begin{array}{cc} 1 &amp; x_{1} \\ 1 &amp; x_{2} \\ \vdot
 [2,] 0.742658</code></pre>
 </div>
 </div>
+<p>Now that we have estimated model coefficients, we can use that information to make predictions with the model. For example,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>beta_vals_vect <span class="ot">&lt;-</span> <span class="fu">matrix</span>(beta_vals,<span class="at">ncol=</span><span class="dv">1</span>,<span class="at">byrow =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>X_new <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">67</span>),<span class="dv">1</span>,<span class="dv">2</span>,<span class="at">byrow=</span><span class="cn">TRUE</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>(y_pred <span class="ot">&lt;-</span> X_new <span class="sc">%*%</span> beta_vals_vect)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         [,1]
+[1,] 51.53264</code></pre>
+</div>
+</div>
 </section>
 <section id="fitting-linear-models-with-r" class="level3">
 <h3 class="anchored" data-anchor-id="fitting-linear-models-with-r">Fitting Linear Models with R</h3>
 <p>There are many functions in base R and other packages that can be used to fit not only linear models but a variety of many different types of models. In base R, we have a function <code>lm</code> that can be used to fit a linear regression model. Let’s examine the documentation for <code>lm</code>. We see that the first argument for <code>lm</code> is a formula. Many modeling functions in base R and other packages accept utilize a formula to represent the model specification. The easiest way to understand this is to see some examples.</p>
 <p>Let’s compare what R does when we use the function <code>lm</code> to fit a linear model with our earlier approach of using <span class="math inline">\(QR\)</span> factorization.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>lm_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x,<span class="at">data=</span>xy_data)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coefficients</span>(lm_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>lm_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x,<span class="at">data=</span>xy_data)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">coefficients</span>(lm_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(Intercept)           x 
    1.774549    0.742658 </code></pre>
 </div>
 </div>
 <p>Under the hood, the <code>lm</code> function in R is using the <span class="math inline">\(QR\)</span> factorization to compute the slope and intercept for the line in figures like <a href="#fig-a-resid">Figure&nbsp;2</a> and <a href="#fig-resids">Figure&nbsp;3</a>.</p>
+<p>We can also make predictions on new data with <code>lm</code> models:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm_fit,<span class="at">newdata=</span><span class="fu">tibble</span>(<span class="at">x=</span><span class="dv">67</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       1 
+51.53264 </code></pre>
+</div>
+</div>
 </section>
 </section>
 <section id="multiple-linear-regression" class="level2">
@@ -553,6 +572,10 @@ y = \beta_{0} + \beta_{1}{\bf x}_{1} + \beta_{2}{\bf x}_{2} + \cdots + \beta_{p}
 </ol>
 <p>The point is, as long as our data can be represented by a data matrix <span class="math inline">\(X\)</span>, then we can try to use <span class="math inline">\(QR\)</span> factorization to solve the linear least squares problem to minimize the residuals <span class="math inline">\({\bf r} = {\bf y} - X{\bf \beta}\)</span>.</p>
 <p>We can use the <code>lm</code> function to easily fit multiple linear regression models. Let’s work through some examples together.</p>
+</section>
+<section id="linear-regression-in-machine-learning" class="level2">
+<h2 class="anchored" data-anchor-id="linear-regression-in-machine-learning">Linear Regression in Machine Learning</h2>
+<p>Through our study of linear regression, we have derived and implemented our first supervised machine learning algorithm. We have also seen in our worked our examples how to use <code>tidymodels</code> to apply linear regression as a machine learning algorithm. However, there are several additional considerations we still need to address. For example,</p>
 </section>
 <section id="preparation-for-the-next-lesson" class="level2">
 <h2 class="anchored" data-anchor-id="preparation-for-the-next-lesson">Preparation for the next lesson</h2>
