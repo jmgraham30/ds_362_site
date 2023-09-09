@@ -30,7 +30,7 @@ theme_set(theme_minimal(base_size = 13))
 
 After this lesson, students will be able to:
 
-* Define linear regression and appreciate from the perspective of machine learning.
+* Define linear regression and appreciate it from the perspective of machine learning.
 
 * Define the norm of a vector. 
 
@@ -117,7 +117,7 @@ xy_data %>%
                color="red",lwd=1)
 ```
 
-@fig-resids shows the same data as in @fig-slr but where we have added a best fit line as well as all the residual values.  One way to learn the values for $\hat{\beta}_0$ and $\hat{\beta}_{1}$ is the minimize the squared error for the residuals. 
+@fig-resids shows the same data as in @fig-slr but where we have added a best fit line as well as all the residual values.  One way to learn the values for $\hat{\beta}_0$ and $\hat{\beta}_{1}$ is to minimize the squared error for the residuals. 
 
 ```{r}
 #| code-fold: true
@@ -268,11 +268,11 @@ $$
 (x-1)^2 + (x-2)^2 = 2x^2 - 6x + 5
 $$
 
-In general, minimizing the residual in the 2-norm corresponds to minimizing a multi-variable quadratic function. However, we can use linear algebra instead of calculus to solve the linear least squares problem. The main tool we need is what is known as the $QR$ factorizatoin or decomposition of a matrix.   
+In general, minimizing the residual in the 2-norm corresponds to minimizing a multi-variable quadratic function. However, we can use linear algebra instead of calculus to solve the linear least squares problem. The main tool we need is what is known as the $QR$ factorization or decomposition of a matrix.   
 
 ### $QR$ Factorization
 
-Consider the following example that can easily be checked by had.
+Consider the following example that can easily be checked by hand.
 
 $$
 \left[\begin{array}{cc} 3 & 1 \\ 4 & 2 \end{array}\right] = \left[\begin{array}{cc} \frac{3}{5} & -\frac{4}{5} \\ \frac{4}{5} & \frac{3}{5} \end{array}\right]\left[\begin{array}{cc} 5 & \frac{11}{5} \\ 0 & \frac{2}{5} \end{array}\right]
@@ -280,7 +280,7 @@ $$
 
 This has the form $A = QR$ and what is really interesting here is that
 
-1. The matrix $Q = \left[\begin{array}{cc} \frac{3}{5} & -\frac{4}{5} \\ \frac{4}{5} & \frac{3}{5} \end{array}\right]$ satisfies that $QQ^{t} = I$ and $Q^{T}Q = I$. We refer to any matrix that satisfies such properties as an **orthogonal** matrix. 
+1. The matrix $Q = \left[\begin{array}{cc} \frac{3}{5} & -\frac{4}{5} \\ \frac{4}{5} & \frac{3}{5} \end{array}\right]$ satisfies that $QQ^{T} = I$ and $Q^{T}Q = I$. We refer to any matrix that satisfies such properties as an **orthogonal** matrix. 
 
 2. The matrix $R = \left[\begin{array}{cc} 5 & \frac{11}{5} \\ 0 & \frac{2}{5} \end{array}\right]$ is **upper triangular** since all the entries below the main diagonal are zero. 
 
@@ -288,7 +288,7 @@ Every matrix has a $QR$ factorization and it is unique if $n \geq p$ and $A$ is 
 
 1. Compute $A = QR$, the $QR$ factorization [^1]. There are efficient algorithms for doing this.
 
-2. Form the vector $Q^{T}{\bf}$.
+2. Form the vector $Q^{T}{\bf b}$.
 
 3. Solve the linear system $R{\bf x} = Q^{T}{\bf b}$.
 
@@ -374,8 +374,11 @@ Q_mat <- qr.Q(X_qr)
 (beta_vals <- backsolve(R_mat,t(Q_mat) %*% y_vect))
 ```
 
+### Fitting Linear Models with R
 
-Let's compare this with what R does when we use the function `lm` to fit a linear model.
+There are many functions in base R and other packages that can be used to fit not only linear models but a variety of many different types of models. In base R, we have a function `lm` that can be used to fit a linear regression model. Let's examine the documentation for `lm`.  We see that the first argument for `lm` is a formula. Many modeling functions in base R and other packages accept utilize a formula to represent the model specification. The easiest way to understand this is to see some examples. 
+
+Let's compare what R does when we use the function `lm` to fit a linear model with our earlier approach of using $QR$ factorization.
 
 ```{r}
 #| code-fold: false
@@ -385,11 +388,27 @@ lm_fit <- lm(y ~ x,data=xy_data)
 coefficients(lm_fit)
 ```
 
-This is what R is doing to compute the slope and intercept for the line in @fig-a-resid and @fig-resids.
+Under the hood, the `lm` function in R is using the $QR$ factorization to compute the slope and intercept for the line in figures like @fig-a-resid and @fig-resids. 
 
 ## Multiple Linear Regression
 
-Suppose that we have data of the form $(y_{i},{\bf x}_{i}) = (y_{i},x_{i1},x_{i2},\ldots , x_{ip})$ so that there are $p$ predictor variables. Then, taking into account the column of ones we can form a $n \times (p + 1)$ sized data matrix and again use $QR$ factorization to solve the corresponding linear least squares problem for the residual ${\bf r} = {\bf y} - X{\bf \beta}$. Now, our coefficient vector ${\bf \beta}$ will have length $p+1$.  
+Suppose that we have data of the form $(y_{i},{\bf x}_{i}) = (y_{i},x_{i1},x_{i2},\ldots , x_{ip})$ so that there are $p$ predictor variables. The multiple linear regression model takes the form
+
+$$
+y = \beta_{0} + \beta_{1}{\bf x}_{1} + \beta_{2}{\bf x}_{2} + \cdots + \beta_{p}{\bf x}_{p} + \epsilon
+$$
+
+Taking into account the column of ones we can form a $n \times (p + 1)$ sized data matrix and again use $QR$ factorization to solve the corresponding linear least squares problem for the residual ${\bf r} = {\bf y} - X{\bf \beta}$. Now, our coefficient vector ${\bf \beta}$ will have length $p+1$.  
+
+Multiple linear regression is a significant generalization of simple linear regression because it not only allows us to account for multiple predictor variables, but also allows us to account for certain types of nonlinearity and also predictor variables that are categorical. This is because:
+
+1. The "linear" part of linear regression refers to linearity with respect to the coefficients ${\bf \beta}$.
+
+2. We can use dummy variables to represent categorical predictor variables. 
+
+The point is, as long as our data can be represented by a data matrix $X$, then we can try to use $QR$ factorization to solve the linear least squares problem to minimize the residuals ${\bf r} = {\bf y} - X{\bf \beta}$. 
+
+We can use the `lm` function to easily fit multiple linear regression models.  Let's work through some examples together. 
 
 ## Preparation for the next lesson
 

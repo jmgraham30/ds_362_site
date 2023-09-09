@@ -187,6 +187,7 @@ div.csl-indent {
   <li><a href="#simple-linear-regression" id="toc-simple-linear-regression" class="nav-link" data-scroll-target="#simple-linear-regression">Simple Linear Regression</a>
   <ul class="collapse">
   <li><a href="#an-example" id="toc-an-example" class="nav-link" data-scroll-target="#an-example">An Example</a></li>
+  <li><a href="#fitting-linear-models-with-r" id="toc-fitting-linear-models-with-r" class="nav-link" data-scroll-target="#fitting-linear-models-with-r">Fitting Linear Models with R</a></li>
   </ul></li>
   <li><a href="#multiple-linear-regression" id="toc-multiple-linear-regression" class="nav-link" data-scroll-target="#multiple-linear-regression">Multiple Linear Regression</a></li>
   <li><a href="#preparation-for-the-next-lesson" id="toc-preparation-for-the-next-lesson" class="nav-link" data-scroll-target="#preparation-for-the-next-lesson">Preparation for the next lesson</a></li>
@@ -229,7 +230,7 @@ div.csl-indent {
 <h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
 <p>After this lesson, students will be able to:</p>
 <ul>
-<li><p>Define linear regression and appreciate from the perspective of machine learning.</p></li>
+<li><p>Define linear regression and appreciate it from the perspective of machine learning.</p></li>
 <li><p>Define the norm of a vector.</p></li>
 <li><p>Understand the role of systems of linear equations, matrices, and <span class="math inline">\(QR\)</span> factorization in linear regression.</p></li>
 <li><p>Use R to compute the <span class="math inline">\(QR\)</span> factorization of a matrix.</p></li>
@@ -316,7 +317,7 @@ y = \beta_{0} + \beta_{1} x + \epsilon
 </div>
 </div>
 </div>
-<p><a href="#fig-resids">Figure&nbsp;3</a> shows the same data as in <a href="#fig-slr">Figure&nbsp;1</a> but where we have added a best fit line as well as all the residual values. One way to learn the values for <span class="math inline">\(\hat{\beta}_0\)</span> and <span class="math inline">\(\hat{\beta}_{1}\)</span> is the minimize the squared error for the residuals.</p>
+<p><a href="#fig-resids">Figure&nbsp;3</a> shows the same data as in <a href="#fig-slr">Figure&nbsp;1</a> but where we have added a best fit line as well as all the residual values. One way to learn the values for <span class="math inline">\(\hat{\beta}_0\)</span> and <span class="math inline">\(\hat{\beta}_{1}\)</span> is to minimize the squared error for the residuals.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -431,23 +432,23 @@ x &amp;= 2
 <p><span class="math display">\[
 (x-1)^2 + (x-2)^2 = 2x^2 - 6x + 5
 \]</span></p>
-<p>In general, minimizing the residual in the 2-norm corresponds to minimizing a multi-variable quadratic function. However, we can use linear algebra instead of calculus to solve the linear least squares problem. The main tool we need is what is known as the <span class="math inline">\(QR\)</span> factorizatoin or decomposition of a matrix.</p>
+<p>In general, minimizing the residual in the 2-norm corresponds to minimizing a multi-variable quadratic function. However, we can use linear algebra instead of calculus to solve the linear least squares problem. The main tool we need is what is known as the <span class="math inline">\(QR\)</span> factorization or decomposition of a matrix.</p>
 </section>
 <section id="qr-factorization" class="level3">
 <h3 class="anchored" data-anchor-id="qr-factorization"><span class="math inline">\(QR\)</span> Factorization</h3>
-<p>Consider the following example that can easily be checked by had.</p>
+<p>Consider the following example that can easily be checked by hand.</p>
 <p><span class="math display">\[
 \left[\begin{array}{cc} 3 &amp; 1 \\ 4 &amp; 2 \end{array}\right] = \left[\begin{array}{cc} \frac{3}{5} &amp; -\frac{4}{5} \\ \frac{4}{5} &amp; \frac{3}{5} \end{array}\right]\left[\begin{array}{cc} 5 &amp; \frac{11}{5} \\ 0 &amp; \frac{2}{5} \end{array}\right]
 \]</span></p>
 <p>This has the form <span class="math inline">\(A = QR\)</span> and what is really interesting here is that</p>
 <ol type="1">
-<li><p>The matrix <span class="math inline">\(Q = \left[\begin{array}{cc} \frac{3}{5} &amp; -\frac{4}{5} \\ \frac{4}{5} &amp; \frac{3}{5} \end{array}\right]\)</span> satisfies that <span class="math inline">\(QQ^{t} = I\)</span> and <span class="math inline">\(Q^{T}Q = I\)</span>. We refer to any matrix that satisfies such properties as an <strong>orthogonal</strong> matrix.</p></li>
+<li><p>The matrix <span class="math inline">\(Q = \left[\begin{array}{cc} \frac{3}{5} &amp; -\frac{4}{5} \\ \frac{4}{5} &amp; \frac{3}{5} \end{array}\right]\)</span> satisfies that <span class="math inline">\(QQ^{T} = I\)</span> and <span class="math inline">\(Q^{T}Q = I\)</span>. We refer to any matrix that satisfies such properties as an <strong>orthogonal</strong> matrix.</p></li>
 <li><p>The matrix <span class="math inline">\(R = \left[\begin{array}{cc} 5 &amp; \frac{11}{5} \\ 0 &amp; \frac{2}{5} \end{array}\right]\)</span> is <strong>upper triangular</strong> since all the entries below the main diagonal are zero.</p></li>
 </ol>
 <p>Every matrix has a <span class="math inline">\(QR\)</span> factorization and it is unique if <span class="math inline">\(n \geq p\)</span> and <span class="math inline">\(A\)</span> is of full rank. Further, the <span class="math inline">\(QR\)</span> factorization can be used to solve the linear least squares problem as follows:</p>
 <ol type="1">
 <li><p>Compute <span class="math inline">\(A = QR\)</span>, the <span class="math inline">\(QR\)</span> factorization <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. There are efficient algorithms for doing this.</p></li>
-<li><p>Form the vector <span class="math inline">\(Q^{T}{\bf}\)</span>.</p></li>
+<li><p>Form the vector <span class="math inline">\(Q^{T}{\bf b}\)</span>.</p></li>
 <li><p>Solve the linear system <span class="math inline">\(R{\bf x} = Q^{T}{\bf b}\)</span>.</p></li>
 </ol>
 <p>The system in point 3 is relatively easy to solve. Since <span class="math inline">\(R\)</span> is upper triangular, the system <span class="math inline">\(R{\bf x} = Q^{T}{\bf b}\)</span> can be solved by a simple algorithm known as backward substitution which is implemented in R by the function <code>backsolve</code>.</p>
@@ -521,7 +522,11 @@ X {\bf \beta} =  \left[\begin{array}{cc} 1 &amp; x_{1} \\ 1 &amp; x_{2} \\ \vdot
 [2,] 0.742658</code></pre>
 </div>
 </div>
-<p>Let’s compare this with what R does when we use the function <code>lm</code> to fit a linear model.</p>
+</section>
+<section id="fitting-linear-models-with-r" class="level3">
+<h3 class="anchored" data-anchor-id="fitting-linear-models-with-r">Fitting Linear Models with R</h3>
+<p>There are many functions in base R and other packages that can be used to fit not only linear models but a variety of many different types of models. In base R, we have a function <code>lm</code> that can be used to fit a linear regression model. Let’s examine the documentation for <code>lm</code>. We see that the first argument for <code>lm</code> is a formula. Many modeling functions in base R and other packages accept utilize a formula to represent the model specification. The easiest way to understand this is to see some examples.</p>
+<p>Let’s compare what R does when we use the function <code>lm</code> to fit a linear model with our earlier approach of using <span class="math inline">\(QR\)</span> factorization.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>lm_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x,<span class="at">data=</span>xy_data)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -531,12 +536,23 @@ X {\bf \beta} =  \left[\begin{array}{cc} 1 &amp; x_{1} \\ 1 &amp; x_{2} \\ \vdot
    1.774549    0.742658 </code></pre>
 </div>
 </div>
-<p>This is what R is doing to compute the slope and intercept for the line in <a href="#fig-a-resid">Figure&nbsp;2</a> and <a href="#fig-resids">Figure&nbsp;3</a>.</p>
+<p>Under the hood, the <code>lm</code> function in R is using the <span class="math inline">\(QR\)</span> factorization to compute the slope and intercept for the line in figures like <a href="#fig-a-resid">Figure&nbsp;2</a> and <a href="#fig-resids">Figure&nbsp;3</a>.</p>
 </section>
 </section>
 <section id="multiple-linear-regression" class="level2">
 <h2 class="anchored" data-anchor-id="multiple-linear-regression">Multiple Linear Regression</h2>
-<p>Suppose that we have data of the form <span class="math inline">\((y_{i},{\bf x}_{i}) = (y_{i},x_{i1},x_{i2},\ldots , x_{ip})\)</span> so that there are <span class="math inline">\(p\)</span> predictor variables. Then, taking into account the column of ones we can form a <span class="math inline">\(n \times (p + 1)\)</span> sized data matrix and again use <span class="math inline">\(QR\)</span> factorization to solve the corresponding linear least squares problem for the residual <span class="math inline">\({\bf r} = {\bf y} - X{\bf \beta}\)</span>. Now, our coefficient vector <span class="math inline">\({\bf \beta}\)</span> will have length <span class="math inline">\(p+1\)</span>.</p>
+<p>Suppose that we have data of the form <span class="math inline">\((y_{i},{\bf x}_{i}) = (y_{i},x_{i1},x_{i2},\ldots , x_{ip})\)</span> so that there are <span class="math inline">\(p\)</span> predictor variables. The multiple linear regression model takes the form</p>
+<p><span class="math display">\[
+y = \beta_{0} + \beta_{1}{\bf x}_{1} + \beta_{2}{\bf x}_{2} + \cdots + \beta_{p}{\bf x}_{p} + \epsilon
+\]</span></p>
+<p>Taking into account the column of ones we can form a <span class="math inline">\(n \times (p + 1)\)</span> sized data matrix and again use <span class="math inline">\(QR\)</span> factorization to solve the corresponding linear least squares problem for the residual <span class="math inline">\({\bf r} = {\bf y} - X{\bf \beta}\)</span>. Now, our coefficient vector <span class="math inline">\({\bf \beta}\)</span> will have length <span class="math inline">\(p+1\)</span>.</p>
+<p>Multiple linear regression is a significant generalization of simple linear regression because it not only allows us to account for multiple predictor variables, but also allows us to account for certain types of nonlinearity and also predictor variables that are categorical. This is because:</p>
+<ol type="1">
+<li><p>The “linear” part of linear regression refers to linearity with respect to the coefficients <span class="math inline">\({\bf \beta}\)</span>.</p></li>
+<li><p>We can use dummy variables to represent categorical predictor variables.</p></li>
+</ol>
+<p>The point is, as long as our data can be represented by a data matrix <span class="math inline">\(X\)</span>, then we can try to use <span class="math inline">\(QR\)</span> factorization to solve the linear least squares problem to minimize the residuals <span class="math inline">\({\bf r} = {\bf y} - X{\bf \beta}\)</span>.</p>
+<p>We can use the <code>lm</code> function to easily fit multiple linear regression models. Let’s work through some examples together.</p>
 </section>
 <section id="preparation-for-the-next-lesson" class="level2">
 <h2 class="anchored" data-anchor-id="preparation-for-the-next-lesson">Preparation for the next lesson</h2>
@@ -589,7 +605,7 @@ Expand for Session Info
  collate  en_US.UTF-8
  ctype    en_US.UTF-8
  tz       America/New_York
- date     2023-09-08
+ date     2023-09-09
  pandoc   3.1.1 @ /Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/ (via rmarkdown)
  quarto   1.3.450 @ /usr/local/bin/quarto
 
