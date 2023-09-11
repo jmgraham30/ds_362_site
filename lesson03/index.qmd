@@ -43,7 +43,7 @@ After this lesson, students will be able to:
 
 ## Readings, etc.
 
-For this next lesson:
+For this lesson:
 
 -   Read chapter 3 from of *An Introduction to Statistical Learning* [@tibshirani2017introduction]. You may also want to read chapter 2 of *Statistical Learning with Math and R* [@suzuki2020statistical].
 

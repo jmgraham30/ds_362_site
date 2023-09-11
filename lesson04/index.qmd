@@ -1,0 +1,88 @@
+---
+title: "Lesson 4"
+subtitle: "Introduction to Classification"
+author: "JMG"
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+    toc: true
+    toc-location: left
+bibliography: lesson04.bib
+license: "CC BY-NC-SA 4.0"
+---
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+
+# load packages used in document
+library(tidyverse)
+library(tidytuesdayR)
+library(ISLR2)
+library(broom)
+
+theme_set(theme_minimal(base_size = 13))
+```
+
+## Learning Objectives
+
+After this lesson, students will be able to:
+
+## Readings, etc.
+
+For this lesson:
+
+-   Read chapter 4 from of *An Introduction to Statistical Learning* [@tibshirani2017introduction]. You may also want to read chapter 3 of *Statistical Learning with Math and R* [@suzuki2020statistical].
+
+-   Watch the corresponding video lecture on classification. [View on YouTube](https://youtu.be/BMJQ3LQ_QKU?si=XvFgGO2jJ5OyR-v4).
+
+```{r}
+#| echo: false
+
+vembedr::embed_youtube(id="BMJQ3LQ_QKU?si=XvFgGO2jJ5OyR-v4",height=450) %>%
+  vembedr::use_align("center")
+```
+
+
+
+## Preparation for the next lesson
+
+For the next lesson:
+
+
+
+## References
+
+::: {#refs}
+:::
+
+::: {.callout-tip collapse="true"}
+## Expand for Session Info
+
+```{r}
+#| echo: false
+
+
+library(sessioninfo)
+# save the session info as an object
+pkg_sesh <- session_info(pkgs = "attached")
+
+# get the quarto version
+quarto_version <- system("quarto --version", intern = TRUE)
+
+# inject the quarto info
+pkg_sesh$platform$quarto <- paste(
+  system("quarto --version", intern = TRUE), 
+  "@", 
+  quarto::quarto_path()
+  )
+
+# print it out
+pkg_sesh
+```
+:::
+
+[![](http://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-nc-sa.png?raw=1){fig-align="left" width="15%"}](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode)
+
