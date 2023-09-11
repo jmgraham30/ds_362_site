@@ -23,6 +23,8 @@ library(tidytuesdayR)
 library(ISLR2)
 library(broom)
 library(kableExtra)
+library(patchwork)
+library(pROC)
 
 theme_set(theme_minimal(base_size = 13))
 ```
@@ -140,10 +142,165 @@ glimpse(Default)
 Let's begin by focusing on just `balance` as a predictor. We can plot the `default` variable versus the `balance`:
 
 ```{r}
+#| label: fig-default
+#| fig-cap: Plot of defaults versus loan balance for the Default data from the ISLR2 package. 
+
+
 Default %>%
   ggplot(aes(x=balance,y=default_01)) + 
   geom_point(alpha=0.2) + 
   labs(x="Loan balance",y="Default, No=0, Yes=1") 
+```
+
+**Question:** What does the plot in @fig-default suggest? 
+
+The goal of logistic regression is to fit the in some sense best logistic function to the data. Let's compare a couple of different logistic functions as candidate models for the `Default` data. @fig-logistics shows two different logistic curves plotted over the `Default` data.
+
+```{r}
+#| label: fig-logistics
+#| fig-cap: Comparison of two different logistics curves plotted over the defaults versus loan balance for the Default data from the ISLR2 package. 
+
+f_1 <- function(x){ exp(-5 + 0.01 * x) / (1 + exp(-5 + 0.01 * x))}
+f_2 <- function(x){ exp(-11 + 0.008 * x) / (1 + exp(-11 + 0.008 * x))}
+
+p_1 <- Default %>%
+  ggplot(aes(x=balance,y=default_01)) + 
+  geom_point(alpha=0.2) + 
+  stat_function(fun = f_1,color="orange",linewidth=1.1) + 
+  labs(x="Loan balance",y="Default, No=0, Yes=1") 
+
+p_2 <- Default %>%
+  ggplot(aes(x=balance,y=default_01)) + 
+  geom_point(alpha=0.2) + 
+  stat_function(fun = f_2, color="darkgreen",linewidth=1.1) + 
+  labs(x="Loan balance",y="Default, No=0, Yes=1") 
+
+p_1 + p_2
+```
+
+**Question:** Which of the two logistic curves in @fig-logistics  do you think is a better fit for the `Default` data? Explain your answer. 
+
+The problem for us now is, how do we define and determine the "best-fit" logistic function for binary classification? Minimizing the squared error for the residuals is not going to work well in this situation (**why not?**). 
+
+### Likelihood Optimization
+
+The **likelihood function** is the probability of the observed data viewed as a function of the model parameters. Then, we define the best-fit logistic curve to be the one that *maximizes* the likelihood. 
+
+**Note:** We point out again that machine learning methods often involve solving some kind of optimization problem and we see that this is the case with logistic regression. 
+
+How should we maximize the likelihood function which is a multi-variable function? One approach is or course to find critical points by computing and setting the partial derivatives to zero and then use the Hessian criteria to confirm there is a maximum. There is a trick that makes this a little easier, that is, rather than maximize the likelihood function, it's typical to maximize the log-likelihood. Because the $\log$ function converts products into sums, this makes it easier to compute partial derivatives.
+
+Luckily for use, the maximum likelihood method is already implemented in R through the `glm` function, where glm stands for **generalized linear model**. For example,
+
+```{r}
+#| code-fold: false
+default_fit_1 <- glm(default_01 ~ balance, data=Default, family="binomial")
+coef(default_fit_1)
+```
+
+gives the maximum likelihood estimated values for $\beta_{0}$ and $\beta_{1}$. Let's plot the corresponding logistic function:
+
+```{r}
+#| label: fig-best-logistic
+#| fig-cap:  Maximum likelihood best fit logistic curve plotted over the defaults versus loan balance for the Default data from the ISLR2 package. 
+
+f_best <- function(x){ exp(-10.65 + 0.0055 * x) / (1 + exp(-10.65 + 0.0055 * x))}
+
+
+Default %>%
+  ggplot(aes(x=balance,y=default_01)) + 
+  geom_point(alpha=0.2) + 
+  stat_function(fun = f_best, color="purple",linewidth=1.1) + 
+  labs(x="Loan balance",y="Default, No=0, Yes=1") 
+
+```
+
+**Question:** How does the maximum likelihood estimated logistic curve compare with the two from @fig-logistics?
+
+We can use our logistic regression model to make predictions. For example, suppose our friend has a balance of $800, are the likelihood to default on their load? We can answer this as follows:
+
+```{r}
+#| code-fold: false
+
+(default_800_odds <- predict(default_fit_1,newdata=tibble(balance=800)))
+(default_800_prob <- predict(default_fit_1,newdata=tibble(balance=800),type="response"))
+```
+
+We see that the log-odds is very small which corresponds to a very small probability of default. Notice the relationship between the probability and the log-odds:
+
+```{r}
+#| code-fold: false
+
+log(default_800_prob / (1 - default_800_prob))
+```
+
+On the other hand, if our friend has a balance of $2,200 then
+
+```{r}
+#| code-fold: false
+
+(default_2200_odds <- predict(default_fit_1,newdata=tibble(balance=2200)))
+(default_2200_prob <- predict(default_fit_1,newdata=tibble(balance=2200),type="response"))
+```
+
+and we see that the predicted probability of default is high. A question we will return to soon is, how does the probability of default relate to classifying defaults as "no" or "yes"?
+
+We can just as easily fit a logistic regression model with more than one predictor. For example,
+
+```{r}
+#| code-fold: false
+default_fit_2 <- glm(default_01 ~ balance + income + student, data=Default, family="binomial")
+coef(default_fit_2)
+```
+
+
+Which of the two models is better remains an open question and we will address this and other topics related to logistic regression later. 
+
+## Classification Errors
+
+Suppose we work for a loan company and our boss isn't interested in the probability that a borrower will default and just wants to know if someone if likely to default or not. One way to deal with this is to choose a cutoff value for the probability of default and classify borrowers with probability of default greater than the threshold value as likely to default. For example, suppose we classify any borrower with a probability of defaulting greater than 50% as likely to default. This will inevitably lead to some amount of misclassification. We can calculate this for our data and model:
+
+```{r}
+#| code-fold: false
+
+
+default_fit_1_preds <- predict(default_fit_1,type="response")
+default_fit_1_class <- (default_fit_1_preds > 0.5) %>% as.numeric()
+
+table(Default$default_01,default_fit_1_class)
+```
+
+This says that there were 42 loans that did not default but the model classified as defaults. That is, the model produced 42 *false positives*. On the other hand, the model classified 233 loans that did default as non-defaults. That is, the model produced 233 *false negatives*. These numbers will change if we change the threshold value for classification. For example, what if we set our threshold to 45%?
+
+```{r}
+#| code-fold: false
+
+
+default_fit_1_preds <- predict(default_fit_1,type="response")
+default_fit_1_class <- (default_fit_1_preds > 0.45) %>% as.numeric()
+
+table(Default$default_01,default_fit_1_class)
+```
+
+For later purposes, let's define the following quantities:
+
+$$
+\begin{align*}
+\text{sensitivity or true positive rate} &= \frac{\text{true positive}}{\text{true positive} + \text{false negative}} \\
+\text{specificity or false positive rate} &= \frac{\text{false positive}}{\text{false positive} + \text{true negative}}
+\end{align*}
+$$
+
+Then, in our example with the 50% threshold value, the sensitivity is `r 100 / (100 + 233)` and the specificity is `r  42 / (42 + 9609)`. 
+
+
+### ROC Curves
+
+```{r}
+#| code-fold: false
+#| warning: false
+#| message: false
+ggroc(roc(Default$default_01,predict(default_fit_1,type="response")),size=2)
 ```
 
 ## Preparation for the next lesson
@@ -160,10 +317,6 @@ For the next lesson we will cover resampling methods. To prepare for the next le
 vembedr::embed_youtube(id="6eWODQJrMKs?si=tPPLUz9g9TMCt6EL",height=450) %>%
   vembedr::use_align("center")
 ```
-
-
-- 
-
 
 
 
