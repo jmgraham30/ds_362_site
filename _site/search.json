@@ -424,34 +424,48 @@
     "href": "lesson04/index.html",
     "title": "Lesson 4",
     "section": "",
-    "text": "After this lesson, students will be able to:"
+    "text": "After this lesson, students will be able to:\n\nDefine the problem of classification.\nFit a logistic regression model.\nDefine the k-Nearest Neighbor algorithm.\nCreate and interpret an ROC curve."
   },
   {
     "objectID": "lesson04/index.html#learning-objectives",
     "href": "lesson04/index.html#learning-objectives",
     "title": "Lesson 4",
     "section": "",
-    "text": "After this lesson, students will be able to:"
+    "text": "After this lesson, students will be able to:\n\nDefine the problem of classification.\nFit a logistic regression model.\nDefine the k-Nearest Neighbor algorithm.\nCreate and interpret an ROC curve."
   },
   {
     "objectID": "lesson04/index.html#readings-etc.",
     "href": "lesson04/index.html#readings-etc.",
     "title": "Lesson 4",
     "section": "Readings, etc.",
-    "text": "Readings, etc.\nFor this lesson:\n\nRead chapter 4 from of An Introduction to Statistical Learning (Tibshirani, James, and Trevor 2017). You may also want to read chapter 3 of Statistical Learning with Math and R (Suzuki 2020).\nWatch the corresponding video lecture on classification. View on YouTube."
+    "text": "Readings, etc.\nFor this lesson:\n\nRead chapter 3 of Statistical Learning with Math and R (Suzuki 2020). You may also want to read chapter 4 from of An Introduction to Statistical Learning (Tibshirani, James, and Trevor 2017).\nWatch the corresponding video lecture on classification. View on YouTube.\n\n\n\n\n\n\n\n\n\n\n\nThe video on logistic regression might also be helpful. View on YouTube."
   },
   {
     "objectID": "lesson04/index.html#preparation-for-the-next-lesson",
     "href": "lesson04/index.html#preparation-for-the-next-lesson",
     "title": "Lesson 4",
     "section": "Preparation for the next lesson",
-    "text": "Preparation for the next lesson\nFor the next lesson:"
+    "text": "Preparation for the next lesson\nFor the next lesson we will cover resampling methods. To prepare for the next lesson, please do the following:\n\nRead chapter 5 from of An Introduction to Statistical Learning (Tibshirani, James, and Trevor 2017). You may also want to read chapter 4 of Statistical Learning with Math and R (Suzuki 2020).\nWatch the corresponding video lecture on cross validation. View on YouTube."
   },
   {
     "objectID": "lesson04/index.html#references",
     "href": "lesson04/index.html#references",
     "title": "Lesson 4",
     "section": "References",
-    "text": "References\n\n\nSuzuki, Joe. 2020. Statistical Learning with Math and r. Springer.\n\n\nTibshirani, Hastie Robert, Gareth James, and Daniela Witten Trevor. 2017. An Introduction to Statistical Learning. springer publication.\n\n\n\n\n\n\n\n\nExpand for Session Info\n\n\n\n\n\n\n\n─ Session info ───────────────────────────────────────────────────────────────\n setting  value\n version  R version 4.3.1 (2023-06-16)\n os       macOS Ventura 13.5.2\n system   aarch64, darwin20\n ui       X11\n language (EN)\n collate  en_US.UTF-8\n ctype    en_US.UTF-8\n tz       America/New_York\n date     2023-09-11\n pandoc   3.1.1 @ /Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/ (via rmarkdown)\n quarto   1.3.450 @ /usr/local/bin/quarto\n\n─ Packages ───────────────────────────────────────────────────────────────────\n package      * version date (UTC) lib source\n broom        * 1.0.5   2023-06-09 [1] CRAN (R 4.3.0)\n dplyr        * 1.1.3   2023-09-03 [1] CRAN (R 4.3.0)\n forcats      * 1.0.0   2023-01-29 [1] CRAN (R 4.3.0)\n ggplot2      * 3.4.3   2023-08-14 [1] CRAN (R 4.3.0)\n ISLR2        * 1.3-2   2022-11-20 [1] CRAN (R 4.3.0)\n lubridate    * 1.9.2   2023-02-10 [1] CRAN (R 4.3.0)\n purrr        * 1.0.2   2023-08-10 [1] CRAN (R 4.3.0)\n readr        * 2.1.4   2023-02-10 [1] CRAN (R 4.3.0)\n sessioninfo  * 1.2.2   2021-12-06 [1] CRAN (R 4.3.0)\n stringr      * 1.5.0   2022-12-02 [1] CRAN (R 4.3.0)\n tibble       * 3.2.1   2023-03-20 [1] CRAN (R 4.3.0)\n tidyr        * 1.3.0   2023-01-24 [1] CRAN (R 4.3.0)\n tidytuesdayR * 1.0.2   2022-02-01 [1] CRAN (R 4.3.0)\n tidyverse    * 2.0.0   2023-02-22 [1] CRAN (R 4.3.0)\n\n [1] /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library\n\n──────────────────────────────────────────────────────────────────────────────"
+    "text": "References\n\n\nSuzuki, Joe. 2020. Statistical Learning with Math and r. Springer.\n\n\nTibshirani, Hastie Robert, Gareth James, and Daniela Witten Trevor. 2017. An Introduction to Statistical Learning. springer publication.\n\n\n\n\n\n\n\n\nExpand for Session Info\n\n\n\n\n\n\n\n─ Session info ───────────────────────────────────────────────────────────────\n setting  value\n version  R version 4.3.1 (2023-06-16)\n os       macOS Ventura 13.5.2\n system   aarch64, darwin20\n ui       X11\n language (EN)\n collate  en_US.UTF-8\n ctype    en_US.UTF-8\n tz       America/New_York\n date     2023-09-11\n pandoc   3.1.1 @ /Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/ (via rmarkdown)\n quarto   1.3.450 @ /usr/local/bin/quarto\n\n─ Packages ───────────────────────────────────────────────────────────────────\n package      * version date (UTC) lib source\n broom        * 1.0.5   2023-06-09 [1] CRAN (R 4.3.0)\n dplyr        * 1.1.3   2023-09-03 [1] CRAN (R 4.3.0)\n forcats      * 1.0.0   2023-01-29 [1] CRAN (R 4.3.0)\n ggplot2      * 3.4.3   2023-08-14 [1] CRAN (R 4.3.0)\n ISLR2        * 1.3-2   2022-11-20 [1] CRAN (R 4.3.0)\n kableExtra   * 1.3.4   2021-02-20 [1] CRAN (R 4.3.0)\n lubridate    * 1.9.2   2023-02-10 [1] CRAN (R 4.3.0)\n purrr        * 1.0.2   2023-08-10 [1] CRAN (R 4.3.0)\n readr        * 2.1.4   2023-02-10 [1] CRAN (R 4.3.0)\n sessioninfo  * 1.2.2   2021-12-06 [1] CRAN (R 4.3.0)\n stringr      * 1.5.0   2022-12-02 [1] CRAN (R 4.3.0)\n tibble       * 3.2.1   2023-03-20 [1] CRAN (R 4.3.0)\n tidyr        * 1.3.0   2023-01-24 [1] CRAN (R 4.3.0)\n tidytuesdayR * 1.0.2   2022-02-01 [1] CRAN (R 4.3.0)\n tidyverse    * 2.0.0   2023-02-22 [1] CRAN (R 4.3.0)\n\n [1] /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library\n\n──────────────────────────────────────────────────────────────────────────────"
+  },
+  {
+    "objectID": "lesson04/index.html#overview",
+    "href": "lesson04/index.html#overview",
+    "title": "Lesson 4",
+    "section": "Overview",
+    "text": "Overview\nIn a classification problem, we assume a functional relationship of the form\n\\[\ny = f({\\bf x}) + \\epsilon\n\\]\nwhere the response variable \\(y\\) takes values in a finite set. The \\(y\\) values will often correspond to classes or categories and this is why we call this problem classification. Classification is a common problem for machine learning, perhaps even more common than regression. There are two general approaches to classification:\n\npredict the values of \\(y\\), that is, the classes directly, or\npredict the probabilities for \\(y\\) to be in each of the relevant classes.\n\nThe approach in 2 has the benefit that we can think of classification as a regression problem since probabilities are numerical quantities. On the other hand, any regression problem can be recast as a classification by binning or otherwise discretizing the response variable.\nA special case of classification is binary classification which is the situation where the response \\(y\\) can take on but two distinct values. We will begin out study of classification by looking at binary classification and logistic regression which is a common approach to binary classification."
+  },
+  {
+    "objectID": "lesson04/index.html#logistic-regression",
+    "href": "lesson04/index.html#logistic-regression",
+    "title": "Lesson 4",
+    "section": "Logistic Regression",
+    "text": "Logistic Regression\nSuppose that we have labelled data \\(({\\bf x}_{1},y_{1}), ({\\bf x}_{2},y_{2}), \\ldots , ({\\bf x}_{n},y_{n})\\) such that for each \\(i\\), \\(y_{i} \\in \\{0,1\\}\\). That is, the response variables can take on only two distinct values. Our goal is to build a model that can predict\n\\[\np({\\bf x}) := P(y = 1 | {\\bf x})\n\\] The method of logistic regression is to build a model of the form\n\\[\np({\\bf x}) = \\frac{e^{\\beta_{0} + \\beta_{1}x_{1} + \\beta_{2}x_{2} + \\cdots + \\beta_{p}x_{p}}}{1 + e^{\\beta_{0} + \\beta_{1}x_{1} + \\beta_{2}x_{2} + \\cdots + \\beta_{p}x_{p}}}\n\\]\nFrom which we can derive the expression\n\\[\n\\log\\left( \\frac{p({\\bf x})}{1 - p({\\bf x})} \\right) = \\beta_{0} + \\beta_{1}x_{1} + \\beta_{2}x_{2} + \\cdots + \\beta_{p}x_{p}\n\\] We call the expression\n\\[\n\\log\\left( \\frac{p({\\bf x})}{1 - p({\\bf x})} \\right)\n\\]\nthe log odds or logit.\nNote: While the probability \\(P(Y = 1| {\\bf x})\\) is not a linear function of the predictor variables, the log odds is a linear function of the predictor.\nWe refer to a function of the form\n\\[\nf(x) = \\frac{e^x}{1 + e^x}\n\\]\nas a logistic function.\nLet’s develop some motivation and intuition for logistic regression. Consider the Default data set from the ISLR2 package. The first few rows of the data are shown below:\n\n\n\n\n\ndefault\nstudent\nbalance\nincome\n\n\n\n\nNo\nNo\n729.5265\n44361.625\n\n\nNo\nYes\n817.1804\n12106.135\n\n\nNo\nNo\n1073.5492\n31767.139\n\n\nNo\nNo\n529.2506\n35704.494\n\n\nNo\nNo\n785.6559\n38463.496\n\n\nNo\nYes\n919.5885\n7491.559\n\n\n\n\n\n\n\nOur goal is to use one or more of the variables student, balance, or income to predict whether an individual is likely to default on their loan. Here we will think of the values for the response default as \\(\\text{No} = 0\\) and \\(\\text{Yes} = 1\\). To do this, we create a 0-1 version of the response:\n\n\nCode\nDefault &lt;- Default %&gt;%\n  mutate(default_01 = ifelse(default == \"No\",0,1))\n\nglimpse(Default)\n\n\nRows: 10,000\nColumns: 5\n$ default    &lt;fct&gt; No, No, No, No, No, No, No, No, No, No, No, No, No, No, No,…\n$ student    &lt;fct&gt; No, Yes, No, No, No, Yes, No, Yes, No, No, Yes, Yes, No, No…\n$ balance    &lt;dbl&gt; 729.5265, 817.1804, 1073.5492, 529.2506, 785.6559, 919.5885…\n$ income     &lt;dbl&gt; 44361.625, 12106.135, 31767.139, 35704.494, 38463.496, 7491…\n$ default_01 &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…\n\n\nLet’s begin by focusing on just balance as a predictor. We can plot the default variable versus the balance:\n\n\nCode\nDefault %&gt;%\n  ggplot(aes(x=balance,y=default_01)) + \n  geom_point(alpha=0.2) + \n  labs(x=\"Loan balance\",y=\"Default, No=0, Yes=1\")"
   }
 ]

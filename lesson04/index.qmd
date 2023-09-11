@@ -22,6 +22,7 @@ library(tidyverse)
 library(tidytuesdayR)
 library(ISLR2)
 library(broom)
+library(kableExtra)
 
 theme_set(theme_minimal(base_size = 13))
 ```
@@ -30,11 +31,19 @@ theme_set(theme_minimal(base_size = 13))
 
 After this lesson, students will be able to:
 
+* Define the problem of classification. 
+
+* Fit a logistic regression model.
+
+* Define the k-Nearest Neighbor algorithm.
+
+* Create and interpret an ROC curve. 
+
 ## Readings, etc.
 
 For this lesson:
 
--   Read chapter 4 from of *An Introduction to Statistical Learning* [@tibshirani2017introduction]. You may also want to read chapter 3 of *Statistical Learning with Math and R* [@suzuki2020statistical].
+- Read chapter 3 of *Statistical Learning with Math and R* [@suzuki2020statistical]. You may also want to read chapter 4 from of *An Introduction to Statistical Learning* [@tibshirani2017introduction].
 
 -   Watch the corresponding video lecture on classification. [View on YouTube](https://youtu.be/BMJQ3LQ_QKU?si=XvFgGO2jJ5OyR-v4).
 
@@ -45,11 +54,116 @@ vembedr::embed_youtube(id="BMJQ3LQ_QKU?si=XvFgGO2jJ5OyR-v4",height=450) %>%
   vembedr::use_align("center")
 ```
 
+- The video on logistic regression might also be helpful. [View on YouTube](https://youtu.be/kr_Be9NVXOM?si=0OtVihMY3zmbY0pa).
 
+```{r}
+#| echo: false
+
+vembedr::embed_youtube(id="kr_Be9NVXOM?si=0OtVihMY3zmbY0pa",height=450) %>%
+  vembedr::use_align("center")
+```
+
+## Overview
+
+In a classification problem, we assume a functional relationship of the form
+
+$$
+y = f({\bf x}) + \epsilon
+$$
+
+where the response variable $y$ takes values in a finite set. The $y$ values will often correspond to classes or categories and this is why we call this problem classification. Classification is a common problem for machine learning, perhaps even more common than regression. There are two general approaches to classification:
+
+1. predict the values of $y$, that is, the classes directly, or
+
+2. predict the probabilities for $y$ to be in each of the relevant classes. 
+
+The approach in 2 has the benefit that we can think of classification as a regression problem since probabilities are numerical quantities. On the other hand, any regression problem can be recast as a classification by binning or otherwise discretizing the response variable. 
+
+A special case of classification is **binary** classification which is the situation where the response $y$ can take on but two distinct values. We will begin out study of classification by looking at binary classification and logistic regression which is a common approach to binary classification. 
+
+## Logistic Regression 
+
+Suppose that we have labelled data $({\bf x}_{1},y_{1}), ({\bf x}_{2},y_{2}), \ldots , ({\bf x}_{n},y_{n})$ such that for each $i$, $y_{i} \in \{0,1\}$. That is, the response variables can take on only two distinct values. Our goal is to build a model that can predict
+
+$$
+p({\bf x}) := P(y = 1 | {\bf x})
+$$
+The method of **logistic regression** is to build a model of the form
+
+$$
+p({\bf x}) = \frac{e^{\beta_{0} + \beta_{1}x_{1} + \beta_{2}x_{2} + \cdots + \beta_{p}x_{p}}}{1 + e^{\beta_{0} + \beta_{1}x_{1} + \beta_{2}x_{2} + \cdots + \beta_{p}x_{p}}}
+$$
+
+From which we can derive the expression
+
+$$
+\log\left( \frac{p({\bf x})}{1 - p({\bf x})} \right) = \beta_{0} + \beta_{1}x_{1} + \beta_{2}x_{2} + \cdots + \beta_{p}x_{p}
+$$
+We call the expression
+
+$$
+\log\left( \frac{p({\bf x})}{1 - p({\bf x})} \right)
+$$
+
+the *log odds* or *logit*.
+
+**Note:** While the probability $P(Y = 1| {\bf x})$ is **not** a linear function of the predictor variables, the log odds **is** a linear function of the predictor.  
+
+We refer to a function of the form
+
+$$
+f(x) = \frac{e^x}{1 + e^x}
+$$
+
+as a **logistic function**.
+
+Let's develop some motivation and intuition for logistic regression. Consider the `Default` data set from the `ISLR2` package. The first few rows of the data are shown below:
+
+```{r}
+#| echo: false
+
+Default %>%
+  head() %>%
+  kable()
+```
+
+
+Our goal is to use one or more of the variables `student`, `balance`, or `income` to predict whether an individual is likely to default on their loan. Here we will think of the values for the response `default` as $\text{No} = 0$ and $\text{Yes} = 1$. To do this, we create a 0-1 version of the response:
+
+```{r}
+Default <- Default %>%
+  mutate(default_01 = ifelse(default == "No",0,1))
+
+glimpse(Default)
+```
+
+Let's begin by focusing on just `balance` as a predictor. We can plot the `default` variable versus the `balance`:
+
+```{r}
+Default %>%
+  ggplot(aes(x=balance,y=default_01)) + 
+  geom_point(alpha=0.2) + 
+  labs(x="Loan balance",y="Default, No=0, Yes=1") 
+```
 
 ## Preparation for the next lesson
 
-For the next lesson:
+For the next lesson we will cover resampling methods. To prepare for the next lesson, please do the following:
+
+-   Read chapter 5 from of *An Introduction to Statistical Learning* [@tibshirani2017introduction]. You may also want to read chapter 4 of *Statistical Learning with Math and R* [@suzuki2020statistical].
+
+-   Watch the corresponding video lecture on cross validation. [View on YouTube](https://youtu.be/6eWODQJrMKs?si=tPPLUz9g9TMCt6EL).
+
+```{r}
+#| echo: false
+
+vembedr::embed_youtube(id="6eWODQJrMKs?si=tPPLUz9g9TMCt6EL",height=450) %>%
+  vembedr::use_align("center")
+```
+
+
+- 
+
 
 
 
