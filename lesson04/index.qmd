@@ -287,16 +287,62 @@ For later purposes, let's define the following quantities:
 $$
 \begin{align*}
 \text{sensitivity or true positive rate} &= \frac{\text{true positive}}{\text{true positive} + \text{false negative}} \\
-\text{specificity or false positive rate} &= \frac{\text{false positive}}{\text{false positive} + \text{true negative}}
+\text{specificity or false positive rate} &= \frac{\text{true negative}}{\text{true negative} + \text{false positive}}
 \end{align*}
 $$
 
-Then, in our example with the 50% threshold value, the sensitivity is `r 100 / (100 + 233)` and the specificity is `r  42 / (42 + 9609)`. 
+Then, in our example with the 50% threshold value, the sensitivity is `r 100 / (100 + 233)` and the specificity is `r  9625 / (9625 + 42)`. 
 
+Notice that the sensitivity and specificity are both functions of the probability threshold value used to make the decision about how to classify predicted response values. Let's write an R function that computes the sensitivity and specificity for any threshold value. 
+
+```{r}
+#| code-fold: false
+
+spec_sens <- function(threshold_val){
+
+  default_fit_1_class <- (default_fit_1_preds > threshold_val) %>% as.numeric()
+
+  conf_mat <- table(Default$default_01,default_fit_1_class)
+  
+  sensitivity <- conf_mat[2,2] / (sum(conf_mat[2, ]))
+  specificity <- conf_mat[1,1] / (sum(conf_mat[1, ]))
+  
+  tibble(sensitivity = sensitivity,specificity = specificity)
+  
+}
+```
+
+Now, let's test our function
+
+```{r}
+#| code-fold: false
+
+spec_sens(0.5)
+```
 
 ### ROC Curves
 
+Let's use our function to compute and plot the sensitivity and specificity values for a range of threshold values. 
+
 ```{r}
+thresh_vals <- seq(0.001,0.981,by=0.001)
+spec_sens_df <- map_df(thresh_vals,spec_sens) %>%
+  mutate(thresh_vals = thresh_vals)
+
+spec_sens_df %>%
+  ggplot(aes(x=specificity,y=sensitivity,color=thresh_vals)) + 
+  geom_path(linewidth=1.1) + 
+  scale_x_reverse() + 
+  xlim(c(1,0)) + 
+  ylim(c(0,1))
+
+```
+
+The package `pROC` contains functions that will create an ROC curve for us. For example, 
+
+```{r}
+#| label: fig-proc
+#| fig-cap: An ROC curve for our logistic regression model of defaults as predicted by balance. The curve is created usign functions from the pROC package.
 #| code-fold: false
 #| warning: false
 #| message: false
