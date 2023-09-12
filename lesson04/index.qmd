@@ -359,6 +359,18 @@ The **area under the ROC curve (AUC)** is a widely used measure of overall perfo
 auc(Default$default_01,predict(default_fit_1,type="response"))
 ```
 
+Note that the largest possible value for AUC is 1. Further, we expect a classifies that performs no better than change to have an AUC of 0.5. We see that as a classifier on the `Deafault` data logistic regression appears to perform well. However, we only computed the AUC for the training data and ultimately what we are interested in is how the model performs on test data. We will return to this issue later. 
+
+An important application of ROC curves and AUC is in comparing different types of classifiers. So, we will spend some time learning about other types of classifiers. 
+
+## KNN
+
+
+## Multi-class Classifiers
+
+
+
+
 ## Preparation for the next lesson
 
 For the next lesson we will cover resampling methods. To prepare for the next lesson, please do the following:

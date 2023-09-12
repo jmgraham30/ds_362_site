@@ -186,6 +186,8 @@ div.csl-indent {
   <ul class="collapse">
   <li><a href="#roc-curves" id="toc-roc-curves" class="nav-link" data-scroll-target="#roc-curves">ROC Curves</a></li>
   </ul></li>
+  <li><a href="#knn" id="toc-knn" class="nav-link" data-scroll-target="#knn">KNN</a></li>
+  <li><a href="#multi-class-classifiers" id="toc-multi-class-classifiers" class="nav-link" data-scroll-target="#multi-class-classifiers">Multi-class Classifiers</a></li>
   <li><a href="#preparation-for-the-next-lesson" id="toc-preparation-for-the-next-lesson" class="nav-link" data-scroll-target="#preparation-for-the-next-lesson">Preparation for the next lesson</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
@@ -619,7 +621,15 @@ Adding another scale for x, which will replace the existing scale.</code></pre>
 <pre><code>Area under the curve: 0.948</code></pre>
 </div>
 </div>
+<p>Note that the largest possible value for AUC is 1. Further, we expect a classifies that performs no better than change to have an AUC of 0.5. We see that as a classifier on the <code>Deafault</code> data logistic regression appears to perform well. However, we only computed the AUC for the training data and ultimately what we are interested in is how the model performs on test data. We will return to this issue later.</p>
+<p>An important application of ROC curves and AUC is in comparing different types of classifiers. So, we will spend some time learning about other types of classifiers.</p>
 </section>
+</section>
+<section id="knn" class="level2">
+<h2 class="anchored" data-anchor-id="knn">KNN</h2>
+</section>
+<section id="multi-class-classifiers" class="level2">
+<h2 class="anchored" data-anchor-id="multi-class-classifiers">Multi-class Classifiers</h2>
 </section>
 <section id="preparation-for-the-next-lesson" class="level2">
 <h2 class="anchored" data-anchor-id="preparation-for-the-next-lesson">Preparation for the next lesson</h2>
