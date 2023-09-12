@@ -593,6 +593,7 @@ Adding another scale for x, which will replace the existing scale.</code></pre>
 <p><img src="index_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>This creates what is known as a <strong>receiver operating characteristic (ROC)</strong> curve which is is a graphical plot that illustrates the diagnostic ability of a binary classifier system as its discrimination threshold is varied.</p>
 <p>The package <code>pROC</code> contains functions that will create an ROC curve for us. For example,</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggroc</span>(<span class="fu">roc</span>(Default<span class="sc">$</span>default_01,<span class="fu">predict</span>(default_fit_1,<span class="at">type=</span><span class="st">"response"</span>)),<span class="at">size=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -603,6 +604,19 @@ Adding another scale for x, which will replace the existing scale.</code></pre>
 <figcaption class="figure-caption">Figure&nbsp;4: An ROC curve for our logistic regression model of defaults as predicted by balance. The curve is created usign functions from the pROC package.</figcaption>
 </figure>
 </div>
+</div>
+</div>
+<p>The <strong>area under the ROC curve (AUC)</strong> is a widely used measure of overall performance of a binary classifier because it summarizes the performance over a range of threshold values. Again, the <code>pROC</code> package contains functions that allows us to calculate the AUC:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">auc</span>(Default<span class="sc">$</span>default_01,<span class="fu">predict</span>(default_fit_1,<span class="at">type=</span><span class="st">"response"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting levels: control = 0, case = 1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Setting direction: controls &lt; cases</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Area under the curve: 0.948</code></pre>
 </div>
 </div>
 </section>

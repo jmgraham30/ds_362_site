@@ -338,6 +338,8 @@ spec_sens_df %>%
 
 ```
 
+This creates what is known as a **receiver operating characteristic (ROC)** curve which is is a graphical plot that illustrates the diagnostic ability of a binary classifier system as its discrimination threshold is varied. 
+
 The package `pROC` contains functions that will create an ROC curve for us. For example, 
 
 ```{r}
@@ -347,6 +349,14 @@ The package `pROC` contains functions that will create an ROC curve for us. For 
 #| warning: false
 #| message: false
 ggroc(roc(Default$default_01,predict(default_fit_1,type="response")),size=2)
+```
+
+The **area under the ROC curve (AUC)** is a widely used measure of overall performance of a binary classifier because it summarizes the performance over a range of threshold values. Again, the `pROC` package contains functions that allows us to calculate the AUC:
+
+```{r}
+#| code-fold: false
+
+auc(Default$default_01,predict(default_fit_1,type="response"))
 ```
 
 ## Preparation for the next lesson
