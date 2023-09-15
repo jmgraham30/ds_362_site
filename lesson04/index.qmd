@@ -271,10 +271,26 @@ Suppose we work for a loan company and our boss isn't interested in the probabil
 default_fit_1_preds <- predict(default_fit_1,type="response")
 default_fit_1_class <- (default_fit_1_preds > 0.5) %>% as.numeric()
 
-table(Default$default_01,default_fit_1_class)
+(cm_tbl <- table(Default$default_01,default_fit_1_class))
 ```
 
-This says that there were 42 loans that did not default but the model classified as defaults. That is, the model produced 42 *false positives*. On the other hand, the model classified 233 loans that did default as non-defaults. That is, the model produced 233 *false negatives*. These numbers will change if we change the threshold value for classification. For example, what if we set our threshold to 45%?
+This says that there were 42 loans that did not default but the model classified as defaults. That is, the model produced 42 *false positives*. On the other hand, the model classified 233 loans that did default as non-defaults. That is, the model produced 233 *false negatives*. From these numbers, we can compute the accuracy:
+
+```{r}
+(cm_tbl[1,1] + cm_tbl[2,2]) / (sum(cm_tbl))
+```
+
+or using a function from `tdiymodels`
+
+```{r}
+tibble(true_defaults = as.factor(Default$default_01),
+       pred_defaults = as.factor(default_fit_1_class)) %>%
+  accuracy(true_defaults,pred_defaults)
+```
+
+
+
+These numbers will change if we change the threshold value for classification. For example, what if we set our threshold to 45%?
 
 ```{r}
 #| code-fold: false
