@@ -19,12 +19,16 @@ license: "CC BY-NC-SA 4.0"
 
 # load packages used in document
 library(tidyverse)
+library(tidymodels)
 library(tidytuesdayR)
 library(ISLR2)
 library(broom)
 library(kableExtra)
 library(patchwork)
 library(pROC)
+library(palmerpenguins)
+
+tidymodels_prefer()
 
 theme_set(theme_minimal(base_size = 13))
 ```
@@ -365,6 +369,30 @@ An important application of ROC curves and AUC is in comparing different types o
 
 ## KNN
 
+Another approach to classification (and also regression) is to use distance-based methods such as **K Nearest Neighbors** (KNN). The basic model assumption is that data points that are closer together are more likely to belong to the same class. To implement such models, we need to address two points:
+
+*  How do we measure distance between data points?
+
+* What is our decision rule for classifying a data point when it is close to multiple points from different classes. 
+
+Given a particular measure of distance, the KNN algorithm proceeds as follows:
+
+1. Choose a value $k$ that is less than or equal to, but typically much less than the total size $n$ of the observed data.
+
+2. For a new value ${\bf x}$, find the $k$ data points that are closest to ${\bf x}$. 
+
+3. Assign to ${\bf x}$ the majority class among its $k$ nearest neighbors. Note that it may also be necessary to establish a rule for breaking ties.   
+
+There is a [KNN demo](https://codepen.io/gangtao/pen/PPoqMW) associated with the textbook [@dinov2018data]. [View the KNN demo](https://codepen.io/gangtao/pen/PPoqMW).
+
+
+Let's work through some KNN examples together in a new R project. 
+
+
+
+**Note:** An important application of KNN is to imputation of missing data.  
+
+There is one major issue with distance-based classification (or regression) methods. This is an issue known as the [**curse of dimensionality**](https://en.wikipedia.org/wiki/Curse_of_dimensionality). The issue is basically that as the dimension of the space that data points belong to increases, the more sparse the data points are within the space. You will be asked to explore this issue further in the homework exercises. 
 
 ## Multi-class Classifiers
 
