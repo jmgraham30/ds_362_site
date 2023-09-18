@@ -1,0 +1,160 @@
+---
+title: "Lesson 5"
+subtitle: "Resampling"
+author: "JMG"
+format:
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+    toc: true
+    toc-location: left
+bibliography: lesson05.bib
+license: "CC BY-NC-SA 4.0"
+---
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+
+# load packages used in document
+library(tidyverse)
+library(tidymodels)
+library(tidytuesdayR)
+library(ISLR2)
+library(broom)
+library(kableExtra)
+library(patchwork)
+library(pROC)
+library(palmerpenguins)
+
+tidymodels_prefer()
+
+theme_set(theme_minimal(base_size = 13))
+```
+
+## Learning Objectives
+
+After this lesson, students will be able to:
+
+* 
+
+## Readings, etc.
+
+For this lesson:
+
+- Read chapter 5 from of *An Introduction to Statistical Learning* [@tibshirani2017introduction]. You may also want to read chapter 4 of *Statistical Learning with Math and R* [@suzuki2020statistical].
+
+-   Watch the corresponding video lecture on cross validation. [View on YouTube](https://youtu.be/6eWODQJrMKs?si=tPPLUz9g9TMCt6EL).
+
+```{r}
+#| echo: false
+
+vembedr::embed_youtube(id="6eWODQJrMKs?si=tPPLUz9g9TMCt6EL",height=450) %>%
+  vembedr::use_align("center")
+```
+
+-   Watch the "Spending your data budget" section of the following video. [View on YouTube](https://youtu.be/sv5r7CVAVwo?si=NHpjUOHurbYfEm0L).
+
+```{r}
+#| echo: false
+
+vembedr::embed_youtube(id="sv5r7CVAVwo?si=NHpjUOHurbYfEm0L",height=450) %>%
+  vembedr::use_start_time("31m29s") %>%
+  vembedr::use_align("center")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Preparation for the next lesson
+
+
+For the next lesson we will cover tree-based methods. To prepare for the next lesson, please do the following:
+
+-   Read chapter 8 from of *An Introduction to Statistical Learning* [@tibshirani2017introduction]. You may also want to read chapter 8 of *Statistical Learning with Math and R* [@suzuki2020statistical].
+
+-   Watch the corresponding video lecture on decision trees. [View on YouTube](https://youtu.be/QNnayf--_yk?si=x-oVRRqQE1cK-oZJ).
+
+```{r}
+#| echo: false
+
+vembedr::embed_youtube(id="QNnayf--_yk?si=x-oVRRqQE1cK-oZJ",height=450) %>%
+  vembedr::use_align("center")
+```
+
+
+- Go through the following two blog posts by Julia Silge:
+
+    - [Predicting injuries for Chicago traffic crashes](https://juliasilge.com/blog/chicago-traffic-model/)
+    
+    - [Predict availability in water sources with random forest models](https://juliasilge.com/blog/water-sources/)
+
+
+
+## References
+
+::: {#refs}
+:::
+
+::: {.callout-tip collapse="true"}
+## Expand for Session Info
+
+```{r}
+#| echo: false
+
+
+library(sessioninfo)
+# save the session info as an object
+pkg_sesh <- session_info(pkgs = "attached")
+
+# get the quarto version
+quarto_version <- system("quarto --version", intern = TRUE)
+
+# inject the quarto info
+pkg_sesh$platform$quarto <- paste(
+  system("quarto --version", intern = TRUE), 
+  "@", 
+  quarto::quarto_path()
+  )
+
+# print it out
+pkg_sesh
+```
+:::
+
+[![](http://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-nc-sa.png?raw=1){fig-align="left" width="15%"}](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode)
+
+
+
+
