@@ -280,7 +280,7 @@ This says that there were 42 loans that did not default but the model classified
 (cm_tbl[1,1] + cm_tbl[2,2]) / (sum(cm_tbl))
 ```
 
-or using a function from `tdiymodels`
+or using a function from `tidymodels`
 
 ```{r}
 tibble(true_defaults = as.factor(Default$default_01),
@@ -345,6 +345,8 @@ spec_sens(0.5)
 Let's use our function to compute and plot the sensitivity and specificity values for a range of threshold values. 
 
 ```{r}
+#| message: false
+#| warning: false
 thresh_vals <- seq(0.001,0.981,by=0.001)
 spec_sens_df <- map_df(thresh_vals,spec_sens) %>%
   mutate(thresh_vals = thresh_vals)
