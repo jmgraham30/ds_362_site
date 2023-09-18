@@ -192,9 +192,9 @@ The **likelihood function** is the probability of the observed data viewed as a 
 
 **Note:** We point out again that machine learning methods often involve solving some kind of optimization problem and we see that this is the case with logistic regression. 
 
-How should we maximize the likelihood function which is a multi-variable function? One approach is or course to find critical points by computing and setting the partial derivatives to zero and then use the Hessian criteria to confirm there is a maximum. There is a trick that makes this a little easier, that is, rather than maximize the likelihood function, it's typical to maximize the log-likelihood. Because the $\log$ function converts products into sums, this makes it easier to compute partial derivatives.
+How should we maximize the likelihood function which is a multi-variable function? One approach is of course to find critical points by computing and setting the partial derivatives to zero and then use the Hessian criteria to confirm there is a maximum. There is a trick that makes this a little easier, that is, rather than maximize the likelihood function, it's typical to maximize the log-likelihood. Because the $\log$ function converts products into sums, this makes it easier to compute partial derivatives.
 
-Luckily for use, the maximum likelihood method is already implemented in R through the `glm` function, where glm stands for **generalized linear model**. For example,
+Luckily for us, the maximum likelihood method for logistic regression is already implemented in R through the `glm` function, where glm stands for **generalized linear model**. For example,
 
 ```{r}
 #| code-fold: false
@@ -221,7 +221,7 @@ Default %>%
 
 **Question:** How does the maximum likelihood estimated logistic curve compare with the two from @fig-logistics?
 
-We can use our logistic regression model to make predictions. For example, suppose our friend has a balance of $800, are the likelihood to default on their load? We can answer this as follows:
+We can use our logistic regression model to make predictions. For example, suppose our friend has a balance of $800, are they likelihood to default on their loan? We can answer this as follows:
 
 ```{r}
 #| code-fold: false
@@ -262,7 +262,7 @@ Which of the two models is better remains an open question and we will address t
 
 ## Classification Errors
 
-Suppose we work for a loan company and our boss isn't interested in the probability that a borrower will default and just wants to know if someone if likely to default or not. One way to deal with this is to choose a cutoff value for the probability of default and classify borrowers with probability of default greater than the threshold value as likely to default. For example, suppose we classify any borrower with a probability of defaulting greater than 50% as likely to default. This will inevitably lead to some amount of misclassification. We can calculate this for our data and model:
+Suppose we work for a loan company and our boss isn't interested in the probability that a borrower will default and just wants to know if someone is likely to default or not. One way to deal with this is to choose a cutoff value for the probability of default and classify borrowers with probability of default greater than the threshold value as likely to default. For example, suppose we classify any borrower with a probability of defaulting greater than 50% as likely to default. This will inevitably lead to some amount of misclassification. We can calculate this for our data and model:
 
 ```{r}
 #| code-fold: false
