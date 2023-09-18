@@ -670,6 +670,15 @@ Adding another scale for x, which will replace the existing scale.</code></pre>
 </section>
 <section id="multi-class-classifiers" class="level2">
 <h2 class="anchored" data-anchor-id="multi-class-classifiers">Multi-class Classifiers</h2>
+<p>In our notebook on KNN and other classification examples, we saw that KNN allows us to build classification models in which there are more than two levels for our categorical response variable. There are other approaches to multi-class classification problems other than KNN. For example, we can extend logistic regression using a so-called <a href="https://en.wikipedia.org/wiki/Softmax_function"><strong>softmax</strong></a> coding. Suppose that our response variable <span class="math inline">\(y\)</span> is categorical with <span class="math inline">\(K\)</span> levels, then for <span class="math inline">\(k=1,2,\ldots, K\)</span>, we model</p>
+<p><span class="math display">\[
+P(y = k|{\bf x}) = \frac{e^{\beta_{k0} + \beta_{k1}x_{1} + \cdots + \beta_{kp}x_{p}}}{\sum_{l=1}^{K}e^{\beta_{l0} + \beta_{l1}x_{1} + \cdots + \beta_{lp}x_{p}}}
+\]</span></p>
+<p>We refer to the right-hand-side of the last expression as a softmax function. The softmax function converts a vector of K real numbers into a probability distribution of K possible outcomes. Notice that for <span class="math inline">\(k \neq k'\)</span> we have</p>
+<p><span class="math display">\[
+\log\left(\frac{P(y = k|{\bf x})}{P(y = k'|{\bf x})} \right) = (\beta_{k0} - \beta_{k'0}) + (\beta_{k1} - \beta_{k'1})x_{1} + \cdots (\beta_{kp} - \beta_{k'p})x_{p}.
+\]</span></p>
+<p>Thus, the log-odds for any pair of of classes is a linear function of our predictor variables. Later in the course, we will utilize the softmax function in our discussion of deep learning methods for classification.</p>
 </section>
 <section id="preparation-for-the-next-lesson" class="level2">
 <h2 class="anchored" data-anchor-id="preparation-for-the-next-lesson">Preparation for the next lesson</h2>
@@ -725,7 +734,7 @@ Expand for Session Info
  collate  en_US.UTF-8
  ctype    en_US.UTF-8
  tz       America/New_York
- date     2023-09-15
+ date     2023-09-18
  pandoc   3.1.1 @ /Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/ (via rmarkdown)
  quarto   1.3.450 @ /usr/local/bin/quarto
 

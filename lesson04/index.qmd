@@ -405,13 +405,25 @@ There is a [KNN demo](https://codepen.io/gangtao/pen/PPoqMW) associated with the
 Let's work through some KNN examples together in a new R project. 
 
 
-
 **Note:** An important application of KNN is to imputation of missing data.  
 
 There is one major issue with distance-based classification (or regression) methods. This is an issue known as the [**curse of dimensionality**](https://en.wikipedia.org/wiki/Curse_of_dimensionality). The issue is basically that as the dimension of the space that data points belong to increases, the more sparse the data points are within the space. You will be asked to explore this issue further in the homework exercises. 
 
 ## Multi-class Classifiers
 
+In our notebook on KNN and other classification examples, we saw that KNN allows us to build classification models in which there are more than two levels for our categorical response variable. There are other approaches to multi-class classification problems other than KNN. For example, we can extend logistic regression using a so-called [**softmax**](https://en.wikipedia.org/wiki/Softmax_function) coding. Suppose that our response variable $y$ is categorical with $K$ levels, then for $k=1,2,\ldots, K$, we model
+
+$$
+P(y = k|{\bf x}) = \frac{e^{\beta_{k0} + \beta_{k1}x_{1} + \cdots + \beta_{kp}x_{p}}}{\sum_{l=1}^{K}e^{\beta_{l0} + \beta_{l1}x_{1} + \cdots + \beta_{lp}x_{p}}}
+$$
+
+We refer to the right-hand-side of the last expression as a softmax function. The softmax function converts a vector of K real numbers into a probability distribution of K possible outcomes. Notice that for $k \neq k'$ we have
+
+$$
+\log\left(\frac{P(y = k|{\bf x})}{P(y = k'|{\bf x})} \right) = (\beta_{k0} - \beta_{k'0}) + (\beta_{k1} - \beta_{k'1})x_{1} + \cdots (\beta_{kp} - \beta_{k'p})x_{p}.
+$$
+
+Thus, the log-odds for any pair of of classes is a linear function of our predictor variables. Later in the course, we will utilize the softmax function in our discussion of deep learning methods for classification. 
 
 
 
