@@ -26,7 +26,7 @@ library(broom)
 library(kableExtra)
 library(patchwork)
 library(pROC)
-library(palmerpenguins)
+#library(palmerpenguins)
 
 tidymodels_prefer()
 
@@ -423,8 +423,23 @@ $$
 \log\left(\frac{P(y = k|{\bf x})}{P(y = k'|{\bf x})} \right) = (\beta_{k0} - \beta_{k'0}) + (\beta_{k1} - \beta_{k'1})x_{1} + \cdots (\beta_{kp} - \beta_{k'p})x_{p}.
 $$
 
-Thus, the log-odds for any pair of of classes is a linear function of our predictor variables. Later in the course, we will utilize the softmax function in our discussion of deep learning methods for classification. 
+Thus, the log-odds for any pair of of classes is a linear function of our predictor variables. Later in the course, we will utilize the softmax function in our discussion of deep learning methods for classification. Such a regression problem is class *multinomial regression*.
 
+### Multi-class Classification Example Problem
+
+Consider again the `penguins` data set, the first few rows of which are displayed in @tbl-pengs-data.
+
+```{r}
+#| echo: false
+#| label: tbl-pengs-data
+#| tbl-cap: The first few rows of the Palmer Penguins data set.
+
+penguins %>%
+  head() %>%
+  kable()
+```
+
+A problem for this data set is to use the various body measurements of penguins as a way to classify the penguin species. Let's return to our classification examples project and attempt to model this data using multi-nomial regression. 
 
 
 ## Preparation for the next lesson
