@@ -142,7 +142,13 @@ vfold_cv(penguins,v=5)
 
 Note that resampled data sets created by `rsample` are directly accessible in a resampling object but do not contain much overhead in memory. Since the original data is not modified, R does not make an automatic copy. For example, creating 50 bootstraps of a data set does not create an object that is 50-fold larger in memory.
 
+@tbl-rsample-examp shows the results of a workflow involving `rsample` created with the following code: 
+
 ```{r}
+#| label: tbl-rsample-examp
+#| tbl-cap: An example workflow for `rsample`.
+
+
 bootstraps(penguins,times=5) %>%
   mutate(analysis_df = map(splits, ~analysis(.x)),
          assessment_df = map(splits, ~assessment(.x))) %>%
@@ -150,8 +156,11 @@ bootstraps(penguins,times=5) %>%
   group_by(id) %>%
   summarise(boot_mean_bill_length_mm = mean(bill_length_mm ,na.rm=TRUE),
             boot_median_bill_length_mm = median(bill_length_mm ,na.rm=TRUE),
-            boot_sd_bill_length_mm = sd(bill_length_mm ,na.rm=TRUE))
+            boot_sd_bill_length_mm = sd(bill_length_mm ,na.rm=TRUE)) %>%
+  kable()
 ```
+
+Essentially what the code has done is to create 5 bootstrap samples from a data set, extract the data frame of each bootstrap resample, and then compute some statistics for a variable in the data frame of each bootstrap resample. Let's experiment with this code in our own R session and work together on some further examples of using `rsample`. 
 
 
 
