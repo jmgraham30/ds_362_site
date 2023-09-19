@@ -146,7 +146,7 @@ Note that resampled data sets created by `rsample` are directly accessible in a 
 
 ```{r}
 #| label: tbl-rsample-examp
-#| tbl-cap: An example workflow for `rsample`.
+#| tbl-cap: Out put from an example workflow for `rsample`.
 
 
 bootstraps(penguins,times=5) %>%
