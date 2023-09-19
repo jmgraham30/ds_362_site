@@ -37,7 +37,13 @@ theme_set(theme_minimal(base_size = 13))
 
 After this lesson, students will be able to:
 
-* 
+* Define the bootstrap method.
+
+* Define cross-validation and distinguish between different approaches to cross-validation. 
+
+* Use the methods in the `rsample` package to generate appropriate resamples.
+
+* Apply bootstrap and cross-validation methods to obtain relevant information about regression and classification models. 
 
 ## Readings, etc.
 
@@ -65,32 +71,33 @@ vembedr::embed_youtube(id="sv5r7CVAVwo?si=NHpjUOHurbYfEm0L",height=450) %>%
 ```
 
 
+## Overview
+
+Machine learning algorithms estimate parameters or other features of a model. It is important to assess the accuracy or uncertainty associated with any estimate. For the purposes of prediction, we are ultimately concerned with how a model performs on a previously unseen set of test data. However, as soon as the model sees the test data, it should not be used again. Thus, in choosing a good model we need to be able to estimate test error without directly use of the test set. Furthermore, we have seen that the specification of some types of models requires the selection of values for one or more hyperparameters.    
+
+[Resampling methods](https://en.wikipedia.org/wiki/Resampling_(statistics)) involve judiciously choosing multiple subsets of our data, typically the training set as a way to solve the problems outlined in the last paragraph. The [bootstrap](https://en.wikipedia.org/wiki/Bootstrapping_(statistics)) samples with replacement from the data in order to assess the accuracy or uncertainty associated with an estimate. [Cross-validation](https://en.wikipedia.org/wiki/Cross-validation_(statistics)) (CV) holds out pieces of the data in order to assess the predictive accuracy of a model or to select hyperparameter values. 
+
+Resampling methods are computation intensive because they involve refitting or re-estimating a model or parameters many times. On the other hand, resampling methods can be used in many more situations than analytic procedures can. Further, with the increased power and speed of modern computers and efficient implementations of algorithms used for resampling, resampling methods have become indispensable tools in modern statistics and machine learning. 
+
+The R package [`rsample`](https://rsample.tidymodels.org/), which is part of the `tidymodels` family provides functions to create different types of resamples and facilitates their use in many analyses. The `rsample` package provides a set of methods that can be used for:
+
+* Resampling for estimating the sampling distribution of a statistic.
+
+* Estimating model performance using a holdout set.
+
+In this lesson, we will explain in detail the bootstrap and cross-validation resampling methods and learn how to use `rsample` for generating resamples. We will also see some use cases for the bootstrap and cross-validation.
+
+## Bootstrap
+
+
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Illustration_bootstrap.svg/1920px-Illustration_bootstrap.svg.png){#fig-bootstrap-illustration height=4in width=10in}
+
+## Cross-validation
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+![](https://miro.medium.com/v2/resize:fit:640/format:webp/1*PdwlCactbJf8F8C7sP-3gw.png){#fig-cv-illustration height=4in width=8in}
 
 
 

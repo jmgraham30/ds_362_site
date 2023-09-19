@@ -141,6 +141,9 @@ div.csl-indent {
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
   <li><a href="#readings-etc." id="toc-readings-etc." class="nav-link" data-scroll-target="#readings-etc.">Readings, etc.</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#bootstrap" id="toc-bootstrap" class="nav-link" data-scroll-target="#bootstrap">Bootstrap</a></li>
+  <li><a href="#cross-validation" id="toc-cross-validation" class="nav-link" data-scroll-target="#cross-validation">Cross-validation</a></li>
   <li><a href="#preparation-for-the-next-lesson" id="toc-preparation-for-the-next-lesson" class="nav-link" data-scroll-target="#preparation-for-the-next-lesson">Preparation for the next lesson</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
@@ -181,7 +184,10 @@ div.csl-indent {
 <h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
 <p>After this lesson, students will be able to:</p>
 <ul>
-<li></li>
+<li><p>Define the bootstrap method.</p></li>
+<li><p>Define cross-validation and distinguish between different approaches to cross-validation.</p></li>
+<li><p>Use the methods in the <code>rsample</code> package to generate appropriate resamples.</p></li>
+<li><p>Apply bootstrap and cross-validation methods to obtain relevant information about regression and classification models.</p></li>
 </ul>
 </section>
 <section id="readings-etc." class="level2">
@@ -212,6 +218,26 @@ div.csl-indent {
 </div>
 </div>
 </div>
+</section>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>Machine learning algorithms estimate parameters or other features of a model. It is important to assess the accuracy or uncertainty associated with any estimate. For the purposes of prediction, we are ultimately concerned with how a model performs on a previously unseen set of test data. However, as soon as the model sees the test data, it should not be used again. Thus, in choosing a good model we need to be able to estimate test error without directly use of the test set. Furthermore, we have seen that the specification of some types of models requires the selection of values for one or more hyperparameters.</p>
+<p><a href="https://en.wikipedia.org/wiki/Resampling_(statistics)">Resampling methods</a> involve judiciously choosing multiple subsets of our data, typically the training set as a way to solve the problems outlined in the last paragraph. The <a href="https://en.wikipedia.org/wiki/Bootstrapping_(statistics)">bootstrap</a> samples with replacement from the data in order to assess the accuracy or uncertainty associated with an estimate. <a href="https://en.wikipedia.org/wiki/Cross-validation_(statistics)">Cross-validation</a> (CV) holds out pieces of the data in order to assess the predictive accuracy of a model or to select hyperparameter values.</p>
+<p>Resampling methods are computation intensive because they involve refitting or re-estimating a model or parameters many times. On the other hand, resampling methods can be used in many more situations than analytic procedures can. Further, with the increased power and speed of modern computers and efficient implementations of algorithms used for resampling, resampling methods have become indispensable tools in modern statistics and machine learning.</p>
+<p>The R package <a href="https://rsample.tidymodels.org/"><code>rsample</code></a>, which is part of the <code>tidymodels</code> family provides functions to create different types of resamples and facilitates their use in many analyses. The <code>rsample</code> package provides a set of methods that can be used for:</p>
+<ul>
+<li><p>Resampling for estimating the sampling distribution of a statistic.</p></li>
+<li><p>Estimating model performance using a holdout set.</p></li>
+</ul>
+<p>In this lesson, we will explain in detail the bootstrap and cross-validation resampling methods and learn how to use <code>rsample</code> for generating resamples. We will also see some use cases for the bootstrap and cross-validation.</p>
+</section>
+<section id="bootstrap" class="level2">
+<h2 class="anchored" data-anchor-id="bootstrap">Bootstrap</h2>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Illustration_bootstrap.svg/1920px-Illustration_bootstrap.svg.png" id="fig-bootstrap-illustration" style="width:10in;height:4in"></p>
+</section>
+<section id="cross-validation" class="level2">
+<h2 class="anchored" data-anchor-id="cross-validation">Cross-validation</h2>
+<p><img src="https://miro.medium.com/v2/resize:fit:640/format:webp/1*PdwlCactbJf8F8C7sP-3gw.png" id="fig-cv-illustration" style="width:8in;height:4in"></p>
 </section>
 <section id="preparation-for-the-next-lesson" class="level2">
 <h2 class="anchored" data-anchor-id="preparation-for-the-next-lesson">Preparation for the next lesson</h2>
@@ -271,7 +297,7 @@ Expand for Session Info
  collate  en_US.UTF-8
  ctype    en_US.UTF-8
  tz       America/New_York
- date     2023-09-18
+ date     2023-09-19
  pandoc   3.1.1 @ /Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/ (via rmarkdown)
  quarto   1.3.450 @ /usr/local/bin/quarto
 
