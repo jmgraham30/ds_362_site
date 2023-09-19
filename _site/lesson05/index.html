@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 /* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
@@ -144,6 +178,7 @@ div.csl-indent {
   <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
   <li><a href="#bootstrap" id="toc-bootstrap" class="nav-link" data-scroll-target="#bootstrap">Bootstrap</a></li>
   <li><a href="#cross-validation" id="toc-cross-validation" class="nav-link" data-scroll-target="#cross-validation">Cross-validation</a></li>
+  <li><a href="#using-rsample" id="toc-using-rsample" class="nav-link" data-scroll-target="#using-rsample"><svg viewbox="0 0 581 512" style="position:relative;display:inline-block;top:.1em;fill:steelblue;height:2em;" xmlns="http://www.w3.org/2000/svg"> <path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg> Using <code>rsample</code></a></li>
   <li><a href="#preparation-for-the-next-lesson" id="toc-preparation-for-the-next-lesson" class="nav-link" data-scroll-target="#preparation-for-the-next-lesson">Preparation for the next lesson</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
@@ -222,6 +257,7 @@ div.csl-indent {
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
 <p>Machine learning algorithms estimate parameters or other features of a model. It is important to assess the accuracy or uncertainty associated with any estimate. For the purposes of prediction, we are ultimately concerned with how a model performs on a previously unseen set of test data. However, as soon as the model sees the test data, it should not be used again. Thus, in choosing a good model we need to be able to estimate test error without directly use of the test set. Furthermore, we have seen that the specification of some types of models requires the selection of values for one or more hyperparameters.</p>
+<p>Notice that in both cases of model fitting and model assessment, there is something that we want to estimate and the value of the estimate will depend on the sampled data. For example, in model fitting we may estimate a parameter while in model assessment we will estimate the test error. From a statistical perspective, we can view whatever it is we are estimating as a random variable so that our problem becomes to learn as much as we can about the distribution of that random variable.</p>
 <p><a href="https://en.wikipedia.org/wiki/Resampling_(statistics)">Resampling methods</a> involve judiciously choosing multiple subsets of our data, typically the training set as a way to solve the problems outlined in the last paragraph. The <a href="https://en.wikipedia.org/wiki/Bootstrapping_(statistics)">bootstrap</a> samples with replacement from the data in order to assess the accuracy or uncertainty associated with an estimate. <a href="https://en.wikipedia.org/wiki/Cross-validation_(statistics)">Cross-validation</a> (CV) holds out pieces of the data in order to assess the predictive accuracy of a model or to select hyperparameter values.</p>
 <p>Resampling methods are computation intensive because they involve refitting or re-estimating a model or parameters many times. On the other hand, resampling methods can be used in many more situations than analytic procedures can. Further, with the increased power and speed of modern computers and efficient implementations of algorithms used for resampling, resampling methods have become indispensable tools in modern statistics and machine learning.</p>
 <p>The R package <a href="https://rsample.tidymodels.org/"><code>rsample</code></a>, which is part of the <code>tidymodels</code> family provides functions to create different types of resamples and facilitates their use in many analyses. The <code>rsample</code> package provides a set of methods that can be used for:</p>
@@ -238,6 +274,90 @@ div.csl-indent {
 <section id="cross-validation" class="level2">
 <h2 class="anchored" data-anchor-id="cross-validation">Cross-validation</h2>
 <p><img src="https://miro.medium.com/v2/resize:fit:640/format:webp/1*PdwlCactbJf8F8C7sP-3gw.png" id="fig-cv-illustration" style="width:8in;height:4in"></p>
+</section>
+<section id="using-rsample" class="level2">
+<h2 class="anchored" data-anchor-id="using-rsample"><svg viewbox="0 0 581 512" style="position:relative;display:inline-block;top:.1em;fill:steelblue;height:2em;" xmlns="http://www.w3.org/2000/svg"> <path d="M581 226.6C581 119.1 450.9 32 290.5 32S0 119.1 0 226.6C0 322.4 103.3 402 239.4 418.1V480h99.1v-61.5c24.3-2.7 47.6-7.4 69.4-13.9L448 480h112l-67.4-113.7c54.5-35.4 88.4-84.9 88.4-139.7zm-466.8 14.5c0-73.5 98.9-133 220.8-133s211.9 40.7 211.9 133c0 50.1-26.5 85-70.3 106.4-2.4-1.6-4.7-2.9-6.4-3.7-10.2-5.2-27.8-10.5-27.8-10.5s86.6-6.4 86.6-92.7-90.6-87.9-90.6-87.9h-199V361c-74.1-21.5-125.2-67.1-125.2-119.9zm225.1 38.3v-55.6c57.8 0 87.8-6.8 87.8 27.3 0 36.5-38.2 28.3-87.8 28.3zm-.9 72.5H365c10.8 0 18.9 11.7 24 19.2-16.1 1.9-33 2.8-50.6 2.9v-22.1z"></path></svg> Using <code>rsample</code></h2>
+<p>The <code>rsample</code> package contains functions to create various types of “data splits” and can be used for purposes of resampling. Some examples of functions from <code>rsample</code> include:</p>
+<ul>
+<li><code>initial_split</code> - creates a single binary split of the data into a training set and testing set. We have seen this function before, it creates a so-called <code>rsplit</code> object.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">initial_split</span>(penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;Training/Testing/Total&gt;
+&lt;258/86/344&gt;</code></pre>
+</div>
+</div>
+<ul>
+<li><code>initial_validation_split</code> - creates a random three-way split of the data into a training set, a validation set, and a testing set. This can be used for very simple tuning tasks or in case you have a very large data set. It creates a <code>rsplot</code> object similar to <code>initial_split</code>.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">initial_validation_split</span>(penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;Training/Validation/Testing/Total&gt;
+&lt;206/69/69/344&gt;</code></pre>
+</div>
+</div>
+<ul>
+<li><code>bootstraps</code> - creates samples that are the same size as the original data set that is made using replacement. This creates a data frame with a column of <code>rsplit</code> objects named <code>splits</code>.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bootstraps</span>(penguins,<span class="at">times=</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Bootstrap sampling 
+# A tibble: 5 × 2
+  splits            id        
+  &lt;list&gt;            &lt;chr&gt;     
+1 &lt;split [344/129]&gt; Bootstrap1
+2 &lt;split [344/125]&gt; Bootstrap2
+3 &lt;split [344/127]&gt; Bootstrap3
+4 &lt;split [344/123]&gt; Bootstrap4
+5 &lt;split [344/120]&gt; Bootstrap5</code></pre>
+</div>
+</div>
+<ul>
+<li><code>vfold_cv</code> - randomly splits the data into V groups of roughly equal size (called “folds”). Also creates a data frame with a column of <code>rsplit</code> objects named <code>splits</code>.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vfold_cv</span>(penguins,<span class="at">v=</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>#  5-fold cross-validation 
+# A tibble: 5 × 2
+  splits           id   
+  &lt;list&gt;           &lt;chr&gt;
+1 &lt;split [275/69]&gt; Fold1
+2 &lt;split [275/69]&gt; Fold2
+3 &lt;split [275/69]&gt; Fold3
+4 &lt;split [275/69]&gt; Fold4
+5 &lt;split [276/68]&gt; Fold5</code></pre>
+</div>
+</div>
+<p><strong>Note:</strong> There are a couple of other similar functions such as <code>loo_cv</code> and <code>mc_cv</code> that you will be asked to explore in the homework.</p>
+<p>Note that resampled data sets created by <code>rsample</code> are directly accessible in a resampling object but do not contain much overhead in memory. Since the original data is not modified, R does not make an automatic copy. For example, creating 50 bootstraps of a data set does not create an object that is 50-fold larger in memory.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bootstraps</span>(penguins,<span class="at">times=</span><span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">analysis_df =</span> <span class="fu">map</span>(splits, <span class="sc">~</span><span class="fu">analysis</span>(.x)),</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">assessment_df =</span> <span class="fu">map</span>(splits, <span class="sc">~</span><span class="fu">assessment</span>(.x))) <span class="sc">%&gt;%</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(analysis_df) <span class="sc">%&gt;%</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">boot_mean_bill_length_mm =</span> <span class="fu">mean</span>(bill_length_mm ,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">boot_median_bill_length_mm =</span> <span class="fu">median</span>(bill_length_mm ,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">boot_sd_bill_length_mm =</span> <span class="fu">sd</span>(bill_length_mm ,<span class="at">na.rm=</span><span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 4
+  id        boot_mean_bill_lengt…¹ boot_median_bill_len…² boot_sd_bill_length_mm
+  &lt;chr&gt;                      &lt;dbl&gt;                  &lt;dbl&gt;                  &lt;dbl&gt;
+1 Bootstra…                   44.1                   45.2                   5.42
+2 Bootstra…                   43.4                   43                     5.34
+3 Bootstra…                   44.3                   45.1                   5.45
+4 Bootstra…                   44.3                   44.5                   5.76
+5 Bootstra…                   43.4                   44                     5.41
+# ℹ abbreviated names: ¹​boot_mean_bill_length_mm, ²​boot_median_bill_length_mm</code></pre>
+</div>
+</div>
 </section>
 <section id="preparation-for-the-next-lesson" class="level2">
 <h2 class="anchored" data-anchor-id="preparation-for-the-next-lesson">Preparation for the next lesson</h2>
@@ -302,37 +422,32 @@ Expand for Session Info
  quarto   1.3.450 @ /usr/local/bin/quarto
 
 ─ Packages ───────────────────────────────────────────────────────────────────
- package        * version date (UTC) lib source
- broom          * 1.0.5   2023-06-09 [1] CRAN (R 4.3.0)
- dials          * 1.2.0   2023-04-03 [1] CRAN (R 4.3.0)
- dplyr          * 1.1.3   2023-09-03 [1] CRAN (R 4.3.0)
- forcats        * 1.0.0   2023-01-29 [1] CRAN (R 4.3.0)
- ggplot2        * 3.4.3   2023-08-14 [1] CRAN (R 4.3.0)
- infer          * 1.0.5   2023-09-06 [1] CRAN (R 4.3.0)
- ISLR2          * 1.3-2   2022-11-20 [1] CRAN (R 4.3.0)
- kableExtra     * 1.3.4   2021-02-20 [1] CRAN (R 4.3.0)
- lubridate      * 1.9.2   2023-02-10 [1] CRAN (R 4.3.0)
- modeldata      * 1.2.0   2023-08-09 [1] CRAN (R 4.3.0)
- palmerpenguins * 0.1.1   2022-08-15 [1] CRAN (R 4.3.0)
- parsnip        * 1.1.1   2023-08-17 [1] CRAN (R 4.3.0)
- patchwork      * 1.1.3   2023-08-14 [1] CRAN (R 4.3.0)
- pROC           * 1.18.4  2023-07-06 [1] CRAN (R 4.3.0)
- purrr          * 1.0.2   2023-08-10 [1] CRAN (R 4.3.0)
- readr          * 2.1.4   2023-02-10 [1] CRAN (R 4.3.0)
- recipes        * 1.0.8   2023-08-25 [1] CRAN (R 4.3.0)
- rsample        * 1.2.0   2023-08-23 [1] CRAN (R 4.3.0)
- scales         * 1.2.1   2022-08-20 [1] CRAN (R 4.3.0)
- sessioninfo    * 1.2.2   2021-12-06 [1] CRAN (R 4.3.0)
- stringr        * 1.5.0   2022-12-02 [1] CRAN (R 4.3.0)
- tibble         * 3.2.1   2023-03-20 [1] CRAN (R 4.3.0)
- tidymodels     * 1.1.1   2023-08-24 [1] CRAN (R 4.3.0)
- tidyr          * 1.3.0   2023-01-24 [1] CRAN (R 4.3.0)
- tidytuesdayR   * 1.0.2   2022-02-01 [1] CRAN (R 4.3.0)
- tidyverse      * 2.0.0   2023-02-22 [1] CRAN (R 4.3.0)
- tune           * 1.1.2   2023-08-23 [1] CRAN (R 4.3.0)
- workflows      * 1.1.3   2023-02-22 [1] CRAN (R 4.3.0)
- workflowsets   * 1.0.1   2023-04-06 [1] CRAN (R 4.3.0)
- yardstick      * 1.2.0   2023-04-21 [1] CRAN (R 4.3.0)
+ package      * version date (UTC) lib source
+ broom        * 1.0.5   2023-06-09 [1] CRAN (R 4.3.0)
+ dials        * 1.2.0   2023-04-03 [1] CRAN (R 4.3.0)
+ dplyr        * 1.1.3   2023-09-03 [1] CRAN (R 4.3.0)
+ forcats      * 1.0.0   2023-01-29 [1] CRAN (R 4.3.0)
+ ggplot2      * 3.4.3   2023-08-14 [1] CRAN (R 4.3.0)
+ infer        * 1.0.5   2023-09-06 [1] CRAN (R 4.3.0)
+ kableExtra   * 1.3.4   2021-02-20 [1] CRAN (R 4.3.0)
+ lubridate    * 1.9.2   2023-02-10 [1] CRAN (R 4.3.0)
+ modeldata    * 1.2.0   2023-08-09 [1] CRAN (R 4.3.0)
+ parsnip      * 1.1.1   2023-08-17 [1] CRAN (R 4.3.0)
+ purrr        * 1.0.2   2023-08-10 [1] CRAN (R 4.3.0)
+ readr        * 2.1.4   2023-02-10 [1] CRAN (R 4.3.0)
+ recipes      * 1.0.8   2023-08-25 [1] CRAN (R 4.3.0)
+ rsample      * 1.2.0   2023-08-23 [1] CRAN (R 4.3.0)
+ scales       * 1.2.1   2022-08-20 [1] CRAN (R 4.3.0)
+ sessioninfo  * 1.2.2   2021-12-06 [1] CRAN (R 4.3.0)
+ stringr      * 1.5.0   2022-12-02 [1] CRAN (R 4.3.0)
+ tibble       * 3.2.1   2023-03-20 [1] CRAN (R 4.3.0)
+ tidymodels   * 1.1.1   2023-08-24 [1] CRAN (R 4.3.0)
+ tidyr        * 1.3.0   2023-01-24 [1] CRAN (R 4.3.0)
+ tidyverse    * 2.0.0   2023-02-22 [1] CRAN (R 4.3.0)
+ tune         * 1.1.2   2023-08-23 [1] CRAN (R 4.3.0)
+ workflows    * 1.1.3   2023-02-22 [1] CRAN (R 4.3.0)
+ workflowsets * 1.0.1   2023-04-06 [1] CRAN (R 4.3.0)
+ yardstick    * 1.2.0   2023-04-21 [1] CRAN (R 4.3.0)
 
  [1] /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library
 

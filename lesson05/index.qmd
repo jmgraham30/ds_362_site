@@ -20,13 +20,8 @@ license: "CC BY-NC-SA 4.0"
 # load packages used in document
 library(tidyverse)
 library(tidymodels)
-library(tidytuesdayR)
-library(ISLR2)
 library(broom)
 library(kableExtra)
-library(patchwork)
-library(pROC)
-library(palmerpenguins)
 
 tidymodels_prefer()
 
@@ -75,6 +70,8 @@ vembedr::embed_youtube(id="sv5r7CVAVwo?si=NHpjUOHurbYfEm0L",height=450) %>%
 
 Machine learning algorithms estimate parameters or other features of a model. It is important to assess the accuracy or uncertainty associated with any estimate. For the purposes of prediction, we are ultimately concerned with how a model performs on a previously unseen set of test data. However, as soon as the model sees the test data, it should not be used again. Thus, in choosing a good model we need to be able to estimate test error without directly use of the test set. Furthermore, we have seen that the specification of some types of models requires the selection of values for one or more hyperparameters.    
 
+Notice that in both cases of model fitting and model assessment, there is something that we want to estimate and the value of the estimate will depend on the sampled data. For example, in model fitting we may estimate a parameter while in model assessment we will estimate the test error. From a statistical perspective, we can view whatever it is we are estimating as a random variable so that our problem becomes to learn as much as we can about the distribution of that random variable.  
+
 [Resampling methods](https://en.wikipedia.org/wiki/Resampling_(statistics)) involve judiciously choosing multiple subsets of our data, typically the training set as a way to solve the problems outlined in the last paragraph. The [bootstrap](https://en.wikipedia.org/wiki/Bootstrapping_(statistics)) samples with replacement from the data in order to assess the accuracy or uncertainty associated with an estimate. [Cross-validation](https://en.wikipedia.org/wiki/Cross-validation_(statistics)) (CV) holds out pieces of the data in order to assess the predictive accuracy of a model or to select hyperparameter values. 
 
 Resampling methods are computation intensive because they involve refitting or re-estimating a model or parameters many times. On the other hand, resampling methods can be used in many more situations than analytic procedures can. Further, with the increased power and speed of modern computers and efficient implementations of algorithms used for resampling, resampling methods have become indispensable tools in modern statistics and machine learning. 
@@ -100,11 +97,66 @@ In this lesson, we will explain in detail the bootstrap and cross-validation res
 ![](https://miro.medium.com/v2/resize:fit:640/format:webp/1*PdwlCactbJf8F8C7sP-3gw.png){#fig-cv-illustration height=4in width=8in}
 
 
+## `r icons::icon_style(icons::fontawesome("r-project"),scale=2,fill="steelblue")` Using `rsample`
 
+The `rsample` package contains functions to create various types of "data splits" and can be used for purposes of resampling. Some examples of functions from `rsample` include:
+
+- `initial_split` - creates a single binary split of the data into a training set and testing set. We have seen this function before, it creates a so-called `rsplit` object. 
+
+```{r}
+#| code-fold: false
+
+
+initial_split(penguins)
+```
+
+- `initial_validation_split` - creates a random three-way split of the data into a training set, a validation set, and a testing set. This can be used for very simple tuning tasks or in case you have a very large data set. It creates a `rsplot` object similar to `initial_split`. 
+
+```{r}
+#| code-fold: false
+
+
+initial_validation_split(penguins)
+```
+
+- `bootstraps` -  creates samples that are the same size as the original data set that is made using replacement. This creates a data frame with a column of `rsplit` objects named `splits`.
+
+```{r}
+#| code-fold: false
+
+
+bootstraps(penguins,times=5)
+```
+
+- `vfold_cv` - randomly splits the data into V groups of roughly equal size (called "folds"). Also creates a data frame with a column of `rsplit` objects named `splits`.
+
+
+```{r}
+#| code-fold: false
+
+
+vfold_cv(penguins,v=5)
+```
+
+**Note:** There are a couple of other similar functions such as `loo_cv` and `mc_cv` that you will be asked to explore in the homework. 
+
+Note that resampled data sets created by `rsample` are directly accessible in a resampling object but do not contain much overhead in memory. Since the original data is not modified, R does not make an automatic copy. For example, creating 50 bootstraps of a data set does not create an object that is 50-fold larger in memory.
+
+```{r}
+bootstraps(penguins,times=5) %>%
+  mutate(analysis_df = map(splits, ~analysis(.x)),
+         assessment_df = map(splits, ~assessment(.x))) %>%
+  unnest(analysis_df) %>%
+  group_by(id) %>%
+  summarise(boot_mean_bill_length_mm = mean(bill_length_mm ,na.rm=TRUE),
+            boot_median_bill_length_mm = median(bill_length_mm ,na.rm=TRUE),
+            boot_sd_bill_length_mm = sd(bill_length_mm ,na.rm=TRUE))
+```
 
 
 
 ## Preparation for the next lesson
+
 
 
 For the next lesson we will cover tree-based methods. To prepare for the next lesson, please do the following:
