@@ -155,6 +155,8 @@ ts_meds_df %>%
 
 In @fig-bootstrap-meds we see that the mean of our bootstrap estimates is the value of the statistic for the original sample data. 
 
+Later in this lesson we will see how to use the `rsample` package to efficiently generate the resamples needed for step 1'. Further, we will look at a detailed application of the bootstrap to a more complicated statistical model.   
+
 ## Cross-validation
 
 
