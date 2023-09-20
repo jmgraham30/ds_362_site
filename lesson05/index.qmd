@@ -162,7 +162,7 @@ Later in this lesson we will see how to use the `rsample` package to efficiently
 
 
 
-![](https://miro.medium.com/v2/resize:fit:640/format:webp/1*PdwlCactbJf8F8C7sP-3gw.png){#fig-cv-illustration height=4in width=8in}
+![An illustration of the. idea of V-fold cross-validation.](https://miro.medium.com/v2/resize:fit:640/format:webp/1*PdwlCactbJf8F8C7sP-3gw.png){#fig-cv-illustration height=4in width=8in}
 
 
 ## `r icons::icon_style(icons::fontawesome("r-project"),scale=2,fill="steelblue")` Using `rsample`

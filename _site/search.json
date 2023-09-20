@@ -557,7 +557,7 @@
     "href": "lesson05/index.html#cross-validation",
     "title": "Lesson 5",
     "section": "Cross-validation",
-    "text": "Cross-validation"
+    "text": "Cross-validation\n\n\n\nFigure 3: An illustration of the. idea of V-fold cross-validation."
   },
   {
     "objectID": "lesson05/index.html#using-rsample",
