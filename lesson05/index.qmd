@@ -149,7 +149,7 @@ ts_meds_df <- tibble(ts_meds = ts_med_vals)
 
 ts_meds_df %>%
   ggplot(aes(x=ts_meds)) + 
-  geom_histogram(color="white",fill="darkgrey",bins=25) + 
+  geom_histogram(color="white",fill="orange",bins=25) + 
   labs(x = "Bootstrap median")
 ```
 
