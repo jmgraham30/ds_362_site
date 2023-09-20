@@ -117,6 +117,8 @@ div.csl-indent {
 }</script>
 <link href="../site_libs/vembedr-0.1.5/css/vembedr.css" rel="stylesheet">
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -269,7 +271,76 @@ div.csl-indent {
 </section>
 <section id="bootstrap" class="level2">
 <h2 class="anchored" data-anchor-id="bootstrap">Bootstrap</h2>
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Illustration_bootstrap.svg/1920px-Illustration_bootstrap.svg.png" id="fig-bootstrap-illustration" style="width:10in;height:4in"></p>
+<p>A common assumption of statistical models is that we have an independent and identically distributed sequence of random variables. Mathematically, <span class="math inline">\(X_{1}, X_{2}, \ldots , X_{n} \sim F\)</span>, where <span class="math inline">\(F\)</span> is a (typically unknown) cumulative distribution function. The <strong>empirical distribution function</strong> (EDF) <span class="math inline">\(\hat{F}_{n}\)</span> is defined by</p>
+<p><span class="math display">\[
+\hat{F}_{n}(x) = \frac{1}{n}\sum_{i=1}^{n}I(X_{i} \leq x)
+\]</span></p>
+<p>where <span class="math inline">\(I\)</span> is the indicator function we have seen before. The EDF satisfies for any fixed value <span class="math inline">\(x\)</span>:</p>
+<ol type="1">
+<li><p><span class="math inline">\(\text{E}[\hat{F}_{n}(x)] = F(x)\)</span>, and</p></li>
+<li><p><span class="math inline">\(\text{Var}[\hat{F}_{n}(x)] = \frac{F(x)(1 - F(x))}{n}\)</span></p></li>
+</ol>
+<p>For a statistic, that is, any function of the sample <span class="math inline">\(T_{n} = g(X_{1},X_{2},\ldots, X_{n})\)</span> the bootstrap estimates the variance <span class="math inline">\(\text{Var}_{F}(T_{n})\)</span> by <span class="math inline">\(\text{Var}_{\hat{F}_{n}}(T_{n})\)</span>. This is what’s called a <strong>plug-in</strong> estimator. Here’s how it works in practice:</p>
+<ol type="1">
+<li><p>Draw a sample <span class="math inline">\(X_{1}^{\ast}, \ldots , X_{n}^{\ast} \sim \hat{F}_{n}\)</span>.</p></li>
+<li><p>Compute <span class="math inline">\(T_{n}^{\ast} = g(X_{1}^{\ast}, \ldots , X_{n}^{\ast})\)</span>.</p></li>
+<li><p>Repeat steps 1 and 2, <span class="math inline">\(B\)</span> times to get <span class="math inline">\(T_{n,1}^{\ast}, \ldots T_{n,B}^{\ast}\)</span>.</p></li>
+<li><p>Define the <strong>bootstrap variance</strong> by</p></li>
+</ol>
+<p><span class="math display">\[
+\mathcal{v}_{\text{boot}} = \frac{1}{B}\sum_{b=1}^{B}\left(T_{n,b}^{\ast} - \frac{1}{B}\sum_{r=1}^{B}T_{n,r}^{\ast} \right)^{2}
+\]</span> It can be shown that <span class="math inline">\(\mathcal{v}_{\text{boot}}\)</span> converges in a specific sense to <span class="math inline">\(\text{Var}_{\hat{F}_{n}}(T_{n})\)</span> as <span class="math inline">\(B \rightarrow \infty\)</span>. To do this, we need to simulate <span class="math inline">\(\hat{F}_{n}\)</span>. Since <span class="math inline">\(\hat{F}_{n}\)</span> give probability <span class="math inline">\(\frac{1}{n}\)</span> to each data point, drawing <span class="math inline">\(n\)</span> points at random from <span class="math inline">\(\hat{F}_{n}\)</span> is the same as drawing a sample of size <span class="math inline">\(n\)</span> <strong>with replacement</strong> from the original data. So, we would replace step 1 above with</p>
+<p>1’. Draw <span class="math inline">\(X_{1}^{\ast}, \ldots , X_{n}^{\ast}\)</span> with replacement from <span class="math inline">\(X_{1}, \ldots , X_{n}\)</span>.</p>
+<p>Intuitively, if a sample is representative of a population, then many samples with replacement from the sample should be representative of the sampling distribution. <a href="#fig-bootstrap-illustration">Figure&nbsp;1</a> illustrates the bootstrap resampling process.</p>
+<div id="fig-bootstrap-illustration" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Illustration_bootstrap.svg/1920px-Illustration_bootstrap.svg.png" style="width:10in;height:4in" class="figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;1: An illustration of the bootstrap idea.</figcaption>
+</figure>
+</div>
+<p>Let’s look at a simple example by bootstraping the median of some sample data:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1234</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>sample_data <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">45</span>,<span class="at">mean =</span> <span class="dv">5</span>, <span class="at">sd =</span> <span class="fl">2.75</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>(t_med <span class="ot">&lt;-</span> <span class="fu">median</span>(sample_data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.594724</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>med_resamp <span class="ot">&lt;-</span> <span class="cf">function</span>(id_val){</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a> ts_med <span class="ot">&lt;-</span> <span class="fu">median</span>(<span class="fu">sample</span>(sample_data,<span class="at">replace=</span><span class="cn">TRUE</span>)) </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>ts_med_vals <span class="ot">&lt;-</span> <span class="fu">map_dbl</span>(<span class="dv">1</span><span class="sc">:</span>B,med_resamp)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>(se_boot <span class="ot">&lt;-</span> <span class="fu">sd</span>(ts_med_vals))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2782101</code></pre>
+</div>
+</div>
+<p>We can plot our bootstrapped median estimates to get an even better understanding of the variation of our statistic:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>ts_meds_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">ts_meds =</span> ts_med_vals)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>ts_meds_df <span class="sc">%&gt;%</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>ts_meds)) <span class="sc">+</span> </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">color=</span><span class="st">"white"</span>,<span class="at">fill=</span><span class="st">"darkgrey"</span>,<span class="at">bins=</span><span class="dv">25</span>) <span class="sc">+</span> </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Bootstrap median"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-bootstrap-meds" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="index_files/figure-html/fig-bootstrap-meds-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;2: The distribution of our boootstrapped median estimates.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>In <a href="#fig-bootstrap-meds">Figure&nbsp;2</a> we see that the mean of our bootstrap estimates is the value of the statistic for the original sample data.</p>
 </section>
 <section id="cross-validation" class="level2">
 <h2 class="anchored" data-anchor-id="cross-validation">Cross-validation</h2>
@@ -282,7 +353,7 @@ div.csl-indent {
 <li><code>initial_split</code> - creates a single binary split of the data into a training set and testing set. We have seen this function before, it creates a so-called <code>rsplit</code> object.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">initial_split</span>(penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">initial_split</span>(penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;Training/Testing/Total&gt;
 &lt;258/86/344&gt;</code></pre>
@@ -292,7 +363,7 @@ div.csl-indent {
 <li><code>initial_validation_split</code> - creates a random three-way split of the data into a training set, a validation set, and a testing set. This can be used for very simple tuning tasks or in case you have a very large data set. It creates a <code>rsplot</code> object similar to <code>initial_split</code>.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">initial_validation_split</span>(penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">initial_validation_split</span>(penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;Training/Validation/Testing/Total&gt;
 &lt;206/69/69/344&gt;</code></pre>
@@ -302,24 +373,24 @@ div.csl-indent {
 <li><code>bootstraps</code> - creates samples that are the same size as the original data set that is made using replacement. This creates a data frame with a column of <code>rsplit</code> objects named <code>splits</code>.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bootstraps</span>(penguins,<span class="at">times=</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bootstraps</span>(penguins,<span class="at">times=</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># Bootstrap sampling 
 # A tibble: 5 × 2
   splits            id        
   &lt;list&gt;            &lt;chr&gt;     
-1 &lt;split [344/127]&gt; Bootstrap1
-2 &lt;split [344/123]&gt; Bootstrap2
-3 &lt;split [344/109]&gt; Bootstrap3
-4 &lt;split [344/125]&gt; Bootstrap4
-5 &lt;split [344/129]&gt; Bootstrap5</code></pre>
+1 &lt;split [344/125]&gt; Bootstrap1
+2 &lt;split [344/136]&gt; Bootstrap2
+3 &lt;split [344/126]&gt; Bootstrap3
+4 &lt;split [344/140]&gt; Bootstrap4
+5 &lt;split [344/121]&gt; Bootstrap5</code></pre>
 </div>
 </div>
 <ul>
 <li><code>vfold_cv</code> - randomly splits the data into V groups of roughly equal size (called “folds”). Also creates a data frame with a column of <code>rsplit</code> objects named <code>splits</code>.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vfold_cv</span>(penguins,<span class="at">v=</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vfold_cv</span>(penguins,<span class="at">v=</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>#  5-fold cross-validation 
 # A tibble: 5 × 2
@@ -338,15 +409,15 @@ div.csl-indent {
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bootstraps</span>(penguins,<span class="at">times=</span><span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">analysis_df =</span> <span class="fu">map</span>(splits, <span class="sc">~</span><span class="fu">analysis</span>(.x)),</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">assessment_df =</span> <span class="fu">map</span>(splits, <span class="sc">~</span><span class="fu">assessment</span>(.x))) <span class="sc">%&gt;%</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(analysis_df) <span class="sc">%&gt;%</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">boot_mean_bill_length_mm =</span> <span class="fu">mean</span>(bill_length_mm ,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">boot_median_bill_length_mm =</span> <span class="fu">median</span>(bill_length_mm ,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">boot_sd_bill_length_mm =</span> <span class="fu">sd</span>(bill_length_mm ,<span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bootstraps</span>(penguins,<span class="at">times=</span><span class="dv">5</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">analysis_df =</span> <span class="fu">map</span>(splits, <span class="sc">~</span><span class="fu">analysis</span>(.x)),</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">assessment_df =</span> <span class="fu">map</span>(splits, <span class="sc">~</span><span class="fu">assessment</span>(.x))) <span class="sc">%&gt;%</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(analysis_df) <span class="sc">%&gt;%</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">boot_mean_bill_length_mm =</span> <span class="fu">mean</span>(bill_length_mm ,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">boot_median_bill_length_mm =</span> <span class="fu">median</span>(bill_length_mm ,<span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">boot_sd_bill_length_mm =</span> <span class="fu">sd</span>(bill_length_mm ,<span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div id="tbl-rsample-examp" class="anchored">
@@ -363,33 +434,33 @@ div.csl-indent {
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Bootstrap1</td>
-<td style="text-align: right;">44.01224</td>
-<td style="text-align: right;">45.2</td>
-<td style="text-align: right;">5.321640</td>
+<td style="text-align: right;">43.96268</td>
+<td style="text-align: right;">44.5</td>
+<td style="text-align: right;">5.380798</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Bootstrap2</td>
-<td style="text-align: right;">43.47289</td>
-<td style="text-align: right;">43.8</td>
-<td style="text-align: right;">5.237270</td>
+<td style="text-align: right;">44.22551</td>
+<td style="text-align: right;">45.1</td>
+<td style="text-align: right;">5.257893</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Bootstrap3</td>
-<td style="text-align: right;">43.75219</td>
-<td style="text-align: right;">43.6</td>
-<td style="text-align: right;">5.272497</td>
+<td style="text-align: right;">43.44575</td>
+<td style="text-align: right;">44.0</td>
+<td style="text-align: right;">5.331782</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Bootstrap4</td>
-<td style="text-align: right;">43.83626</td>
-<td style="text-align: right;">43.8</td>
-<td style="text-align: right;">5.459687</td>
+<td style="text-align: right;">43.95306</td>
+<td style="text-align: right;">44.5</td>
+<td style="text-align: right;">5.333140</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Bootstrap5</td>
-<td style="text-align: right;">43.44100</td>
-<td style="text-align: right;">43.2</td>
-<td style="text-align: right;">5.598457</td>
+<td style="text-align: right;">43.88692</td>
+<td style="text-align: right;">44.9</td>
+<td style="text-align: right;">5.473746</td>
 </tr>
 </tbody>
 </table>
@@ -458,7 +529,7 @@ Expand for Session Info
  collate  en_US.UTF-8
  ctype    en_US.UTF-8
  tz       America/New_York
- date     2023-09-19
+ date     2023-09-20
  pandoc   3.1.1 @ /Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/ (via rmarkdown)
  quarto   1.3.450 @ /usr/local/bin/quarto
 
