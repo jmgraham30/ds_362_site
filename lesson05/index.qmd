@@ -159,11 +159,18 @@ Later in this lesson we will see how to use the `rsample` package to efficiently
 
 ## Cross-validation
 
+There are difference approaches to cross-validation but the most common method is **$V$-fold cross-validation**[^1]. This method involves randomly dividing the training set into $V$ groups called *folds* of approximately equal size. The first fold is treated as a validation set and the model is fit on the remaining $V-1$ folds. Then, the error $E_{1}$ is computed for the held out set. This procedure is repeated $V$ times and the $V$-fold CV estimate for the test error is
 
+$$
+\text{CV}_{V} = \frac{1}{V}\sum_{i=1}^{k}E_{i}
+$$
+@fig-cv-illustration illustrates $V$-fold cross-validation for $V=5$.
 
+[^1]: $V$-fold cross-validation is also commonly referred to as $k$-fold cross-validation but we avoid the $k$ notation because $k$ will appear as a hyperparameter for several of the machine learning algorithms we will discuss. 
 
 ![An illustration of the. idea of V-fold cross-validation.](https://miro.medium.com/v2/resize:fit:640/format:webp/1*PdwlCactbJf8F8C7sP-3gw.png){#fig-cv-illustration height=4in width=8in}
 
+Whenever $V=1$, we have what is known as *leave one out cross-validation* (LOOCV). The most common values for $V$ are five and ten. In the next section, we will see how to efficiently create the folds for cross-validation using the `rsample` package. Then later, we will look at a detailed application of cross-validation to some machine learning models.  
 
 ## `r icons::icon_style(icons::fontawesome("r-project"),scale=2,fill="steelblue")` Using `rsample`
 
