@@ -26,7 +26,23 @@ After this lesson, students will be able to:
 
 For this lesson, refer to the following readings, etc.:
 
--
+- Read chapter 8 from of *An Introduction to Statistical Learning* [@tibshirani2017introduction]. You may also want to read chapter 8 of *Statistical Learning with Math and R* [@suzuki2020statistical].
+
+-   Watch the corresponding video lecture on decision trees. [View on YouTube](https://youtu.be/QNnayf--_yk?si=x-oVRRqQE1cK-oZJ).
+
+```{r}
+#| echo: false
+
+vembedr::embed_youtube(id="QNnayf--_yk?si=x-oVRRqQE1cK-oZJ",height=450) %>%
+  vembedr::use_align("center")
+```
+
+
+- Go through the following two blog posts by Julia Silge:
+
+    - [Predicting injuries for Chicago traffic crashes](https://juliasilge.com/blog/chicago-traffic-model/)
+    
+    - [Predict availability in water sources with random forest models](https://juliasilge.com/blog/water-sources/)
 
 
 
