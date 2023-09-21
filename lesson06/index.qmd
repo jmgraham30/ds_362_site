@@ -1,0 +1,78 @@
+---
+title: "Lesson 6"
+subtitle: "Tree-based Models"
+author: "JMG"
+format:
+  html:
+    echo: true
+    code-fold: false
+    code-summary: "Show the code"
+    toc: true
+    toc-location: left
+bibliography: lesson06.bib
+license: "CC BY-NC-SA 4.0"
+---
+
+
+
+## Learning Objectives
+
+After this lesson, students will be able to: 
+
+- 
+
+
+## Readings, etc.
+
+For this lesson, refer to the following readings, etc.:
+
+-
+
+
+
+
+
+
+
+
+## Preparation for the next lesson
+
+To prepare for the next lesson, please read:
+
+- 
+
+
+## References
+
+::: {#refs}
+:::
+
+
+:::{.callout-tip collapse="true"}
+## Expand for Session Info
+```{r}
+#| echo: false
+
+
+library(sessioninfo)
+# save the session info as an object
+pkg_sesh <- session_info(pkgs = "attached")
+
+# get the quarto version
+quarto_version <- system("quarto --version", intern = TRUE)
+
+# inject the quarto info
+pkg_sesh$platform$quarto <- paste(
+  system("quarto --version", intern = TRUE), 
+  "@", 
+  quarto::quarto_path()
+  )
+
+# print it out
+pkg_sesh
+```
+
+:::
+
+
+[![](http://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-nc-sa.png?raw=1){fig-align="left" width=15%}](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode)
