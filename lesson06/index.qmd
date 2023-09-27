@@ -13,13 +13,29 @@ bibliography: lesson06.bib
 license: "CC BY-NC-SA 4.0"
 ---
 
+```{r}
+#| include: false
+#| message: false
+#| warning: false
 
+library(tidyverse)
+library(tidymodels)
+library(ISLR2)
+
+tidymodels_prefer()
+
+theme_set(theme_minimal(base_size = 12))
+```
 
 ## Learning Objectives
 
 After this lesson, students will be able to: 
 
-- 
+- Define decision tree and understand the splitting algorithm for tree-based regression and classification. 
+
+- Define the concepts of bagging, boosting, and random forests.
+
+- Use the `tidymodels` workflow to fit and tune various tree-based models. 
 
 
 ## Readings, etc.
@@ -45,18 +61,155 @@ vembedr::embed_youtube(id="QNnayf--_yk?si=x-oVRRqQE1cK-oZJ",height=450) %>%
     - [Predict availability in water sources with random forest models](https://juliasilge.com/blog/water-sources/)
 
 
+## Overview
+
+Tree-based models are a class of *nonparametric* algorithms that work by partitioning the feature space, that is, the predictors into a number of smaller (non-overlapping) regions with similar response values using a set of splitting rules. Predictions are obtained by averaging response values in each region. Such divide-and-conquer methods can produce simple rules that are easy to interpret and visualize. However, simple decision trees typically lack in predictive performance compared to more complex algorithms. In order to address this, techniques such as bagging, boosting, and random forests have been developed. Each of these approaches involve fitting multiple trees which are combined in some way that results in improved accuracy but at a cost of some loss in interpretability.  
 
 
+## Basic Decision Trees
+
+### Motivating Example
+
+To motivate decision trees, let's consider a regression problem. The `Hitters` data from the `ISLR2` package contains data on major league baseball players. We would like to use this data to predict player salaries based on information about the players and their performance. Let's start by getting a glimpse of the data.
+
+```{r}
+#| echo: false
 
 
+glimpse(Hitters)
+```
 
+We see that there are some missing values for the `Salary` response variable so let's remove the rows with the missing observations.
+
+```{r}
+Hitters <- Hitters %>%
+  filter(!is.na(Salary))
+```
+
+Let's also look at the distribution for `Salary`.
+
+```{r}
+#| code-fold: true
+#| message: false
+#| label: fig-player-salaries
+#| fig-cap: | 
+#|  Histrogram of salaries for players recorded in the `Hitters` data set from 
+#|  the `ISLR2` package. 
+Hitters %>%
+  ggplot(aes(x=Salary)) + 
+  geom_histogram(color="white")
+```
+
+Since the data is skewed, we should $\log$ transform the response variable. 
+
+```{r}
+#| code-fold: true
+#| message: false
+#| label: fig-player-salaries-log
+#| fig-cap: | 
+#|  Histrogram ($\log$ scale) of salaries for players recorded in the `Hitters` data set from 
+#|  the `ISLR2` package. 
+
+Hitters <- Hitters %>%
+  mutate(Salary_log = log(Salary))
+
+Hitters %>%
+  ggplot(aes(x=Salary_log)) + 
+  geom_histogram(color="white") + 
+  labs(x = "Salary (log)")
+```
+
+For illustrative purposes, let's suppose we want to model the $\log$ scaled salary as a response to the predictor variables `Hits` which records the number of by the player in their most recent year of play and `Years` which is the numbe of years the player has played. We first examine a plot of the relationship between these variables.
+
+```{r}
+#| code-fold: true
+#| message: false
+#| label: fig-player-salaries-hits
+#| fig-cap: | 
+#|  Scatter plot of ($\log$ scale) of salaries versus hits for players recorded #|  in the `Hitters` data set from the `ISLR2` package. 
+
+
+Hitters %>%
+  ggplot(aes(x = Years, y = Hits, color=Salary_log)) + 
+  geom_point() + 
+  labs(color = "Salary (log)")
+```
+
+For this problem, the basic decision tree algorithm for regression will separate the `Years-Hits` predictor or feature space (in this case the plane) into some number of distinct regions and then make predictions by averaging the $\log$ scaled salary values in each of the regions. 
+
+The question is, how to we divide up the predictor space?  
+
+### Basic Decison Tree Regerssion Algorithm
+
+To build a regression tree, there are two basic steps:
+
+1. Divide the predicor space. Suppose there are $p$ predictors so that ${\bf x} = (x_{1}, x_{2}, \ldots , x_{p})$. For the set of all possible predictor values, divide this up into $J$ non-overlapping regions, $R_{1}, R_{2}, \ldots ,R_{J}$. 
+
+2. Fo revery observation that falls into region $R_{j}$ we make the same prediction, which is simply the mean of the response values for the training observations in $R_{j}$.
+
+
+The question is, how do we construct the regions $R_{1}, R_{2}, \ldots ,R_{J}$? A typical approach is to divide the predictor space into *boxes*, that is, each $R_{j}$ will be a set of the form $(a_{1j}, b_{1j}) \times (a_{2j},b_{2j}) \times \cdots \times (a_{pj},b_{pj})$. Then the goal is to find boxes that minimize
+
+$$
+\text{RSS} = \sum_{j=1}^{J}\sum_{i \in R_{j}}(y_{i} - \bar{y}_{R_{j}})^2
+$$
+
+There is a major challenge to minimizing the RSS in this setting:
+
+> It is infeasible to consider every possible partition of the space of predictors into $J$ boxes. 
+
+Instead of an exhaustive search, the typical approach is what is known as **recursive binary splitting**. Here is how it works:
+
+1. Select the predictor $x_{j}$ and a cutpoint $s$ such that splitting the predictor space into the regions $\{{\bf x} | x_{j} < s\}$ and $\{{\bf x} | x_{j} \geq s\}$ produces the greatest possible reduction in RSS.
+
+2. Repeat the process, but this time, instead of splitting the entire predictor space, we split one of the two previously identified regions. This will result in three regions and we attempt to split one of those, etc. The process continues until a stopping criterion is reached. This algorithm is an example of a *greedy* algorithm because at each step of the tree-building process, the best split is made at that step.
+
+@fig-three-split shows an example of splitting applied to the   `Hitters` data set from the `ISLR2` package. 
+
+![A three-region partition for the `Hitters` data set from the `ISLR2` package.](https://www.dropbox.com/scl/fi/in7v3m89cpfm3y1llmaa9/8_2.jpg?rlkey=b70m3u4v1zpmrlcmhvrkh4s8s&raw=1){#fig-three-split}
+
+We can represent this result by the tree diagram shown in @fig-three-split-tree.
+
+![The tree diagram for the split shown in @fig-three-split.](https://www.dropbox.com/scl/fi/j6ar9pe82uhx3ea95mahe/8_1.jpg?rlkey=d78x4028k37sdzl3qu6d5bdvk&raw=1){#fig-three-split-tree width=50% height=50%}
+
+Once the regions $R_{1}, R_{2}, \ldots, R_{J}$ have been created, we predict the response for a given test observation using the mean of the training observations in the region to which that test observation belongs.  
+
+Here is an example in R using the `rpart` package that fits and plots a similar decision tree model:
+
+```{r}
+hitters_dt <- rpart::rpart(Salary_log ~ Hits +Years,
+                           data=Hitters,
+                           method="anova",
+                           control=list(cp = 0.1,xval=3))
+
+rpart.plot::rpart.plot(hitters_dt)
+```
 
 ## Preparation for the next lesson
 
 To prepare for the next lesson, please read:
 
-- 
+- Read chapter 9 from of *An Introduction to Statistical Learning* [@tibshirani2017introduction]. You may also want to read chapter 9 of *Statistical Learning with Math and R* [@suzuki2020statistical].
 
+Watch the following video lectures on support vector machines: 
+
+* [View Supoprt Vector Classifier video on YouTube](https://youtu.be/pjvnCEfAswc?si=5I-xmhB3Y006RP0Y).
+
+```{r}
+#| echo: false
+
+vembedr::embed_youtube(id="pjvnCEfAswc?si=5I-xmhB3Y006RP0Y",height=450) %>%
+  vembedr::use_align("center")
+```
+
+* [View Supoprt Vector Classifiers in R video on YouTube](https://youtu.be/WCRwbrNWrpw?si=rkEz30HgpeBK9VTD).
+    
+```{r}
+#| echo: false
+
+vembedr::embed_youtube(id="WCRwbrNWrpw?si=rkEz30HgpeBK9VTD",height=450) %>%
+  vembedr::use_align("center")
+```
 
 ## References
 

@@ -314,7 +314,7 @@ $ NewLeague &lt;fct&gt; A, N, A, N, N, A, A, A, N, A, A, N, N, A, N, A, N, A, A,
 <details>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Hitters <span class="ot">&lt;-</span> Hitters <span class="sc">%&gt;%</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Salary_log =</span> <span class="fu">log10</span>(Salary))</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Salary_log =</span> <span class="fu">log</span>(Salary))</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>Hitters <span class="sc">%&gt;%</span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Salary_log)) <span class="sc">+</span> </span>
@@ -362,17 +362,53 @@ $ NewLeague &lt;fct&gt; A, N, A, N, N, A, A, A, N, A, A, N, N, A, N, A, N, A, A,
 <p><span class="math display">\[
 \text{RSS} = \sum_{j=1}^{J}\sum_{i \in R_{j}}(y_{i} - \bar{y}_{R_{j}})^2
 \]</span></p>
+<p>There is a major challenge to minimizing the RSS in this setting:</p>
+<blockquote class="blockquote">
+<p>It is infeasible to consider every possible partition of the space of predictors into <span class="math inline">\(J\)</span> boxes.</p>
+</blockquote>
+<p>Instead of an exhaustive search, the typical approach is what is known as <strong>recursive binary splitting</strong>. Here is how it works:</p>
+<ol type="1">
+<li><p>Select the predictor <span class="math inline">\(x_{j}\)</span> and a cutpoint <span class="math inline">\(s\)</span> such that splitting the predictor space into the regions <span class="math inline">\(\{{\bf x} | x_{j} &lt; s\}\)</span> and <span class="math inline">\(\{{\bf x} | x_{j} \geq s\}\)</span> produces the greatest possible reduction in RSS.</p></li>
+<li><p>Repeat the process, but this time, instead of splitting the entire predictor space, we split one of the two previously identified regions. This will result in three regions and we attempt to split one of those, etc. The process continues until a stopping criterion is reached. This algorithm is an example of a <em>greedy</em> algorithm because at each step of the tree-building process, the best split is made at that step.</p></li>
+</ol>
+<p><a href="#fig-three-split">Figure&nbsp;4</a> shows an example of splitting applied to the <code>Hitters</code> data set from the <code>ISLR2</code> package.</p>
+<div id="fig-three-split" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="https://www.dropbox.com/scl/fi/in7v3m89cpfm3y1llmaa9/8_2.jpg?rlkey=b70m3u4v1zpmrlcmhvrkh4s8s&amp;raw=1" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;4: A three-region partition for the <code>Hitters</code> data set from the <code>ISLR2</code> package.</figcaption>
+</figure>
+</div>
+<p>We can represent this result by the tree diagram shown in <a href="#fig-three-split-tree">Figure&nbsp;5</a>.</p>
+<div id="fig-three-split-tree" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="https://www.dropbox.com/scl/fi/j6ar9pe82uhx3ea95mahe/8_1.jpg?rlkey=d78x4028k37sdzl3qu6d5bdvk&amp;raw=1" style="width:50.0%;height:50.0%" class="figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;5: The tree diagram for the split shown in <a href="#fig-three-split">Figure&nbsp;4</a>.</figcaption>
+</figure>
+</div>
+<p>Once the regions <span class="math inline">\(R_{1}, R_{2}, \ldots, R_{J}\)</span> have been created, we predict the response for a given test observation using the mean of the training observations in the region to which that test observation belongs.</p>
+<p>Here is an example in R using the <code>rpart</code> package that fits and plots a similar decision tree model:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>hitters_dt <span class="ot">&lt;-</span> rpart<span class="sc">::</span><span class="fu">rpart</span>(Salary_log <span class="sc">~</span> Hits <span class="sc">+</span>Years,</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">data=</span>Hitters,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">method=</span><span class="st">"anova"</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">control=</span><span class="fu">list</span>(<span class="at">cp =</span> <span class="fl">0.1</span>,<span class="at">xval=</span><span class="dv">3</span>))</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>rpart.plot<span class="sc">::</span><span class="fu">rpart.plot</span>(hitters_dt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 </section>
 </section>
 <section id="preparation-for-the-next-lesson" class="level2">
 <h2 class="anchored" data-anchor-id="preparation-for-the-next-lesson">Preparation for the next lesson</h2>
 <p>To prepare for the next lesson, please read:</p>
 <ul>
-<li><p>Read chapter 9 from of <em>An Introduction to Statistical Learning</em> <span class="citation" data-cites="tibshirani2017introduction">(<a href="#ref-tibshirani2017introduction" role="doc-biblioref">Tibshirani, James, and Trevor 2017</a>)</span>. You may also want to read chapter 9 of <em>Statistical Learning with Math and R</em> <span class="citation" data-cites="suzuki2020statistical">(<a href="#ref-suzuki2020statistical" role="doc-biblioref">Suzuki 2020</a>)</span>.</p></li>
-<li><p>Watch the following video lectures on support vector machines:</p>
+<li>Read chapter 9 from of <em>An Introduction to Statistical Learning</em> <span class="citation" data-cites="tibshirani2017introduction">(<a href="#ref-tibshirani2017introduction" role="doc-biblioref">Tibshirani, James, and Trevor 2017</a>)</span>. You may also want to read chapter 9 of <em>Statistical Learning with Math and R</em> <span class="citation" data-cites="suzuki2020statistical">(<a href="#ref-suzuki2020statistical" role="doc-biblioref">Suzuki 2020</a>)</span>.</li>
+</ul>
+<p>Watch the following video lectures on support vector machines:</p>
 <ul>
 <li><a href="https://youtu.be/pjvnCEfAswc?si=5I-xmhB3Y006RP0Y">View Supoprt Vector Classifier video on YouTube</a>.</li>
-</ul></li>
 </ul>
 <div class="cell">
 <div class="cell-output-display">
@@ -383,7 +419,9 @@ $ NewLeague &lt;fct&gt; A, N, A, N, N, A, A, A, N, A, A, N, N, A, N, A, N, A, A,
 </div>
 </div>
 </div>
-<pre><code>* [View Supoprt Vector Classifiers in R video on YouTube](https://youtu.be/WCRwbrNWrpw?si=rkEz30HgpeBK9VTD).</code></pre>
+<ul>
+<li><a href="https://youtu.be/WCRwbrNWrpw?si=rkEz30HgpeBK9VTD">View Supoprt Vector Classifiers in R video on YouTube</a>.</li>
+</ul>
 <div class="cell">
 <div class="cell-output-display">
 <div class="vembedr" align="center">
