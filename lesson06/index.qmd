@@ -185,6 +185,8 @@ hitters_dt <- rpart::rpart(Salary_log ~ Hits +Years,
 rpart.plot::rpart.plot(hitters_dt)
 ```
 
+### Pruning
+
 ## Preparation for the next lesson
 
 To prepare for the next lesson, please read:
