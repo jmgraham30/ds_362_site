@@ -187,6 +187,39 @@ rpart.plot::rpart.plot(hitters_dt)
 
 ### Pruning
 
+
+
+### Classification Trees
+
+
+
+
+### Advantages and Disadvantages of Trees
+
+
+
+
+## Bagging
+
+
+
+
+## Random Forests
+
+
+
+
+## Boosting 
+
+
+
+
+
+## Summary
+
+
+
+
 ## Preparation for the next lesson
 
 To prepare for the next lesson, please read:
