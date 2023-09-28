@@ -398,7 +398,7 @@ $ NewLeague &lt;fct&gt; A, N, A, N, N, A, A, A, N, A, A, N, N, A, N, A, N, A, A,
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>hitters_dt <span class="ot">&lt;-</span> rpart<span class="sc">::</span><span class="fu">rpart</span>(Salary_log <span class="sc">~</span> Hits <span class="sc">+</span>Years,</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">data=</span>Hitters,</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">method=</span><span class="st">"anova"</span>,</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">control=</span><span class="fu">list</span>(<span class="at">cp =</span> <span class="fl">0.1</span>,<span class="at">xval=</span><span class="dv">3</span>))</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">control=</span><span class="fu">list</span>(<span class="at">cp =</span> <span class="fl">0.1</span>,<span class="at">maxdepth=</span><span class="dv">2</span>))</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>rpart.plot<span class="sc">::</span><span class="fu">rpart.plot</span>(hitters_dt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -409,6 +409,7 @@ $ NewLeague &lt;fct&gt; A, N, A, N, N, A, A, A, N, A, A, N, N, A, N, A, N, A, A,
 <section id="pruning" class="level3">
 <h3 class="anchored" data-anchor-id="pruning">Pruning</h3>
 <p>It is easy to overfit a decision tree to training data. An approach to dealing with this issue is to use a technique known as <em>pruning</em>. The idea is to build an initially large tree <span class="math inline">\(T_{0}\)</span>, and then prune it back to a subtree that leads to the lowest test error rate. In order to do so, we will need to incorporate some way to estimate test error.</p>
+<p>The approach we take, known as <strong>cost complexity pruning</strong> is to consider a sequence of subtrees indexed by a non-negative parameter <span class="math inline">\(\alpha\)</span>. For each value of <span class="math inline">\(\alpha\)</span>, there corresponds a subtree <span class="math inline">\(T \subset T_{0}\)</span> that minimizes the following expression:</p>
 <p><span class="math display">\[
 \sum_{m=1}^{|T|} \sum_{i:\ x_{i} \in R_{m}} (y_{i} - \bar{y}_{R_{m}})^2 + \alpha |T|
 \]</span></p>
@@ -436,7 +437,7 @@ $ NewLeague &lt;fct&gt; A, N, A, N, N, A, A, A, N, A, A, N, N, A, N, A, N, A, A,
 <td style="text-align: left;">3. Use <span class="math inline">\(V\)</span>-fold cross-validation to choose <span class="math inline">\(\alpha\)</span>. That is, divide the training observations into <span class="math inline">\(V\)</span> folds. For each <span class="math inline">\(k=1,\ldots , V\)</span>:</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">(a) Repeat Steps 1 and 3 on all but the <span class="math inline">\(v\)</span>th fold of the training data.</td>
+<td style="text-align: left;">(a) Repeat Steps 1 and 2 on all but the <span class="math inline">\(v\)</span>th fold of the training data.</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">(b) Evaluate the mean squared prediction error on the data in the left-out <span class="math inline">\(v\)</span>th fold, as a function of <span class="math inline">\(\alpha\)</span>.</td>
@@ -450,6 +451,31 @@ $ NewLeague &lt;fct&gt; A, N, A, N, N, A, A, A, N, A, A, N, N, A, N, A, N, A, A,
 </tbody>
 </table>
 </div>
+<p>In the function <code>rpart</code> briefly introduced earlier, one can control the complexity parameter through setting a value named <code>cp</code> and the maximum depth with <code>maxdepth</code>. Let’s see what happens if we decrease <code>cp</code> and increase <code>maxdepth</code> in comparison with our earlier tree for the <code>Hitters</code> data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>hitters_dt_2 <span class="ot">&lt;-</span> rpart<span class="sc">::</span><span class="fu">rpart</span>(Salary_log <span class="sc">~</span> Hits <span class="sc">+</span>Years,</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">data=</span>Hitters,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">method=</span><span class="st">"anova"</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">control=</span><span class="fu">list</span>(<span class="at">cp =</span> <span class="fl">0.01</span>,<span class="at">maxdepth=</span><span class="dv">6</span>))</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>rpart.plot<span class="sc">::</span><span class="fu">rpart.plot</span>(hitters_dt_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>We can also plot the results of the cross-validation:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>rpart<span class="sc">::</span><span class="fu">plotcp</span>(hitters_dt_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-cp-cv" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="index_files/figure-html/fig-cp-cv-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;6: The results of cross-validation to choose a value for the complexity parameter <span class="math inline">\(\alpha\)</span>.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Notice from <a href="#fig-cp-cv">Figure&nbsp;6</a> we see that there is little gain in decreasing the complexity parameter, that is, the value we denoted by <span class="math inline">\(\alpha\)</span> beyond 0.029.</p>
 </section>
 <section id="classification-trees" class="level3">
 <h3 class="anchored" data-anchor-id="classification-trees">Classification Trees</h3>

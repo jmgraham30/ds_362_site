@@ -180,7 +180,7 @@ Here is an example in R using the `rpart` package that fits and plots a similar 
 hitters_dt <- rpart::rpart(Salary_log ~ Hits +Years,
                            data=Hitters,
                            method="anova",
-                           control=list(cp = 0.1,xval=3))
+                           control=list(cp = 0.1,maxdepth=2))
 
 rpart.plot::rpart.plot(hitters_dt)
 ```
@@ -188,6 +188,8 @@ rpart.plot::rpart.plot(hitters_dt)
 ### Pruning
 
 It is easy to overfit a decision tree to training data. An approach to dealing with this issue is to use a technique known as *pruning*. The idea is to build an initially large tree $T_{0}$, and then prune it back to a subtree that leads to the lowest test error rate. In order to do so, we will need to incorporate some way to estimate test error. 
+
+The approach we take, known as **cost complexity pruning** is to consider a sequence of subtrees indexed by a non-negative parameter $\alpha$. For each value of $\alpha$, there corresponds a subtree $T \subset T_{0}$ that minimizes the following expression: 
 
 $$
 \sum_{m=1}^{|T|} \sum_{i:\ x_{i} \in R_{m}} (y_{i} - \bar{y}_{R_{m}})^2 + \alpha |T|
@@ -202,12 +204,35 @@ Here, $|T|$ is the number of terminal nodes of the subtree $T$, $R_{m}$ is the b
 | 1. Use recursive binary splitting to grow a large tree on the training data, stopping only when each terminal node has fewer than some minimum number of observations.       |
 | 2. Apply cost complexity pruning to the large tree in order to obtain a sequence of  best subtrees, as a function of $\alpha$.  |
 | 3. Use $V$-fold cross-validation to choose $\alpha$. That is, divide the training observations into $V$ folds. For each $k=1,\ldots , V$: |
-|    (a) Repeat Steps 1 and 3 on all but the $v$th fold of the training data.|
+|    (a) Repeat Steps 1 and 2 on all but the $v$th fold of the training data.|
 |    (b) Evaluate the mean squared prediction error on the data in the left-out $v$th fold, as a function of $\alpha$.|
 |Average the results for each value of $\alpha$, and pick $\alpha$ to minimize the average error.|
 | 4. Return the subtree from Step 2 that corresponds to the chosen value of $\alpha$. |
 
 : Regression tree algorithm that uses pruning. {#tbl-reg-tree-alg}
+
+In the function `rpart` briefly introduced earlier, one can control the complexity parameter through setting a value named `cp` and the maximum depth with `maxdepth`. Let's see what happens if we decrease `cp` and increase `maxdepth` in comparison with our earlier tree for the `Hitters` data.
+
+```{r}
+hitters_dt_2 <- rpart::rpart(Salary_log ~ Hits +Years,
+                           data=Hitters,
+                           method="anova",
+                           control=list(cp = 0.01,maxdepth=6))
+
+rpart.plot::rpart.plot(hitters_dt_2)
+```
+
+We can also plot the results of the cross-validation:
+
+```{r}
+#| label: fig-cp-cv
+#| fig-cap: The results of cross-validation to choose a value for the complexity parameter $\alpha$.
+
+
+rpart::plotcp(hitters_dt_2)
+```
+
+Notice from @fig-cp-cv we see that there is little gain in decreasing the complexity parameter, that is, the value we denoted by $\alpha$ beyond 0.029. 
 
 ### Classification Trees
 
