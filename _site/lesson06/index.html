@@ -408,7 +408,11 @@ $ NewLeague &lt;fct&gt; A, N, A, N, N, A, A, A, N, A, A, N, N, A, N, A, N, A, A,
 </section>
 <section id="pruning" class="level3">
 <h3 class="anchored" data-anchor-id="pruning">Pruning</h3>
+<p>It is easy to overfit a decision tree to training data. An approach to dealing with this issue is to use a technique known as <em>pruning</em>. The idea is to build an initially large tree <span class="math inline">\(T_{0}\)</span>, and then prune it back to a subtree that leads to the lowest test error rate. In order to do so, we will need to incorporate some way to estimate test error.</p>
+<p><a href="#tbl-reg-tree-alg">Table&nbsp;1</a> summarizes our algorithm for building regression tree by pruning.</p>
+<div id="tbl-reg-tree-alg" class="anchored">
 <table class="table">
+<caption>Table&nbsp;1: Regression tree algorithm that uses pruning.</caption>
 <colgroup>
 <col style="width: 100%">
 </colgroup>
@@ -441,12 +445,51 @@ $ NewLeague &lt;fct&gt; A, N, A, N, N, A, A, A, N, A, A, N, N, A, N, A, N, A, A,
 </tr>
 </tbody>
 </table>
+</div>
 </section>
 <section id="classification-trees" class="level3">
 <h3 class="anchored" data-anchor-id="classification-trees">Classification Trees</h3>
 </section>
 <section id="advantages-and-disadvantages-of-trees" class="level3">
 <h3 class="anchored" data-anchor-id="advantages-and-disadvantages-of-trees">Advantages and Disadvantages of Trees</h3>
+<p><a href="#tbl-tree-pro-con">Table&nbsp;2</a> lists some of the advantages and disadvantages associated with the use of decision trees.</p>
+<div id="tbl-tree-pro-con" class="anchored">
+<table class="table">
+<caption>Table&nbsp;2: Advantages and disadvantages of decision trees.</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Advantage or Disadvantage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Easy to explain</td>
+<td style="text-align: left;">Advantage</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Mirror decision-making</td>
+<td style="text-align: left;">Advantage</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Graphical display</td>
+<td style="text-align: left;">Advantage</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Easily handle categorical predictors</td>
+<td style="text-align: left;">Advantage</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Lacking in predictive accuracy</td>
+<td style="text-align: left;">Disadvantage</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Non-robust</td>
+<td style="text-align: left;">Disadvantage</td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
 </section>
 <section id="bagging" class="level2">

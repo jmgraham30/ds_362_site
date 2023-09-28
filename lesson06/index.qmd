@@ -187,6 +187,10 @@ rpart.plot::rpart.plot(hitters_dt)
 
 ### Pruning
 
+It is easy to overfit a decision tree to training data. An approach to dealing with this issue is to use a technique known as *pruning*. The idea is to build an initially large tree $T_{0}$, and then prune it back to a subtree that leads to the lowest test error rate. In order to do so, we will need to incorporate some way to estimate test error. 
+
+@tbl-reg-tree-alg summarizes our algorithm for building regression tree by pruning. 
+
 |    Algorithm: Building a Regression Tree       |
 |:----------------------------------------------|
 | 1. Use recursive binary splitting to grow a large tree on the training data, stopping only when each terminal node has fewer than some minimum number of observations.       |
@@ -197,7 +201,7 @@ rpart.plot::rpart.plot(hitters_dt)
 |Average the results for each value of $\alpha$, and pick $\alpha$ to minimize the average error.|
 | 4. Return the subtree from Step 2 that corresponds to the chosen value of $\alpha$. |
 
-
+: Regression tree algorithm that uses pruning. {#tbl-reg-tree-alg}
 
 ### Classification Trees
 
@@ -206,7 +210,18 @@ rpart.plot::rpart.plot(hitters_dt)
 
 ### Advantages and Disadvantages of Trees
 
+@tbl-tree-pro-con lists some of the advantages and disadvantages associated with the use of decision trees.
 
+| Description |  Advantage or Disadvantage  |
+|:------------|:----------------------------|
+|Easy to explain| Advantage|
+|Mirror decision-making|  Advantage|
+|Graphical display| Advantage|
+|Easily handle categorical predictors| Advantage|
+|Lacking in predictive accuracy|Disadvantage|
+|Non-robust|Disadvantage|
+
+: Advantages and disadvantages of decision trees. {#tbl-tree-pro-con}
 
 
 ## Bagging
