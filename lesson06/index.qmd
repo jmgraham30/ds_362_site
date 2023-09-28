@@ -189,6 +189,12 @@ rpart.plot::rpart.plot(hitters_dt)
 
 It is easy to overfit a decision tree to training data. An approach to dealing with this issue is to use a technique known as *pruning*. The idea is to build an initially large tree $T_{0}$, and then prune it back to a subtree that leads to the lowest test error rate. In order to do so, we will need to incorporate some way to estimate test error. 
 
+$$
+\sum_{m=1}^{|T|} \sum_{i:\ x_{i} \in R_{m}} (y_{i} - \bar{y}_{R_{m}})^2 + \alpha |T|
+$$
+
+Here, $|T|$ is the number of terminal nodes of the subtree $T$, $R_{m}$ is the box corresponding to the $m$th terminal node, and $\bar{y}_{R_{m}}$ is the predicted response associated with $R_{m}$. The tuning parameter $\alpha$ is a penalty that controls a trade-off between the subtree's complexity and its fit to the training data. When $\alpha = 0$, then the subtree will be $T_{0}$. As $\alpha$ increases, the cost of having more terminal nodes is higher so the higher $\alpha$, the smaller $T$ will tend to be.   
+
 @tbl-reg-tree-alg summarizes our algorithm for building regression tree by pruning. 
 
 |    Algorithm: Building a Regression Tree       |
