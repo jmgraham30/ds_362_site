@@ -248,6 +248,46 @@ where in each expression $\hat{p}_{mk}$ is the proportion of training observatio
 
 Both the Gini index and entropy provide a measure of node purity, a value that measures the extent to which a node in a tree contains observations from a single class. A very small value for the node purity would correspond to a situation where a node contains predominantly observations from a single class. 
 
+Let's examine a small case study for classification trees. Consider the data `Heart` which we must read in from a `.csv` file. These data contain a binary outcome `AHD` for 303 patients who presented with chest pain. An outcome value of `Yes` indicates the presence of heart disease based on an angiographic test, while `No` means no heart disease. There are 13 predictors including `Age`, `Sex`, `Chol` (a cholesterol measurement), and other heart and lung function measurements. Let's import and glimpse the data.
+
+```{r}
+#| message: false
+#| warning: false
+
+
+Heart <- read_csv("https://www.statlearning.com/s/Heart.csv")
+
+glimpse(Heart)
+```
+
+Let's fit a large classification tree without pruning.
+
+```{r}
+heart_dt <- rpart::rpart(AHD ~ .,
+                           data=Heart,
+                           method="class",
+                           control=list(cp = 0.0,xval=10))
+
+rpart.plot::rpart.plot(heart_dt)
+```
+
+Let's look at the cross-validation results.
+
+```{r}
+rpart::plotcp(heart_dt)
+```
+
+Now let's include some pruning.
+
+```{r}
+heart_dt_2 <- rpart::rpart(AHD ~ .,
+                           data=Heart,
+                           method="class",
+                           control=list(cp = 0.032,xval=10))
+
+rpart.plot::rpart.plot(heart_dt_2)
+```
+
 
 
 ### Advantages and Disadvantages of Trees

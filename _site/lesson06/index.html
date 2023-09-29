@@ -487,6 +487,62 @@ $ NewLeague &lt;fct&gt; A, N, A, N, N, A, A, A, N, A, A, N, N, A, N, A, N, A, A,
 </ol>
 <p>where in each expression <span class="math inline">\(\hat{p}_{mk}\)</span> is the proportion of training observations in the <span class="math inline">\(m\)</span>th regions that are from the <span class="math inline">\(k\)</span>th class.</p>
 <p>Both the Gini index and entropy provide a measure of node purity, a value that measures the extent to which a node in a tree contains observations from a single class. A very small value for the node purity would correspond to a situation where a node contains predominantly observations from a single class.</p>
+<p>Let’s examine a small case study for classification trees. Consider the data <code>Heart</code> which we must read in from a <code>.csv</code> file. These data contain a binary outcome <code>AHD</code> for 303 patients who presented with chest pain. An outcome value of <code>Yes</code> indicates the presence of heart disease based on an angiographic test, while <code>No</code> means no heart disease. There are 13 predictors including <code>Age</code>, <code>Sex</code>, <code>Chol</code> (a cholesterol measurement), and other heart and lung function measurements. Let’s import and glimpse the data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>Heart <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://www.statlearning.com/s/Heart.csv"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(Heart)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 303
+Columns: 15
+$ ...1      &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 1…
+$ Age       &lt;dbl&gt; 63, 67, 67, 37, 41, 56, 62, 57, 63, 53, 57, 56, 56, 44, 52, …
+$ Sex       &lt;dbl&gt; 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, …
+$ ChestPain &lt;chr&gt; "typical", "asymptomatic", "asymptomatic", "nonanginal", "no…
+$ RestBP    &lt;dbl&gt; 145, 160, 120, 130, 130, 120, 140, 120, 130, 140, 140, 140, …
+$ Chol      &lt;dbl&gt; 233, 286, 229, 250, 204, 236, 268, 354, 254, 203, 192, 294, …
+$ Fbs       &lt;dbl&gt; 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, …
+$ RestECG   &lt;dbl&gt; 2, 2, 2, 0, 2, 0, 2, 0, 2, 2, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, …
+$ MaxHR     &lt;dbl&gt; 150, 108, 129, 187, 172, 178, 160, 163, 147, 155, 148, 153, …
+$ ExAng     &lt;dbl&gt; 0, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, …
+$ Oldpeak   &lt;dbl&gt; 2.3, 1.5, 2.6, 3.5, 1.4, 0.8, 3.6, 0.6, 1.4, 3.1, 0.4, 1.3, …
+$ Slope     &lt;dbl&gt; 3, 2, 2, 3, 1, 1, 3, 1, 2, 3, 2, 2, 2, 1, 1, 1, 3, 1, 1, 1, …
+$ Ca        &lt;dbl&gt; 0, 3, 2, 0, 0, 0, 2, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, …
+$ Thal      &lt;chr&gt; "fixed", "normal", "reversable", "normal", "normal", "normal…
+$ AHD       &lt;chr&gt; "No", "Yes", "Yes", "No", "No", "No", "Yes", "No", "Yes", "Y…</code></pre>
+</div>
+</div>
+<p>Let’s fit a large classification tree without pruning.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>heart_dt <span class="ot">&lt;-</span> rpart<span class="sc">::</span><span class="fu">rpart</span>(AHD <span class="sc">~</span> .,</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">data=</span>Heart,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">method=</span><span class="st">"class"</span>,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">control=</span><span class="fu">list</span>(<span class="at">cp =</span> <span class="fl">0.0</span>,<span class="at">xval=</span><span class="dv">10</span>))</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>rpart.plot<span class="sc">::</span><span class="fu">rpart.plot</span>(heart_dt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Let’s look at the cross-validation results.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>rpart<span class="sc">::</span><span class="fu">plotcp</span>(heart_dt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Now let’s include some pruning.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>heart_dt_2 <span class="ot">&lt;-</span> rpart<span class="sc">::</span><span class="fu">rpart</span>(AHD <span class="sc">~</span> .,</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">data=</span>Heart,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">method=</span><span class="st">"class"</span>,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">control=</span><span class="fu">list</span>(<span class="at">cp =</span> <span class="fl">0.032</span>,<span class="at">xval=</span><span class="dv">10</span>))</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>rpart.plot<span class="sc">::</span><span class="fu">rpart.plot</span>(heart_dt_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 </section>
 <section id="advantages-and-disadvantages-of-trees" class="level3">
 <h3 class="anchored" data-anchor-id="advantages-and-disadvantages-of-trees">Advantages and Disadvantages of Trees</h3>
