@@ -238,13 +238,13 @@ Notice from @fig-cp-cv we see that there is little gain in decreasing the comple
 
 Classification trees work very similarly to regression trees. The main difference is that RSS cannot be used in making splits since the response is categorical. There are three alternatives used in place of RSS to fit classification trees:
 
-1. Classification error rate: $E = 1 - \max_{k}(\hat{p_{mk}})$,
+1. Classification error rate: $E = 1 - \max_{k}(\hat{p}_{mk})$,
 
-2. The Gini index: $G = \sum_{k=1}^{K}\hat{p_{mk}}(1 - \hat{p_{mk}})$,
+2. The Gini index: $G = \sum_{k=1}^{K}\hat{p}_{mk}(1 - \hat{p}_{mk})$,
 
-3. Entropy: $D = -\sum{k=1}^{K}\hat{p_{mk}}\log(\hat{p_{mk}})$,
+3. Entropy: $D = -\sum_{k=1}^{K}\hat{p}_{mk}\log(\hat{p}_{mk})$,
 
-where in each expression $\hat{p_{mk}}$ is the proportion of training observations in the $m$th regions that are from the $k$th class. 
+where in each expression $\hat{p}_{mk}$ is the proportion of training observations in the $m$th regions that are from the $k$th class. 
 
 Both the Gini index and entropy provide a measure of node purity, a value that measures the extent to which a node in a tree contains observations from a single class. A very small value for the node purity would correspond to a situation where a node contains predominantly observations from a single class. 
 

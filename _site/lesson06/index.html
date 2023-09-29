@@ -481,11 +481,11 @@ $ NewLeague &lt;fct&gt; A, N, A, N, N, A, A, A, N, A, A, N, N, A, N, A, N, A, A,
 <h3 class="anchored" data-anchor-id="classification-trees">Classification Trees</h3>
 <p>Classification trees work very similarly to regression trees. The main difference is that RSS cannot be used in making splits since the response is categorical. There are three alternatives used in place of RSS to fit classification trees:</p>
 <ol type="1">
-<li><p>Classification error rate: <span class="math inline">\(E = 1 - \max_{k}(\hat{p_{mk}})\)</span>,</p></li>
-<li><p>The Gini index: <span class="math inline">\(G = \sum_{k=1}^{K}\hat{p_{mk}}(1 - \hat{p_{mk}})\)</span>,</p></li>
-<li><p>Entropy: <span class="math inline">\(D = -\sum{k=1}^{K}\hat{p_{mk}}\log(\hat{p_{mk}})\)</span>,</p></li>
+<li><p>Classification error rate: <span class="math inline">\(E = 1 - \max_{k}(\hat{p}_{mk})\)</span>,</p></li>
+<li><p>The Gini index: <span class="math inline">\(G = \sum_{k=1}^{K}\hat{p}_{mk}(1 - \hat{p}_{mk})\)</span>,</p></li>
+<li><p>Entropy: <span class="math inline">\(D = -\sum_{k=1}^{K}\hat{p}_{mk}\log(\hat{p}_{mk})\)</span>,</p></li>
 </ol>
-<p>where in each expression <span class="math inline">\(\hat{p_{mk}}\)</span> is the proportion of training observations in the <span class="math inline">\(m\)</span>th regions that are from the <span class="math inline">\(k\)</span>th class.</p>
+<p>where in each expression <span class="math inline">\(\hat{p}_{mk}\)</span> is the proportion of training observations in the <span class="math inline">\(m\)</span>th regions that are from the <span class="math inline">\(k\)</span>th class.</p>
 <p>Both the Gini index and entropy provide a measure of node purity, a value that measures the extent to which a node in a tree contains observations from a single class. A very small value for the node purity would correspond to a situation where a node contains predominantly observations from a single class.</p>
 </section>
 <section id="advantages-and-disadvantages-of-trees" class="level3">
