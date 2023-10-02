@@ -311,16 +311,11 @@ Let's fit a large classification tree without pruning.
 heart_dt <- rpart::rpart(AHD ~ .,
                            data=Heart,
                            method="class",
-                           control=list(cp = 0.0,xval=10))
+                           control=list(cp = 0.0,xval=0))
 
 rpart.plot::rpart.plot(heart_dt)
 ```
 
-Let's look at the cross-validation results.
-
-```{r}
-rpart::plotcp(heart_dt)
-```
 
 Now let's include some pruning.
 
@@ -333,7 +328,11 @@ heart_dt_2 <- rpart::rpart(AHD ~ .,
 rpart.plot::rpart.plot(heart_dt_2)
 ```
 
+We can see the cross-validation results.
 
+```{r}
+rpart::plotcp(heart_dt_2)
+```
 
 ### Advantages and Disadvantages of Trees
 
