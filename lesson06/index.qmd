@@ -308,7 +308,26 @@ rpart.plot::rpart.plot(heart_dt_2)
 
 ## Bagging
 
+Decision trees tend to have low bias but high variance. There is a fairly general trick that can be used to reduce variance, that is, by averaging. Here's an illustration of the principle. Suppose we have an i.i.d. sequence $Z_{1}, Z_{2}, \ldots , Z_{n}$ each with variance $\sigma^{2}$. Then, the variance of the mean $\bar{Z} = \frac{1}{n}\sum_{i=1}^{n}Z_{n}$ is $\text{Var}[\bar{Z}] = \frac{\sigma^2}{n}$ and $\frac{\sigma^2}{n} < \sigma^{2}$. Thus, averaging tends to reduce variance. 
 
+In the context of machine learning, we can in principle fit a model on $B$ separate training sets to get $\hat{f}_{1}({\bf x}), \hat{f}_{2}({\bf x}), \ldots , \hat{f}_{B}({\bf x})$ and the make a prediction
+
+$$
+\hat{f}_{\text{avg}}({\bf x}) = \frac{1}{B}\sum_{i=1}^{B}\hat{f}_{i}({\bf x})
+$$
+which we expect to reduce the variance in predictions. However, this is impractical because it requires access to many training sets. Instead, we can bootstrap. We generate $B$ bootstrap resamples, fit models $\hat{f}_{1}^{\ast}({\bf x}), \hat{f}_{2}^{\ast}({\bf x}), \ldots , \hat{f}_{B}^{\ast}({\bf x})$  on each of the bootstrap resamples and then compute
+
+$$
+\hat{f}_{\text{bag}}({\bf x}) = \frac{1}{B}\sum_{i=1}^{B}\hat{f}_{i}^{\ast}({\bf x})
+$$
+This is know as bootstrap aggregation or **bagging**. Bagging is especially useful in the setting of decision trees although it can be applied to pretty much any type of model.  
+
+As described so far, bagging has been presented in the context of regression but it works in the context of classification too. The main difference is that rather than averaging, we take a majority vote to make predictions. 
+
+**Note:** A single bootstrap resample does not typically make use of all the observations in the training set. Those observations in a bootstrap resample that are not included are called the **out-of-bag** (OOB) observations. This is useful because the OOB sets can be used to estimate test error without the need for cross-validation. 
+
+
+We will explore bagging in applications together in an RStudio project. 
 
 
 ## Random Forests

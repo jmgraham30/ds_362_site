@@ -588,6 +588,17 @@ $ AHD       &lt;chr&gt; "No", "Yes", "Yes", "No", "No", "No", "Yes", "No", "Yes"
 </section>
 <section id="bagging" class="level2">
 <h2 class="anchored" data-anchor-id="bagging">Bagging</h2>
+<p>Decision trees tend to have low bias but high variance. There is a fairly general trick that can be used to reduce variance, that is, by averaging. Here’s an illustration of the principle. Suppose we have an i.i.d. sequence <span class="math inline">\(Z_{1}, Z_{2}, \ldots , Z_{n}\)</span> each with variance <span class="math inline">\(\sigma^{2}\)</span>. Then, the variance of the mean <span class="math inline">\(\bar{Z} = \frac{1}{n}\sum_{i=1}^{n}Z_{n}\)</span> is <span class="math inline">\(\text{Var}[\bar{Z}] = \frac{\sigma^2}{n}\)</span> and <span class="math inline">\(\frac{\sigma^2}{n} &lt; \sigma^{2}\)</span>. Thus, averaging tends to reduce variance.</p>
+<p>In the context of machine learning, we can in principle fit a model on <span class="math inline">\(B\)</span> separate training sets to get <span class="math inline">\(\hat{f}_{1}({\bf x}), \hat{f}_{2}({\bf x}), \ldots , \hat{f}_{B}({\bf x})\)</span> and the make a prediction</p>
+<p><span class="math display">\[
+\hat{f}_{\text{avg}}({\bf x}) = \frac{1}{B}\sum_{i=1}^{B}\hat{f}_{i}({\bf x})
+\]</span> which we expect to reduce the variance in predictions. However, this is impractical because it requires access to many training sets. Instead, we can bootstrap. We generate <span class="math inline">\(B\)</span> bootstrap resamples, fit models <span class="math inline">\(\hat{f}_{1}^{\ast}({\bf x}), \hat{f}_{2}^{\ast}({\bf x}), \ldots , \hat{f}_{B}^{\ast}({\bf x})\)</span> on each of the bootstrap resamples and then compute</p>
+<p><span class="math display">\[
+\hat{f}_{\text{bag}}({\bf x}) = \frac{1}{B}\sum_{i=1}^{B}\hat{f}_{i}^{\ast}({\bf x})
+\]</span> This is know as bootstrap aggregation or <strong>bagging</strong>. Bagging is especially useful in the setting of decision trees although it can be applied to pretty much any type of model.</p>
+<p>As described so far, bagging has been presented in the context of regression but it works in the context of classification too. The main difference is that rather than averaging, we take a majority vote to make predictions.</p>
+<p><strong>Note:</strong> A single bootstrap resample does not typically make use of all the observations in the training set. Those observations in a bootstrap resample that are not included are called the <strong>out-of-bag</strong> (OOB) observations. This is useful because the OOB sets can be used to estimate test error without the need for cross-validation.</p>
+<p>We will explore bagging in applications together in an RStudio project.</p>
 </section>
 <section id="random-forests" class="level2">
 <h2 class="anchored" data-anchor-id="random-forests">Random Forests</h2>
@@ -657,14 +668,14 @@ Expand for Session Info
 <pre><code>─ Session info ───────────────────────────────────────────────────────────────
  setting  value
  version  R version 4.3.1 (2023-06-16)
- os       macOS Ventura 13.6
+ os       macOS Sonoma 14.0
  system   aarch64, darwin20
  ui       X11
  language (EN)
  collate  en_US.UTF-8
  ctype    en_US.UTF-8
  tz       America/New_York
- date     2023-09-29
+ date     2023-10-02
  pandoc   3.1.1 @ /Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/ (via rmarkdown)
  quarto   1.3.450 @ /usr/local/bin/quarto
 
