@@ -634,14 +634,14 @@
     "href": "lesson06/index.html#random-forests",
     "title": "Lesson 6",
     "section": "Random Forests",
-    "text": "Random Forests"
+    "text": "Random Forests\nRandom forests are a modification of bagged decision trees that build a large collection of de-correlated trees to further improve predictive performance. They have become a very popular “out-of-the-box” or “off-the-shelf” learning algorithm that enjoys good predictive performance with relatively little hyperparameter tuning.\nRandom forests are built using the same fundamental principles as decision trees and bagging. Bagging trees introduces a random component into the tree building process by building many trees on bootstrapped copies of the training data. Bagging then aggregates the predictions across all the trees; this aggregation reduces the variance of the overall procedure and results in improved predictive performance. However, simply bagging trees results in tree correlation that limits the effect of variance reduction.\nRandom forests help to reduce tree correlation by injecting more randomness into the tree-growing process. More specifically, while growing a decision tree during the bagging process, random forests perform split-variable randomization where each time a split is to be performed, the search for the split variable is limited to a random subset of \\(m_{\\text{try}}\\) of the original \\(p\\) features. Typical default values are \\(m_{\\text{try}} = \\frac{p}{3}\\) for regression and \\(m_{\\text{try}} = \\sqrt{p}\\) for classification but ideally \\(m_{\\text{try}}\\) should be considered a hyperparameter whose value needs to be tuned using cross-validation.\nWe will explore random forests in applications together in an RStudio project."
   },
   {
     "objectID": "lesson06/index.html#boosting",
     "href": "lesson06/index.html#boosting",
     "title": "Lesson 6",
     "section": "Boosting",
-    "text": "Boosting"
+    "text": "Boosting\nBoosting works in a similar way to bagging, except that the trees are grown sequentially. That is, each tree is grown using information from previously grown trees. Boosting does not involve bootstrap sampling; instead each tree is fit on a modified version of the original data set. Boosting is described in Table 3.\n\n\nTable 3: The booting algorithm described for regression trees.\n\n\n\n\n\nAlgorithm: Boosting for Regression Trees\n\n\n\n\n1. Set \\(\\hat{f}({\\bf x}) = 0\\) and \\(r_{i}=y_{i}\\) for all \\(i\\) in the training set.\n\n\n2. For \\(b=1,2,\\ldots, B\\), repeat:\n\n\n(a) For a tree \\(\\hat{f}_{b}\\) with \\(d\\) splits (\\(d+1\\) terminal nodes) to the training data \\((X,r)\\).\n\n\n(b) Update \\(\\hat{f}\\) by adding in a shrunken version of the new tree: \\(\\hat{f}({\\bf x}) + \\lambda \\hat{f}_{b} \\rightarrow \\hat{f}({\\bf x})\\).\n\n\n(c) Update the residuals \\(r_{i} - \\lambda \\hat{f}_{b} \\rightarrow r_{i}\\).\n\n\n3. Output the boosted model, \\(\\hat{f}({\\bf x}) = \\sum_{b=1}^{B}\\hat{f}_{b}({\\bf x})\\)."
   },
   {
     "objectID": "lesson06/index.html#summary",

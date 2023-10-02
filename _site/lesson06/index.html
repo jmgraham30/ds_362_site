@@ -602,9 +602,47 @@ $ AHD       &lt;chr&gt; "No", "Yes", "Yes", "No", "No", "No", "Yes", "No", "Yes"
 </section>
 <section id="random-forests" class="level2">
 <h2 class="anchored" data-anchor-id="random-forests">Random Forests</h2>
+<p>Random forests are a modification of bagged decision trees that build a large collection of de-correlated trees to further improve predictive performance. They have become a very popular “out-of-the-box” or “off-the-shelf” learning algorithm that enjoys good predictive performance with relatively little hyperparameter tuning.</p>
+<p>Random forests are built using the same fundamental principles as decision trees and bagging. Bagging trees introduces a random component into the tree building process by building many trees on bootstrapped copies of the training data. Bagging then aggregates the predictions across all the trees; this aggregation reduces the variance of the overall procedure and results in improved predictive performance. However, simply bagging trees results in tree correlation that limits the effect of variance reduction.</p>
+<p>Random forests help to reduce tree correlation by injecting more randomness into the tree-growing process. More specifically, while growing a decision tree during the bagging process, random forests perform split-variable randomization where each time a split is to be performed, the search for the split variable is limited to a random subset of <span class="math inline">\(m_{\text{try}}\)</span> of the original <span class="math inline">\(p\)</span> features. Typical default values are <span class="math inline">\(m_{\text{try}} = \frac{p}{3}\)</span> for regression and <span class="math inline">\(m_{\text{try}} = \sqrt{p}\)</span> for classification but ideally <span class="math inline">\(m_{\text{try}}\)</span> should be considered a hyperparameter whose value needs to be tuned using cross-validation.</p>
+<p>We will explore random forests in applications together in an RStudio project.</p>
 </section>
 <section id="boosting" class="level2">
 <h2 class="anchored" data-anchor-id="boosting">Boosting</h2>
+<p>Boosting works in a similar way to bagging, except that the trees are grown sequentially. That is, each tree is grown using information from previously grown trees. Boosting does not involve bootstrap sampling; instead each tree is fit on a modified version of the original data set. Boosting is described in <a href="#tbl-boosting">Table&nbsp;3</a>.</p>
+<div id="tbl-boosting" class="anchored">
+<table class="table">
+<caption>Table&nbsp;3: The booting algorithm described for regression trees.</caption>
+<colgroup>
+<col style="width: 100%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Algorithm: Boosting for Regression Trees</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1. Set <span class="math inline">\(\hat{f}({\bf x}) = 0\)</span> and <span class="math inline">\(r_{i}=y_{i}\)</span> for all <span class="math inline">\(i\)</span> in the training set.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2. For <span class="math inline">\(b=1,2,\ldots, B\)</span>, repeat:</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">(a) For a tree <span class="math inline">\(\hat{f}_{b}\)</span> with <span class="math inline">\(d\)</span> splits (<span class="math inline">\(d+1\)</span> terminal nodes) to the training data <span class="math inline">\((X,r)\)</span>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">(b) Update <span class="math inline">\(\hat{f}\)</span> by adding in a shrunken version of the new tree: <span class="math inline">\(\hat{f}({\bf x}) + \lambda \hat{f}_{b} \rightarrow \hat{f}({\bf x})\)</span>.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">(c) Update the residuals <span class="math inline">\(r_{i} - \lambda \hat{f}_{b} \rightarrow r_{i}\)</span>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">3. Output the boosted model, <span class="math inline">\(\hat{f}({\bf x}) = \sum_{b=1}^{B}\hat{f}_{b}({\bf x})\)</span>.</td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
 <section id="summary" class="level2">
 <h2 class="anchored" data-anchor-id="summary">Summary</h2>
