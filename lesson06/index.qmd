@@ -181,10 +181,11 @@ Once the regions $R_{1}, R_{2}, \ldots, R_{J}$ have been created, we predict the
 Here is an example in R using the `rpart` package that fits and plots a similar decision tree model:
 
 ```{r}
-hitters_dt <- rpart::rpart(Salary_log ~ Hits +Years,
+hitters_dt <- rpart::rpart(Salary_log ~ Hits + Years,
                            data=Hitters,
                            method="anova",
-                           control=list(cp = 0.1,maxdepth=2))
+                           control=list(cp = 0.1,maxdepth=2,
+                                        minsplit=20,xval = 0))
 
 rpart.plot::rpart.plot(hitters_dt)
 ```
@@ -246,10 +247,11 @@ Here, $|T|$ is the number of terminal nodes of the subtree $T$, $R_{m}$ is the b
 In the function `rpart` briefly introduced earlier, one can control the complexity parameter through setting a value named `cp` and the maximum depth with `maxdepth`. Let's see what happens if we decrease `cp` and increase `maxdepth` in comparison with our earlier tree for the `Hitters` data.
 
 ```{r}
-hitters_dt_2 <- rpart::rpart(Salary_log ~ Hits +Years,
+hitters_dt_2 <- rpart::rpart(Salary_log ~ Hits + Years,
                            data=Hitters,
                            method="anova",
-                           control=list(cp = 0.01,maxdepth=6))
+                           control=list(cp = 0.01,maxdepth=20,
+                                        minsplit=10,xval = 10))
 
 rpart.plot::rpart.plot(hitters_dt_2)
 ```
@@ -264,7 +266,18 @@ We can also plot the results of the cross-validation:
 rpart::plotcp(hitters_dt_2)
 ```
 
-Notice from @fig-cp-cv we see that there is little gain in decreasing the complexity parameter, that is, the value we denoted by $\alpha$ beyond 0.029. 
+Notice from @fig-cp-cv we see that there is little gain in decreasing the complexity parameter, that is, the value we denoted by $\alpha$ beyond a certain point. Clearly, pruning has occurred because we could have grown a tree with up to 20 splits. In fact, let's examine the larger tree:
+
+```{r}
+hitters_dt_3 <- rpart::rpart(Salary_log ~ Hits + Years,
+                           data=Hitters,
+                           method="anova",
+                           control=list(cp = 0.0,maxdepth=20,
+                                        minsplit=5,xval = 0))
+
+rpart.plot::rpart.plot(hitters_dt_3)
+```
+
 
 ### Classification Trees
 
