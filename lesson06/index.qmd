@@ -141,7 +141,7 @@ For this problem, the basic decision tree algorithm for regression will separate
 
 The question is, how to we divide up the predictor space?  
 
-### Basic Decison Tree Regerssion Algorithm
+### Basic Decison Tree Regression Algorithm
 
 To build a regression tree, there are two basic steps:
 

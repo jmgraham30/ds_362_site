@@ -181,7 +181,7 @@ div.csl-indent {
   <li><a href="#basic-decision-trees" id="toc-basic-decision-trees" class="nav-link" data-scroll-target="#basic-decision-trees">Basic Decision Trees</a>
   <ul class="collapse">
   <li><a href="#motivating-example" id="toc-motivating-example" class="nav-link" data-scroll-target="#motivating-example">Motivating Example</a></li>
-  <li><a href="#basic-decison-tree-regerssion-algorithm" id="toc-basic-decison-tree-regerssion-algorithm" class="nav-link" data-scroll-target="#basic-decison-tree-regerssion-algorithm">Basic Decison Tree Regerssion Algorithm</a></li>
+  <li><a href="#basic-decison-tree-regression-algorithm" id="toc-basic-decison-tree-regression-algorithm" class="nav-link" data-scroll-target="#basic-decison-tree-regression-algorithm">Basic Decison Tree Regression Algorithm</a></li>
   <li><a href="#pruning" id="toc-pruning" class="nav-link" data-scroll-target="#pruning">Pruning</a></li>
   <li><a href="#classification-trees" id="toc-classification-trees" class="nav-link" data-scroll-target="#classification-trees">Classification Trees</a></li>
   <li><a href="#advantages-and-disadvantages-of-trees" id="toc-advantages-and-disadvantages-of-trees" class="nav-link" data-scroll-target="#advantages-and-disadvantages-of-trees">Advantages and Disadvantages of Trees</a></li>
@@ -358,8 +358,8 @@ $ NewLeague &lt;fct&gt; A, N, A, N, N, A, A, A, N, A, A, N, N, A, N, A, N, A, A,
 <p>For this problem, the basic decision tree algorithm for regression will separate the <code>Years-Hits</code> predictor or feature space (in this case the plane) into some number of distinct regions and then make predictions by averaging the <span class="math inline">\(\log\)</span> scaled salary values in each of the regions.</p>
 <p>The question is, how to we divide up the predictor space?</p>
 </section>
-<section id="basic-decison-tree-regerssion-algorithm" class="level3">
-<h3 class="anchored" data-anchor-id="basic-decison-tree-regerssion-algorithm">Basic Decison Tree Regerssion Algorithm</h3>
+<section id="basic-decison-tree-regression-algorithm" class="level3">
+<h3 class="anchored" data-anchor-id="basic-decison-tree-regression-algorithm">Basic Decison Tree Regression Algorithm</h3>
 <p>To build a regression tree, there are two basic steps:</p>
 <ol type="1">
 <li><p>Divide the predictor space. Suppose there are <span class="math inline">\(p\)</span> predictors so that <span class="math inline">\({\bf x} = (x_{1}, x_{2}, \ldots , x_{p})\)</span>. For the set of all possible predictor values, divide this up into <span class="math inline">\(J\)</span> non-overlapping regions, <span class="math inline">\(R_{1}, R_{2}, \ldots ,R_{J}\)</span>.</p></li>
