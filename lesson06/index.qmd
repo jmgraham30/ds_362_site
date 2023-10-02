@@ -93,8 +93,9 @@ Let's also look at the distribution for `Salary`.
 #| message: false
 #| label: fig-player-salaries
 #| fig-cap: | 
-#|  Histrogram of salaries for players recorded in the `Hitters` data set from 
-#|  the `ISLR2` package. 
+#|  Histrogram of salaries for players recorded in the `Hitters` data set from the `ISLR2` package. 
+
+
 Hitters %>%
   ggplot(aes(x=Salary)) + 
   geom_histogram(color="white")
@@ -126,7 +127,8 @@ For illustrative purposes, let's suppose we want to model the $\log$ scaled sala
 #| message: false
 #| label: fig-player-salaries-hits
 #| fig-cap: | 
-#|  Scatter plot of ($\log$ scale) of salaries versus hits for players recorded #|  in the `Hitters` data set from the `ISLR2` package. 
+#|  Scatter plot of ($\log$ scale) of salaries versus hits for players recorded 
+#|  in the `Hitters` data set from the `ISLR2` package. 
 
 
 Hitters %>%
