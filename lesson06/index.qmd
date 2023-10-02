@@ -21,6 +21,8 @@ license: "CC BY-NC-SA 4.0"
 library(tidyverse)
 library(tidymodels)
 library(ISLR2)
+library(vip)
+library(parttree)
 
 tidymodels_prefer()
 
@@ -185,6 +187,34 @@ hitters_dt <- rpart::rpart(Salary_log ~ Hits +Years,
                            control=list(cp = 0.1,maxdepth=2))
 
 rpart.plot::rpart.plot(hitters_dt)
+```
+
+
+@fig-predictions shows the regions and predictions from the decision tree obtained with the `rpart` function. This figure is obtained by using functions from the [`parttree`](https://github.com/grantmcdermott/parttree) package.
+
+```{r}
+#| code-fold: true
+#| label: fig-predictions
+#| fig-cap: The `Hitters` data from @fig-three-split shows with the regions and predictions from the decision tree obtained with the `rpart` function. 
+
+
+Hitters %>%
+  ggplot(aes(x=Years,y=Hits)) + 
+  geom_parttree(data=hitters_dt,aes(fill = Salary_log),alpha=0.3) + 
+  geom_point(aes(color=Salary_log)) +
+  scale_colour_viridis_c(aesthetics = c("color", "fill"))
+```
+
+
+The `vip` package allows us to visualize the variable importance scores for the predictors in a decision tree model. That is, a measure of the decrease in RSS due to splits over a given predictor. @fig-vip shows the variable importance scores for the predictors in the `Hitters` data based on the decision tree obtained with the `rpart` function.
+
+```{r}
+#| code-fold: true
+#| label: fig-vip
+#| fig-cap: The variable importance scores for the predictors in the `Hitters` data based on the decision tree obtained with the `rpart` function. 
+
+
+vip(hitters_dt,aesthetics = list(fill = "midnightblue", alpha = 0.8))
 ```
 
 ### Pruning
