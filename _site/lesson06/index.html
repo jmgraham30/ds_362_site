@@ -362,8 +362,8 @@ $ NewLeague &lt;fct&gt; A, N, A, N, N, A, A, A, N, A, A, N, N, A, N, A, N, A, A,
 <h3 class="anchored" data-anchor-id="basic-decison-tree-regerssion-algorithm">Basic Decison Tree Regerssion Algorithm</h3>
 <p>To build a regression tree, there are two basic steps:</p>
 <ol type="1">
-<li><p>Divide the predicor space. Suppose there are <span class="math inline">\(p\)</span> predictors so that <span class="math inline">\({\bf x} = (x_{1}, x_{2}, \ldots , x_{p})\)</span>. For the set of all possible predictor values, divide this up into <span class="math inline">\(J\)</span> non-overlapping regions, <span class="math inline">\(R_{1}, R_{2}, \ldots ,R_{J}\)</span>.</p></li>
-<li><p>Fo revery observation that falls into region <span class="math inline">\(R_{j}\)</span> we make the same prediction, which is simply the mean of the response values for the training observations in <span class="math inline">\(R_{j}\)</span>.</p></li>
+<li><p>Divide the predictor space. Suppose there are <span class="math inline">\(p\)</span> predictors so that <span class="math inline">\({\bf x} = (x_{1}, x_{2}, \ldots , x_{p})\)</span>. For the set of all possible predictor values, divide this up into <span class="math inline">\(J\)</span> non-overlapping regions, <span class="math inline">\(R_{1}, R_{2}, \ldots ,R_{J}\)</span>.</p></li>
+<li><p>For every observation that falls into region <span class="math inline">\(R_{j}\)</span> we make the same prediction, which is simply the mean of the response values for the training observations in <span class="math inline">\(R_{j}\)</span>.</p></li>
 </ol>
 <p>The question is, how do we construct the regions <span class="math inline">\(R_{1}, R_{2}, \ldots ,R_{J}\)</span>? A typical approach is to divide the predictor space into <em>boxes</em>, that is, each <span class="math inline">\(R_{j}\)</span> will be a set of the form <span class="math inline">\((a_{1j}, b_{1j}) \times (a_{2j},b_{2j}) \times \cdots \times (a_{pj},b_{pj})\)</span>. Then the goal is to find boxes that minimize</p>
 <p><span class="math display">\[

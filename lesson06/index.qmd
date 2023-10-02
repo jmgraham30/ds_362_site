@@ -143,9 +143,9 @@ The question is, how to we divide up the predictor space?
 
 To build a regression tree, there are two basic steps:
 
-1. Divide the predicor space. Suppose there are $p$ predictors so that ${\bf x} = (x_{1}, x_{2}, \ldots , x_{p})$. For the set of all possible predictor values, divide this up into $J$ non-overlapping regions, $R_{1}, R_{2}, \ldots ,R_{J}$. 
+1. Divide the predictor space. Suppose there are $p$ predictors so that ${\bf x} = (x_{1}, x_{2}, \ldots , x_{p})$. For the set of all possible predictor values, divide this up into $J$ non-overlapping regions, $R_{1}, R_{2}, \ldots ,R_{J}$. 
 
-2. Fo revery observation that falls into region $R_{j}$ we make the same prediction, which is simply the mean of the response values for the training observations in $R_{j}$.
+2. For every observation that falls into region $R_{j}$ we make the same prediction, which is simply the mean of the response values for the training observations in $R_{j}$.
 
 
 The question is, how do we construct the regions $R_{1}, R_{2}, \ldots ,R_{J}$? A typical approach is to divide the predictor space into *boxes*, that is, each $R_{j}$ will be a set of the form $(a_{1j}, b_{1j}) \times (a_{2j},b_{2j}) \times \cdots \times (a_{pj},b_{pj})$. Then the goal is to find boxes that minimize
