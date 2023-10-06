@@ -1,0 +1,141 @@
+---
+title: "Lesson 7"
+subtitle: "Support Vector Machines"
+author: "JMG"
+format:
+  html:
+    echo: true
+    code-fold: false
+    code-summary: "Show the code"
+    toc: true
+    toc-location: left
+bibliography: lesson07.bib
+license: "CC BY-NC-SA 4.0"
+---
+
+```{r}
+#| include: false
+#| message: false
+#| warning: false
+
+library(tidyverse)
+library(tidymodels)
+library(ISLR2)
+library(vip)
+library(parttree)
+
+tidymodels_prefer()
+
+theme_set(theme_minimal(base_size = 12))
+```
+
+## Learning Objectives
+
+After this lesson, students will be able to: 
+
+- Describe the support vector machine (SVM) approach to classification. 
+
+- Use the `tidymodels` workflow to fit and tune various SVM classification models. 
+
+
+## Readings, etc.
+
+For this lesson, refer to the following readings, etc.:
+
+- Read chapter 9 from of *An Introduction to Statistical Learning* [@tibshirani2017introduction]. You may also want to read chapter 9 of *Statistical Learning with Math and R* [@suzuki2020statistical].
+
+- [View Supoprt Vector Classifier video on YouTube](https://youtu.be/pjvnCEfAswc?si=5I-xmhB3Y006RP0Y).
+
+```{r}
+#| echo: false
+
+vembedr::embed_youtube(id="pjvnCEfAswc?si=5I-xmhB3Y006RP0Y",height=450) %>%
+  vembedr::use_align("center")
+```
+
+- [View Supoprt Vector Classifiers in R video on YouTube](https://youtu.be/WCRwbrNWrpw?si=rkEz30HgpeBK9VTD).
+    
+```{r}
+#| echo: false
+
+vembedr::embed_youtube(id="WCRwbrNWrpw?si=rkEz30HgpeBK9VTD",height=450) %>%
+  vembedr::use_align("center")
+```
+
+    
+## Overview    
+    
+  
+
+## Support Vector Machine Approaches
+    
+    
+### Maximal Marginal Cllassifier
+
+![](https://www.dropbox.com/scl/fi/zzqb6rbbkput1wegmuaj7/9_2.jpg?rlkey=ke0owlerrfm7xyk2momwo8mv5&raw=1)
+
+
+
+![](https://www.dropbox.com/scl/fi/z6bfo6dl85hddo7kceqf9/9_3.jpg?rlkey=erj5245hguu6zfn6yx8y39u4p&raw=1)    
+    
+    
+## Preparation for the next lesson
+
+To prepare for the next lesson, please read:
+
+- Read chapter 9 from of *An Introduction to Statistical Learning* [@tibshirani2017introduction]. You may also want to read chapter 9 of *Statistical Learning with Math and R* [@suzuki2020statistical].
+
+Watch the following video lectures on support vector machines: 
+
+* [View Supoprt Vector Classifier video on YouTube](https://youtu.be/pjvnCEfAswc?si=5I-xmhB3Y006RP0Y).
+
+```{r}
+#| echo: false
+
+vembedr::embed_youtube(id="pjvnCEfAswc?si=5I-xmhB3Y006RP0Y",height=450) %>%
+  vembedr::use_align("center")
+```
+
+* [View Supoprt Vector Classifiers in R video on YouTube](https://youtu.be/WCRwbrNWrpw?si=rkEz30HgpeBK9VTD).
+    
+```{r}
+#| echo: false
+
+vembedr::embed_youtube(id="WCRwbrNWrpw?si=rkEz30HgpeBK9VTD",height=450) %>%
+  vembedr::use_align("center")
+```
+
+## References
+
+::: {#refs}
+:::
+
+
+:::{.callout-tip collapse="true"}
+## Expand for Session Info
+```{r}
+#| echo: false
+
+
+library(sessioninfo)
+# save the session info as an object
+pkg_sesh <- session_info(pkgs = "attached")
+
+# get the quarto version
+quarto_version <- system("quarto --version", intern = TRUE)
+
+# inject the quarto info
+pkg_sesh$platform$quarto <- paste(
+  system("quarto --version", intern = TRUE), 
+  "@", 
+  quarto::quarto_path()
+  )
+
+# print it out
+pkg_sesh
+```
+
+:::
+
+
+[![](http://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-nc-sa.png?raw=1){fig-align="left" width=15%}](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode)
