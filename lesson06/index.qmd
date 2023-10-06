@@ -394,7 +394,7 @@ Boosting works in a similar way to bagging, except that the trees are grown sequ
 |:----------------------------------------------|
 | 1. Set $\hat{f}({\bf x}) = 0$ and $r_{i}=y_{i}$ for all $i$ in the training set.       |
 | 2. For $b=1,2,\ldots, B$, repeat:  |
-|    (a) For a tree $\hat{f}_{b}$ with $d$ splits ($d+1$ terminal nodes) to the training data $(X,r)$.|
+|    (a) Fit a tree $\hat{f}_{b}$ with $d$ splits ($d+1$ terminal nodes) to the training data $(X,r)$.|
 |    (b) Update $\hat{f}$ by adding in a shrunken version of the new tree: $\hat{f}({\bf x}) + \lambda \hat{f}_{b} \rightarrow \hat{f}({\bf x})$.|
 | (c) Update the residuals $r_{i} - \lambda \hat{f}_{b} \rightarrow r_{i}$.|
 | 3. Output the boosted model, $\hat{f}({\bf x}) = \sum_{b=1}^{B}\hat{f}_{b}({\bf x})$. |
