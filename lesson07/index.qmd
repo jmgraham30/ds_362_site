@@ -44,7 +44,7 @@ For this lesson, refer to the following readings, etc.:
 
 - Read chapter 9 from of *An Introduction to Statistical Learning* [@tibshirani2017introduction]. You may also want to read chapter 9 of *Statistical Learning with Math and R* [@suzuki2020statistical].
 
-- [View Supoprt Vector Classifier video on YouTube](https://youtu.be/pjvnCEfAswc?si=5I-xmhB3Y006RP0Y).
+- [View Support Vector Classifier video on YouTube](https://youtu.be/pjvnCEfAswc?si=5I-xmhB3Y006RP0Y).
 
 ```{r}
 #| echo: false
@@ -53,7 +53,7 @@ vembedr::embed_youtube(id="pjvnCEfAswc?si=5I-xmhB3Y006RP0Y",height=450) %>%
   vembedr::use_align("center")
 ```
 
-- [View Supoprt Vector Classifiers in R video on YouTube](https://youtu.be/WCRwbrNWrpw?si=rkEz30HgpeBK9VTD).
+- [View Support Vector Classifiers in R video on YouTube](https://youtu.be/WCRwbrNWrpw?si=rkEz30HgpeBK9VTD).
     
 ```{r}
 #| echo: false
@@ -72,38 +72,33 @@ vembedr::embed_youtube(id="WCRwbrNWrpw?si=rkEz30HgpeBK9VTD",height=450) %>%
     
 ### Maximal Marginal Cllassifier
 
-![](https://www.dropbox.com/scl/fi/zzqb6rbbkput1wegmuaj7/9_2.jpg?rlkey=ke0owlerrfm7xyk2momwo8mv5&raw=1)
+![Left: Separating hyperplanes for binary data. Right: The decision rule based on a separating hyperplane.](https://www.dropbox.com/scl/fi/zzqb6rbbkput1wegmuaj7/9_2.jpg?rlkey=ke0owlerrfm7xyk2momwo8mv5&raw=1){#fig-sep-hyperplane}
 
 
 
-![](https://www.dropbox.com/scl/fi/z6bfo6dl85hddo7kceqf9/9_3.jpg?rlkey=erj5245hguu6zfn6yx8y39u4p&raw=1)    
+![The solid lines shows the maximal margin hyperplane. The margin is the distance between the two dotted lines.](https://www.dropbox.com/scl/fi/z6bfo6dl85hddo7kceqf9/9_3.jpg?rlkey=erj5245hguu6zfn6yx8y39u4p&raw=1){#fig-max-margin width=75% height=75%}    
+    
+    
+    
     
     
 ## Preparation for the next lesson
 
 To prepare for the next lesson, please read:
 
-- Read chapter 9 from of *An Introduction to Statistical Learning* [@tibshirani2017introduction]. You may also want to read chapter 9 of *Statistical Learning with Math and R* [@suzuki2020statistical].
+- Read chapter 10 from of *An Introduction to Statistical Learning* [@tibshirani2017introduction]. 
 
-Watch the following video lectures on support vector machines: 
+Watch the following video lectures on neural networks: 
 
-* [View Supoprt Vector Classifier video on YouTube](https://youtu.be/pjvnCEfAswc?si=5I-xmhB3Y006RP0Y).
+* [View Introduction to Neural Networks video on YouTube](https://youtu.be/jJb2qytbcNg?si=hwdtetIKGC18RbXT).
 
 ```{r}
 #| echo: false
 
-vembedr::embed_youtube(id="pjvnCEfAswc?si=5I-xmhB3Y006RP0Y",height=450) %>%
+vembedr::embed_youtube(id="jJb2qytbcNg?si=hwdtetIKGC18RbXT",height=450) %>%
   vembedr::use_align("center")
 ```
 
-* [View Supoprt Vector Classifiers in R video on YouTube](https://youtu.be/WCRwbrNWrpw?si=rkEz30HgpeBK9VTD).
-    
-```{r}
-#| echo: false
-
-vembedr::embed_youtube(id="WCRwbrNWrpw?si=rkEz30HgpeBK9VTD",height=450) %>%
-  vembedr::use_align("center")
-```
 
 ## References
 

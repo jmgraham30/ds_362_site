@@ -669,7 +669,7 @@
     "href": "lesson07/index.html#readings-etc.",
     "title": "Lesson 7",
     "section": "Readings, etc.",
-    "text": "Readings, etc.\nFor this lesson, refer to the following readings, etc.:\n\nRead chapter 9 from of An Introduction to Statistical Learning (Tibshirani, James, and Trevor 2017). You may also want to read chapter 9 of Statistical Learning with Math and R (Suzuki 2020).\nView Supoprt Vector Classifier video on YouTube.\n\n\n\n\n\n\n\n\n\n\n\nView Supoprt Vector Classifiers in R video on YouTube."
+    "text": "Readings, etc.\nFor this lesson, refer to the following readings, etc.:\n\nRead chapter 9 from of An Introduction to Statistical Learning (Tibshirani, James, and Trevor 2017). You may also want to read chapter 9 of Statistical Learning with Math and R (Suzuki 2020).\nView Support Vector Classifier video on YouTube.\n\n\n\n\n\n\n\n\n\n\n\nView Support Vector Classifiers in R video on YouTube."
   },
   {
     "objectID": "lesson07/index.html#overview",
@@ -683,14 +683,14 @@
     "href": "lesson07/index.html#support-vector-machine-approaches",
     "title": "Lesson 7",
     "section": "Support Vector Machine Approaches",
-    "text": "Support Vector Machine Approaches\n\nMaximal Marginal Cllassifier"
+    "text": "Support Vector Machine Approaches\n\nMaximal Marginal Cllassifier\n\n\n\nFigure 1: Left: Separating hyperplanes for binary data. Right: The decision rule based on a separating hyperplane.\n\n\n\n\n\nFigure 2: The solid lines shows the maximal margin hyperplane. The margin is the distance between the two dotted lines."
   },
   {
     "objectID": "lesson07/index.html#preparation-for-the-next-lesson",
     "href": "lesson07/index.html#preparation-for-the-next-lesson",
     "title": "Lesson 7",
     "section": "Preparation for the next lesson",
-    "text": "Preparation for the next lesson\nTo prepare for the next lesson, please read:\n\nRead chapter 9 from of An Introduction to Statistical Learning (Tibshirani, James, and Trevor 2017). You may also want to read chapter 9 of Statistical Learning with Math and R (Suzuki 2020).\n\nWatch the following video lectures on support vector machines:\n\nView Supoprt Vector Classifier video on YouTube.\n\n\n\n\n\n\n\n\n\n\n\nView Supoprt Vector Classifiers in R video on YouTube."
+    "text": "Preparation for the next lesson\nTo prepare for the next lesson, please read:\n\nRead chapter 10 from of An Introduction to Statistical Learning (Tibshirani, James, and Trevor 2017).\n\nWatch the following video lectures on neural networks:\n\nView Introduction to Neural Networks video on YouTube."
   },
   {
     "objectID": "lesson07/index.html#references",
