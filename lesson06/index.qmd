@@ -407,7 +407,7 @@ In this lesson, we have covered the various tree-based methods:
 
 1. Basic decision trees.
 
-2. Bootstrap aggregated (bagging) tree.
+2. Bootstrap aggregating (bagging) trees.
 
 3. Random forests.
 
