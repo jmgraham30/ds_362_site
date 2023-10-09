@@ -27,6 +27,8 @@ library(kableExtra)
 tidymodels_prefer()
 
 theme_set(theme_minimal(base_size = 12))
+
+doParallel::registerDoParallel()
 ```
 
 
@@ -334,17 +336,18 @@ The best references for `tidymodels` are the [tidymodels.org](https://www.tidymo
 
 ## Some Examples
 
-### Example 1: `tidymodels` Workflow for Regression
+### Example 1: `tidymodels` Workflow for Linear Regression for Predictive Modeling
 
-The following is an example of the `tidymodels` workflow for regression.  The example uses the `mtcars` dataset and the `parsnip` and `recipes` packages.  The example is adapted from the [Tidy Modeling with R](https://www.tmwr.org/) book [@kuhn2022tidy].
+The following is an example of the `tidymodels` workflow for linear regression for predictive modeling.  The example uses the `mtcars` dataset and the `parsnip` and `recipes` packages.  The example is adapted from the [Tidy Modeling with R](https://www.tmwr.org/) book [@kuhn2022tidy].
 
 
 ```{r}
 #| echo: true 
-#| fig.align: center
-#| fig.cap: "Tidy Models Workflow for Regression"
-#| fig.height: 4
-#| fig.width: 6
+#| label: fig-tidy-models-workflow-lm
+#| fig-align: center
+#| fig-cap: "Tidy Models Workflow for Regression"
+#| fig-height: 4
+#| fig-width: 6
 #| message: false
 #| warning: false
 #| code-fold: true
@@ -431,11 +434,168 @@ lm_tidy %>%
 
 # print the model evaluation
 lm_eval %>%
+  select(-metric) %>%
   kable() %>%
   kable_styling() %>%
   scroll_box(width = "100%", height = "200px")
 ```
 
+
+### Example 2: `tidymodels` Workflow for Linear Regression for Inferential Modeling
+
+The following is an example of the `tidymodels` workflow for linear regression for inferential modeling.  The example uses the `mtcars` dataset and the `parsnip` and `recipes` packages.
+
+```{r}
+#| echo: true
+#| label: fig-tidy-models-workflow-lm-inferential
+#| fig-align: center
+#| fig-cap: "Tidy Models Workflow for Regression"
+#| fig-height: 4
+#| fig-width: 6
+#| message: false
+#| warning: false
+#| code-fold: true
+
+# set seed for reproducibility
+set.seed(123)
+
+# load the mtcars dataset
+data(mtcars)
+
+# create bootstrap samples
+mtcars_boot <- reg_intervals(mpg ~ disp + cyl + wt + am, 
+                             data = mtcars,
+                             model_fn = "lm",
+                             type = "percentile",
+                             keep_reps = TRUE)
+
+
+mtcars_boot %>% 
+  select(term, .replicates) %>% 
+  unnest(cols = .replicates) %>% 
+  ggplot(aes(x = estimate)) + 
+  geom_histogram(bins = 30,color="white",fill="lightblue") + 
+  facet_wrap(~ term, scales = "free_x") + 
+  geom_vline(data = mtcars_boot, aes(xintercept = .lower), col = "purple") + 
+  geom_vline(data = mtcars_boot, aes(xintercept = .upper), col = "purple") + 
+  geom_vline(xintercept = 0, col = "black",linetype="dashed")
+```
+
+### Example 3: `tidymodels` Workflow for Tuning Random Forest for Regression
+
+The following is an example of the `tidymodels` workflow for tuning random forest for regression.  The example uses the `mtcars` dataset and the `parsnip` and `recipes` packages.
+
+```{r}
+#| echo: true
+#| label: fig-tidy-models-workflow-rf
+#| fig-align: center
+#| fig-cap: "Tidy Models Workflow for Random Forest"
+#| fig-height: 4
+#| fig-width: 6
+#| message: false
+#| warning: false
+#| code-fold: true
+
+# set seed for reproducibility
+set.seed(123)
+
+# load the mtcars dataset
+data(mtcars)
+
+# create a training and testing split
+mtcars_split <- initial_split(mtcars, prop = 0.75)
+
+# create a training and testing dataset
+mtcars_train <- training(mtcars_split)
+mtcars_test <- testing(mtcars_split)
+
+# create a cross-validation set
+mtcars_cv <- vfold_cv(mtcars_train, v = 5)
+
+# create a recipe for preprocessing
+mtcars_recipe <- recipe(mpg ~ ., data = mtcars_train)
+
+# create a random forest model
+rf_spec <- rand_forest(
+  mtry = tune(),
+  trees = 1000,
+  min_n = tune()
+) %>%
+  set_mode("regression") %>%
+  set_engine("ranger")
+
+# create a workflow
+tune_wf <- workflow() %>%
+  add_recipe(mtcars_recipe) %>%
+  add_model(rf_spec)
+
+# create tuning grid
+rf_grid <- grid_regular(
+  mtry(range = c(3, 11)),
+  min_n(),
+  levels = 15
+)
+
+# tune the model
+tune_res <- tune_grid(
+  tune_wf,
+  resamples = mtcars_cv,
+  grid = rf_grid
+)
+
+# visualize the tuning results
+tune_res %>%
+  collect_metrics() %>%
+  filter(.metric == "rmse") %>%
+  mutate(min_n = factor(min_n)) %>%
+  ggplot(aes(mtry, mean, color = min_n)) +
+  geom_line(alpha = 0.5, size = 1.5) +
+  geom_point() +
+  labs(y = "RMSE")
+
+```
+
+Now we will select a final model based on the tuning results.
+
+```{r}
+#| echo: true
+#| code-fold: true
+
+best_rmse <- select_best(tune_res, "rmse")
+
+final_rf <- finalize_model(
+  rf_spec,
+  best_rmse
+)
+
+final_wf <- workflow() %>%
+  add_recipe(mtcars_recipe) %>%
+  add_model(final_rf)
+
+final_res <- final_wf %>%
+  last_fit(mtcars_split)
+
+final_res %>%
+  collect_metrics() %>%
+  kable()
+```
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| label: fig-tidy-models-workflow-rf-pred
+#| fig-align: center
+#| fig-cap: "Results on Test Set for Tuned Random Forest for Regression"
+
+final_res %>%
+  collect_predictions() %>%
+  ggplot(aes(mpg, .pred)) +
+  geom_abline(color = "purple") +
+  geom_point() +
+  labs(x = "Observed", y = "Predicted")
+
+  
+```
 
 ## References
 
