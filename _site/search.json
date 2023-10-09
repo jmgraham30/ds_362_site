@@ -733,5 +733,12 @@
     "title": "Machine Learning Models",
     "section": "tidymodels Machine Learning Workflow",
     "text": "tidymodels Machine Learning Workflow\nThe tidymodels framework provides a consistent set of steps for training and evaluating machine learning models. The following is a list of the steps in the tidymodels workflow:\n\nData Preparation:\n\nLoad and prepare your dataset following tidy data principles.\n\nData Splitting:\n\nUse the rsample package to create data splits for training and testing.\n\nPreprocessing and Feature Engineering:\n\nDefine a data preprocessing plan using the recipes package.\nCreate a “recipe” for data cleaning, transformation, and feature engineering.\n\nModel Specification:\n\nSpecify machine learning models with the parsnip package.\nChoose from a variety of models for regression, classification, etc.\n\nHyperparameter Tuning:\n\nUtilize the tune package for hyperparameter tuning.\nDefine a grid of hyperparameters and use resampling methods for evaluation.\n\nModel Training:\n\nTrain models with the specified data splits, preprocessing plan, and hyperparameters.\nUse the fit function to train on the training data.\n\nModel Evaluation:\n\nAssess model performance using the yardstick package.\nCalculate relevant evaluation metrics (e.g., accuracy, RMSE).\n\nModel Selection:\n\nCompare model performance and hyperparameter settings.\nSelect the best-performing model or create ensembles (e.g., stacking, bagging).\n\nModel Interpretation and Visualization:\n\nUse the broom package to extract and tidy model results.\nVisualize model outputs and interpret results.\n\nDeployment and Prediction:\n\nDeploy the final model for predictions on new data.\nUse the trained model in production environments.\n\nDocumentation and Reproducibility:\n\nDocument the entire workflow, including preprocessing, model specifications, tuning, and results.\nEnsure reproducibility and transparency.\n\nSharing and Collaboration:\n\nShare code and findings with collaborators for reproducibility and collaboration.\n\nOngoing Monitoring and Maintenance:\n\nIn production, monitor model performance and update models as needed."
+  },
+  {
+    "objectID": "ml_models/index.html#some-examples",
+    "href": "ml_models/index.html#some-examples",
+    "title": "Machine Learning Models",
+    "section": "Some Examples",
+    "text": "Some Examples"
   }
 ]
