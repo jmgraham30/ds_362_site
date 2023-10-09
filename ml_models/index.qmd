@@ -22,6 +22,7 @@ library(tidyverse)
 library(tidymodels)
 library(vip)
 library(parttree)
+library(kableExtra)
 
 tidymodels_prefer()
 
@@ -329,9 +330,111 @@ The  `tidymodels` framework provides a consistent set of steps for training and 
     - In production, monitor model performance and update models as needed.
 
 
+The best references for `tidymodels` are the [tidymodels.org](https://www.tidymodels.org/) website and the [Tidy Modeling with R](https://www.tmwr.org/) book.  The [Tidy Modeling with R](https://www.tmwr.org/) book is available for free online and is a great resource for learning the `tidymodels` framework [@kuhn2022tidy]. The blog posts by [Julia Silge](https://juliasilge.com/) are also a great resource for learning `tidymodels`. [View Silge's blog](https://juliasilge.com/).
+
 ## Some Examples
 
+### Example 1: `tidymodels` Workflow for Regression
 
+The following is an example of the `tidymodels` workflow for regression.  The example uses the `mtcars` dataset and the `parsnip` and `recipes` packages.  The example is adapted from the [Tidy Modeling with R](https://www.tmwr.org/) book [@kuhn2022tidy].
+
+
+```{r}
+#| echo: true 
+#| fig.align: center
+#| fig.cap: "Tidy Models Workflow for Regression"
+#| fig.height: 4
+#| fig.width: 6
+#| message: false
+#| warning: false
+#| code-fold: true
+
+# set seed for reproducibility
+set.seed(123)
+
+# load the mtcars dataset
+data(mtcars)
+
+# create a training and testing split
+mtcars_split <- initial_split(mtcars, prop = 0.75)
+
+# create a training and testing dataset
+mtcars_train <- training(mtcars_split)
+mtcars_test <- testing(mtcars_split)
+
+# create a recipe for preprocessing
+mtcars_recipe <- recipe(mpg ~ ., data = mtcars_train) %>%
+  step_center(all_predictors()) %>%
+  step_scale(all_predictors())
+
+# create a linear regression model
+lm_spec <- linear_reg() %>%
+  set_engine("lm")
+
+# fit the model
+lm_fit <- workflow() %>%
+  add_recipe(mtcars_recipe) %>%
+  add_model(lm_spec) %>%
+  fit(data = mtcars_train)
+
+# make predictions
+lm_pred <- predict(lm_fit, mtcars_test) %>%
+  bind_cols(mtcars_test)
+
+# evaluate the model
+lm_eval <- lm_pred %>%
+  metrics(truth = mpg, estimate = .pred) %>%
+  bind_rows(
+    lm_pred %>%
+      rsq(truth = mpg, estimate = .pred) %>%
+      mutate(metric = "rsq")
+  )
+
+# tidy the model results
+lm_tidy <- tidy(lm_fit)
+
+# visualize the model results
+lm_tidy %>%
+  ggplot(aes(x = term, y = estimate)) +
+  geom_point() +
+  geom_errorbar(aes(ymin = estimate - std.error, ymax = estimate + std.error)) +
+  coord_flip() +
+  labs(
+    title = "Linear Regression Model Results",
+    subtitle = "Model: mpg ~ .",
+    x = "Term",
+    y = "Estimate"
+  )
+
+```
+
+
+```{r}
+#| label: tbl-lm-results
+#| tbl-cap: "Linear Regression Model Results"
+#| echo: false
+
+# print the model results
+lm_tidy %>%
+  kable() %>%
+  kable_styling() %>%
+  scroll_box(width = "100%", height = "200px")
+
+```
+
+
+
+```{r}
+#| label: tbl-lm-eval
+#| tbl-cap: "Linear Regression Model Evaluation"
+#| echo: false
+
+# print the model evaluation
+lm_eval %>%
+  kable() %>%
+  kable_styling() %>%
+  scroll_box(width = "100%", height = "200px")
+```
 
 
 ## References
