@@ -397,6 +397,111 @@ div.csl-indent {
 </section>
 <section id="tidymodels" class="level3">
 <h3 class="anchored" data-anchor-id="tidymodels"><code>tidymodels</code></h3>
+<ol type="1">
+<li><strong><a href="https://www.tidymodels.org/"><code>tidyverse</code> Integration</a>:</strong>
+<ul>
+<li><em>Description</em>: <code>tidymodels</code> seamlessly integrates with the popular <code>tidyverse</code> suite of packages, allowing for the use of tidy data frames and other tidy tools.</li>
+</ul></li>
+<li><strong><a href="https://parsnip.tidymodels.org/"><code>parsnip</code></a>:</strong>
+<ul>
+<li><em>Description</em>: The <code>parsnip</code> package defines a common interface for specifying machine learning models, making it easier to work with different modeling engines.</li>
+</ul></li>
+<li><strong><a href="https://recipes.tidymodels.org/"><code>recipes</code></a>:</strong>
+<ul>
+<li><em>Description</em>: The <code>recipes</code> package provides a systematic way to define and preprocess feature engineering steps for your data, creating a “recipe” that includes data preprocessing and variable transformations.</li>
+</ul></li>
+<li><strong><a href="https://tune.tidymodels.org/"><code>tune</code></a>:</strong>
+<ul>
+<li><em>Description</em>: The <code>tune</code> package offers tools for hyperparameter tuning, allowing you to optimize model performance by systematically searching for the best hyperparameters.</li>
+</ul></li>
+<li><strong><a href="https://workflows.tidymodels.org/"><code>workflows</code></a>:</strong>
+<ul>
+<li><em>Description</em>: The <code>workflows</code> package simplifies the process of building, tuning, and evaluating models by combining models, recipes, and tuning into a unified workflow.</li>
+</ul></li>
+<li><strong><a href="https://yardstick.tidymodels.org/"><code>yardstick</code></a>:</strong>
+<ul>
+<li><em>Description</em>: The <code>yardstick</code> package provides a wide range of functions for model evaluation, including metrics for classification, regression, and survival analysis tasks.</li>
+</ul></li>
+<li><strong><a href="https://rsample.tidymodels.org/"><code>rsample</code></a>:</strong>
+<ul>
+<li><em>Description</em>: The <code>rsample</code> package is for resampling and creating data splits, essential for tasks such as cross-validation and bootstrapping.</li>
+</ul></li>
+<li><strong><a href="https://broom.tidymodels.org/"><code>broom</code></a>:</strong>
+<ul>
+<li><em>Description</em>: The <code>broom</code> package helps tidy up the results of model fits, making it easy to extract coefficients, predictions, and other model-related information in a tidy data format.</li>
+</ul></li>
+<li><strong>Community and Extensibility:</strong>
+<ul>
+<li><em>Description</em>: The <code>tidymodels</code> ecosystem has a growing community of users and contributors. It supports the creation of custom modeling engines, extending the framework to new algorithms.</li>
+</ul></li>
+<li><strong>Reproducibility and Best Practices:</strong>
+<ul>
+<li><em>Description</em>: <code>tidymodels</code> promotes best practices in machine learning, emphasizing tidy data principles, clear model specification, and reproducibility.</li>
+</ul></li>
+</ol>
+<p>List of <code>parsnip</code> models:</p>
+<ol type="1">
+<li><strong><a href="https://parsnip.tidymodels.org/reference/linear_reg.html"><code>linear_reg</code></a>:</strong>
+<ul>
+<li><em>Description</em>: Linear Regression Model</li>
+<li><em>Type</em>: Regression</li>
+<li><em>Documentation</em>: <a href="https://parsnip.tidymodels.org/reference/linear_reg.html">linear_reg Documentation</a></li>
+</ul></li>
+<li><strong><a href="https://parsnip.tidymodels.org/reference/logistic_reg.html"><code>logistic_reg</code></a>:</strong>
+<ul>
+<li><em>Description</em>: Logistic Regression Model</li>
+<li><em>Type</em>: Classification</li>
+<li><em>Documentation</em>: <a href="https://parsnip.tidymodels.org/reference/logistic_reg.html">logistic_reg Documentation</a></li>
+</ul></li>
+<li><strong><a href="https://parsnip.tidymodels.org/reference/decision_tree.html"><code>decision_tree</code></a>:</strong>
+<ul>
+<li><em>Description</em>: Decision Tree Model</li>
+<li><em>Type</em>: Both (Regression and Classification)</li>
+<li><em>Documentation</em>: <a href="https://parsnip.tidymodels.org/reference/decision_tree.html">decision_tree Documentation</a></li>
+</ul></li>
+<li><strong><a href="https://parsnip.tidymodels.org/reference/rand_forest.html"><code>rand_forest</code></a>:</strong>
+<ul>
+<li><em>Description</em>: Random Forest Model</li>
+<li><em>Type</em>: Both (Regression and Classification)</li>
+<li><em>Documentation</em>: <a href="https://parsnip.tidymodels.org/reference/rand_forest.html">rand_forest Documentation</a></li>
+</ul></li>
+<li><strong><a href="https://parsnip.tidymodels.org/reference/svm_rbf.html"><code>svm_rbf</code></a>:</strong>
+<ul>
+<li><em>Description</em>: Support Vector Machine with Radial Basis Function Kernel Model</li>
+<li><em>Type</em>: Both (Regression and Classification)</li>
+<li><em>Documentation</em>: <a href="https://parsnip.tidymodels.org/reference/svm_rbf.html">svm_rbf Documentation</a></li>
+</ul></li>
+<li><strong><a href="https://parsnip.tidymodels.org/reference/svm_linear.html"><code>svm_linear</code></a>:</strong>
+<ul>
+<li><em>Description</em>: Support Vector Machine with Linear Kernel Model</li>
+<li><em>Type</em>: Both (Regression and Classification)</li>
+<li><em>Documentation</em>: <a href="https://parsnip.tidymodels.org/reference/svm_linear.html">svm_linear Documentation</a></li>
+</ul></li>
+<li><strong><a href="https://parsnip.tidymodels.org/reference/nearest_neighbor.html"><code>nearest_neighbor</code></a>:</strong>
+<ul>
+<li><em>Description</em>: k-Nearest Neighbors Model</li>
+<li><em>Type</em>: Both (Regression and Classification)</li>
+<li><em>Documentation</em>: <a href="https://parsnip.tidymodels.org/reference/nearest_neighbor.html">nearest_neighbor Documentation</a></li>
+</ul></li>
+<li><strong><a href="https://parsnip.tidymodels.org/reference/naive_Bayes.html"><code>naive_Bayes</code></a>:</strong>
+<ul>
+<li><em>Description</em>: Naive Bayes Model</li>
+<li><em>Type</em>: Classification</li>
+<li><em>Documentation</em>: <a href="https://parsnip.tidymodels.org/reference/naive_Bayes.html">naive_Bayes Documentation</a></li>
+</ul></li>
+<li><strong><a href="https://parsnip.tidymodels.org/reference/boost_tree.html"><code>boost_tree</code></a>:</strong>
+<ul>
+<li><em>Description</em>: Gradient Boosting Model</li>
+<li><em>Type</em>: Both (Regression and Classification)</li>
+<li><em>Documentation</em>: <a href="https://parsnip.tidymodels.org/reference/boost_tree.html">boost_tree Documentation</a></li>
+</ul></li>
+<li><strong><a href="https://parsnip.tidymodels.org/reference/mlp.html"><code>mlp</code></a>:</strong>
+<ul>
+<li><em>Description</em>: Multilayer Perceptron (Neural Network) Model</li>
+<li><em>Type</em>: Both (Regression and Classification)</li>
+<li><em>Documentation</em>: <a href="https://parsnip.tidymodels.org/reference/mlp.html">mlp Documentation</a></li>
+</ul></li>
+</ol>
 </section>
 </section>
 <section id="references" class="level2">
