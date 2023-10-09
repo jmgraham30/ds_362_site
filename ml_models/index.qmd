@@ -223,7 +223,7 @@ The `tidymodels` package in R is an integrated ecosystem of packages designed to
     - *Description*: `tidymodels` promotes best practices in machine learning, emphasizing tidy data principles, clear model specification, and reproducibility.
 
 
-List of `parsnip` models:
+The `parsnip` package in the `tidymodels` family allows one to specify a variety of supervised machine learning models.  Here is a list of some of the `parsnip` models:
 
 1. **[`linear_reg`](https://parsnip.tidymodels.org/reference/linear_reg.html):**
    - *Description*: Linear Regression Model
@@ -276,7 +276,9 @@ List of `parsnip` models:
     - *Documentation*: [mlp Documentation](https://parsnip.tidymodels.org/reference/mlp.html)
 
 
-## Tidymodels Machine Learning Workflow
+## `tidymodels` Machine Learning Workflow
+
+The  `tidymodels` framework provides a consistent set of steps for training and evaluating machine learning models.  The following is a list of the steps in the `tidymodels` workflow:
 
 1. **Data Preparation:**
    - Load and prepare your dataset following tidy data principles.
