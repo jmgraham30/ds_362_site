@@ -460,6 +460,20 @@ vembedr::embed_youtube(id="WCRwbrNWrpw?si=rkEz30HgpeBK9VTD",height=450) %>%
   vembedr::use_align("center")
 ```
 
+
+- Read chapter 10 from of *An Introduction to Statistical Learning* [@tibshirani2017introduction]. 
+
+Watch the following video lectures on neural networks: 
+
+* [View Introduction to Neural Networks video on YouTube](https://youtu.be/jJb2qytbcNg?si=hwdtetIKGC18RbXT).
+
+```{r}
+#| echo: false
+
+vembedr::embed_youtube(id="jJb2qytbcNg?si=hwdtetIKGC18RbXT",height=450) %>%
+  vembedr::use_align("center")
+```
+
 ## References
 
 ::: {#refs}

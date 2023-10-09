@@ -606,14 +606,14 @@
     "href": "lesson06/index.html#preparation-for-the-next-lesson",
     "title": "Lesson 6",
     "section": "Preparation for the next lesson",
-    "text": "Preparation for the next lesson\nTo prepare for the next lesson, please read:\n\nRead chapter 9 from of An Introduction to Statistical Learning (Tibshirani, James, and Trevor 2017). You may also want to read chapter 9 of Statistical Learning with Math and R (Suzuki 2020).\n\nWatch the following video lectures on support vector machines:\n\nView Supoprt Vector Classifier video on YouTube.\n\n\n\n\n\n\n\n\n\n\n\nView Supoprt Vector Classifiers in R video on YouTube."
+    "text": "Preparation for the next lesson\nTo prepare for the next lesson, please read:\n\nRead chapter 9 from of An Introduction to Statistical Learning (Tibshirani, James, and Trevor 2017). You may also want to read chapter 9 of Statistical Learning with Math and R (Suzuki 2020).\n\nWatch the following video lectures on support vector machines:\n\nView Supoprt Vector Classifier video on YouTube.\n\n\n\n\n\n\n\n\n\n\n\nView Supoprt Vector Classifiers in R video on YouTube.\n\n\n\n\n\n\n\n\n\n\n\nRead chapter 10 from of An Introduction to Statistical Learning (Tibshirani, James, and Trevor 2017).\n\nWatch the following video lectures on neural networks:\n\nView Introduction to Neural Networks video on YouTube."
   },
   {
     "objectID": "lesson06/index.html#references",
     "href": "lesson06/index.html#references",
     "title": "Lesson 6",
     "section": "References",
-    "text": "References\n\n\nSuzuki, Joe. 2020. Statistical Learning with Math and r. Springer.\n\n\nTibshirani, Hastie Robert, Gareth James, and Daniela Witten Trevor. 2017. An Introduction to Statistical Learning. springer publication.\n\n\n\n\n\n\n\n\nExpand for Session Info\n\n\n\n\n\n\n\n─ Session info ───────────────────────────────────────────────────────────────\n setting  value\n version  R version 4.3.1 (2023-06-16)\n os       macOS Sonoma 14.0\n system   aarch64, darwin20\n ui       X11\n language (EN)\n collate  en_US.UTF-8\n ctype    en_US.UTF-8\n tz       America/New_York\n date     2023-10-06\n pandoc   3.1.1 @ /Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/ (via rmarkdown)\n quarto   1.3.450 @ /usr/local/bin/quarto\n\n─ Packages ───────────────────────────────────────────────────────────────────\n package      * version    date (UTC) lib source\n broom        * 1.0.5      2023-06-09 [1] CRAN (R 4.3.0)\n dials        * 1.2.0      2023-04-03 [1] CRAN (R 4.3.0)\n dplyr        * 1.1.3      2023-09-03 [1] CRAN (R 4.3.0)\n forcats      * 1.0.0      2023-01-29 [1] CRAN (R 4.3.0)\n ggplot2      * 3.4.3      2023-08-14 [1] CRAN (R 4.3.0)\n infer        * 1.0.5      2023-09-06 [1] CRAN (R 4.3.0)\n ISLR2        * 1.3-2      2022-11-20 [1] CRAN (R 4.3.0)\n lubridate    * 1.9.3      2023-09-27 [1] CRAN (R 4.3.1)\n modeldata    * 1.2.0      2023-08-09 [1] CRAN (R 4.3.0)\n parsnip      * 1.1.1      2023-08-17 [1] CRAN (R 4.3.0)\n parttree     * 0.0.1.9004 2023-10-02 [1] Github (grantmcdermott/parttree@d2b60ac)\n purrr        * 1.0.2      2023-08-10 [1] CRAN (R 4.3.0)\n readr        * 2.1.4      2023-02-10 [1] CRAN (R 4.3.0)\n recipes      * 1.0.8      2023-08-25 [1] CRAN (R 4.3.0)\n rsample      * 1.2.0      2023-08-23 [1] CRAN (R 4.3.0)\n scales       * 1.2.1      2022-08-20 [1] CRAN (R 4.3.0)\n sessioninfo  * 1.2.2      2021-12-06 [1] CRAN (R 4.3.0)\n stringr      * 1.5.0      2022-12-02 [1] CRAN (R 4.3.0)\n tibble       * 3.2.1      2023-03-20 [1] CRAN (R 4.3.0)\n tidymodels   * 1.1.1      2023-08-24 [1] CRAN (R 4.3.0)\n tidyr        * 1.3.0      2023-01-24 [1] CRAN (R 4.3.0)\n tidyverse    * 2.0.0      2023-02-22 [1] CRAN (R 4.3.0)\n tune         * 1.1.2      2023-08-23 [1] CRAN (R 4.3.0)\n vip          * 0.4.1      2023-08-21 [1] CRAN (R 4.3.0)\n workflows    * 1.1.3      2023-02-22 [1] CRAN (R 4.3.0)\n workflowsets * 1.0.1      2023-04-06 [1] CRAN (R 4.3.0)\n yardstick    * 1.2.0      2023-04-21 [1] CRAN (R 4.3.0)\n\n [1] /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library\n\n──────────────────────────────────────────────────────────────────────────────"
+    "text": "References\n\n\nSuzuki, Joe. 2020. Statistical Learning with Math and r. Springer.\n\n\nTibshirani, Hastie Robert, Gareth James, and Daniela Witten Trevor. 2017. An Introduction to Statistical Learning. springer publication.\n\n\n\n\n\n\n\n\nExpand for Session Info\n\n\n\n\n\n\n\n─ Session info ───────────────────────────────────────────────────────────────\n setting  value\n version  R version 4.3.1 (2023-06-16)\n os       macOS Sonoma 14.0\n system   aarch64, darwin20\n ui       X11\n language (EN)\n collate  en_US.UTF-8\n ctype    en_US.UTF-8\n tz       America/New_York\n date     2023-10-09\n pandoc   3.1.1 @ /Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/ (via rmarkdown)\n quarto   1.3.450 @ /usr/local/bin/quarto\n\n─ Packages ───────────────────────────────────────────────────────────────────\n package      * version    date (UTC) lib source\n broom        * 1.0.5      2023-06-09 [1] CRAN (R 4.3.0)\n dials        * 1.2.0      2023-04-03 [1] CRAN (R 4.3.0)\n dplyr        * 1.1.3      2023-09-03 [1] CRAN (R 4.3.0)\n forcats      * 1.0.0      2023-01-29 [1] CRAN (R 4.3.0)\n ggplot2      * 3.4.3      2023-08-14 [1] CRAN (R 4.3.0)\n infer        * 1.0.5      2023-09-06 [1] CRAN (R 4.3.0)\n ISLR2        * 1.3-2      2022-11-20 [1] CRAN (R 4.3.0)\n lubridate    * 1.9.3      2023-09-27 [1] CRAN (R 4.3.1)\n modeldata    * 1.2.0      2023-08-09 [1] CRAN (R 4.3.0)\n parsnip      * 1.1.1      2023-08-17 [1] CRAN (R 4.3.0)\n parttree     * 0.0.1.9004 2023-10-02 [1] Github (grantmcdermott/parttree@d2b60ac)\n purrr        * 1.0.2      2023-08-10 [1] CRAN (R 4.3.0)\n readr        * 2.1.4      2023-02-10 [1] CRAN (R 4.3.0)\n recipes      * 1.0.8      2023-08-25 [1] CRAN (R 4.3.0)\n rsample      * 1.2.0      2023-08-23 [1] CRAN (R 4.3.0)\n scales       * 1.2.1      2022-08-20 [1] CRAN (R 4.3.0)\n sessioninfo  * 1.2.2      2021-12-06 [1] CRAN (R 4.3.0)\n stringr      * 1.5.0      2022-12-02 [1] CRAN (R 4.3.0)\n tibble       * 3.2.1      2023-03-20 [1] CRAN (R 4.3.0)\n tidymodels   * 1.1.1      2023-08-24 [1] CRAN (R 4.3.0)\n tidyr        * 1.3.0      2023-01-24 [1] CRAN (R 4.3.0)\n tidyverse    * 2.0.0      2023-02-22 [1] CRAN (R 4.3.0)\n tune         * 1.1.2      2023-08-23 [1] CRAN (R 4.3.0)\n vip          * 0.4.1      2023-08-21 [1] CRAN (R 4.3.0)\n workflows    * 1.1.3      2023-02-22 [1] CRAN (R 4.3.0)\n workflowsets * 1.0.1      2023-04-06 [1] CRAN (R 4.3.0)\n yardstick    * 1.2.0      2023-04-21 [1] CRAN (R 4.3.0)\n\n [1] /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library\n\n──────────────────────────────────────────────────────────────────────────────"
   },
   {
     "objectID": "lesson06/index.html#basic-decision-trees",
@@ -740,5 +740,103 @@
     "title": "Machine Learning Models",
     "section": "Some Examples",
     "text": "Some Examples\n\nExample 1: tidymodels Workflow for Regression\nThe following is an example of the tidymodels workflow for regression. The example uses the mtcars dataset and the parsnip and recipes packages. The example is adapted from the Tidy Modeling with R book (Kuhn and Silge 2022).\n\n\nCode\n# set seed for reproducibility\nset.seed(123)\n\n# load the mtcars dataset\ndata(mtcars)\n\n# create a training and testing split\nmtcars_split &lt;- initial_split(mtcars, prop = 0.75)\n\n# create a training and testing dataset\nmtcars_train &lt;- training(mtcars_split)\nmtcars_test &lt;- testing(mtcars_split)\n\n# create a recipe for preprocessing\nmtcars_recipe &lt;- recipe(mpg ~ ., data = mtcars_train) %&gt;%\n  step_center(all_predictors()) %&gt;%\n  step_scale(all_predictors())\n\n# create a linear regression model\nlm_spec &lt;- linear_reg() %&gt;%\n  set_engine(\"lm\")\n\n# fit the model\nlm_fit &lt;- workflow() %&gt;%\n  add_recipe(mtcars_recipe) %&gt;%\n  add_model(lm_spec) %&gt;%\n  fit(data = mtcars_train)\n\n# make predictions\nlm_pred &lt;- predict(lm_fit, mtcars_test) %&gt;%\n  bind_cols(mtcars_test)\n\n# evaluate the model\nlm_eval &lt;- lm_pred %&gt;%\n  metrics(truth = mpg, estimate = .pred) %&gt;%\n  bind_rows(\n    lm_pred %&gt;%\n      rsq(truth = mpg, estimate = .pred) %&gt;%\n      mutate(metric = \"rsq\")\n  )\n\n# tidy the model results\nlm_tidy &lt;- tidy(lm_fit)\n\n# visualize the model results\nlm_tidy %&gt;%\n  ggplot(aes(x = term, y = estimate)) +\n  geom_point() +\n  geom_errorbar(aes(ymin = estimate - std.error, ymax = estimate + std.error)) +\n  coord_flip() +\n  labs(\n    title = \"Linear Regression Model Results\",\n    subtitle = \"Model: mpg ~ .\",\n    x = \"Term\",\n    y = \"Estimate\"\n  )\n\n\n\n\n\nTidy Models Workflow for Regression\n\n\n\n\n\n\n\n\n\nTable 1: Linear Regression Model Results\n\n\nterm\nestimate\nstd.error\nstatistic\np.value\n\n\n\n\n(Intercept)\n21.0708333\n0.6035556\n34.9111701\n0.0000000\n\n\ncyl\n-1.8085954\n2.7450923\n-0.6588469\n0.5214933\n\n\ndisp\n2.7886147\n3.3586784\n0.8302714\n0.4213717\n\n\nhp\n-1.4572830\n2.4512678\n-0.5945018\n0.5623810\n\n\ndrat\n0.0941833\n1.1813897\n0.0797225\n0.9376722\n\n\nwt\n-4.4737683\n2.3983919\n-1.8653200\n0.0848621\n\n\nqsec\n1.6098052\n1.7188679\n0.9365497\n0.3660636\n\n\nvs\n0.4021956\n1.3188879\n0.3049506\n0.7652312\n\n\nam\n1.2501668\n1.4919647\n0.8379332\n0.4172084\n\n\ngear\n-0.0667576\n1.5665234\n-0.0426151\n0.9666559\n\n\ncarb\n0.5220534\n1.8506869\n0.2820863\n0.7823182\n\n\n\n\n\n\n\n\n\n\n\n\n\nTable 2: Linear Regression Model Evaluation\n\n\n.metric\n.estimator\n.estimate\nmetric\n\n\n\n\nrmse\nstandard\n2.4214858\nNA\n\n\nrsq\nstandard\n0.7487043\nNA\n\n\nmae\nstandard\n2.0481386\nNA\n\n\nrsq\nstandard\n0.7487043\nrsq"
+  },
+  {
+    "objectID": "nns/index.html",
+    "href": "nns/index.html",
+    "title": "Lesson",
+    "section": "",
+    "text": "After this lesson, students will be able to:"
+  },
+  {
+    "objectID": "nns/index.html#learning-objectives",
+    "href": "nns/index.html#learning-objectives",
+    "title": "Lesson",
+    "section": "",
+    "text": "After this lesson, students will be able to:"
+  },
+  {
+    "objectID": "nns/index.html#readings-etc.",
+    "href": "nns/index.html#readings-etc.",
+    "title": "Lesson",
+    "section": "Readings, etc.",
+    "text": "Readings, etc.\nFor this lesson, refer to the following readings, etc.:\n\nRead chapter 10 from of An Introduction to Statistical Learning (Tibshirani, James, and Trevor 2017).\n\nWatch the following video lectures on neural networks:\n\nView Introduction to Neural Networks video on YouTube."
+  },
+  {
+    "objectID": "nns/index.html#overview",
+    "href": "nns/index.html#overview",
+    "title": "Lesson",
+    "section": "Overview",
+    "text": "Overview"
+  },
+  {
+    "objectID": "nns/index.html#support-vector-machine-approaches",
+    "href": "nns/index.html#support-vector-machine-approaches",
+    "title": "Lesson",
+    "section": "Support Vector Machine Approaches",
+    "text": "Support Vector Machine Approaches\n\nMaximal Marginal Cllassifier\n\n\n\nFigure 1: Left: Separating hyperplanes for binary data. Right: The decision rule based on a separating hyperplane.\n\n\n\n\n\nFigure 2: The solid lines shows the maximal margin hyperplane. The margin is the distance between the two dotted lines."
+  },
+  {
+    "objectID": "nns/index.html#preparation-for-the-next-lesson",
+    "href": "nns/index.html#preparation-for-the-next-lesson",
+    "title": "Lesson",
+    "section": "Preparation for the next lesson",
+    "text": "Preparation for the next lesson\nTo prepare for the next lesson, please read:\n\nRead chapter 9 from of An Introduction to Statistical Learning (Tibshirani, James, and Trevor 2017). You may also want to read chapter 9 of Statistical Learning with Math and R (Suzuki 2020).\nView Support Vector Classifier video on YouTube.\n\n\n\n\n\n\n\n\n\n\n\nView Support Vector Classifiers in R video on YouTube."
+  },
+  {
+    "objectID": "nns/index.html#references",
+    "href": "nns/index.html#references",
+    "title": "Lesson",
+    "section": "References",
+    "text": "References\n\n\nSuzuki, Joe. 2020. Statistical Learning with Math and r. Springer.\n\n\nTibshirani, Hastie Robert, Gareth James, and Daniela Witten Trevor. 2017. An Introduction to Statistical Learning. springer publication.\n\n\n\n\n\n\n\n\nExpand for Session Info\n\n\n\n\n\n\n\n─ Session info ───────────────────────────────────────────────────────────────\n setting  value\n version  R version 4.3.1 (2023-06-16)\n os       macOS Sonoma 14.0\n system   aarch64, darwin20\n ui       X11\n language (EN)\n collate  en_US.UTF-8\n ctype    en_US.UTF-8\n tz       America/New_York\n date     2023-10-09\n pandoc   3.1.1 @ /Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/ (via rmarkdown)\n quarto   1.3.450 @ /usr/local/bin/quarto\n\n─ Packages ───────────────────────────────────────────────────────────────────\n package      * version date (UTC) lib source\n broom        * 1.0.5   2023-06-09 [1] CRAN (R 4.3.0)\n dials        * 1.2.0   2023-04-03 [1] CRAN (R 4.3.0)\n dplyr        * 1.1.3   2023-09-03 [1] CRAN (R 4.3.0)\n forcats      * 1.0.0   2023-01-29 [1] CRAN (R 4.3.0)\n ggplot2      * 3.4.3   2023-08-14 [1] CRAN (R 4.3.0)\n infer        * 1.0.5   2023-09-06 [1] CRAN (R 4.3.0)\n ISLR2        * 1.3-2   2022-11-20 [1] CRAN (R 4.3.0)\n lubridate    * 1.9.3   2023-09-27 [1] CRAN (R 4.3.1)\n modeldata    * 1.2.0   2023-08-09 [1] CRAN (R 4.3.0)\n parsnip      * 1.1.1   2023-08-17 [1] CRAN (R 4.3.0)\n purrr        * 1.0.2   2023-08-10 [1] CRAN (R 4.3.0)\n readr        * 2.1.4   2023-02-10 [1] CRAN (R 4.3.0)\n recipes      * 1.0.8   2023-08-25 [1] CRAN (R 4.3.0)\n rsample      * 1.2.0   2023-08-23 [1] CRAN (R 4.3.0)\n scales       * 1.2.1   2022-08-20 [1] CRAN (R 4.3.0)\n sessioninfo  * 1.2.2   2021-12-06 [1] CRAN (R 4.3.0)\n stringr      * 1.5.0   2022-12-02 [1] CRAN (R 4.3.0)\n tibble       * 3.2.1   2023-03-20 [1] CRAN (R 4.3.0)\n tidymodels   * 1.1.1   2023-08-24 [1] CRAN (R 4.3.0)\n tidyr        * 1.3.0   2023-01-24 [1] CRAN (R 4.3.0)\n tidyverse    * 2.0.0   2023-02-22 [1] CRAN (R 4.3.0)\n tune         * 1.1.2   2023-08-23 [1] CRAN (R 4.3.0)\n workflows    * 1.1.3   2023-02-22 [1] CRAN (R 4.3.0)\n workflowsets * 1.0.1   2023-04-06 [1] CRAN (R 4.3.0)\n yardstick    * 1.2.0   2023-04-21 [1] CRAN (R 4.3.0)\n\n [1] /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library\n\n──────────────────────────────────────────────────────────────────────────────"
+  },
+  {
+    "objectID": "svm/index.html",
+    "href": "svm/index.html",
+    "title": "Lesson",
+    "section": "",
+    "text": "After this lesson, students will be able to:\n\nDescribe the support vector machine (SVM) approach to classification.\nUse the tidymodels workflow to fit and tune various SVM classification models."
+  },
+  {
+    "objectID": "svm/index.html#learning-objectives",
+    "href": "svm/index.html#learning-objectives",
+    "title": "Lesson",
+    "section": "",
+    "text": "After this lesson, students will be able to:\n\nDescribe the support vector machine (SVM) approach to classification.\nUse the tidymodels workflow to fit and tune various SVM classification models."
+  },
+  {
+    "objectID": "svm/index.html#readings-etc.",
+    "href": "svm/index.html#readings-etc.",
+    "title": "Lesson",
+    "section": "Readings, etc.",
+    "text": "Readings, etc.\nFor this lesson, refer to the following readings, etc.:\n\nRead chapter 9 from of An Introduction to Statistical Learning (Tibshirani, James, and Trevor 2017). You may also want to read chapter 9 of Statistical Learning with Math and R (Suzuki 2020).\nView Support Vector Classifier video on YouTube.\n\n\n\n\n\n\n\n\n\n\n\nView Support Vector Classifiers in R video on YouTube."
+  },
+  {
+    "objectID": "svm/index.html#overview",
+    "href": "svm/index.html#overview",
+    "title": "Lesson",
+    "section": "Overview",
+    "text": "Overview"
+  },
+  {
+    "objectID": "svm/index.html#support-vector-machine-approaches",
+    "href": "svm/index.html#support-vector-machine-approaches",
+    "title": "Lesson",
+    "section": "Support Vector Machine Approaches",
+    "text": "Support Vector Machine Approaches\n\nMaximal Marginal Cllassifier\n\n\n\nFigure 1: Left: Separating hyperplanes for binary data. Right: The decision rule based on a separating hyperplane.\n\n\n\n\n\nFigure 2: The solid lines shows the maximal margin hyperplane. The margin is the distance between the two dotted lines."
+  },
+  {
+    "objectID": "svm/index.html#preparation-for-the-next-lesson",
+    "href": "svm/index.html#preparation-for-the-next-lesson",
+    "title": "Lesson",
+    "section": "Preparation for the next lesson",
+    "text": "Preparation for the next lesson\nTo prepare for the next lesson, please read:\n\nRead chapter 10 from of An Introduction to Statistical Learning (Tibshirani, James, and Trevor 2017).\n\nWatch the following video lectures on neural networks:\n\nView Introduction to Neural Networks video on YouTube."
+  },
+  {
+    "objectID": "svm/index.html#references",
+    "href": "svm/index.html#references",
+    "title": "Lesson",
+    "section": "References",
+    "text": "References\n\n\nSuzuki, Joe. 2020. Statistical Learning with Math and r. Springer.\n\n\nTibshirani, Hastie Robert, Gareth James, and Daniela Witten Trevor. 2017. An Introduction to Statistical Learning. springer publication.\n\n\n\n\n\n\n\n\nExpand for Session Info\n\n\n\n\n\n\n\n─ Session info ───────────────────────────────────────────────────────────────\n setting  value\n version  R version 4.3.1 (2023-06-16)\n os       macOS Sonoma 14.0\n system   aarch64, darwin20\n ui       X11\n language (EN)\n collate  en_US.UTF-8\n ctype    en_US.UTF-8\n tz       America/New_York\n date     2023-10-09\n pandoc   3.1.1 @ /Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/ (via rmarkdown)\n quarto   1.3.450 @ /usr/local/bin/quarto\n\n─ Packages ───────────────────────────────────────────────────────────────────\n package      * version    date (UTC) lib source\n broom        * 1.0.5      2023-06-09 [1] CRAN (R 4.3.0)\n dials        * 1.2.0      2023-04-03 [1] CRAN (R 4.3.0)\n dplyr        * 1.1.3      2023-09-03 [1] CRAN (R 4.3.0)\n forcats      * 1.0.0      2023-01-29 [1] CRAN (R 4.3.0)\n ggplot2      * 3.4.3      2023-08-14 [1] CRAN (R 4.3.0)\n infer        * 1.0.5      2023-09-06 [1] CRAN (R 4.3.0)\n ISLR2        * 1.3-2      2022-11-20 [1] CRAN (R 4.3.0)\n lubridate    * 1.9.3      2023-09-27 [1] CRAN (R 4.3.1)\n modeldata    * 1.2.0      2023-08-09 [1] CRAN (R 4.3.0)\n parsnip      * 1.1.1      2023-08-17 [1] CRAN (R 4.3.0)\n parttree     * 0.0.1.9004 2023-10-02 [1] Github (grantmcdermott/parttree@d2b60ac)\n purrr        * 1.0.2      2023-08-10 [1] CRAN (R 4.3.0)\n readr        * 2.1.4      2023-02-10 [1] CRAN (R 4.3.0)\n recipes      * 1.0.8      2023-08-25 [1] CRAN (R 4.3.0)\n rsample      * 1.2.0      2023-08-23 [1] CRAN (R 4.3.0)\n scales       * 1.2.1      2022-08-20 [1] CRAN (R 4.3.0)\n sessioninfo  * 1.2.2      2021-12-06 [1] CRAN (R 4.3.0)\n stringr      * 1.5.0      2022-12-02 [1] CRAN (R 4.3.0)\n tibble       * 3.2.1      2023-03-20 [1] CRAN (R 4.3.0)\n tidymodels   * 1.1.1      2023-08-24 [1] CRAN (R 4.3.0)\n tidyr        * 1.3.0      2023-01-24 [1] CRAN (R 4.3.0)\n tidyverse    * 2.0.0      2023-02-22 [1] CRAN (R 4.3.0)\n tune         * 1.1.2      2023-08-23 [1] CRAN (R 4.3.0)\n vip          * 0.4.1      2023-08-21 [1] CRAN (R 4.3.0)\n workflows    * 1.1.3      2023-02-22 [1] CRAN (R 4.3.0)\n workflowsets * 1.0.1      2023-04-06 [1] CRAN (R 4.3.0)\n yardstick    * 1.2.0      2023-04-21 [1] CRAN (R 4.3.0)\n\n [1] /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library\n\n──────────────────────────────────────────────────────────────────────────────"
   }
 ]
