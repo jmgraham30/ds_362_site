@@ -577,8 +577,12 @@ final_res <- final_wf %>%
 
 final_res %>%
   collect_metrics() %>%
-  kable()
+  kable() %>%
+  kable_styling() %>%
+  scroll_box(width = "100%", height = "200px")
 ```
+
+Let's see how the model predictions compare with the observed data for the test set observations. 
 
 ```{r}
 #| echo: true
@@ -595,6 +599,144 @@ final_res %>%
   labs(x = "Observed", y = "Predicted")
 
   
+```
+
+
+### Example 4: `tidymodels` Workflow for Classification with Multinomial Logistic Regression
+
+The following is an example of the `tidymodels` workflow for multinomial logistic regression.  The example uses the `penguins` dataset and the `parsnip` and `recipes` packages.
+
+```{r}
+#| echo: true
+#| label: fig-tidy-models-workflow-logit
+#| fig-align: center
+#| fig-cap: "Tidy Models Workflow for Multinomial Logistic Regression"
+#| fig-height: 4
+#| fig-width: 6
+#| message: false
+#| warning: false
+#| code-fold: true
+
+# set seed for reproducibility
+set.seed(123)
+
+# load the penguins dataset
+data(penguins)
+
+# remove missing values from the dataset
+penguins <- penguins %>% drop_na()
+
+# create a training and testing split
+penguins_split <- initial_split(penguins, prop = 0.75)
+
+# create a training and testing dataset
+penguins_train <- training(penguins_split)
+penguins_test <- testing(penguins_split)
+
+# create a cross-validation set
+penguins_cv <- vfold_cv(penguins_train, v = 5)
+
+# create a recipe for preprocessing
+penguins_recipe <- recipe(island ~ bill_length_mm + bill_depth_mm + flipper_length_mm + body_mass_g, data = penguins_train)
+
+# create a multinomial logistic regression model
+logit_spec <- multinom_reg(penalty = tune(), mixture = tune()) %>%
+  set_engine("glmnet") %>%
+  set_mode("classification")
+
+# create a workflow
+nber_wf <- workflow(penguins_recipe, logit_spec)
+
+# create grid for tuning
+nber_grid <- grid_regular(penalty(range = c(-5, 0)), 
+                          mixture(range = c(0, 1)),
+                          levels = 20)
+
+# tune the model
+nber_rs <-
+  tune_grid(
+    nber_wf,
+    penguins_cv,
+    grid = nber_grid
+  )
+
+autoplot(nber_rs)
+```
+
+Show best models.
+
+```{r}
+#| echo: true
+#| code-fold: true
+
+show_best(nber_rs) %>%
+  kable() %>%
+  kable_styling() %>%
+  scroll_box(width = "100%", height = "200px")
+```
+
+Select the best model.
+
+```{r}
+#| echo: true
+#| code-fold: true
+
+
+final_penalty <-
+  nber_rs %>%
+  select_by_one_std_err(metric = "roc_auc", desc(penalty))
+```
+
+Fit the final model. 
+
+```{r}
+#| echo: true
+#| code-fold: true
+
+
+final_rs <-
+  nber_wf %>%
+  finalize_workflow(final_penalty) %>%
+  last_fit(penguins_split)
+```
+
+The confusion matrix for the final model prdictions on the test set. 
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| label: fig-tidy-models-workflow-logit-confusion
+#| fig-align: center
+#| fig-cap: "Confusion Matrix for Final Model Predictions on Test Set"
+#| fig-height: 4
+#| fig-width: 6
+
+
+
+collect_predictions(final_rs) %>%
+  conf_mat(island, .pred_class) %>%
+  autoplot()
+```
+
+The ROC curve. 
+
+```{r}
+#| echo: true
+#| code-fold: true
+#| label: fig-tidy-models-workflow-logit-roc
+#| fig-align: center
+#| fig-cap: "ROC Curve for Final Model Predictions on Test Set"
+#| fig-height: 4
+#| fig-width: 6
+
+
+collect_predictions(final_rs) %>%
+  roc_curve(truth = island, .pred_Biscoe:.pred_Torgersen) %>%
+  ggplot(aes(1 - specificity, sensitivity, color = .level)) +
+  geom_abline(slope = 1, color = "gray50", lty = 2, alpha = 0.8) +
+  geom_path(size = 1.5, alpha = 0.7) +
+  labs(color = NULL) +
+  coord_fixed()
 ```
 
 ## References

@@ -186,6 +186,7 @@ div.csl-indent {
   <li><a href="#example-1-tidymodels-workflow-for-linear-regression-for-predictive-modeling" id="toc-example-1-tidymodels-workflow-for-linear-regression-for-predictive-modeling" class="nav-link" data-scroll-target="#example-1-tidymodels-workflow-for-linear-regression-for-predictive-modeling">Example 1: <code>tidymodels</code> Workflow for Linear Regression for Predictive Modeling</a></li>
   <li><a href="#example-2-tidymodels-workflow-for-linear-regression-for-inferential-modeling" id="toc-example-2-tidymodels-workflow-for-linear-regression-for-inferential-modeling" class="nav-link" data-scroll-target="#example-2-tidymodels-workflow-for-linear-regression-for-inferential-modeling">Example 2: <code>tidymodels</code> Workflow for Linear Regression for Inferential Modeling</a></li>
   <li><a href="#example-3-tidymodels-workflow-for-tuning-random-forest-for-regression" id="toc-example-3-tidymodels-workflow-for-tuning-random-forest-for-regression" class="nav-link" data-scroll-target="#example-3-tidymodels-workflow-for-tuning-random-forest-for-regression">Example 3: <code>tidymodels</code> Workflow for Tuning Random Forest for Regression</a></li>
+  <li><a href="#example-4-tidymodels-workflow-for-classification-with-multinomial-logistic-regression" id="toc-example-4-tidymodels-workflow-for-classification-with-multinomial-logistic-regression" class="nav-link" data-scroll-target="#example-4-tidymodels-workflow-for-classification-with-multinomial-logistic-regression">Example 4: <code>tidymodels</code> Workflow for Classification with Multinomial Logistic Regression</a></li>
   </ul></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
@@ -965,16 +966,19 @@ div.csl-indent {
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>final_res <span class="sc">%&gt;%</span></span>
 <span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">collect_metrics</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">"100%"</span>, <span class="at">height =</span> <span class="st">"200px"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<table data-quarto-postprocess="true" class="table table-sm table-striped small">
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:200px; overflow-x: scroll; width:100%; ">
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
 <thead>
 <tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th">.metric</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">.estimator</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">.estimate</th>
-<th style="text-align: left;" data-quarto-table-cell-role="th">.config</th>
+<th data-quarto-table-cell-role="th" style="text-align: left; position: sticky; top: 0; background-color: #FFFFFF;">.metric</th>
+<th data-quarto-table-cell-role="th" style="text-align: left; position: sticky; top: 0; background-color: #FFFFFF;">.estimator</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">.estimate</th>
+<th data-quarto-table-cell-role="th" style="text-align: left; position: sticky; top: 0; background-color: #FFFFFF;">.config</th>
 </tr>
 </thead>
 <tbody>
@@ -992,10 +996,11 @@ div.csl-indent {
 </tr>
 </tbody>
 </table>
-
+</div>
 
 </div>
 </div>
+<p>Let’s see how the model predictions compare with the observed data for the test set observations.</p>
 <div class="cell" data-layout-align="center">
 <details>
 <summary>Code</summary>
@@ -1011,6 +1016,208 @@ div.csl-indent {
 <figure class="figure">
 <p><img src="index_files/figure-html/fig-tidy-models-workflow-rf-pred-1.png" class="img-fluid figure-img" width="672"></p>
 <figcaption class="figure-caption">Figure&nbsp;4: Results on Test Set for Tuned Random Forest for Regression</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="example-4-tidymodels-workflow-for-classification-with-multinomial-logistic-regression" class="level3">
+<h3 class="anchored" data-anchor-id="example-4-tidymodels-workflow-for-classification-with-multinomial-logistic-regression">Example 4: <code>tidymodels</code> Workflow for Classification with Multinomial Logistic Regression</h3>
+<p>The following is an example of the <code>tidymodels</code> workflow for multinomial logistic regression. The example uses the <code>penguins</code> dataset and the <code>parsnip</code> and <code>recipes</code> packages.</p>
+<div class="cell" data-layout-align="center">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set seed for reproducibility</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># load the penguins dataset</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(penguins)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># remove missing values from the dataset</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>penguins <span class="ot">&lt;-</span> penguins <span class="sc">%&gt;%</span> <span class="fu">drop_na</span>()</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co"># create a training and testing split</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>penguins_split <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(penguins, <span class="at">prop =</span> <span class="fl">0.75</span>)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># create a training and testing dataset</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>penguins_train <span class="ot">&lt;-</span> <span class="fu">training</span>(penguins_split)</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>penguins_test <span class="ot">&lt;-</span> <span class="fu">testing</span>(penguins_split)</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co"># create a cross-validation set</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>penguins_cv <span class="ot">&lt;-</span> <span class="fu">vfold_cv</span>(penguins_train, <span class="at">v =</span> <span class="dv">5</span>)</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co"># create a recipe for preprocessing</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>penguins_recipe <span class="ot">&lt;-</span> <span class="fu">recipe</span>(island <span class="sc">~</span> bill_length_mm <span class="sc">+</span> bill_depth_mm <span class="sc">+</span> flipper_length_mm <span class="sc">+</span> body_mass_g, <span class="at">data =</span> penguins_train)</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co"># create a multinomial logistic regression model</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>logit_spec <span class="ot">&lt;-</span> <span class="fu">multinom_reg</span>(<span class="at">penalty =</span> <span class="fu">tune</span>(), <span class="at">mixture =</span> <span class="fu">tune</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">"glmnet"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_mode</span>(<span class="st">"classification"</span>)</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="co"># create a workflow</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>nber_wf <span class="ot">&lt;-</span> <span class="fu">workflow</span>(penguins_recipe, logit_spec)</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="co"># create grid for tuning</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>nber_grid <span class="ot">&lt;-</span> <span class="fu">grid_regular</span>(<span class="fu">penalty</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">0</span>)), </span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>                          <span class="fu">mixture</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)),</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>                          <span class="at">levels =</span> <span class="dv">20</span>)</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="co"># tune the model</span></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>nber_rs <span class="ot">&lt;-</span></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tune_grid</span>(</span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>    nber_wf,</span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>    penguins_cv,</span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">grid =</span> nber_grid</span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(nber_rs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-tidy-models-workflow-logit" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="index_files/figure-html/fig-tidy-models-workflow-logit-1.png" class="img-fluid figure-img" width="576"></p>
+<figcaption class="figure-caption">Figure&nbsp;5: Tidy Models Workflow for Multinomial Logistic Regression</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Show best models.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">show_best</span>(nber_rs) <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">"100%"</span>, <span class="at">height =</span> <span class="st">"200px"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: No value of `metric` was given; metric 'roc_auc' will be used.</code></pre>
+</div>
+<div class="cell-output-display">
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:200px; overflow-x: scroll; width:100%; ">
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">penalty</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">mixture</th>
+<th data-quarto-table-cell-role="th" style="text-align: left; position: sticky; top: 0; background-color: #FFFFFF;">.metric</th>
+<th data-quarto-table-cell-role="th" style="text-align: left; position: sticky; top: 0; background-color: #FFFFFF;">.estimator</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">mean</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">n</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">std_err</th>
+<th data-quarto-table-cell-role="th" style="text-align: left; position: sticky; top: 0; background-color: #FFFFFF;">.config</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.0000100</td>
+<td style="text-align: right;">0.4210526</td>
+<td style="text-align: left;">roc_auc</td>
+<td style="text-align: left;">hand_till</td>
+<td style="text-align: right;">0.8596058</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.0076867</td>
+<td style="text-align: left;">Preprocessor1_Model161</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.0000183</td>
+<td style="text-align: right;">0.4210526</td>
+<td style="text-align: left;">roc_auc</td>
+<td style="text-align: left;">hand_till</td>
+<td style="text-align: right;">0.8596058</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.0076867</td>
+<td style="text-align: left;">Preprocessor1_Model162</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.0000336</td>
+<td style="text-align: right;">0.4210526</td>
+<td style="text-align: left;">roc_auc</td>
+<td style="text-align: left;">hand_till</td>
+<td style="text-align: right;">0.8596058</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.0076867</td>
+<td style="text-align: left;">Preprocessor1_Model163</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.0000616</td>
+<td style="text-align: right;">0.4210526</td>
+<td style="text-align: left;">roc_auc</td>
+<td style="text-align: left;">hand_till</td>
+<td style="text-align: right;">0.8596058</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.0076867</td>
+<td style="text-align: left;">Preprocessor1_Model164</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.0001129</td>
+<td style="text-align: right;">0.4210526</td>
+<td style="text-align: left;">roc_auc</td>
+<td style="text-align: left;">hand_till</td>
+<td style="text-align: right;">0.8596058</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.0076867</td>
+<td style="text-align: left;">Preprocessor1_Model165</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+</div>
+</div>
+<p>Select the best model.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>final_penalty <span class="ot">&lt;-</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  nber_rs <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select_by_one_std_err</span>(<span class="at">metric =</span> <span class="st">"roc_auc"</span>, <span class="fu">desc</span>(penalty))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Fit the final model.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>final_rs <span class="ot">&lt;-</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  nber_wf <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">finalize_workflow</span>(final_penalty) <span class="sc">%&gt;%</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">last_fit</span>(penguins_split)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>The confusion matrix for the final model prdictions on the test set.</p>
+<div class="cell" data-layout-align="center">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">collect_predictions</span>(final_rs) <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">conf_mat</span>(island, .pred_class) <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autoplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-tidy-models-workflow-logit-confusion" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="index_files/figure-html/fig-tidy-models-workflow-logit-confusion-1.png" class="img-fluid figure-img" width="576"></p>
+<figcaption class="figure-caption">Figure&nbsp;6: Confusion Matrix for Final Model Predictions on Test Set</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The ROC curve.</p>
+<div class="cell" data-layout-align="center">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">collect_predictions</span>(final_rs) <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">roc_curve</span>(<span class="at">truth =</span> island, .pred_Biscoe<span class="sc">:</span>.pred_Torgersen) <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="dv">1</span> <span class="sc">-</span> specificity, sensitivity, <span class="at">color =</span> .level)) <span class="sc">+</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">"gray50"</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>(<span class="at">size =</span> <span class="fl">1.5</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">color =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_fixed</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-tidy-models-workflow-logit-roc" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="index_files/figure-html/fig-tidy-models-workflow-logit-roc-1.png" class="img-fluid figure-img" width="576"></p>
+<figcaption class="figure-caption">Figure&nbsp;7: ROC Curve for Final Model Predictions on Test Set</figcaption>
 </figure>
 </div>
 </div>
@@ -1059,9 +1266,11 @@ Expand for Session Info
  dplyr        * 1.1.3      2023-09-03 [1] CRAN (R 4.3.0)
  forcats      * 1.0.0      2023-01-29 [1] CRAN (R 4.3.0)
  ggplot2      * 3.4.3      2023-08-14 [1] CRAN (R 4.3.0)
+ glmnet       * 4.1-8      2023-08-22 [1] CRAN (R 4.3.0)
  infer        * 1.0.5      2023-09-06 [1] CRAN (R 4.3.0)
  kableExtra   * 1.3.4      2021-02-20 [1] CRAN (R 4.3.0)
  lubridate    * 1.9.3      2023-09-27 [1] CRAN (R 4.3.1)
+ Matrix       * 1.6-1.1    2023-09-18 [1] CRAN (R 4.3.1)
  modeldata    * 1.2.0      2023-08-09 [1] CRAN (R 4.3.0)
  parsnip      * 1.1.1      2023-08-17 [1] CRAN (R 4.3.0)
  parttree     * 0.0.1.9004 2023-10-02 [1] Github (grantmcdermott/parttree@d2b60ac)
