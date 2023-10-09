@@ -37,7 +37,7 @@ Machine learning (ML) as we have defined it involves estimating a (mathematical)
 
 ### Basic Models
 
-Here we provide lists of the most common machine learning models . Remember that the choice of the machine learning model depends on the specific problem, the nature of the data, and the trade-off between interpretability and predictive performance. It's often a good practice to experiment with multiple models and evaluate their performance to select the most suitable one for a given task.
+Here we provide lists of the most common machine learning models, separating the lists into one for supervised methods and one for unsupervised methods. Remember that the choice of the machine learning model depends on the specific problem, the nature of the data, and the trade-off between interpretability and predictive performance. It's often a good practice to experiment with multiple models and evaluate their performance to select the most suitable one for a given task.
 
 #### Summary and Characteristics of Most Common Supervised Machine Learning Models
 
