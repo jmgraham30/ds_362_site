@@ -668,6 +668,8 @@ Show best models.
 ```{r}
 #| echo: true
 #| code-fold: true
+#| warning: false
+#| message: false
 
 show_best(nber_rs) %>%
   kable() %>%
@@ -680,6 +682,8 @@ Select the best model.
 ```{r}
 #| echo: true
 #| code-fold: true
+#| warning: false
+#| message: false
 
 
 final_penalty <-
@@ -692,7 +696,8 @@ Fit the final model.
 ```{r}
 #| echo: true
 #| code-fold: true
-
+#| warning: false
+#| message: false
 
 final_rs <-
   nber_wf %>%
@@ -738,6 +743,11 @@ collect_predictions(final_rs) %>%
   labs(color = NULL) +
   coord_fixed()
 ```
+
+
+## Comparing Multiple Modeling Approaches
+
+In her blog post [Evaluate multiple modeling approaches for spam email](https://juliasilge.com/blog/spam-email/), Julia Silge uses workflow sets to evaluate multiple possible models. Let's work through that post together. [View the post](https://juliasilge.com/blog/spam-email/).
 
 ## References
 
