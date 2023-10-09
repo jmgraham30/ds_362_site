@@ -1,6 +1,6 @@
 ---
 title: "Machine Learning Models"
-subtitle: "The tidymodels Workflow"
+subtitle: "The `tidymodels` Workflow"
 author: "JMG"
 format:
   html:
