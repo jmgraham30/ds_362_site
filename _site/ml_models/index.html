@@ -143,6 +143,7 @@ div.csl-indent {
   <li><a href="#basic-models" id="toc-basic-models" class="nav-link" data-scroll-target="#basic-models">Basic Models</a></li>
   <li><a href="#tidymodels" id="toc-tidymodels" class="nav-link" data-scroll-target="#tidymodels"><code>tidymodels</code></a></li>
   </ul></li>
+  <li><a href="#tidymodels-machine-learning-workflow" id="toc-tidymodels-machine-learning-workflow" class="nav-link" data-scroll-target="#tidymodels-machine-learning-workflow">Tidymodels Machine Learning Workflow</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
@@ -397,6 +398,7 @@ div.csl-indent {
 </section>
 <section id="tidymodels" class="level3">
 <h3 class="anchored" data-anchor-id="tidymodels"><code>tidymodels</code></h3>
+<p>The <code>tidymodels</code> package in R is an integrated ecosystem of packages designed to streamline the process of creating, evaluating, and deploying machine learning models while adhering to tidy data principles. The <code>tidymodels</code> framework follows a structured and consistent approach to machine learning, making it easier for data scientists and analysts to work with data and build predictive models. Here’s a brief description of the key components of the <code>tidymodels</code> package:</p>
 <ol type="1">
 <li><strong><a href="https://www.tidymodels.org/"><code>tidyverse</code> Integration</a>:</strong>
 <ul>
@@ -503,6 +505,72 @@ div.csl-indent {
 </ul></li>
 </ol>
 </section>
+</section>
+<section id="tidymodels-machine-learning-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="tidymodels-machine-learning-workflow">Tidymodels Machine Learning Workflow</h2>
+<ol type="1">
+<li><strong>Data Preparation:</strong>
+<ul>
+<li>Load and prepare your dataset following tidy data principles.</li>
+</ul></li>
+<li><strong>Data Splitting:</strong>
+<ul>
+<li>Use the <code>rsample</code> package to create data splits for training and testing.</li>
+</ul></li>
+<li><strong>Preprocessing and Feature Engineering:</strong>
+<ul>
+<li>Define a data preprocessing plan using the <code>recipes</code> package.</li>
+<li>Create a “recipe” for data cleaning, transformation, and feature engineering.</li>
+</ul></li>
+<li><strong>Model Specification:</strong>
+<ul>
+<li>Specify machine learning models with the <code>parsnip</code> package.</li>
+<li>Choose from a variety of models for regression, classification, etc.</li>
+</ul></li>
+<li><strong>Hyperparameter Tuning:</strong>
+<ul>
+<li>Utilize the <code>tune</code> package for hyperparameter tuning.</li>
+<li>Define a grid of hyperparameters and use resampling methods for evaluation.</li>
+</ul></li>
+<li><strong>Model Training:</strong>
+<ul>
+<li>Train models with the specified data splits, preprocessing plan, and hyperparameters.</li>
+<li>Use the <code>fit</code> function to train on the training data.</li>
+</ul></li>
+<li><strong>Model Evaluation:</strong>
+<ul>
+<li>Assess model performance using the <code>yardstick</code> package.</li>
+<li>Calculate relevant evaluation metrics (e.g., accuracy, RMSE).</li>
+</ul></li>
+<li><strong>Model Selection:</strong>
+<ul>
+<li>Compare model performance and hyperparameter settings.</li>
+<li>Select the best-performing model or create ensembles (e.g., stacking, bagging).</li>
+</ul></li>
+<li><strong>Model Interpretation and Visualization:</strong>
+<ul>
+<li>Use the <code>broom</code> package to extract and tidy model results.</li>
+<li>Visualize model outputs and interpret results.</li>
+</ul></li>
+<li><strong>Deployment and Prediction:</strong>
+<ul>
+<li>Deploy the final model for predictions on new data.</li>
+<li>Use the trained model in production environments.</li>
+</ul></li>
+<li><strong>Documentation and Reproducibility:</strong>
+<ul>
+<li>Document the entire workflow, including preprocessing, model specifications, tuning, and results.</li>
+<li>Ensure reproducibility and transparency.</li>
+</ul></li>
+<li><strong>Sharing and Collaboration:</strong>
+<ul>
+<li>Share code and findings with collaborators for reproducibility and collaboration.</li>
+</ul></li>
+<li><strong>Ongoing Monitoring and Maintenance:</strong>
+<ul>
+<li>In production, monitor model performance and update models as needed.</li>
+</ul></li>
+</ol>
 </section>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>
