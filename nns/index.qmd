@@ -1,6 +1,6 @@
 ---
-title: "Lesson 7"
-subtitle: "Support Vector Machines"
+title: "Lesson "
+subtitle: "Neural Networks"
 author: "JMG"
 format:
   html:
@@ -9,7 +9,7 @@ format:
     code-summary: "Show the code"
     toc: true
     toc-location: left
-bibliography: lesson07.bib
+bibliography: nns.bib
 license: "CC BY-NC-SA 4.0"
 ---
 
@@ -21,8 +21,6 @@ license: "CC BY-NC-SA 4.0"
 library(tidyverse)
 library(tidymodels)
 library(ISLR2)
-library(vip)
-library(parttree)
 
 tidymodels_prefer()
 
@@ -33,34 +31,27 @@ theme_set(theme_minimal(base_size = 12))
 
 After this lesson, students will be able to: 
 
-- Describe the support vector machine (SVM) approach to classification. 
-
-- Use the `tidymodels` workflow to fit and tune various SVM classification models. 
+- 
 
 
 ## Readings, etc.
 
 For this lesson, refer to the following readings, etc.:
 
-- Read chapter 9 from of *An Introduction to Statistical Learning* [@tibshirani2017introduction]. You may also want to read chapter 9 of *Statistical Learning with Math and R* [@suzuki2020statistical].
 
-- [View Support Vector Classifier video on YouTube](https://youtu.be/pjvnCEfAswc?si=5I-xmhB3Y006RP0Y).
+- Read chapter 10 from of *An Introduction to Statistical Learning* [@tibshirani2017introduction]. 
+
+Watch the following video lectures on neural networks: 
+
+* [View Introduction to Neural Networks video on YouTube](https://youtu.be/jJb2qytbcNg?si=hwdtetIKGC18RbXT).
 
 ```{r}
 #| echo: false
 
-vembedr::embed_youtube(id="pjvnCEfAswc?si=5I-xmhB3Y006RP0Y",height=450) %>%
+vembedr::embed_youtube(id="jJb2qytbcNg?si=hwdtetIKGC18RbXT",height=450) %>%
   vembedr::use_align("center")
 ```
 
-- [View Support Vector Classifiers in R video on YouTube](https://youtu.be/WCRwbrNWrpw?si=rkEz30HgpeBK9VTD).
-    
-```{r}
-#| echo: false
-
-vembedr::embed_youtube(id="WCRwbrNWrpw?si=rkEz30HgpeBK9VTD",height=450) %>%
-  vembedr::use_align("center")
-```
 
     
 ## Overview    
@@ -86,18 +77,26 @@ vembedr::embed_youtube(id="WCRwbrNWrpw?si=rkEz30HgpeBK9VTD",height=450) %>%
 
 To prepare for the next lesson, please read:
 
-- Read chapter 10 from of *An Introduction to Statistical Learning* [@tibshirani2017introduction]. 
+- Read chapter 9 from of *An Introduction to Statistical Learning* [@tibshirani2017introduction]. You may also want to read chapter 9 of *Statistical Learning with Math and R* [@suzuki2020statistical].
 
-Watch the following video lectures on neural networks: 
-
-* [View Introduction to Neural Networks video on YouTube](https://youtu.be/jJb2qytbcNg?si=hwdtetIKGC18RbXT).
+- [View Support Vector Classifier video on YouTube](https://youtu.be/pjvnCEfAswc?si=5I-xmhB3Y006RP0Y).
 
 ```{r}
 #| echo: false
 
-vembedr::embed_youtube(id="jJb2qytbcNg?si=hwdtetIKGC18RbXT",height=450) %>%
+vembedr::embed_youtube(id="pjvnCEfAswc?si=5I-xmhB3Y006RP0Y",height=450) %>%
   vembedr::use_align("center")
 ```
+
+- [View Support Vector Classifiers in R video on YouTube](https://youtu.be/WCRwbrNWrpw?si=rkEz30HgpeBK9VTD).
+    
+```{r}
+#| echo: false
+
+vembedr::embed_youtube(id="WCRwbrNWrpw?si=rkEz30HgpeBK9VTD",height=450) %>%
+  vembedr::use_align("center")
+```
+
 
 
 ## References
