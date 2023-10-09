@@ -9,7 +9,7 @@ format:
     code-summary: "Show the code"
     toc: true
     toc-location: left
-bibliography: lesson06.bib
+bibliography: ml_models.bib
 license: "CC BY-NC-SA 4.0"
 ---
 
@@ -29,6 +29,165 @@ theme_set(theme_minimal(base_size = 12))
 ```
 
 
+## Overview
+
+
+Machine learning (ML) as we have defined it involves estimating a (mathematical) function and we divide problems into two general types: *supervised* and *unsupervised* learning. In supervised learning, we have a set of data that we use to train a model to predict a target variable. In unsupervised learning, we have a set of data that we use to train a model to find patterns in the data. In this chapter, we will focus on supervised learning. Further, we separate supervised learning into two types: *regression* and *classification*. In regression, the target variable is continuous. In classification, the target variable is categorical. We also consider two types of applications for machine learning: *prediction* and *inference*. In prediction, we are interested in predicting the target variable. In inference, we are interested in understanding the relationship between the target variable and the predictors. 
+
+
+### Basic Models
+
+Here we provide lists of the most common machine learning models . Remember that the choice of the machine learning model depends on the specific problem, the nature of the data, and the trade-off between interpretability and predictive performance. It's often a good practice to experiment with multiple models and evaluate their performance to select the most suitable one for a given task.
+
+#### Summary and Characteristics of Most Common Supervised Machine Learning Models
+
+1. **[Linear Regression](https://en.wikipedia.org/wiki/Linear_regression):**
+   - *Summary*: Linear regression models the relationship between a dependent variable and one or more independent variables by fitting a linear equation to the observed data.
+   - *Characteristics*:
+     - Suitable for regression tasks (predicting continuous numeric values).
+     - Assumes a linear relationship between predictors and the target.
+     - Simple and interpretable.
+
+2. **[Logistic Regression](https://en.wikipedia.org/wiki/Logistic_regression):**
+   - *Summary*: Logistic regression is used for binary classification, modeling the probability that an instance belongs to a particular class.
+   - *Characteristics*:
+     - Suitable for binary classification tasks.
+     - Uses the logistic function to model probabilities.
+     - Provides probabilities and interpretable coefficients.
+
+3. **[Decision Trees](https://en.wikipedia.org/wiki/Decision_tree):**
+   - *Summary*: Decision trees divide the data into subsets based on the most significant attributes, making them suitable for both classification and regression tasks.
+   - *Characteristics*:
+     - Non-linear and can capture complex relationships.
+     - Prone to overfitting but can be regularized.
+     - Easily interpretable.
+
+4. **[Random Forest](https://en.wikipedia.org/wiki/Random_forest):**
+   - *Summary*: Random forests are an ensemble of decision trees that improve predictive accuracy and reduce overfitting.
+   - *Characteristics*:
+     - Combines multiple decision trees for better performance.
+     - Handles feature importance and reduces variance.
+     - Works well for classification and regression.
+
+5. **[Support Vector Machines (SVM)](https://en.wikipedia.org/wiki/Support_vector_machine):**
+   - *Summary*: SVMs aim to find a hyperplane that best separates data points into different classes.
+   - *Characteristics*:
+     - Effective for binary classification and can be extended to multiclass.
+     - Uses kernel functions for non-linear separations.
+     - Good for high-dimensional data.
+
+6. **[K-Nearest Neighbors (K-NN)](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm):**
+   - *Summary*: K-NN assigns a class to a data point based on the majority class among its k-nearest neighbors in feature space.
+   - *Characteristics*:
+     - Simple and intuitive.
+     - Can handle both classification and regression.
+     - Sensitive to the choice of k.
+
+7. **[Naive Bayes](https://en.wikipedia.org/wiki/Naive_Bayes_classifier):**
+   - *Summary*: Naive Bayes is a probabilistic classifier based on Bayes' theorem, assuming that features are conditionally independent.
+   - *Characteristics*:
+     - Efficient and suitable for text classification.
+     - Assumes feature independence (naive assumption).
+     - Works well for high-dimensional data.
+
+8. **[Gradient Boosting Machines (GBM)](https://en.wikipedia.org/wiki/Gradient_boosting):**
+   - *Summary*: GBMs build an ensemble of weak learners (usually decision trees) to create a strong predictive model.
+   - *Characteristics*:
+     - Combines multiple weak learners for high accuracy.
+     - Handles regression and classification tasks.
+     - Prone to overfitting, but can be regularized.
+
+9. **[Neural Networks (Deep Learning)](https://en.wikipedia.org/wiki/Artificial_neural_network):**
+   - *Summary*: Neural networks, especially deep learning models, are highly flexible and can model complex relationships in data.
+   - *Characteristics*:
+     - Extremely powerful for various tasks.
+     - Requires large amounts of data and computational resources.
+     - Interpretability can be a challenge for deep models.
+
+10. **[Ensemble Methods](https://en.wikipedia.org/wiki/Ensemble_learning):**
+    - *Summary*: Ensemble methods combine multiple base models to improve predictive performance.
+    - *Characteristics*:
+      - Include bagging (e.g., Random Forest), boosting (e.g., AdaBoost), and stacking.
+      - Often more robust and accurate than individual models.
+      - Handle various types of data and tasks.
+
+
+#### Summary and Characteristics of Most Common Unsupervised Machine Learning Models
+
+
+1. **[K-Means Clustering](https://en.wikipedia.org/wiki/K-means_clustering):**
+   - *Summary*: K-Means is a clustering algorithm that partitions data into clusters based on similarity.
+   - *Characteristics*:
+     - Unsupervised clustering.
+     - Assigns data points to clusters with similar attributes.
+     - Requires specifying the number of clusters (k).
+
+2. **[Hierarchical Clustering](https://en.wikipedia.org/wiki/Hierarchical_clustering):**
+   - *Summary*: Hierarchical clustering builds a tree of clusters, revealing hierarchical relationships.
+   - *Characteristics*:
+     - Creates a tree-like structure of nested clusters.
+     - Agglomerative (bottom-up) or divisive (top-down) approaches.
+     - No need to specify the number of clusters in advance.
+
+3. **[Principal Component Analysis (PCA)](https://en.wikipedia.org/wiki/Principal_component_analysis):**
+   - *Summary*: PCA is a dimensionality reduction technique that captures the most important features in data.
+   - *Characteristics*:
+     - Reduces the dimensionality of data while preserving variance.
+     - Used for feature selection and visualization.
+     - Finds orthogonal linear combinations of features (principal components).
+
+4. **[Independent Component Analysis (ICA)](https://en.wikipedia.org/wiki/Independent_component_analysis):**
+   - *Summary*: ICA separates a multivariate signal into additive, independent components.
+   - *Characteristics*:
+     - Used for blind source separation and feature extraction.
+     - Assumes that observed data is a linear combination of independent sources.
+     - Applied in signal processing and neuroscience.
+
+5. **[Apriori Algorithm](https://en.wikipedia.org/wiki/Apriori_algorithm):**
+   - *Summary*: Apriori is used for association rule mining in transaction data.
+   - *Characteristics*:
+     - Discovers frequent itemsets in transaction databases.
+     - Used for market basket analysis and recommendation systems.
+     - Generates association rules (if item A is bought, item B is also likely to be bought).
+
+6. **[DBSCAN (Density-Based Spatial Clustering of Applications with Noise)](https://en.wikipedia.org/wiki/DBSCAN):**
+   - *Summary*: DBSCAN clusters data points based on density and identifies noise points.
+   - *Characteristics*:
+     - Automatically detects clusters of varying shapes and sizes.
+     - Suitable for data with irregular densities.
+     - Does not require specifying the number of clusters in advance.
+
+7. **[Gaussian Mixture Model (GMM)](https://en.wikipedia.org/wiki/Mixture_model):**
+   - *Summary*: GMM models data as a mixture of Gaussian distributions.
+   - *Characteristics*:
+     - Allows modeling complex data distributions.
+     - Useful for density estimation and clustering.
+     - Can be used for both soft and hard clustering.
+
+8. **[t-Distributed Stochastic Neighbor Embedding (t-SNE)](https://en.wikipedia.org/wiki/T-distributed_stochastic_neighbor_embedding):**
+   - *Summary*: t-SNE is a dimensionality reduction technique known for preserving local structure in data.
+   - *Characteristics*:
+     - Used for high-dimensional data visualization.
+     - Effective for visualizing clusters and similarities.
+     - Non-linear dimensionality reduction.
+
+9. **[Autoencoders](https://en.wikipedia.org/wiki/Autoencoder):**
+   - *Summary*: Autoencoders are neural networks used for unsupervised feature learning.
+   - *Characteristics*:
+     - Learn data representations by encoding and decoding input data.
+     - Used for dimensionality reduction, denoising, and anomaly detection.
+     - Neural network architecture.
+
+10. **[Latent Dirichlet Allocation (LDA)](https://en.wikipedia.org/wiki/Latent_Dirichlet_allocation):**
+    - *Summary*: LDA is a probabilistic model used for topic modeling in text data.
+    - *Characteristics*:
+      - Identifies topics in a collection of documents.
+      - Assumes documents are mixtures of topics, and words are mixtures of topic-specific words.
+      - Widely used in natural language processing.
+
+
+
+### `tidymodels`
 
 
 
