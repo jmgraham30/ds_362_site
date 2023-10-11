@@ -887,5 +887,19 @@
     "title": "Lesson 8",
     "section": "References",
     "text": "References\n\n\nSuzuki, Joe. 2020. Statistical Learning with Math and r. Springer.\n\n\nTibshirani, Hastie Robert, Gareth James, and Daniela Witten Trevor. 2017. An Introduction to Statistical Learning. springer publication.\n\n\n\n\n\n\n\n\nExpand for Session Info\n\n\n\n\n\n\n\n─ Session info ───────────────────────────────────────────────────────────────\n setting  value\n version  R version 4.3.1 (2023-06-16)\n os       macOS Sonoma 14.0\n system   aarch64, darwin20\n ui       X11\n language (EN)\n collate  en_US.UTF-8\n ctype    en_US.UTF-8\n tz       America/New_York\n date     2023-10-11\n pandoc   3.1.1 @ /Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/ (via rmarkdown)\n quarto   1.3.450 @ /usr/local/bin/quarto\n\n─ Packages ───────────────────────────────────────────────────────────────────\n package      * version    date (UTC) lib source\n broom        * 1.0.5      2023-06-09 [1] CRAN (R 4.3.0)\n dials        * 1.2.0      2023-04-03 [1] CRAN (R 4.3.0)\n dplyr        * 1.1.3      2023-09-03 [1] CRAN (R 4.3.0)\n forcats      * 1.0.0      2023-01-29 [1] CRAN (R 4.3.0)\n ggplot2      * 3.4.3      2023-08-14 [1] CRAN (R 4.3.0)\n infer        * 1.0.5      2023-09-06 [1] CRAN (R 4.3.0)\n ISLR2        * 1.3-2      2022-11-20 [1] CRAN (R 4.3.0)\n lubridate    * 1.9.3      2023-09-27 [1] CRAN (R 4.3.1)\n modeldata    * 1.2.0      2023-08-09 [1] CRAN (R 4.3.0)\n parsnip      * 1.1.1      2023-08-17 [1] CRAN (R 4.3.0)\n parttree     * 0.0.1.9004 2023-10-02 [1] Github (grantmcdermott/parttree@d2b60ac)\n purrr        * 1.0.2      2023-08-10 [1] CRAN (R 4.3.0)\n readr        * 2.1.4      2023-02-10 [1] CRAN (R 4.3.0)\n recipes      * 1.0.8      2023-08-25 [1] CRAN (R 4.3.0)\n rsample      * 1.2.0      2023-08-23 [1] CRAN (R 4.3.0)\n scales       * 1.2.1      2022-08-20 [1] CRAN (R 4.3.0)\n sessioninfo  * 1.2.2      2021-12-06 [1] CRAN (R 4.3.0)\n stringr      * 1.5.0      2022-12-02 [1] CRAN (R 4.3.0)\n tibble       * 3.2.1      2023-03-20 [1] CRAN (R 4.3.0)\n tidymodels   * 1.1.1      2023-08-24 [1] CRAN (R 4.3.0)\n tidyr        * 1.3.0      2023-01-24 [1] CRAN (R 4.3.0)\n tidyverse    * 2.0.0      2023-02-22 [1] CRAN (R 4.3.0)\n tune         * 1.1.2      2023-08-23 [1] CRAN (R 4.3.0)\n vip          * 0.4.1      2023-08-21 [1] CRAN (R 4.3.0)\n workflows    * 1.1.3      2023-02-22 [1] CRAN (R 4.3.0)\n workflowsets * 1.0.1      2023-04-06 [1] CRAN (R 4.3.0)\n yardstick    * 1.2.0      2023-04-21 [1] CRAN (R 4.3.0)\n\n [1] /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library\n\n──────────────────────────────────────────────────────────────────────────────"
+  },
+  {
+    "objectID": "lesson07/index.html#neural-networks",
+    "href": "lesson07/index.html#neural-networks",
+    "title": "Lesson 7",
+    "section": "Neural Networks",
+    "text": "Neural Networks\n\nSingle Layer Networks\n\n\nMultilayer networks\n\n\nConvolutional and Recurrent Networks"
+  },
+  {
+    "objectID": "lesson07/index.html#neural-networks-and-deep-learning-in-r",
+    "href": "lesson07/index.html#neural-networks-and-deep-learning-in-r",
+    "title": "Lesson 7",
+    "section": "  Neural Networks and Deep Learning in R",
+    "text": "Neural Networks and Deep Learning in R"
   }
 ]

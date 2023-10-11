@@ -75,6 +75,21 @@ Here are some additional resources on neural networks and deep learning that cov
 
 3. For a more detailed introduction to neural networks, see [@goodfellow2016deep]. This book is accessible online, [view the book](https://www.deeplearningbook.org/).
 
+## Neural Networks
+
+### Single Layer Networks
+
+
+### Multilayer networks
+
+
+### Convolutional and Recurrent Networks
+
+
+## `r icons::icon_style(icons::fontawesome("r-project"),scale=2,fill="steelblue")` Neural Networks and Deep Learning in R
+
+
+
 ## References
 
 ::: {#refs}
