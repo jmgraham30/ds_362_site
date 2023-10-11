@@ -655,28 +655,28 @@
     "href": "lesson07/index.html",
     "title": "Lesson 7",
     "section": "",
-    "text": "After this lesson, students will be able to:\n\nDescribe the support vector machine (SVM) approach to classification.\nUse the tidymodels workflow to fit and tune various SVM classification models."
+    "text": "After this lesson, students will be able to:\n\nDescribe the structure of a neural network and explain the role of activation functions, loss functions, optimization algorithms, and regularization in neural networks and deep learning.\nImplement a neural network in R using packages such as brulee and torch."
   },
   {
     "objectID": "lesson07/index.html#learning-objectives",
     "href": "lesson07/index.html#learning-objectives",
     "title": "Lesson 7",
     "section": "",
-    "text": "After this lesson, students will be able to:\n\nDescribe the support vector machine (SVM) approach to classification.\nUse the tidymodels workflow to fit and tune various SVM classification models."
+    "text": "After this lesson, students will be able to:\n\nDescribe the structure of a neural network and explain the role of activation functions, loss functions, optimization algorithms, and regularization in neural networks and deep learning.\nImplement a neural network in R using packages such as brulee and torch."
   },
   {
     "objectID": "lesson07/index.html#readings-etc.",
     "href": "lesson07/index.html#readings-etc.",
     "title": "Lesson 7",
     "section": "Readings, etc.",
-    "text": "Readings, etc.\nFor this lesson, refer to the following readings, etc.:\n\nRead chapter 9 from of An Introduction to Statistical Learning (Tibshirani, James, and Trevor 2017). You may also want to read chapter 9 of Statistical Learning with Math and R (Suzuki 2020).\nView Support Vector Classifier video on YouTube.\n\n\n\n\n\n\n\n\n\n\n\nView Support Vector Classifiers in R video on YouTube."
+    "text": "Readings, etc.\nFor this lesson, refer to the following readings, etc.:\n\nRead chapter 10 from of An Introduction to Statistical Learning (Tibshirani, James, and Trevor 2017).\n\nWatch the following video lectures on neural networks:\n\nView Introduction to Neural Networks video on YouTube."
   },
   {
     "objectID": "lesson07/index.html#overview",
     "href": "lesson07/index.html#overview",
     "title": "Lesson 7",
     "section": "Overview",
-    "text": "Overview"
+    "text": "Overview\nDeep learning is an active area of research in machine learning and artificial intelligence and neural networks are the foundation of deep learning. In this lesson, we will introduce neural networks and discuss how they are used in deep learning.\nNeural networks are a class of machine learning models that are inspired by the structure of the brain. They are composed of a series of layers of neurons that are connected to each other. Each artificial neuron is a simple computational unit that takes in a set of inputs, performs a computation, and produces an output. The output of one neuron is then used as the input to the next neuron. The first layer of artificial neurons is called the input layer and the last layer of neurons is called the output layer. The layers in between the input and output layers are called hidden layers. The number of hidden layers in a neural network is called the depth of the network. The number of neurons in each layer is called the width of the network. The figure below shows a neural network with two hidden layers. From here on out we will ignore the biological analogy that is the historical origin of neural networks and focus on the mathematical model.\nThe mathematical details of neural networks are conceptually simple but can be difficult to understand. In order to develop some intuition, we will start by exploring an interactive visualization of a neural network via the Neural Network Playground website. Visit the Neural Network Playground.\nThe visualization allows you to create a neural network and then train it on a dataset. The dataset can be a classification problem or a regression problem. The visualization allows you to change the activation function, the number of hidden layers, the number of neurons in each layer, and the learning rate. These are components related to the training of a network that we will define in detail later.\nHere are some additional resources on neural networks and deep learning that cover various aspects of the field that we do not have time to go over in this course:\n\nFor historical context, see Thinking Machines: The Quest for Artificial Intelligence–and Where It’s Taking Us Next by Dormehl or Deep Learning by Kelleher.\nFor an excellent overview of the types of problems that neural networks and deep learning are well-suited for, see (Krohn, Beyleveld, and Bassens 2019).\nFor a more detailed introduction to neural networks, see (Goodfellow, Bengio, and Courville 2016). This book is accessible online, view the book."
   },
   {
     "objectID": "lesson07/index.html#support-vector-machine-approaches",
@@ -697,7 +697,7 @@
     "href": "lesson07/index.html#references",
     "title": "Lesson 7",
     "section": "References",
-    "text": "References\n\n\nSuzuki, Joe. 2020. Statistical Learning with Math and r. Springer.\n\n\nTibshirani, Hastie Robert, Gareth James, and Daniela Witten Trevor. 2017. An Introduction to Statistical Learning. springer publication.\n\n\n\n\n\n\n\n\nExpand for Session Info\n\n\n\n\n\n\n\n─ Session info ───────────────────────────────────────────────────────────────\n setting  value\n version  R version 4.3.1 (2023-06-16)\n os       macOS Sonoma 14.0\n system   aarch64, darwin20\n ui       X11\n language (EN)\n collate  en_US.UTF-8\n ctype    en_US.UTF-8\n tz       America/New_York\n date     2023-10-06\n pandoc   3.1.1 @ /Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/ (via rmarkdown)\n quarto   1.3.450 @ /usr/local/bin/quarto\n\n─ Packages ───────────────────────────────────────────────────────────────────\n package      * version    date (UTC) lib source\n broom        * 1.0.5      2023-06-09 [1] CRAN (R 4.3.0)\n dials        * 1.2.0      2023-04-03 [1] CRAN (R 4.3.0)\n dplyr        * 1.1.3      2023-09-03 [1] CRAN (R 4.3.0)\n forcats      * 1.0.0      2023-01-29 [1] CRAN (R 4.3.0)\n ggplot2      * 3.4.3      2023-08-14 [1] CRAN (R 4.3.0)\n infer        * 1.0.5      2023-09-06 [1] CRAN (R 4.3.0)\n ISLR2        * 1.3-2      2022-11-20 [1] CRAN (R 4.3.0)\n lubridate    * 1.9.3      2023-09-27 [1] CRAN (R 4.3.1)\n modeldata    * 1.2.0      2023-08-09 [1] CRAN (R 4.3.0)\n parsnip      * 1.1.1      2023-08-17 [1] CRAN (R 4.3.0)\n parttree     * 0.0.1.9004 2023-10-02 [1] Github (grantmcdermott/parttree@d2b60ac)\n purrr        * 1.0.2      2023-08-10 [1] CRAN (R 4.3.0)\n readr        * 2.1.4      2023-02-10 [1] CRAN (R 4.3.0)\n recipes      * 1.0.8      2023-08-25 [1] CRAN (R 4.3.0)\n rsample      * 1.2.0      2023-08-23 [1] CRAN (R 4.3.0)\n scales       * 1.2.1      2022-08-20 [1] CRAN (R 4.3.0)\n sessioninfo  * 1.2.2      2021-12-06 [1] CRAN (R 4.3.0)\n stringr      * 1.5.0      2022-12-02 [1] CRAN (R 4.3.0)\n tibble       * 3.2.1      2023-03-20 [1] CRAN (R 4.3.0)\n tidymodels   * 1.1.1      2023-08-24 [1] CRAN (R 4.3.0)\n tidyr        * 1.3.0      2023-01-24 [1] CRAN (R 4.3.0)\n tidyverse    * 2.0.0      2023-02-22 [1] CRAN (R 4.3.0)\n tune         * 1.1.2      2023-08-23 [1] CRAN (R 4.3.0)\n vip          * 0.4.1      2023-08-21 [1] CRAN (R 4.3.0)\n workflows    * 1.1.3      2023-02-22 [1] CRAN (R 4.3.0)\n workflowsets * 1.0.1      2023-04-06 [1] CRAN (R 4.3.0)\n yardstick    * 1.2.0      2023-04-21 [1] CRAN (R 4.3.0)\n\n [1] /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library\n\n──────────────────────────────────────────────────────────────────────────────"
+    "text": "References\n\n\nGoodfellow, Ian, Yoshua Bengio, and Aaron Courville. 2016. Deep Learning. MIT press.\n\n\nKrohn, Jon, Grant Beyleveld, and Aglaé Bassens. 2019. Deep Learning Illustrated. Addison-Wesley Professional.\n\n\nTibshirani, Hastie Robert, Gareth James, and Daniela Witten Trevor. 2017. An Introduction to Statistical Learning. springer publication.\n\n\n\n\n\n\n\n\nExpand for Session Info\n\n\n\n\n\n\n\n─ Session info ───────────────────────────────────────────────────────────────\n setting  value\n version  R version 4.3.1 (2023-06-16)\n os       macOS Sonoma 14.0\n system   aarch64, darwin20\n ui       X11\n language (EN)\n collate  en_US.UTF-8\n ctype    en_US.UTF-8\n tz       America/New_York\n date     2023-10-11\n pandoc   3.1.1 @ /Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/ (via rmarkdown)\n quarto   1.3.450 @ /usr/local/bin/quarto\n\n─ Packages ───────────────────────────────────────────────────────────────────\n package      * version date (UTC) lib source\n broom        * 1.0.5   2023-06-09 [1] CRAN (R 4.3.0)\n dials        * 1.2.0   2023-04-03 [1] CRAN (R 4.3.0)\n dplyr        * 1.1.3   2023-09-03 [1] CRAN (R 4.3.0)\n forcats      * 1.0.0   2023-01-29 [1] CRAN (R 4.3.0)\n ggplot2      * 3.4.3   2023-08-14 [1] CRAN (R 4.3.0)\n infer        * 1.0.5   2023-09-06 [1] CRAN (R 4.3.0)\n ISLR2        * 1.3-2   2022-11-20 [1] CRAN (R 4.3.0)\n lubridate    * 1.9.3   2023-09-27 [1] CRAN (R 4.3.1)\n modeldata    * 1.2.0   2023-08-09 [1] CRAN (R 4.3.0)\n parsnip      * 1.1.1   2023-08-17 [1] CRAN (R 4.3.0)\n purrr        * 1.0.2   2023-08-10 [1] CRAN (R 4.3.0)\n readr        * 2.1.4   2023-02-10 [1] CRAN (R 4.3.0)\n recipes      * 1.0.8   2023-08-25 [1] CRAN (R 4.3.0)\n rsample      * 1.2.0   2023-08-23 [1] CRAN (R 4.3.0)\n scales       * 1.2.1   2022-08-20 [1] CRAN (R 4.3.0)\n sessioninfo  * 1.2.2   2021-12-06 [1] CRAN (R 4.3.0)\n stringr      * 1.5.0   2022-12-02 [1] CRAN (R 4.3.0)\n tibble       * 3.2.1   2023-03-20 [1] CRAN (R 4.3.0)\n tidymodels   * 1.1.1   2023-08-24 [1] CRAN (R 4.3.0)\n tidyr        * 1.3.0   2023-01-24 [1] CRAN (R 4.3.0)\n tidyverse    * 2.0.0   2023-02-22 [1] CRAN (R 4.3.0)\n tune         * 1.1.2   2023-08-23 [1] CRAN (R 4.3.0)\n workflows    * 1.1.3   2023-02-22 [1] CRAN (R 4.3.0)\n workflowsets * 1.0.1   2023-04-06 [1] CRAN (R 4.3.0)\n yardstick    * 1.2.0   2023-04-21 [1] CRAN (R 4.3.0)\n\n [1] /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library\n\n──────────────────────────────────────────────────────────────────────────────"
   },
   {
     "objectID": "ml_models/index.html",
@@ -845,5 +845,47 @@
     "title": "Machine Learning Models",
     "section": "Comparing Multiple Modeling Approaches",
     "text": "Comparing Multiple Modeling Approaches\nIn her blog post Evaluate multiple modeling approaches for spam email, Julia Silge uses workflow sets to evaluate multiple possible models. Let’s work through that post together. View the post."
+  },
+  {
+    "objectID": "lesson08/index.html",
+    "href": "lesson08/index.html",
+    "title": "Lesson 8",
+    "section": "",
+    "text": "After this lesson, students will be able to:\n\nDescribe the support vector machine (SVM) approach to classification.\nUse the tidymodels workflow to fit and tune various SVM classification models."
+  },
+  {
+    "objectID": "lesson08/index.html#learning-objectives",
+    "href": "lesson08/index.html#learning-objectives",
+    "title": "Lesson 8",
+    "section": "",
+    "text": "After this lesson, students will be able to:\n\nDescribe the support vector machine (SVM) approach to classification.\nUse the tidymodels workflow to fit and tune various SVM classification models."
+  },
+  {
+    "objectID": "lesson08/index.html#readings-etc.",
+    "href": "lesson08/index.html#readings-etc.",
+    "title": "Lesson 8",
+    "section": "Readings, etc.",
+    "text": "Readings, etc.\nFor this lesson, refer to the following readings, etc.:\n\nRead chapter 9 from of An Introduction to Statistical Learning (Tibshirani, James, and Trevor 2017). You may also want to read chapter 9 of Statistical Learning with Math and R (Suzuki 2020).\nView Support Vector Classifier video on YouTube.\n\n\n\n\n\n\n\n\n\n\n\nView Support Vector Classifiers in R video on YouTube."
+  },
+  {
+    "objectID": "lesson08/index.html#overview",
+    "href": "lesson08/index.html#overview",
+    "title": "Lesson 8",
+    "section": "Overview",
+    "text": "Overview"
+  },
+  {
+    "objectID": "lesson08/index.html#support-vector-machine-approaches",
+    "href": "lesson08/index.html#support-vector-machine-approaches",
+    "title": "Lesson 8",
+    "section": "Support Vector Machine Approaches",
+    "text": "Support Vector Machine Approaches\n\nMaximal Marginal Cllassifier\n\n\n\nFigure 1: Left: Separating hyperplanes for binary data. Right: The decision rule based on a separating hyperplane.\n\n\n\n\n\nFigure 2: The solid lines shows the maximal margin hyperplane. The margin is the distance between the two dotted lines."
+  },
+  {
+    "objectID": "lesson08/index.html#references",
+    "href": "lesson08/index.html#references",
+    "title": "Lesson 8",
+    "section": "References",
+    "text": "References\n\n\nSuzuki, Joe. 2020. Statistical Learning with Math and r. Springer.\n\n\nTibshirani, Hastie Robert, Gareth James, and Daniela Witten Trevor. 2017. An Introduction to Statistical Learning. springer publication.\n\n\n\n\n\n\n\n\nExpand for Session Info\n\n\n\n\n\n\n\n─ Session info ───────────────────────────────────────────────────────────────\n setting  value\n version  R version 4.3.1 (2023-06-16)\n os       macOS Sonoma 14.0\n system   aarch64, darwin20\n ui       X11\n language (EN)\n collate  en_US.UTF-8\n ctype    en_US.UTF-8\n tz       America/New_York\n date     2023-10-11\n pandoc   3.1.1 @ /Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/ (via rmarkdown)\n quarto   1.3.450 @ /usr/local/bin/quarto\n\n─ Packages ───────────────────────────────────────────────────────────────────\n package      * version    date (UTC) lib source\n broom        * 1.0.5      2023-06-09 [1] CRAN (R 4.3.0)\n dials        * 1.2.0      2023-04-03 [1] CRAN (R 4.3.0)\n dplyr        * 1.1.3      2023-09-03 [1] CRAN (R 4.3.0)\n forcats      * 1.0.0      2023-01-29 [1] CRAN (R 4.3.0)\n ggplot2      * 3.4.3      2023-08-14 [1] CRAN (R 4.3.0)\n infer        * 1.0.5      2023-09-06 [1] CRAN (R 4.3.0)\n ISLR2        * 1.3-2      2022-11-20 [1] CRAN (R 4.3.0)\n lubridate    * 1.9.3      2023-09-27 [1] CRAN (R 4.3.1)\n modeldata    * 1.2.0      2023-08-09 [1] CRAN (R 4.3.0)\n parsnip      * 1.1.1      2023-08-17 [1] CRAN (R 4.3.0)\n parttree     * 0.0.1.9004 2023-10-02 [1] Github (grantmcdermott/parttree@d2b60ac)\n purrr        * 1.0.2      2023-08-10 [1] CRAN (R 4.3.0)\n readr        * 2.1.4      2023-02-10 [1] CRAN (R 4.3.0)\n recipes      * 1.0.8      2023-08-25 [1] CRAN (R 4.3.0)\n rsample      * 1.2.0      2023-08-23 [1] CRAN (R 4.3.0)\n scales       * 1.2.1      2022-08-20 [1] CRAN (R 4.3.0)\n sessioninfo  * 1.2.2      2021-12-06 [1] CRAN (R 4.3.0)\n stringr      * 1.5.0      2022-12-02 [1] CRAN (R 4.3.0)\n tibble       * 3.2.1      2023-03-20 [1] CRAN (R 4.3.0)\n tidymodels   * 1.1.1      2023-08-24 [1] CRAN (R 4.3.0)\n tidyr        * 1.3.0      2023-01-24 [1] CRAN (R 4.3.0)\n tidyverse    * 2.0.0      2023-02-22 [1] CRAN (R 4.3.0)\n tune         * 1.1.2      2023-08-23 [1] CRAN (R 4.3.0)\n vip          * 0.4.1      2023-08-21 [1] CRAN (R 4.3.0)\n workflows    * 1.1.3      2023-02-22 [1] CRAN (R 4.3.0)\n workflowsets * 1.0.1      2023-04-06 [1] CRAN (R 4.3.0)\n yardstick    * 1.2.0      2023-04-21 [1] CRAN (R 4.3.0)\n\n [1] /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library\n\n──────────────────────────────────────────────────────────────────────────────"
   }
 ]

@@ -8,7 +8,7 @@
 
 <meta name="author" content="JMG">
 
-<title>DS 362 - Lesson 7</title>
+<title>DS 362 - Lesson 8</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -142,6 +142,10 @@ div.csl-indent {
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
   <li><a href="#readings-etc." id="toc-readings-etc." class="nav-link" data-scroll-target="#readings-etc.">Readings, etc.</a></li>
   <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#support-vector-machine-approaches" id="toc-support-vector-machine-approaches" class="nav-link" data-scroll-target="#support-vector-machine-approaches">Support Vector Machine Approaches</a>
+  <ul class="collapse">
+  <li><a href="#maximal-marginal-cllassifier" id="toc-maximal-marginal-cllassifier" class="nav-link" data-scroll-target="#maximal-marginal-cllassifier">Maximal Marginal Cllassifier</a></li>
+  </ul></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
 </nav>
@@ -155,8 +159,8 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Lesson 7</h1>
-<p class="subtitle lead">Neural Networks and Deep Learning</p>
+<h1 class="title">Lesson 8</h1>
+<p class="subtitle lead">Support Vector Machines</p>
 </div>
 
 
@@ -181,25 +185,34 @@ div.csl-indent {
 <h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
 <p>After this lesson, students will be able to:</p>
 <ul>
-<li><p>Describe the structure of a neural network and explain the role of activation functions, loss functions, optimization algorithms, and regularization in neural networks and deep learning.</p></li>
-<li><p>Implement a neural network in R using packages such as <code>brulee</code> and <code>torch</code>.</p></li>
+<li><p>Describe the support vector machine (SVM) approach to classification.</p></li>
+<li><p>Use the <code>tidymodels</code> workflow to fit and tune various SVM classification models.</p></li>
 </ul>
 </section>
 <section id="readings-etc." class="level2">
 <h2 class="anchored" data-anchor-id="readings-etc.">Readings, etc.</h2>
 <p>For this lesson, refer to the following readings, etc.:</p>
 <ul>
-<li>Read chapter 10 from of <em>An Introduction to Statistical Learning</em> <span class="citation" data-cites="tibshirani2017introduction">(<a href="#ref-tibshirani2017introduction" role="doc-biblioref">Tibshirani, James, and Trevor 2017</a>)</span>.</li>
-</ul>
-<p>Watch the following video lectures on neural networks:</p>
-<ul>
-<li><a href="https://youtu.be/jJb2qytbcNg?si=hwdtetIKGC18RbXT">View Introduction to Neural Networks video on YouTube</a>.</li>
+<li><p>Read chapter 9 from of <em>An Introduction to Statistical Learning</em> <span class="citation" data-cites="tibshirani2017introduction">(<a href="#ref-tibshirani2017introduction" role="doc-biblioref">Tibshirani, James, and Trevor 2017</a>)</span>. You may also want to read chapter 9 of <em>Statistical Learning with Math and R</em> <span class="citation" data-cites="suzuki2020statistical">(<a href="#ref-suzuki2020statistical" role="doc-biblioref">Suzuki 2020</a>)</span>.</p></li>
+<li><p><a href="https://youtu.be/pjvnCEfAswc?si=5I-xmhB3Y006RP0Y">View Support Vector Classifier video on YouTube</a>.</p></li>
 </ul>
 <div class="cell">
 <div class="cell-output-display">
 <div class="vembedr" align="center">
 <div>
-<iframe src="https://www.youtube.com/embed/jJb2qytbcNg?si=hwdtetIKGC18RbXT" width="800" height="450" frameborder="0" allowfullscreen="" data-external="1"></iframe>
+<iframe src="https://www.youtube.com/embed/pjvnCEfAswc?si=5I-xmhB3Y006RP0Y" width="800" height="450" frameborder="0" allowfullscreen="" data-external="1"></iframe>
+</div>
+</div>
+</div>
+</div>
+<ul>
+<li><a href="https://youtu.be/WCRwbrNWrpw?si=rkEz30HgpeBK9VTD">View Support Vector Classifiers in R video on YouTube</a>.</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div class="vembedr" align="center">
+<div>
+<iframe src="https://www.youtube.com/embed/WCRwbrNWrpw?si=rkEz30HgpeBK9VTD" width="800" height="450" frameborder="0" allowfullscreen="" data-external="1"></iframe>
 </div>
 </div>
 </div>
@@ -207,25 +220,30 @@ div.csl-indent {
 </section>
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p><a href="https://en.wikipedia.org/wiki/Deep_learning">Deep learning</a> is an active area of research in machine learning and artificial intelligence and <a href="https://en.wikipedia.org/wiki/Artificial_neural_network">neural networks</a> are the foundation of deep learning. In this lesson, we will introduce neural networks and discuss how they are used in deep learning.</p>
-<p>Neural networks are a class of machine learning models that are inspired by the structure of the brain. They are composed of a series of layers of neurons that are connected to each other. Each artificial neuron is a simple computational unit that takes in a set of inputs, performs a computation, and produces an output. The output of one neuron is then used as the input to the next neuron. The first layer of artificial neurons is called the input layer and the last layer of neurons is called the output layer. The layers in between the input and output layers are called hidden layers. The number of hidden layers in a neural network is called the depth of the network. The number of neurons in each layer is called the width of the network. The figure below shows a neural network with two hidden layers. From here on out we will ignore the biological analogy that is the historical origin of neural networks and focus on the mathematical model.</p>
-<p>The mathematical details of neural networks are conceptually simple but can be difficult to understand. In order to develop some intuition, we will start by exploring an interactive visualization of a neural network via the <a href="https://playground.tensorflow.org/#activation=tanh&amp;batchSize=10&amp;dataset=circle&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=4,2&amp;seed=0.92779&amp;showTestData=false&amp;discretize=false&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false">Neural Network Playground</a> website. <a href="https://playground.tensorflow.org/#activation=tanh&amp;batchSize=10&amp;dataset=circle&amp;regDataset=reg-plane&amp;learningRate=0.03&amp;regularizationRate=0&amp;noise=0&amp;networkShape=4,2&amp;seed=0.92779&amp;showTestData=false&amp;discretize=false&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false">Visit the Neural Network Playground</a>.</p>
-<p>The visualization allows you to create a neural network and then train it on a dataset. The dataset can be a classification problem or a regression problem. The visualization allows you to change the activation function, the number of hidden layers, the number of neurons in each layer, and the learning rate. These are components related to the training of a network that we will define in detail later.</p>
-<p>Here are some additional resources on neural networks and deep learning that cover various aspects of the field that we do not have time to go over in this course:</p>
-<ol type="1">
-<li><p>For historical context, see <em>Thinking Machines: The Quest for Artificial Intelligence–and Where It’s Taking Us Next</em> by Dormehl or <em>Deep Learning</em> by Kelleher.</p></li>
-<li><p>For an excellent overview of the types of problems that neural networks and deep learning are well-suited for, see <span class="citation" data-cites="krohn2019deep">(<a href="#ref-krohn2019deep" role="doc-biblioref">Krohn, Beyleveld, and Bassens 2019</a>)</span>.</p></li>
-<li><p>For a more detailed introduction to neural networks, see <span class="citation" data-cites="goodfellow2016deep">(<a href="#ref-goodfellow2016deep" role="doc-biblioref">Goodfellow, Bengio, and Courville 2016</a>)</span>. This book is accessible online, <a href="https://www.deeplearningbook.org/">view the book</a>.</p></li>
-</ol>
+</section>
+<section id="support-vector-machine-approaches" class="level2">
+<h2 class="anchored" data-anchor-id="support-vector-machine-approaches">Support Vector Machine Approaches</h2>
+<section id="maximal-marginal-cllassifier" class="level3">
+<h3 class="anchored" data-anchor-id="maximal-marginal-cllassifier">Maximal Marginal Cllassifier</h3>
+<div id="fig-sep-hyperplane" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="https://www.dropbox.com/scl/fi/zzqb6rbbkput1wegmuaj7/9_2.jpg?rlkey=ke0owlerrfm7xyk2momwo8mv5&amp;raw=1" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;1: Left: Separating hyperplanes for binary data. Right: The decision rule based on a separating hyperplane.</figcaption>
+</figure>
+</div>
+<div id="fig-max-margin" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="https://www.dropbox.com/scl/fi/z6bfo6dl85hddo7kceqf9/9_3.jpg?rlkey=erj5245hguu6zfn6yx8y39u4p&amp;raw=1" style="width:75.0%;height:75.0%" class="figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;2: The solid lines shows the maximal margin hyperplane. The margin is the distance between the two dotted lines.</figcaption>
+</figure>
+</div>
+</section>
 </section>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent" role="list">
-<div id="ref-goodfellow2016deep" class="csl-entry" role="listitem">
-Goodfellow, Ian, Yoshua Bengio, and Aaron Courville. 2016. <em>Deep Learning</em>. MIT press.
-</div>
-<div id="ref-krohn2019deep" class="csl-entry" role="listitem">
-Krohn, Jon, Grant Beyleveld, and Aglaé Bassens. 2019. <em>Deep Learning Illustrated</em>. Addison-Wesley Professional.
+<div id="ref-suzuki2020statistical" class="csl-entry" role="listitem">
+Suzuki, Joe. 2020. <em>Statistical Learning with Math and r</em>. Springer.
 </div>
 <div id="ref-tibshirani2017introduction" class="csl-entry" role="listitem">
 Tibshirani, Hastie Robert, Gareth James, and Daniela Witten Trevor. 2017. <em>An Introduction to Statistical Learning</em>. springer publication.
@@ -260,32 +278,34 @@ Expand for Session Info
  quarto   1.3.450 @ /usr/local/bin/quarto
 
 ─ Packages ───────────────────────────────────────────────────────────────────
- package      * version date (UTC) lib source
- broom        * 1.0.5   2023-06-09 [1] CRAN (R 4.3.0)
- dials        * 1.2.0   2023-04-03 [1] CRAN (R 4.3.0)
- dplyr        * 1.1.3   2023-09-03 [1] CRAN (R 4.3.0)
- forcats      * 1.0.0   2023-01-29 [1] CRAN (R 4.3.0)
- ggplot2      * 3.4.3   2023-08-14 [1] CRAN (R 4.3.0)
- infer        * 1.0.5   2023-09-06 [1] CRAN (R 4.3.0)
- ISLR2        * 1.3-2   2022-11-20 [1] CRAN (R 4.3.0)
- lubridate    * 1.9.3   2023-09-27 [1] CRAN (R 4.3.1)
- modeldata    * 1.2.0   2023-08-09 [1] CRAN (R 4.3.0)
- parsnip      * 1.1.1   2023-08-17 [1] CRAN (R 4.3.0)
- purrr        * 1.0.2   2023-08-10 [1] CRAN (R 4.3.0)
- readr        * 2.1.4   2023-02-10 [1] CRAN (R 4.3.0)
- recipes      * 1.0.8   2023-08-25 [1] CRAN (R 4.3.0)
- rsample      * 1.2.0   2023-08-23 [1] CRAN (R 4.3.0)
- scales       * 1.2.1   2022-08-20 [1] CRAN (R 4.3.0)
- sessioninfo  * 1.2.2   2021-12-06 [1] CRAN (R 4.3.0)
- stringr      * 1.5.0   2022-12-02 [1] CRAN (R 4.3.0)
- tibble       * 3.2.1   2023-03-20 [1] CRAN (R 4.3.0)
- tidymodels   * 1.1.1   2023-08-24 [1] CRAN (R 4.3.0)
- tidyr        * 1.3.0   2023-01-24 [1] CRAN (R 4.3.0)
- tidyverse    * 2.0.0   2023-02-22 [1] CRAN (R 4.3.0)
- tune         * 1.1.2   2023-08-23 [1] CRAN (R 4.3.0)
- workflows    * 1.1.3   2023-02-22 [1] CRAN (R 4.3.0)
- workflowsets * 1.0.1   2023-04-06 [1] CRAN (R 4.3.0)
- yardstick    * 1.2.0   2023-04-21 [1] CRAN (R 4.3.0)
+ package      * version    date (UTC) lib source
+ broom        * 1.0.5      2023-06-09 [1] CRAN (R 4.3.0)
+ dials        * 1.2.0      2023-04-03 [1] CRAN (R 4.3.0)
+ dplyr        * 1.1.3      2023-09-03 [1] CRAN (R 4.3.0)
+ forcats      * 1.0.0      2023-01-29 [1] CRAN (R 4.3.0)
+ ggplot2      * 3.4.3      2023-08-14 [1] CRAN (R 4.3.0)
+ infer        * 1.0.5      2023-09-06 [1] CRAN (R 4.3.0)
+ ISLR2        * 1.3-2      2022-11-20 [1] CRAN (R 4.3.0)
+ lubridate    * 1.9.3      2023-09-27 [1] CRAN (R 4.3.1)
+ modeldata    * 1.2.0      2023-08-09 [1] CRAN (R 4.3.0)
+ parsnip      * 1.1.1      2023-08-17 [1] CRAN (R 4.3.0)
+ parttree     * 0.0.1.9004 2023-10-02 [1] Github (grantmcdermott/parttree@d2b60ac)
+ purrr        * 1.0.2      2023-08-10 [1] CRAN (R 4.3.0)
+ readr        * 2.1.4      2023-02-10 [1] CRAN (R 4.3.0)
+ recipes      * 1.0.8      2023-08-25 [1] CRAN (R 4.3.0)
+ rsample      * 1.2.0      2023-08-23 [1] CRAN (R 4.3.0)
+ scales       * 1.2.1      2022-08-20 [1] CRAN (R 4.3.0)
+ sessioninfo  * 1.2.2      2021-12-06 [1] CRAN (R 4.3.0)
+ stringr      * 1.5.0      2022-12-02 [1] CRAN (R 4.3.0)
+ tibble       * 3.2.1      2023-03-20 [1] CRAN (R 4.3.0)
+ tidymodels   * 1.1.1      2023-08-24 [1] CRAN (R 4.3.0)
+ tidyr        * 1.3.0      2023-01-24 [1] CRAN (R 4.3.0)
+ tidyverse    * 2.0.0      2023-02-22 [1] CRAN (R 4.3.0)
+ tune         * 1.1.2      2023-08-23 [1] CRAN (R 4.3.0)
+ vip          * 0.4.1      2023-08-21 [1] CRAN (R 4.3.0)
+ workflows    * 1.1.3      2023-02-22 [1] CRAN (R 4.3.0)
+ workflowsets * 1.0.1      2023-04-06 [1] CRAN (R 4.3.0)
+ yardstick    * 1.2.0      2023-04-21 [1] CRAN (R 4.3.0)
 
  [1] /Library/Frameworks/R.framework/Versions/4.3-arm64/Resources/library
 

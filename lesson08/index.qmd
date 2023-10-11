@@ -1,5 +1,5 @@
 ---
-title: "Lesson "
+title: "Lesson 8"
 subtitle: "Support Vector Machines"
 author: "JMG"
 format:
@@ -9,7 +9,7 @@ format:
     code-summary: "Show the code"
     toc: true
     toc-location: left
-bibliography: svm.bib
+bibliography: lesson08.bib
 license: "CC BY-NC-SA 4.0"
 ---
 

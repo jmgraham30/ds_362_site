@@ -1,0 +1,111 @@
+---
+title: "Lesson 7"
+subtitle: "Neural Networks and Deep Learning"
+author: "JMG"
+format:
+  html:
+    echo: true
+    code-fold: false
+    code-summary: "Show the code"
+    toc: true
+    toc-location: left
+bibliography: lesson07.bib
+license: "CC BY-NC-SA 4.0"
+---
+
+```{r}
+#| include: false
+#| message: false
+#| warning: false
+
+library(tidyverse)
+library(tidymodels)
+library(ISLR2)
+
+tidymodels_prefer()
+
+theme_set(theme_minimal(base_size = 12))
+```
+
+## Learning Objectives
+
+After this lesson, students will be able to: 
+
+- Describe the structure of a neural network and explain the role of activation functions, loss functions, optimization algorithms, and regularization  in neural networks and deep learning.
+
+- Implement a neural network in R using packages such as `brulee` and `torch`.
+
+
+
+## Readings, etc.
+
+For this lesson, refer to the following readings, etc.:
+
+
+- Read chapter 10 from of *An Introduction to Statistical Learning* [@tibshirani2017introduction]. 
+
+Watch the following video lectures on neural networks: 
+
+* [View Introduction to Neural Networks video on YouTube](https://youtu.be/jJb2qytbcNg?si=hwdtetIKGC18RbXT).
+
+```{r}
+#| echo: false
+
+vembedr::embed_youtube(id="jJb2qytbcNg?si=hwdtetIKGC18RbXT",height=450) %>%
+  vembedr::use_align("center")
+```
+
+
+    
+## Overview   
+
+[Deep learning](https://en.wikipedia.org/wiki/Deep_learning) is an active area of research in machine learning and artificial intelligence and [neural networks](https://en.wikipedia.org/wiki/Artificial_neural_network) are the foundation of deep learning. In this lesson, we will introduce neural networks and discuss how they are used in deep learning.
+
+Neural networks are a class of machine learning models that are inspired by the structure of the brain. They are composed of a series of layers of neurons that are connected to each other. Each artificial neuron is a simple computational unit that takes in a set of inputs, performs a computation, and produces an output. The output of one neuron is then used as the input to the next neuron. The first layer of artificial neurons is called the input layer and the last layer of neurons is called the output layer. The layers in between the input and output layers are called hidden layers. The number of hidden layers in a neural network is called the depth of the network. The number of neurons in each layer is called the width of the network. The figure below shows a neural network with two hidden layers. From here on out we will ignore the biological analogy that is the historical origin of neural networks and focus on the mathematical model.
+
+The mathematical details of neural networks are conceptually simple but can be difficult to understand. In order to develop some intuition, we will start by exploring an interactive visualization of a neural network via the [Neural Network Playground](https://playground.tensorflow.org/#activation=tanh&batchSize=10&dataset=circle&regDataset=reg-plane&learningRate=0.03&regularizationRate=0&noise=0&networkShape=4,2&seed=0.92779&showTestData=false&discretize=false&percTrainData=50&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=classification&initZero=false&hideText=false) website. [Visit the Neural Network Playground](https://playground.tensorflow.org/#activation=tanh&batchSize=10&dataset=circle&regDataset=reg-plane&learningRate=0.03&regularizationRate=0&noise=0&networkShape=4,2&seed=0.92779&showTestData=false&discretize=false&percTrainData=50&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=classification&initZero=false&hideText=false). 
+
+The visualization allows you to create a neural network and then train it on a dataset. The dataset can be a classification problem or a regression problem. The visualization allows you to change the activation function, the number of hidden layers, the number of neurons in each layer, and the learning rate. These are components related to the training of a network that we will define in detail later. 
+    
+Here are some additional resources on neural networks and deep learning that cover various aspects of the field that we do not have time to go over in this course:
+
+1. For historical context, see *Thinking Machines: The Quest for Artificial Intelligence--and Where It's Taking Us Next* by Dormehl or *Deep Learning* by Kelleher.
+
+2. For an excellent overview of the types of problems that neural networks and deep learning are well-suited for, see [@krohn2019deep].
+
+3. For a more detailed introduction to neural networks, see [@goodfellow2016deep]. This book is accessible online, [view the book](https://www.deeplearningbook.org/).
+
+## References
+
+::: {#refs}
+:::
+
+
+:::{.callout-tip collapse="true"}
+## Expand for Session Info
+```{r}
+#| echo: false
+
+
+library(sessioninfo)
+# save the session info as an object
+pkg_sesh <- session_info(pkgs = "attached")
+
+# get the quarto version
+quarto_version <- system("quarto --version", intern = TRUE)
+
+# inject the quarto info
+pkg_sesh$platform$quarto <- paste(
+  system("quarto --version", intern = TRUE), 
+  "@", 
+  quarto::quarto_path()
+  )
+
+# print it out
+pkg_sesh
+```
+
+:::
+
+
+[![](http://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-nc-sa.png?raw=1){fig-align="left" width=15%}](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode)
