@@ -209,7 +209,7 @@ tibble(x = x) %>%
   labs(
     x = TeX("$x$"),
     y = TeX("$f(x)$"),
-    title = TeX("Gradient descent for the function $f(x)$")
+    title = TeX(r'(Gradient descent for the function $f(x)$)')
   )
 
 ```
