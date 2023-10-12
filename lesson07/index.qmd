@@ -20,7 +20,7 @@ license: "CC BY-NC-SA 4.0"
 
 library(tidyverse)
 library(tidymodels)
-library(ISLR2)
+library(latex2exp)
 
 tidymodels_prefer()
 
@@ -72,7 +72,8 @@ Neural networks are a class of machine learning models that are inspired by the 
 
 Neural networks are conceptually simple but the mathematical details can be confusing. The general idea is that a neural network takes an input of $p$ predictor variables $X = (X_{1},X_{2},\ldots , X_{p})$ and builds a *nonlinear* function $f(X)$ to predict the response $Y$. What distinguishes neural networks for other nonlinear methods is the particular structure of the model function $f$.
  
- ### Describing a Neural Network
+ 
+### Describing a Neural Network
  
  In order to develop some intuition, we will start by exploring an interactive visualization of a neural network via the [Neural Network Playground](https://playground.tensorflow.org/#activation=tanh&batchSize=10&dataset=circle&regDataset=reg-plane&learningRate=0.03&regularizationRate=0&noise=0&networkShape=4,2&seed=0.92779&showTestData=false&discretize=false&percTrainData=50&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=classification&initZero=false&hideText=false) website. [Visit the Neural Network Playground](https://playground.tensorflow.org/#activation=tanh&batchSize=10&dataset=circle&regDataset=reg-plane&learningRate=0.03&regularizationRate=0&noise=0&networkShape=4,2&seed=0.92779&showTestData=false&discretize=false&percTrainData=50&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=classification&initZero=false&hideText=false). 
 
@@ -81,6 +82,8 @@ The visualization allows you to create a neural network and then train it on a d
 ### Describing a Neural Networks in R
 
 Let's also take a look at a simple neural network in R. The [`brulee`](https://brulee.tidymodels.org/index.html) package provides a simple interface via a function `brulee_mlp()` (it's a good idea to skim the [`brulee_mlp` documentation](https://brulee.tidymodels.org/reference/brulee_mlp.html)) for creating neural networks in R and uses the `tidymodels` framework for modeling. The code, available via [this GitHub repo](https://github.com/jmgraham30/nn_class_example/tree/main),  creates a neural network with one hidden layer and trains it on the `penguins` dataset. The repository also contains a script with an example of tuning a neural network with a single hidden layer. Let's examine this together in an RStudio project. 
+
+### Suggestions for Further Reading
     
 Here are some additional resources on neural networks and deep learning that cover various aspects of the field that we do not have time to go over in this course:
 
@@ -96,7 +99,7 @@ A neural network is a nonlinear function that is described by parameters called 
 
 The output of each node is then used as the input to the nodes of the next layer. The output of the last layer is the output of the neural network. The weights and bias parameters are learned during the training process. The training process involves finding the weights and bias parameters that **minimize a loss function**. The loss function is a measure of how well the neural network is performing on the training data. The goal of training a neural network is to find the weights and bias parameters that minimize the loss function.
 
-As with all of the other machine learning algorithms we have covered so far, deep learning requires us to solve some kind of optimization problem. In the case of neural networks, we seek to fund the weights and bias parameters that minimize the loss function. For regression problems, the loss function is typically the mean squared error (MSE). For classification problems, the loss function is typically the cross-entropy loss. 
+As with all of the other machine learning algorithms we have covered so far, deep learning requires us to solve some kind of optimization problem. In the case of neural networks, we seek to find the weights and bias parameters that minimize the loss function. For regression problems, the loss function is typically the mean squared error (MSE). For classification problems, the loss function is typically the cross-entropy loss. 
 
 The weights and bias parameters are learned using an algorithm called [gradient descent](https://en.wikipedia.org/wiki/Gradient_descent). Gradient descent is an optimization algorithm that is used to find the minimum of a function. In the context of neural networks, we use gradient descent to find the minimum of the loss function. The loss function is a function of the weights and biases of the neural network. The weights and biases are the parameters of the neural network. The loss function is a measure of how well the neural network is performing on the training data. The goal of training a neural network is to find the weights and bias parameters that minimize the loss function.
 
@@ -104,11 +107,112 @@ The weights and bias parameters are learned using an algorithm called [gradient 
 
 Gradient descent and SGD require us to compute the gradient (multi-variable derivative) of the loss function with respect to the weights and bias parameters. The activation function at each node of the network results in a nonlinear function of the parameters we want to optimize. Thus, computing the implementation of gradient descent for neural networks forces us to use the chain rule for derivatives and this becomes a very messy calculation. 
 
-A major development in the field of neural networks was the introduction of the [back propagation algorithm](https://en.wikipedia.org/wiki/Backpropagation) by Rumelhart, Hinton, and Williams in 1986. The back propagation algorithm is an algorithm for training neural networks. This algorithm is used to calculate the gradient of the loss function with respect to the weights and bias parameters. The gradient is then used to update the weights and bias parameters. The back propagation algorithm is an application of the [chain rule](https://en.wikipedia.org/wiki/Chain_rule) for derivatives. The chain rule is used to calculate the gradient of a function that is composed of other functions. The back propagation algorithm is an application of the chain rule to calculate the gradient of the loss function with respect to the weights and bias parameters.
+A major development in the field of neural networks was the introduction of the [backpropagation algorithm](https://en.wikipedia.org/wiki/Backpropagation) by Rumelhart, Hinton, and Williams in 1986. The backpropagation algorithm is an algorithm for training neural networks. This algorithm is used to calculate the gradient of the loss function with respect to the weights and bias parameters. The gradient is then used to update the weights and bias parameters via gradient descent or something similar. The backpropagation algorithm is clever use of the [chain rule](https://en.wikipedia.org/wiki/Chain_rule) for derivatives. 
 
 We will proceed by getting a feel for gradient descent in the context of functions that are a lot simpler than neural networks. 
 
 ### Gradient Descent for Optimization
+
+Gradient descent is an iterative optimization algorithm for finding the minimum of a function $f:\mathbb{R}^{d} \rightarrow \mathbb{R}$. The algorithm starts with an initial guess ${\bf x}_{0} \in \mathbb{R}^{d}$ for the minimizing value for the function. The algorithm then iteratively updates the guess by an iteration of the form
+
+$$
+{\bf x}_{k+1} = {\bf x}_{k} - \alpha_{k} \nabla f({\bf x}_{k})
+$$
+
+where $\alpha_{k} > 0$ is the step size and $\nabla f({\bf x}_{k})$ is the gradient of the function $f$ at the point ${\bf x}_{k}$. Recall that the gradient of a function is a vector that points in the direction of the steepest ascent of the function. In practical implementations one often takes the step size $\alpha_{k} = \text{constant}$ for all $k$ and this constant is called the **learning rate**. In the context of neural networks, each step in an iteration of gradient descent is called an **epoch**.
+
+Let's start with a simple one-dimensional problem. Consider the function
+
+$$
+f(x) = x^4 + 7x^3 + 5x^2 - 17x + 3
+$$
+which is plotted in @fig-quart-fun. This function has a global minimum at $x = -4.5$. We can use gradient descent to find at least approximately the value of $x$ that minimizes $f(x)$.
+
+```{r}
+#| label: fig-quart-fun
+#| fig-cap: A fourth-degree polynomial function with a global minimum at $x = -4.5$.
+#| code-fold: true
+
+f <- function(x) {
+  x^4 + 7*x^3 + 5*x^2 - 17*x + 3
+}
+
+x <- seq(-6, 2, length.out = 100)
+
+tibble(x = x) %>% 
+  mutate(y = f(x)) %>% 
+  ggplot(aes(x = x, y = y)) +
+  geom_line() +
+  geom_vline(xintercept = -4.5, linetype = "dashed") +
+  geom_point(aes(x = -4.5, y = f(-4.5)), color = "purple", size = 3) +
+  labs(
+    x = TeX("$x$"),
+    y = TeX("$f(x)$"),
+    title = "A polynomial function with a global minimum"
+  )
+
+```
+
+The gradient (derivative) of $f(x)$ is given by
+
+$$
+f'(x) = 4x^3 + 21x^2 + 10x - 17
+$$
+
+Let's iterate gradient descent for 25 epochs with a learning rate of $\alpha = 0.01$ and an initial guess of $x_{0} = -3$. We will plot the value of $x$ at each epoch and the value of the function $f(x)$ at each epoch. We will also plot the value of the gradient at each epoch. 
+
+
+
+```{r}
+#| label: fig-quart-grad-descent
+#| fig-cap: Gradient descent for the function $f(x)$. 
+#| code-fold: true
+#| fig-width: 8
+#| fig-height: 6
+#| fig-align: center
+
+f_prime <- function(x) {
+  4*x^3 + 21*x^2 + 10*x - 17
+}
+
+x <- seq(-6, 2, length.out = 100)
+
+gd_min <- function(x0, 
+                  alpha=0.01, 
+                  fun_to_min=f, 
+                  fun_deriv=f_prime, 
+                  n_epochs = 25){
+  x <- x0
+  x_vals <- c(x)
+  y_vals <- c(fun_to_min(x))
+  grad_vals <- c(fun_deriv(x))
+  
+  for (i in 1:n_epochs){
+    x <- x - alpha*fun_deriv(x)
+    x_vals <- c(x_vals, x)
+    y_vals <- c(y_vals, fun_to_min(x))
+    grad_vals <- c(grad_vals, fun_deriv(x))
+  }
+  
+  return(tibble(x = x_vals, y = y_vals, grad = grad_vals))
+}
+
+tst <- gd_min(-3)
+
+tibble(x = x) %>% 
+  mutate(y = f(x)) %>% 
+  ggplot(aes(x = x, y = y)) +
+  geom_line() +
+  geom_vline(xintercept = -4.5, linetype = "dashed") +
+  geom_point(aes(x = -4.5, y = f(-4.5)), color = "purple", size = 3) +
+  geom_point(data = tst, aes(x = x, y = y, color=y),size=2) +
+  labs(
+    x = TeX("$x$"),
+    y = TeX("$f(x)$"),
+    title = TeX("Gradient descent for the function $f(x)$")
+  )
+
+```
 
 
 
