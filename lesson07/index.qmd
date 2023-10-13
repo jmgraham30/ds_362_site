@@ -35,7 +35,7 @@ After this lesson, students will be able to:
 
 - Implement the gradient descent algorithm for optimization of simple functions.
 
-- Implement a neural network in R using packages such as `brulee` and `torch`.
+- Implement a neural network in R using packages such as `brulee`, `keras` or `torch`.
 
 
 
@@ -91,7 +91,7 @@ Here are some additional resources on neural networks and deep learning that cov
 
 2. For an excellent overview of the types of problems that neural networks and deep learning are well-suited for, see [@krohn2019deep].
 
-3. For a more detailed introduction to neural networks, see [@goodfellow2016deep]. This book is accessible online, [view the book](https://www.deeplearningbook.org/).
+3. For a more detailed introduction to neural networks, see [@Goodfellow-et-al-2016]. This book is accessible online, [view the book](https://www.deeplearningbook.org/).
 
 ## Neural Networks
 
