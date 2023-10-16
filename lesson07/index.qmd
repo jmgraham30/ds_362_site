@@ -217,6 +217,48 @@ tibble(x = x) %>%
 
 ### Activation Functions
 
+
+1. **Sigmoid Activation Function:**
+   
+   - *Description*: The sigmoid activation function is commonly used in neural networks for binary classification tasks. It maps input values to the range \((0, 1)\), making it suitable for output layers of binary classifiers.
+   - *Mathematical Expression*: 
+   
+   $$
+   \text{Sigmoid}(x) = \frac{1}{1 + e^{-x}}
+   $$
+
+2. **ReLU (Rectified Linear Unit) Activation Function:**
+   
+   - *Description*: ReLU is a widely used activation function that introduces non-linearity by returning the input for positive values and zero for negative values. It helps mitigate the vanishing gradient problem.
+   - *Mathematical Expression*: 
+   
+   $$
+   \text{ReLU}(x) = \max(0, x) 
+   $$
+
+3. **Tanh (Hyperbolic Tangent) Activation Function:**
+   
+   - *Description*: Tanh is another common activation function that maps input values to the range \((-1, 1)\). It provides zero-centered output, which can help training converge faster.
+   - *Mathematical Expression*: 
+   
+   $$
+   \text{Tanh}(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}} 
+   $$
+
+4. **Leaky ReLU Activation Function:**
+   
+   - *Description*: Leaky ReLU is a variation of ReLU that allows a small gradient when the input is negative. It addresses the "dying ReLU" problem by preventing neurons from becoming inactive.
+   - *Mathematical Expression*: 
+   
+   $$
+   \text{Leaky ReLU}(x) = \begin{cases} x, & \text{if } x \geq 0 \\ \alpha x, & \text{if } x < 0 \end{cases}
+   $$
+    
+where $\alpha$ is a small constant.   
+    
+
+@fig-activation-functions shows the plot for each of the activation functions we defined. 
+
 ```{r}
 #| label: fig-activation-functions
 #| fig-cap: Activation functions used in neural networks.

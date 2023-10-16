@@ -413,6 +413,42 @@ f'(x) = 4x^3 + 21x^2 + 10x - 17
 </section>
 <section id="activation-functions" class="level3">
 <h3 class="anchored" data-anchor-id="activation-functions">Activation Functions</h3>
+<ol type="1">
+<li><p><strong>Sigmoid Activation Function:</strong></p>
+<ul>
+<li><em>Description</em>: The sigmoid activation function is commonly used in neural networks for binary classification tasks. It maps input values to the range ((0, 1)), making it suitable for output layers of binary classifiers.</li>
+<li><em>Mathematical Expression</em>:</li>
+</ul>
+<p><span class="math display">\[
+\text{Sigmoid}(x) = \frac{1}{1 + e^{-x}}
+\]</span></p></li>
+<li><p><strong>ReLU (Rectified Linear Unit) Activation Function:</strong></p>
+<ul>
+<li><em>Description</em>: ReLU is a widely used activation function that introduces non-linearity by returning the input for positive values and zero for negative values. It helps mitigate the vanishing gradient problem.</li>
+<li><em>Mathematical Expression</em>:</li>
+</ul>
+<p><span class="math display">\[
+\text{ReLU}(x) = \max(0, x)
+\]</span></p></li>
+<li><p><strong>Tanh (Hyperbolic Tangent) Activation Function:</strong></p>
+<ul>
+<li><em>Description</em>: Tanh is another common activation function that maps input values to the range ((-1, 1)). It provides zero-centered output, which can help training converge faster.</li>
+<li><em>Mathematical Expression</em>:</li>
+</ul>
+<p><span class="math display">\[
+\text{Tanh}(x) = \frac{e^x - e^{-x}}{e^x + e^{-x}}
+\]</span></p></li>
+<li><p><strong>Leaky ReLU Activation Function:</strong></p>
+<ul>
+<li><em>Description</em>: Leaky ReLU is a variation of ReLU that allows a small gradient when the input is negative. It addresses the “dying ReLU” problem by preventing neurons from becoming inactive.</li>
+<li><em>Mathematical Expression</em>:</li>
+</ul>
+<p><span class="math display">\[
+\text{Leaky ReLU}(x) = \begin{cases} x, &amp; \text{if } x \geq 0 \\ \alpha x, &amp; \text{if } x &lt; 0 \end{cases}
+\]</span></p></li>
+</ol>
+<p>where <span class="math inline">\(\alpha\)</span> is a small constant.</p>
+<p><a href="#fig-activation-functions">Figure&nbsp;4</a> shows the plot for each of the activation functions we defined.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
