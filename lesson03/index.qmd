@@ -350,7 +350,7 @@ $$
 X {\bf \beta} =  \left[\begin{array}{cc} 1 & x_{1} \\ 1 & x_{2} \\ \vdots & \vdots \\ 1 & x_{n} \end{array}\right]\left[\begin{array}{c} \beta_{0} \\ \beta_{1} \end{array}\right]
 $$
 
-In order to account for the intercept coefficent, we have to add the column of ones. We call the matrix $X$ so formed the **data matrix** and the vector ${\bf \beta}$ the parameter vector. Thus, we can write the linear regression problem as a linear least squares problem to minimize the residual ${\bf r} = {\bf y} - X{\bf \beta}$. Minimizing this is the 2-norm is the same as minimizing the squared error. Let's see this worked out in a computational example. 
+In order to account for the intercept coefficient, we have to add the column of ones. We call the matrix $X$ so formed the **data matrix** and the vector ${\bf \beta}$ the parameter vector. Thus, we can write the linear regression problem as a linear least squares problem to minimize the residual ${\bf r} = {\bf y} - X{\bf \beta}$. Minimizing this is the 2-norm is the same as minimizing the squared error. Let's see this worked out in a computational example. 
 
 ### An Example
 

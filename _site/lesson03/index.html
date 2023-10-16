@@ -501,7 +501,7 @@ x &amp;= 2
 <p><span class="math display">\[
 X {\bf \beta} =  \left[\begin{array}{cc} 1 &amp; x_{1} \\ 1 &amp; x_{2} \\ \vdots &amp; \vdots \\ 1 &amp; x_{n} \end{array}\right]\left[\begin{array}{c} \beta_{0} \\ \beta_{1} \end{array}\right]
 \]</span></p>
-<p>In order to account for the intercept coefficent, we have to add the column of ones. We call the matrix <span class="math inline">\(X\)</span> so formed the <strong>data matrix</strong> and the vector <span class="math inline">\({\bf \beta}\)</span> the parameter vector. Thus, we can write the linear regression problem as a linear least squares problem to minimize the residual <span class="math inline">\({\bf r} = {\bf y} - X{\bf \beta}\)</span>. Minimizing this is the 2-norm is the same as minimizing the squared error. Let’s see this worked out in a computational example.</p>
+<p>In order to account for the intercept coefficient, we have to add the column of ones. We call the matrix <span class="math inline">\(X\)</span> so formed the <strong>data matrix</strong> and the vector <span class="math inline">\({\bf \beta}\)</span> the parameter vector. Thus, we can write the linear regression problem as a linear least squares problem to minimize the residual <span class="math inline">\({\bf r} = {\bf y} - X{\bf \beta}\)</span>. Minimizing this is the 2-norm is the same as minimizing the squared error. Let’s see this worked out in a computational example.</p>
 <section id="an-example" class="level3">
 <h3 class="anchored" data-anchor-id="an-example">An Example</h3>
 <p>The following R code constructs the data matrix <span class="math inline">\(X\)</span>, computes the <span class="math inline">\(QR\)</span> factorization for <span class="math inline">\(X\)</span>, and then applies the backward substitution algorithm to solve <span class="math inline">\(R{\bf \beta} = Q^{T}{\bf y}\)</span>:</p>
@@ -636,15 +636,15 @@ Expand for Session Info
 <pre><code>─ Session info ───────────────────────────────────────────────────────────────
  setting  value
  version  R version 4.3.1 (2023-06-16)
- os       macOS Ventura 13.5.2
+ os       macOS Sonoma 14.0
  system   aarch64, darwin20
  ui       X11
  language (EN)
  collate  en_US.UTF-8
  ctype    en_US.UTF-8
  tz       America/New_York
- date     2023-09-11
- pandoc   3.1.1 @ /Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/ (via rmarkdown)
+ date     2023-10-16
+ pandoc   3.1.8 @ /opt/homebrew/bin/ (via rmarkdown)
  quarto   1.3.450 @ /usr/local/bin/quarto
 
 ─ Packages ───────────────────────────────────────────────────────────────────
@@ -652,9 +652,9 @@ Expand for Session Info
  broom        * 1.0.5   2023-06-09 [1] CRAN (R 4.3.0)
  dplyr        * 1.1.3   2023-09-03 [1] CRAN (R 4.3.0)
  forcats      * 1.0.0   2023-01-29 [1] CRAN (R 4.3.0)
- ggplot2      * 3.4.3   2023-08-14 [1] CRAN (R 4.3.0)
+ ggplot2      * 3.4.4   2023-10-12 [1] CRAN (R 4.3.1)
  ISLR2        * 1.3-2   2022-11-20 [1] CRAN (R 4.3.0)
- lubridate    * 1.9.2   2023-02-10 [1] CRAN (R 4.3.0)
+ lubridate    * 1.9.3   2023-09-27 [1] CRAN (R 4.3.1)
  purrr        * 1.0.2   2023-08-10 [1] CRAN (R 4.3.0)
  readr        * 2.1.4   2023-02-10 [1] CRAN (R 4.3.0)
  sessioninfo  * 1.2.2   2021-12-06 [1] CRAN (R 4.3.0)
