@@ -215,10 +215,54 @@ tibble(x = x) %>%
 
 ```
 
+### Activation Functions
 
+```{r}
+#| label: fig-activation-functions
+#| fig-cap: Activation functions used in neural networks.
+#| code-fold: true
+
+  
+
+# Create a data frame with x values
+x <- seq(-3, 3, length.out = 1000)
+df <- data.frame(x = x)
+
+# Sigmoid Activation Function
+df$sigmoid <- 1 / (1 + exp(-x))
+
+# ReLU (Rectified Linear Unit) Activation Function
+df$relu <- pmax(0, x)
+
+# Tanh (Hyperbolic Tangent) Activation Function
+df$tanh <- (exp(x) - exp(-x)) / (exp(x) + exp(-x))
+
+# Leaky ReLU Activation Function
+leaky_relu <- function(x, alpha = 0.01) {
+  ifelse(x >= 0, x, alpha * x)
+}
+df$leaky_relu <- leaky_relu(x)
+
+# Plot the activation functions
+ggplot(df, aes(x)) +
+  geom_line(aes(y = sigmoid, color = "Sigmoid"), linewidth = 1) +
+  geom_line(aes(y = relu, color = "ReLU"), linewidth = 1) +
+  geom_line(aes(y = tanh, color = "Tanh"), linewidth = 1) +
+  geom_line(aes(y = leaky_relu, color = "Leaky ReLU"), linewidth = 1) +
+  labs(
+    title = "Common Activation Functions for Neural Networks",
+    x = "Input (x)",
+    y = "Output",
+    color = "Activation Function"
+  ) +
+  scale_color_manual(values = c("Sigmoid" = "#E69F00", "ReLU" = "#56B4E9", "Tanh" = "#009E73", "Leaky ReLU" = "#CC79A7")) +
+  theme_minimal()
+
+```
 
 
 ### Single Layer Networks
+
 
 
 ### Multilayer networks
