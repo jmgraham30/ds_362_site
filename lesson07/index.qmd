@@ -280,7 +280,7 @@ df$relu <- pmax(0, x)
 df$tanh <- (exp(x) - exp(-x)) / (exp(x) + exp(-x))
 
 # Leaky ReLU Activation Function
-leaky_relu <- function(x, alpha = 0.01) {
+leaky_relu <- function(x, alpha = 0.03) {
   ifelse(x >= 0, x, alpha * x)
 }
 df$leaky_relu <- leaky_relu(x)
@@ -305,7 +305,15 @@ ggplot(df, aes(x)) +
 
 ### Single Layer Networks
 
+A single layer neural network is the simplest type of neural network. It consists of a single layer of neurons that take in a set of inputs and produce a set of outputs. The output is computed by applying an activation function to a weighted sum of the inputs. We can describe a single layer neural network with $K$ hidden units mathematically via
 
+$$
+\begin{align*}
+f(X) &= \beta_{0} + \sum_{k=1}^{K}\beta_{k}h_{k}(X) \\
+     &= \beta_{0} + \sum_{k=1}^{K}\beta_{k}g(w_{k0} + \sum_{j=1}^{p}w_{kj}X_{j})
+\end{align*}
+$$
+where $g$ is some activation function. Notice that a single layer neural network with $p$ inputs and $K$ hidden units has $1 + K + K + pK$ parameters. 
 
 ### Multilayer networks
 

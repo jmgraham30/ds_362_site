@@ -466,7 +466,7 @@ f'(x) = 4x^3 + 21x^2 + 10x - 17
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>tanh <span class="ot">&lt;-</span> (<span class="fu">exp</span>(x) <span class="sc">-</span> <span class="fu">exp</span>(<span class="sc">-</span>x)) <span class="sc">/</span> (<span class="fu">exp</span>(x) <span class="sc">+</span> <span class="fu">exp</span>(<span class="sc">-</span>x))</span>
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Leaky ReLU Activation Function</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>leaky_relu <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">alpha =</span> <span class="fl">0.01</span>) {</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>leaky_relu <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">alpha =</span> <span class="fl">0.03</span>) {</span>
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ifelse</span>(x <span class="sc">&gt;=</span> <span class="dv">0</span>, x, alpha <span class="sc">*</span> x)</span>
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>leaky_relu <span class="ot">&lt;-</span> <span class="fu">leaky_relu</span>(x)</span>
@@ -498,6 +498,13 @@ f'(x) = 4x^3 + 21x^2 + 10x - 17
 </section>
 <section id="single-layer-networks" class="level3">
 <h3 class="anchored" data-anchor-id="single-layer-networks">Single Layer Networks</h3>
+<p>A single layer neural network is the simplest type of neural network. It consists of a single layer of neurons that take in a set of inputs and produce a set of outputs. The output is computed by applying an activation function to a weighted sum of the inputs. We can describe a single layer neural network with <span class="math inline">\(K\)</span> hidden units mathematically via</p>
+<p><span class="math display">\[
+\begin{align*}
+f(X) &amp;= \beta_{0} + \sum_{k=1}^{K}\beta_{k}h_{k}(X) \\
+     &amp;= \beta_{0} + \sum_{k=1}^{K}\beta_{k}g(w_{k0} + \sum_{j=1}^{p}w_{kj}X_{j})
+\end{align*}
+\]</span> where <span class="math inline">\(g\)</span> is some activation function. Notice that a single layer neural network with <span class="math inline">\(p\)</span> inputs and <span class="math inline">\(K\)</span> hidden units has <span class="math inline">\(1 + K + K + pK\)</span> parameters.</p>
 </section>
 <section id="multilayer-networks" class="level3">
 <h3 class="anchored" data-anchor-id="multilayer-networks">Multilayer networks</h3>
