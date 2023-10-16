@@ -576,9 +576,7 @@ The choice of architecture often involves a trade-off between model capacity and
 
 ## Freely Available Libraries and Packages for Neural Networks
 
-### R
-
-## R Packages for Neural Networks and Deep Learning
+### R Packages for Neural Networks and Deep Learning
 
 1. **keras:**
    - *Description*: The `keras` package in R provides an interface to the Keras deep learning framework. Keras is known for its ease of use and flexibility and can run on top of TensorFlow, Theano, or Microsoft Cognitive Toolkit (CNTK).
