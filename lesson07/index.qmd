@@ -93,6 +93,73 @@ Here are some additional resources on neural networks and deep learning that cov
 
 3. For a more detailed introduction to neural networks, see [@Goodfellow-et-al-2016]. This book is accessible online, [view the book](https://www.deeplearningbook.org/).
 
+### Recent Applications of Neural Networks and Deep Learning
+
+1. **Natural Language Processing (NLP):**
+   - *Example*: BERT, GPT-3, and other large transformer models for tasks like language translation, text generation, and sentiment analysis.
+   - *Learn More*: [OpenAI's GPT-3](https://openai.com/research/gpt-3), [Google's BERT](https://ai.google/research/pubs/pub48095)
+
+2. **Computer Vision:**
+   - *Example*: Convolutional Neural Networks (CNNs) for image classification, object detection, and facial recognition.
+   - *Learn More*: [ImageNet Large Scale Visual Recognition Challenge](http://www.image-net.org/challenges/LSVRC/)
+
+3. **Healthcare:**
+   - *Example*: Using deep learning to analyze medical images, detect diseases, and predict patient outcomes.
+   - *Learn More*: [Stanford's CheXNet](https://stanfordmlgroup.github.io/projects/chexnet/)
+
+4. **Autonomous Vehicles:**
+   - *Example*: Self-driving cars rely on neural networks to perceive their surroundings and make decisions.
+   - *Learn More*: [Waymo's Self-Driving Technology](https://waymo.com/technology/)
+
+5. **Recommender Systems:**
+   - *Example*: Recommending products, movies, or content to users based on their preferences and behavior.
+   - *Learn More*: [Netflix's Recommendation Algorithm](https://help.netflix.com/en/node/100639)
+
+6. **Finance:**
+   - *Example*: Predictive modeling for stock price forecasting, fraud detection, and algorithmic trading.
+   - *Learn More*: [Stock Price Prediction with LSTM](https://github.com/mwitiderrick/stockprice)
+
+7. **Voice Assistants:**
+   - *Example*: Voice recognition and natural language understanding in smart speakers like Amazon Echo and Google Home.
+   - *Learn More*: [Amazon Alexa](https://developer.amazon.com/en-US/alexa)
+
+8. **Generative Adversarial Networks (GANs):**
+   - *Example*: Creating art, generating synthetic images, and deepfakes.
+   - *Learn More*: [NVIDIA's GAN Research](https://www.nvidia.com/en-us/research/ai-playground/)
+
+9. **Robotics:**
+   - *Example*: Deep reinforcement learning for robot control and autonomous navigation.
+   - *Learn More*: [OpenAI's Robotics Research](https://openai.com/research/robotics)
+
+10. **Climate Science:**
+    - *Example*: Using neural networks to analyze climate data, model climate change, and predict extreme weather events.
+    - *Learn More*: [DeepMind's Climate Science](https://deepmind.com/research/case-studies/climate-change)
+
+### Sizes of Neural Networks in Various Applications
+
+1. **Natural Language Processing (NLP):**
+   - *GPT-3*: GPT-3, developed by OpenAI, is one of the largest language models with 175 billion parameters.
+   - *BERT*: Google's BERT has 340 million parameters and is highly influential in NLP.
+
+2. **Computer Vision:**
+   - *ImageNet Models*: Models like VGG-16, VGG-19, and ResNet used for image classification have tens of millions of parameters.
+   - *Large CNNs*: In complex computer vision tasks, models can have hundreds of millions of parameters. Examples include Inception models and DenseNet.
+
+3. **Healthcare:**
+   - The size of neural networks in healthcare applications varies, ranging from a few million to tens of millions of parameters for tasks like medical image analysis.
+
+4. **Autonomous Vehicles:**
+   - Neural networks used in autonomous vehicles vary in size. Perception networks processing sensor data may have tens of millions of parameters, while decision-making networks might be smaller.
+
+5. **Generative Adversarial Networks (GANs):**
+   - Large GANs, such as BigGAN, can have hundreds of millions of parameters and are used for image generation.
+
+6. **Climate Science:**
+   - Climate models using deep learning can have varying numbers of parameters, typically in the millions to tens of millions, depending on the model's complexity.
+
+
+
+
 ## Neural Networks
 
 A neural network is a nonlinear function that is described by parameters called weights and bias. Each node or neuron in a layer of the network inputs a linear combination of the outputs from the nodes of the previous layer. The weights and bias parameters specify the linear combination which is passed through an [activation function](https://en.wikipedia.org/wiki/Activation_function) to produce the output of the node. The activation function is a nonlinear function, its output defines the output of the node. Later, we will define some typical activation functions. 
