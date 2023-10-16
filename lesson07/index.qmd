@@ -310,10 +310,38 @@ A single layer neural network is the simplest type of neural network. It consist
 $$
 \begin{align*}
 f(X) &= \beta_{0} + \sum_{k=1}^{K}\beta_{k}h_{k}(X) \\
-     &= \beta_{0} + \sum_{k=1}^{K}\beta_{k}g(w_{k0} + \sum_{j=1}^{p}w_{kj}X_{j})
+     &= \beta_{0} + \sum_{k=1}^{K}\beta_{k}g\left(w_{k0} + \sum_{j=1}^{p}w_{kj}X_{j}\right)
 \end{align*}
 $$
-where $g$ is some activation function. Notice that a single layer neural network with $p$ inputs and $K$ hidden units has $1 + K + K + pK$ parameters. 
+where $g$ is some activation function. Notice that a single layer neural network with $p$ inputs and $K$ hidden units has $1 + K + K + pK = 1 + (p+2)K$ parameters. We can view a single layer neural network as a generalized linear model with $K$ basis functions. That is, a linear regression in $K$ activation functions. 
+
+To gain some perspective on what the nonlinearity in an single layer neural network allows us to capture, let's look at a simple example. Suppose that we have $p=2$ input variables $X_{1}$ and $X_{2}$ and $K=2$ hidden units. Further, suppose that our activation function is $g(z) = z^2$. Set the following parameters:
+
+$$
+\begin{array}{ccc} \beta_{0} = 0, & \beta_{1} = \frac{1}{4}, & \beta_{2} = -\frac{1}{4} \\ w_{10} = 0, & w_{11} = 1, & w_{12} = 1, \\ w_{20} = 0, & w_{21} = 1, & w_{22} = -1.   \end{array}
+$$
+
+Then, 
+
+$$
+\begin{align*}
+h_{1} &= (0 + X_{1} + X_{2})^2, \\
+h_{2} &= (0 + X_{1} - X_{2})^2. 
+\end{align*}
+$$
+
+Thus, 
+
+$$
+\begin{align*}
+f(X) &= \beta_{0} + \beta_{1}h_{1} + \beta_{2}h_{2} \\
+     &= 0 + \frac{1}{4}(X_{1} + X_{2})^2 - \frac{1}{4}(X_{1} - X_{2})^2 \\
+     &= \frac{1}{4}(X_{1}^2 + 2X_{1}X_{2} + X_{2}^2) - \frac{1}{4}(X_{1}^2 - 2X_{1}X_{2} + X_{2}^2) \\
+     &= X_{1}X_{2}.
+\end{align*}
+$$
+
+So, we see that the sum of two nonlinear transformations of linear functions can produce an interaction term. This is a somewhat artificial example but the point is that the nonlinearity in a single layer neural network via an activation function can "detect" a variety of features in our data.
 
 ### Multilayer networks
 

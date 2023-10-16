@@ -502,9 +502,30 @@ f'(x) = 4x^3 + 21x^2 + 10x - 17
 <p><span class="math display">\[
 \begin{align*}
 f(X) &amp;= \beta_{0} + \sum_{k=1}^{K}\beta_{k}h_{k}(X) \\
-     &amp;= \beta_{0} + \sum_{k=1}^{K}\beta_{k}g(w_{k0} + \sum_{j=1}^{p}w_{kj}X_{j})
+     &amp;= \beta_{0} + \sum_{k=1}^{K}\beta_{k}g\left(w_{k0} + \sum_{j=1}^{p}w_{kj}X_{j}\right)
 \end{align*}
-\]</span> where <span class="math inline">\(g\)</span> is some activation function. Notice that a single layer neural network with <span class="math inline">\(p\)</span> inputs and <span class="math inline">\(K\)</span> hidden units has <span class="math inline">\(1 + K + K + pK\)</span> parameters.</p>
+\]</span> where <span class="math inline">\(g\)</span> is some activation function. Notice that a single layer neural network with <span class="math inline">\(p\)</span> inputs and <span class="math inline">\(K\)</span> hidden units has <span class="math inline">\(1 + K + K + pK = 1 + (p+2)K\)</span> parameters. We can view a single layer neural network as a generalized linear model with <span class="math inline">\(K\)</span> basis functions. That is, a linear regression in <span class="math inline">\(K\)</span> activation functions.</p>
+<p>To gain some perspective on what the nonlinearity in an single layer neural network allows us to capture, let’s look at a simple example. Suppose that we have <span class="math inline">\(p=2\)</span> input variables <span class="math inline">\(X_{1}\)</span> and <span class="math inline">\(X_{2}\)</span> and <span class="math inline">\(K=2\)</span> hidden units. Further, suppose that our activation function is <span class="math inline">\(g(z) = z^2\)</span>. Set the following parameters:</p>
+<p><span class="math display">\[
+\begin{array}{ccc} \beta_{0} = 0, &amp; \beta_{1} = \frac{1}{4}, &amp; \beta_{2} = -\frac{1}{4} \\ w_{10} = 0, &amp; w_{11} = 1, &amp; w_{12} = 1, \\ w_{20} = 0, &amp; w_{21} = 1, &amp; w_{22} = -1.   \end{array}
+\]</span></p>
+<p>Then,</p>
+<p><span class="math display">\[
+\begin{align*}
+h_{1} &amp;= (0 + X_{1} + X_{2})^2, \\
+h_{2} &amp;= (0 + X_{1} - X_{2})^2.
+\end{align*}
+\]</span></p>
+<p>Thus,</p>
+<p><span class="math display">\[
+\begin{align*}
+f(X) &amp;= \beta_{0} + \beta_{1}h_{1} + \beta_{2}h_{2} \\
+     &amp;= 0 + \frac{1}{4}(X_{1} + X_{2})^2 - \frac{1}{4}(X_{1} - X_{2})^2 \\
+     &amp;= \frac{1}{4}(X_{1}^2 + 2X_{1}X_{2} + X_{2}^2) - \frac{1}{4}(X_{1}^2 - 2X_{1}X_{2} + X_{2}^2) \\
+     &amp;= X_{1}X_{2}.
+\end{align*}
+\]</span></p>
+<p>So, we see that the sum of two nonlinear transformations of linear functions can produce an interaction term. This is a somewhat artificial example but the point is that the nonlinearity in a single layer neural network via an activation function can “detect” a variety of features in our data.</p>
 </section>
 <section id="multilayer-networks" class="level3">
 <h3 class="anchored" data-anchor-id="multilayer-networks">Multilayer networks</h3>
