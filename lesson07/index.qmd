@@ -483,6 +483,7 @@ We have already seen one example of training a neural network in R using the `br
    - *Description*: The `keras` package in R provides an interface to the Keras deep learning framework. Keras is known for its ease of use and flexibility and can run on top of TensorFlow, Theano, or Microsoft Cognitive Toolkit (CNTK).
    - *Documentation*: [keras Documentation](https://keras.rstudio.com/)
    - *Tutorials*: [keras Tutorials](https://keras.rstudio.com/articles/tutorial_basic_classification.html)
+   - *Lab from Textbook*: The webpage for the ISLR2 textbook contains a link to a lab that uses the `keras` package. [View lab](https://hastie.su.domains/ISLR2/Labs/Rmarkdown_Notebooks/Ch10-deeplearning-lab-keras.html).
 
 2. **tensorflow:**
    - *Description*: The `tensorflow` package for R provides a low-level interface to the TensorFlow deep learning framework. It allows for fine-grained control over model architecture and training.
@@ -493,6 +494,7 @@ We have already seen one example of training a neural network in R using the `br
    - *Description*: The `torch` package offers an interface to PyTorch, a deep learning framework known for its flexibility and dynamic computation graph. It is suitable for both research and production.
    - *Documentation*: [torch Documentation](https://torch.mlverse.org/)
    - *Textbook*: [Deep Learning and Scientific Computing with R](https://skeydan.github.io/Deep-Learning-and-Scientific-Computing-with-R-torch/)
+   - *Lab from Textbook*: The webpage for the ISLR2 textbook contains a link to a lab that uses the `torch` package. [View lab](https://hastie.su.domains/ISLR2/Labs/Rmarkdown_Notebooks/Ch10-deeplearning-lab-torch.html).
 
 4. **caret:**
    - *Description*: While not a deep learning library, the `caret` package is a versatile tool for training and evaluating machine learning models, including neural networks. It provides a unified interface for various R packages and algorithms.
