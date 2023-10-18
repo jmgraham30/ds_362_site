@@ -73,13 +73,13 @@ Neural networks are a class of machine learning models that are inspired by the 
 Neural networks are conceptually simple but the mathematical details can be confusing. The general idea is that a neural network takes an input of $p$ predictor variables $X = (X_{1},X_{2},\ldots , X_{p})$ and builds a *nonlinear* function $f(X)$ to predict the response $Y$. What distinguishes neural networks for other nonlinear methods is the particular structure of the model function $f$.
  
  
-### Describing a Neural Network
+### Exploring a Neural Network Interactively
  
  In order to develop some intuition, we will start by exploring an interactive visualization of a neural network via the [Neural Network Playground](https://playground.tensorflow.org/#activation=tanh&batchSize=10&dataset=circle&regDataset=reg-plane&learningRate=0.03&regularizationRate=0&noise=0&networkShape=4,2&seed=0.92779&showTestData=false&discretize=false&percTrainData=50&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=classification&initZero=false&hideText=false) website. [Visit the Neural Network Playground](https://playground.tensorflow.org/#activation=tanh&batchSize=10&dataset=circle&regDataset=reg-plane&learningRate=0.03&regularizationRate=0&noise=0&networkShape=4,2&seed=0.92779&showTestData=false&discretize=false&percTrainData=50&x=true&y=true&xTimesY=false&xSquared=false&ySquared=false&cosX=false&sinX=false&cosY=false&sinY=false&collectStats=false&problem=classification&initZero=false&hideText=false). 
 
 The visualization allows you to create a neural network and then train it on a dataset. The dataset can be a classification problem or a regression problem. The visualization allows you to change the activation function, the number of hidden layers, the number of neurons in each layer, and the learning rate. These are components related to the training of a network that we will define in detail later. 
 
-### Describing a Neural Networks in R
+### Exploring Neural Networks in R
 
 Let's also take a look at a simple neural network in R. The [`brulee`](https://brulee.tidymodels.org/index.html) package provides a simple interface via a function `brulee_mlp()` (it's a good idea to skim the [`brulee_mlp` documentation](https://brulee.tidymodels.org/reference/brulee_mlp.html)) for creating neural networks in R and uses the `tidymodels` framework for modeling. The code, available via [this GitHub repo](https://github.com/jmgraham30/nn_class_example/tree/main),  creates a neural network with one hidden layer and trains it on the `penguins` dataset. The repository also contains a script with an example of tuning a neural network with a single hidden layer. Let's examine this together in an RStudio project. 
 
@@ -475,7 +475,36 @@ Despite their effectiveness, RNNs may be computationally expensive and may not s
 
 ## `r icons::icon_style(icons::fontawesome("r-project"),scale=2,fill="steelblue")` Neural Networks in R
 
+We have already seen one example of training a neural network in R using the `brulee` package which fits in with the `tidymodels` framework. There are another of other packages which facilitate deep learning in R and it is worth being aware of them since some of them allow one to go beyond what is capable with `brulee` and implement CNNs or RNNs. 
 
+### R Packages for Neural Networks and Deep Learning
+
+1. **keras:**
+   - *Description*: The `keras` package in R provides an interface to the Keras deep learning framework. Keras is known for its ease of use and flexibility and can run on top of TensorFlow, Theano, or Microsoft Cognitive Toolkit (CNTK).
+   - *Documentation*: [keras Documentation](https://keras.rstudio.com/)
+   - *Tutorials*: [keras Tutorials](https://keras.rstudio.com/articles/tutorial_basic_classification.html)
+
+2. **tensorflow:**
+   - *Description*: The `tensorflow` package for R provides a low-level interface to the TensorFlow deep learning framework. It allows for fine-grained control over model architecture and training.
+   - *Documentation*: [tensorflow Documentation](https://tensorflow.rstudio.com/)
+   - *Tutorials*: [tensorflow Tutorials](https://tensorflow.rstudio.com/tutorials/beginners/basic-ml/tutorial_basic_classification/)
+   
+3. **torch:**
+   - *Description*: The `torch` package offers an interface to PyTorch, a deep learning framework known for its flexibility and dynamic computation graph. It is suitable for both research and production.
+   - *Documentation*: [torch Documentation](https://torch.mlverse.org/)
+   - *Textbook*: [Deep Learning and Scientific Computing with R](https://skeydan.github.io/Deep-Learning-and-Scientific-Computing-with-R-torch/)
+
+4. **caret:**
+   - *Description*: While not a deep learning library, the `caret` package is a versatile tool for training and evaluating machine learning models, including neural networks. It provides a unified interface for various R packages and algorithms.
+   - *Documentation*: [caret Documentation](https://topepo.github.io/caret/)
+  
+
+5. **h2o:**
+   - *Description*: The `h2o` package is designed for scalable machine learning and deep learning. It provides an easy-to-use interface for building deep learning models, autoML, and more.
+   - *Documentation*: [h2o Documentation](http://docs.h2o.ai/h2o/latest-stable/h2o-docs/booklets/DeepLearningBooklet.pdf)
+
+
+These R packages cover a range of deep learning needs, from high-level and user-friendly interfaces to low-level control and flexibility. Explore the provided documentation and tutorials to get started with deep learning using these tools.
 
 ## Further Topics on Deep Learning
 
@@ -590,36 +619,6 @@ The choice of architecture often involves a trade-off between model capacity and
 
 
 ## Freely Available Libraries and Packages for Neural Networks
-
-### R Packages for Neural Networks and Deep Learning
-
-1. **keras:**
-   - *Description*: The `keras` package in R provides an interface to the Keras deep learning framework. Keras is known for its ease of use and flexibility and can run on top of TensorFlow, Theano, or Microsoft Cognitive Toolkit (CNTK).
-   - *Documentation*: [keras Documentation](https://keras.rstudio.com/)
-   - *Tutorials*: [keras Tutorials](https://keras.rstudio.com/articles/tutorial_basic_classification.html)
-
-2. **tensorflow:**
-   - *Description*: The `tensorflow` package for R provides a low-level interface to the TensorFlow deep learning framework. It allows for fine-grained control over model architecture and training.
-   - *Documentation*: [tensorflow Documentation](https://tensorflow.rstudio.com/)
-   - *Tutorials*: [tensorflow Tutorials](https://tensorflow.rstudio.com/tutorials/beginners/basic-ml/tutorial_basic_classification/)
-   
-3. **torch:**
-   - *Description*: The `torch` package offers an interface to PyTorch, a deep learning framework known for its flexibility and dynamic computation graph. It is suitable for both research and production.
-   - *Documentation*: [torch Documentation](https://torch.mlverse.org/)
-   - *Textbook*: [Deep Learning and Scientific Computing with R](https://skeydan.github.io/Deep-Learning-and-Scientific-Computing-with-R-torch/)
-
-4. **caret:**
-   - *Description*: While not a deep learning library, the `caret` package is a versatile tool for training and evaluating machine learning models, including neural networks. It provides a unified interface for various R packages and algorithms.
-   - *Documentation*: [caret Documentation](https://topepo.github.io/caret/)
-  
-
-5. **h2o:**
-   - *Description*: The `h2o` package is designed for scalable machine learning and deep learning. It provides an easy-to-use interface for building deep learning models, autoML, and more.
-   - *Documentation*: [h2o Documentation](http://docs.h2o.ai/h2o/latest-stable/h2o-docs/booklets/DeepLearningBooklet.pdf)
-
-
-These R packages cover a range of deep learning needs, from high-level and user-friendly interfaces to low-level control and flexibility. Explore the provided documentation and tutorials to get started with deep learning using these tools.
-
 
 ### Other Languages
 
