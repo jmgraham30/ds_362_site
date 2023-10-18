@@ -343,8 +343,23 @@ $$
 
 So, we see that the sum of two nonlinear transformations of linear functions can produce an interaction term. This is a somewhat artificial example but the point is that the nonlinearity in a single layer neural network via an activation function can "detect" a variety of features in our data.
 
-### Multilayer networks
+## Multilayer networks
 
+In principle, a single layer neural network can approximate most functions of interest in machine learning. This is a consequence of a family of results known as [universal approximation theorems](https://en.wikipedia.org/wiki/Universal_approximation_theorem). However, in practice, deep learning is improved by using multiple layers. A neural network with multiple layers is known as a multilayer neural network. Let's examine the training of a multilayer neural network in more detail.
+
+### Backpropagation
+
+The implementation of gradient descent or its variant in deep learning typically require use to compute the gradient of chains of functions like
+
+$$
+{\bf y} = (f_{K} \circ f_{K-1} \circ \cdots \circ f_{1})({\bf x})
+$$
+where ${\bf x}$ are the inputs, ${\bf y}$ are the observations, and every $f_{i}$ has its own parameters. In neural networks, 
+
+$$
+f_{i}({\bf x}_{i-1}) = \sigma({\bf W}_{i-1}{\bf x}_{i-1} + {\bf b}_{i-1})
+$$
+is the activation function for the $i$-th layer, where ${\bf W}_{i-1}$ is the weight matrix and ${\bf b}_{i-1}$ is the bias vector. Here, ${\bf x}_{i-1}$ is the output from layer $i-1$. To train such a model, we need to compute the gradient of the loss function with respect to the parameters ${\bf W}_{i}$ and ${\bf b}_{i}$ for each layer $i$. This is done via the [backpropagation](https://en.wikipedia.org/wiki/Backpropagation) algorithm. We will now explain how this works. For a reference, see section 5.6.1 from [@deisenroth2020mathematics]. See also [these online notes](https://people.cs.umass.edu/~domke/courses/sml2011/08autodiff_nnets.pdf).
 
 ## Convolutional and Recurrent Networks
 
