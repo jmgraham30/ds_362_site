@@ -91,7 +91,7 @@ We note that $y$ may be numerical in which case we have a **regression** problem
 
 ### Fitting Supervised Models
 
-Fitting an unsupervised learning model typically amounts to estimating the function $f$ in the assumed relationship
+Fitting a supervised learning model typically amounts to estimating the function $f$ in the assumed relationship
 
 $$
 y = f({\bf x}) + \epsilon
