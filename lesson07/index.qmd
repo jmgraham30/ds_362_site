@@ -160,7 +160,7 @@ $$
 f'(x) = 4x^3 + 21x^2 + 10x - 17
 $$
 
-Let's iterate gradient descent for 25 epochs with a learning rate of $\alpha = 0.01$ and an initial guess of $x_{0} = -3$. We will plot the value of $x$ at each epoch and the value of the function $f(x)$ at each epoch. We will also plot the value of the gradient at each epoch. 
+Let's iterate gradient descent for 25 epochs with a learning rate of $\alpha = 0.01$ and an initial guess of $x_{0} = -3$. We will plot the value of $x$ at each epoch and the value of the function $f(x)$ at each epoch.
 
 
 
@@ -217,10 +217,11 @@ tibble(x = x) %>%
 
 ### Activation Functions
 
+Shortly, we will describe a neural network with a single hidden layer in more detail. In ordre to do so, we need to introduce the concept of an **activation function**. An activation function is a function that is applied to the output of a node in a neural network. The activation function introduces non-linearity into the neural network. Without non-linearity, the neural network would be equivalent to a linear regression model. There are many different activation functions that are used in neural networks. Here are some of the most common activation functions: 
 
 1. **Sigmoid Activation Function:**
    
-   - *Description*: The sigmoid activation function is commonly used in neural networks for binary classification tasks. It maps input values to the range \((0, 1)\), making it suitable for output layers of binary classifiers.
+   - *Description*: The sigmoid activation function is commonly used in neural networks for binary classification tasks. It maps input values to the range $(0, 1)$, making it suitable for output layers of binary classifiers.
    - *Mathematical Expression*: 
    
    $$
@@ -238,7 +239,7 @@ tibble(x = x) %>%
 
 3. **Tanh (Hyperbolic Tangent) Activation Function:**
    
-   - *Description*: Tanh is another common activation function that maps input values to the range \((-1, 1)\). It provides zero-centered output, which can help training converge faster.
+   - *Description*: Tanh is another common activation function that maps input values to the range $(-1, 1)$. It provides zero-centered output, which can help training converge faster.
    - *Mathematical Expression*: 
    
    $$
@@ -305,12 +306,12 @@ ggplot(df, aes(x)) +
 
 ### Single Layer Networks
 
-A single layer neural network is the simplest type of neural network. It consists of a single layer of neurons that take in a set of inputs and produce a set of outputs. The output is computed by applying an activation function to a weighted sum of the inputs. We can describe a single layer neural network with $K$ hidden units mathematically via
+A single layer neural network is the simplest type of neural network. It consists of a single layer of neurons that take in a set of inputs and produce a set of outputs. The output is computed by applying an activation function to a weighted sum of the inputs. We can describe a single layer neural network with $K$ hidden units mathematically via the following expression:
 
 $$
 \begin{align*}
 f(X) &= \beta_{0} + \sum_{k=1}^{K}\beta_{k}h_{k}(X) \\
-     &= \beta_{0} + \sum_{k=1}^{K}\beta_{k}g\left(w_{k0} + \sum_{j=1}^{p}w_{kj}X_{j}\right)
+     &= \beta_{0} + \sum_{k=1}^{K}\beta_{k}g\left(w_{k0} + \sum_{j=1}^{p}w_{kj}X_{j}\right),
 \end{align*}
 $$
 where $g$ is some activation function. Notice that a single layer neural network with $p$ inputs and $K$ hidden units has $1 + K + K + pK = 1 + (p+2)K$ parameters. We can view a single layer neural network as a generalized linear model with $K$ basis functions. That is, a linear regression in $K$ activation functions. 
@@ -349,7 +350,7 @@ In principle, a single layer neural network can approximate most functions of in
 
 ### Backpropagation
 
-The implementation of gradient descent or its variant in deep learning typically require use to compute the gradient of chains of functions like
+The implementation of gradient descent or its variant in deep learning typically requires us to compute the gradient of chains of functions like
 
 $$
 {\bf y} = (f_{K} \circ f_{K-1} \circ \cdots \circ f_{1})({\bf x})
@@ -412,6 +413,10 @@ CNNs are characterized by a unique architecture that is well-suited for extracti
 
 3. **Fully Connected Layers**: After feature extraction, CNNs often have one or more fully connected layers similar to those in feedforward networks. These layers combine the features to make predictions.
 
+@fig-cnn provides an illustration of the CNN architecture. For further perspective on CNNs, [view this article](https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-the-eli5-way-3bd2b1164a53).
+
+![Architecture of CNNs.](https://miro.medium.com/v2/resize:fit:720/format:webp/1*uAeANQIOQPqWZnnuH-VEyw.jpeg){#fig-cnn}
+
 #### Training Process for CNNs
 
 The training process for CNNs involves the following key steps:
@@ -447,6 +452,10 @@ RNNs are characterized by their recurrent connections, which enable the network 
 2. **Recurrent Connection**: The hidden state at the current time step is computed based on the input at the current time step and the hidden state at the previous time step. This recurrent connection allows RNNs to capture dependencies across sequential data.
 
 3. **Output Layer**: RNNs can have an output layer, which produces predictions or features based on the current hidden state. The output can be used for various tasks, such as sequence classification or prediction.
+
+@fig-rnn provides an illustration of the RNN architecture. For further perspective on CNNs, [view this article](https://medium.datadriveninvestor.com/recurrent-neural-network-with-keras-b5b5f6fe5187).
+
+![Architecture of an RNN.](https://miro.medium.com/v2/resize:fit:640/format:webp/0*xs3Dya3qQBx6IU7C.png){#fig-rnn}
 
 #### Training Process for RNNs
 
