@@ -64,7 +64,16 @@ vembedr::embed_youtube(id="WCRwbrNWrpw?si=rkEz30HgpeBK9VTD",height=450) %>%
 
     
 ## Overview    
-    
+
+[Support Vector Machines (SVM)](https://en.wikipedia.org/wiki/Support_vector_machine) are a class of powerful machine learning algorithms commonly used for classification tasks. The fundamental principle behind SVM is to find a hyperplane that maximizes the margin between different classes in the data. This hyperplane serves as the decision boundary, where data points are classified into one of two or more classes based on their position relative to the hyperplane. SVM is particularly effective in scenarios where the classes are well-separated and works well in high-dimensional spaces. The choice of the kernel function in SVM allows it to handle non-linear data by mapping it to a higher-dimensional space, making it versatile for a wide range of classification problems.
+
+Variations of SVM include:
+- [Support Vector Machine with a Linear Kernel (Linear SVM)](https://en.wikipedia.org/wiki/Support_vector_machine#Linear_SVM)
+- [Support Vector Machine with a Polynomial Kernel (Polynomial SVM)](https://en.wikipedia.org/wiki/Support_vector_machine#Polynomial_kernel)
+- [Support Vector Machine with a Radial Basis Function Kernel (RBF SVM)](https://en.wikipedia.org/wiki/Support_vector_machine#RBF_kernel)
+
+These variations offer flexibility to adapt to different data distributions. Additionally, SVM can be extended to multiclass classification by using techniques like one-vs-all. Despite its effectiveness, SVM's performance can be sensitive to the choice of kernel and hyperparameters, and it may be computationally expensive for large datasets. However, it remains a valuable tool in the machine learning toolkit, especially when dealing with well-defined classes and both linear and non-linear data.
+
   
 
 ## Support Vector Machine Approaches
@@ -79,8 +88,51 @@ vembedr::embed_youtube(id="WCRwbrNWrpw?si=rkEz30HgpeBK9VTD",height=450) %>%
 ![The solid lines shows the maximal margin hyperplane. The margin is the distance between the two dotted lines.](https://www.dropbox.com/scl/fi/z6bfo6dl85hddo7kceqf9/9_3.jpg?rlkey=erj5245hguu6zfn6yx8y39u4p&raw=1){#fig-max-margin width=75% height=75%}    
     
     
-    
 
+## Summary    
+
+Support Vector Machines (SVM) are a powerful and versatile class of supervised machine learning algorithms for classification.
+
+### Key Concepts
+
+1. **Maximizing Margin**: SVM's primary objective is to find a decision boundary that maximizes the margin between different classes of data points. This boundary is called the "hyperplane."
+
+2. **Linear Separability**: SVM works well when data is linearly separable, meaning that it can be separated by a straight line (in 2D), a plane (in 3D), or a hyperplane (in higher dimensions).
+
+3. **Support Vectors**: The data points that are closest to the hyperplane and influence its position are called "support vectors." These support vectors play a crucial role in defining the decision boundary.
+
+4. **Kernel Tricks**: SVM can handle non-linear data by applying kernel functions (e.g., polynomial, radial basis function) that transform the data into a higher-dimensional space, where it becomes linearly separable.
+
+### SVM Classification Process
+
+1. **Data Preparation**: SVM begins with labeled training data, where each data point is associated with a class label.
+
+2. **Model Training**: The SVM algorithm learns the optimal hyperplane that best separates the classes while maximizing the margin. The hyperplane equation can be expressed as $f(x) = \mathbf{w} \cdot \mathbf{x} + b$, where $\mathbf{w}$ is the weight vector and $b$ is the bias term.
+
+3. **Margin Calculation**: The margin is determined by the distance between the hyperplane and the nearest support vectors from each class.
+
+4. **Classification**: To predict the class of a new data point, SVM evaluates $f(x)$. If $f(x) > 0$, the point is classified into one class; if $f(x) < 0$, it's classified into the other class.
+
+### Hyperparameter Tuning
+
+- **C Parameter**: It controls the trade-off between maximizing the margin and minimizing the classification error. Smaller values of C create a wider margin but may misclassify some points, while larger values of C lead to a narrower margin but fewer misclassifications.
+
+- **Kernel Type**: The choice of kernel function, such as linear, polynomial, or radial basis function, can significantly impact the model's ability to handle non-linear data.
+
+### Advantages of SVM
+
+- Effective in high-dimensional spaces.
+- Robust against overfitting.
+- Suitable for small to large datasets.
+- Works well with both linear and non-linear data.
+
+### Limitations
+
+- Computationally expensive for large datasets.
+- Sensitivity to the choice of kernel and hyperparameters.
+- Can be challenging to interpret in high-dimensional spaces.
+
+SVM is a versatile algorithm widely used for classification tasks, especially when dealing with well-defined classes and both linear and non-linear data. It's essential to understand its hyperparameters and the choice of kernel functions to maximize its effectiveness in different scenarios.
 
 
 
