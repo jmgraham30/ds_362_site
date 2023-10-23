@@ -366,7 +366,7 @@ is the activation function for the $i$-th layer, where ${\bf W}_{i-1}$ is the we
 
 ### Overview of Neural Network Types
 
-Thus far, we have been discussing what are known as feedforward neural networks. However, there are variations on this that are worth describing as different kinds of neural networks are used for different kinds of tasks, including image recognition, natural language processing, and time series analysis. There are three main types of neural networks: feedforward, convolutional, and recurrent networks.
+Thus far, we have been discussing what are known as feedforward neural networks. However, there are variations on this that are worth describing as different kinds of neural networks are used for different kinds of tasks, including image recognition, natural language processing, and time series analysis. There are three main types of neural networks: feedforward, convolutional, and recurrent networks. 
 
 #### Feedforward Neural Networks (FNNs)
 
@@ -401,7 +401,10 @@ Each type of neural network is tailored to specific data types and tasks. The ch
 
 ### Convolutional Neural Networks (CNNs)
 
-Convolutional Neural Networks (CNNs) are a type of neural network designed for processing grid-like data, with a primary focus on tasks related to images and other spatial data. CNNs have been instrumental in revolutionizing computer vision and are widely used for tasks like image classification, object detection, and segmentation.
+Convolutional Neural Networks (CNNs) are a type of neural network designed for processing grid-like data, with a primary focus on tasks related to images and other spatial data. CNNs have been instrumental in revolutionizing computer vision and are widely used for tasks like image classification, object detection, and segmentation. @fig-cnn-idea illustrates the general idea of a CNN. That is, rather than learning each pixel of an image, we first learn local features (e.g., edges, shapes) and then combine them to make predictions.
+
+
+![CNNs work by learning local features an of image through convolution and pooling.](https://www.dropbox.com/scl/fi/ki18hqgaon23oa7cea5eg/10_6.jpeg?rlkey=qplu10zfhezkjiejcw4puju1a&raw=1){#fig-cnn-idea}
 
 #### Architecture of CNNs
 
