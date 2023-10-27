@@ -316,16 +316,37 @@ $$
 for all $i = 1, 2, \ldots, n$. Put differently, the maximal margin classifier finds the separating hyperplane that provides the largest margin/gap between the two classes. The width of both margin boundaries is  
 $M$.
  
-What is it is not possible to perfectly separate the two classes? That is, what if there is no separating hyperplane? In this case, we can allow some observations to be on the wrong side of the margin boundaries. This is called a **soft margin classifier** or **support vector classifier**. The soft margin classifier is constructed as a solution to the following optimization problem:
-    
+What if it is not possible to perfectly separate the two classes? That is, what if there is no separating hyperplane? In this situation, we can loosen the constraints (or soften the margin) by allowing some points to be on the wrong side of the margin; this is referred to as the the soft margin classifier (SMC) or **support vector classifier**. 
+
 ## Support Vector Classifier
+
+The soft margin classifier is constructed as a solution to an optimization problem modifying that of the maximal margin classifier:
+
+$$
+\text{maximize}_{\beta_0,\beta_{1},\ldots, \beta_{p}, \epsilon_{1},\ldots, \epsilon_{n}} M 
+$$
+
+subject to 
+
+
+$$
+\begin{align*}
+& \sum_{j=1}^{p} \beta_{j}^{2} = 1 \\
+& y_{i}\left(\beta_{0} + \sum_{j=1}^{p} \beta_{j} x_{ij}\right) \geq M(1 - \epsilon_{i}), \\
+& \epsilon_{i} \geq 0, \quad \sum_{i=1}^{n} \epsilon_{i} \leq C,
+\end{align*}
+$$
+    
+for all $i = 1, 2, \ldots, n$. The hyperparameter $C$ is a non-negative tuning parameter that controls the amount of softening. The larger the value of $C$, the more points are allowed to be on the wrong side of the margin. The parameter $C$ is often referred to as the **budget**. The larger the budget, the more we are willing to pay for misclassification. The hyperparameter $C$ is often chosen via cross-validation. This is illustrated in @fig-smc. The left panel shows the maximal margin classifier. The right panel shows the soft margin classifier with a budget of $C = \infty$. The solid black points represent the support vectors that define the margin boundaries.   
+    
+
 
 ```{r}
 #| code-fold: true
 #| message: false
 #| warning: false
 #| label: fig-smc
-#| fig-cap: Soft margin classifier. (Left) Zero budget for overlap (i.e., the HMC). (Right) Maximumn allowable overlap. The solid black points represent the support vectors that define the margin boundaries.
+#| fig-cap: Soft margin classifier. (Left) Zero budget for overlap (i.e., the maximal margin). (Right) Maximumn allowable overlap. The solid black points represent the support vectors that define the margin boundaries.
 #| fig-asp: 0.5
 #| fig-width: 8
 #| fig-out.width: 100%
@@ -343,8 +364,9 @@ gridExtra::grid.arrange(p1, p2, nrow = 1)
 
 
 
-
 ## Support Vector Machines
+
+How should we handle situations where there is clearly a need for a nonlinear decision boundary? One approach is to use the so-called kernel trick. The idea is to enlarge the feature space by adding nonlinear transformations of the original features. This is illustrated in @fig-svm-circle. The left panel shows the two classes in the original feature space. The middle panel shows the two classes in the enlarged feature space. The right panel shows the decision boundary from the maximal margin in the enlarged feature space projected back into the original feature space. The decision boundary in the original feature space is nonlinear.
 
 ```{r}
 #| code-fold: true
@@ -455,11 +477,39 @@ p3 <- contourplot(
 gridExtra::grid.arrange(p1, p2, p3, nrow = 1)
 ```
 
+Support vector machines (SVMs) are methods that automate using kernels to enlarge the feature space. The idea is to find a hyperplane that separates the classes in the enlarged feature space. The hyperplane is then projected back into the original feature space. The decision boundary in the original feature space is nonlinear. The hyperplane is chosen to maximize the margin between the classes. The support vectors are the points that are closest to the hyperplane. The support vectors are the only points that influence the hyperplane. 
+
+We will not go into the full mathematical detail of SVMs here but take a moment to describe some of the different kernel options that are used frequently in practice. First, recall the notation for an inner product:
+
+$$
+\langle {\bf x}_{i}, {\bf x}_{i'} \rangle = \sum_{j=1}^{p} x_{ij} x_{i'j}
+$$
+An inner product is a type of **kernel** and we generally write $K({\bf x}_{i}, {\bf x}_{i'})$ to denote a kernel function. Then, with some kernel we consider functions of the form
+
+$$
+f({\bf x}) = \beta_{0} + \sum_{i \in \mathcal{S}} \alpha_{i} K({\bf x}_{i}, {\bf x})
+$$
+where $\mathcal{S}$ is the set of support vectors. The most common kernels are:
+
+- **Linear kernel**: $K({\bf x}_{i}, {\bf x}_{i'}) = \langle {\bf x}_{i}, {\bf x}_{i'} \rangle$
+
+- **Polynomial kernel**: $K({\bf x}_{i}, {\bf x}_{i'}) = (1 + \langle {\bf x}_{i}, {\bf x}_{i'} \rangle)^{d}$
+
+- **Radial basis function kernel**: $K({\bf x}_{i}, {\bf x}_{i'}) = \exp(-\gamma \langle {\bf x}_{i} - {\bf x}_{i'}, {\bf x}_{i} - {\bf x}_{i'} \rangle)$
+
+
+### More Than Two Classes
+
+SVMs can be extended to more than two classes using the **one-versus-one** approach. In this approach, we fit a separate SVM for each pair of classes. Then, to classify a new observation, we use a majority vote approach.
+
+### Support Vector Regression
+
+SVMs can also be used for regression. The idea is to find a hyperplane that is as close as possible to the data points. The hyperplane is chosen to minimize the sum of the distances between the hyperplane and the data points. The support vectors are the points that are closest to the hyperplane. The support vectors are the only points that influence the hyperplane.
 
 
 ## Summary    
 
-Support Vector Machines (SVM) are a powerful and versatile class of supervised machine learning algorithms for classification.
+Support Vector Machines (SVM) are a powerful and versatile class of supervised machine learning algorithms for classification. SVMs are based on the concept of decision planes that define decision boundaries. A decision plane is one that separates between a set of objects having different class memberships. SVMs are used for both classification and regression tasks. SVMs are particularly well suited for classification of complex but small- or medium-sized datasets.
 
 ### Key Concepts
 

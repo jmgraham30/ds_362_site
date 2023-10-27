@@ -183,7 +183,11 @@ div.csl-indent {
   <li><a href="#maximal-marginal-classifier" id="toc-maximal-marginal-classifier" class="nav-link" data-scroll-target="#maximal-marginal-classifier">Maximal Marginal Classifier</a></li>
   </ul></li>
   <li><a href="#support-vector-classifier" id="toc-support-vector-classifier" class="nav-link" data-scroll-target="#support-vector-classifier">Support Vector Classifier</a></li>
-  <li><a href="#support-vector-machines" id="toc-support-vector-machines" class="nav-link" data-scroll-target="#support-vector-machines">Support Vector Machines</a></li>
+  <li><a href="#support-vector-machines" id="toc-support-vector-machines" class="nav-link" data-scroll-target="#support-vector-machines">Support Vector Machines</a>
+  <ul class="collapse">
+  <li><a href="#more-than-two-classes" id="toc-more-than-two-classes" class="nav-link" data-scroll-target="#more-than-two-classes">More Than Two Classes</a></li>
+  <li><a href="#support-vector-regression" id="toc-support-vector-regression" class="nav-link" data-scroll-target="#support-vector-regression">Support Vector Regression</a></li>
+  </ul></li>
   <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a>
   <ul class="collapse">
   <li><a href="#key-concepts" id="toc-key-concepts" class="nav-link" data-scroll-target="#key-concepts">Key Concepts</a></li>
@@ -437,11 +441,24 @@ f({\bf x}) = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots + \beta_p x_p = 0
 \]</span></p>
 <p>for all <span class="math inline">\(i = 1, 2, \ldots, n\)</span>. Put differently, the maximal margin classifier finds the separating hyperplane that provides the largest margin/gap between the two classes. The width of both margin boundaries is<br>
 <span class="math inline">\(M\)</span>.</p>
-<p>What is it is not possible to perfectly separate the two classes? That is, what if there is no separating hyperplane? In this case, we can allow some observations to be on the wrong side of the margin boundaries. This is called a <strong>soft margin classifier</strong> or <strong>support vector classifier</strong>. The soft margin classifier is constructed as a solution to the following optimization problem:</p>
+<p>What if it is not possible to perfectly separate the two classes? That is, what if there is no separating hyperplane? In this situation, we can loosen the constraints (or soften the margin) by allowing some points to be on the wrong side of the margin; this is referred to as the the soft margin classifier (SMC) or <strong>support vector classifier</strong>.</p>
 </section>
 </section>
 <section id="support-vector-classifier" class="level2">
 <h2 class="anchored" data-anchor-id="support-vector-classifier">Support Vector Classifier</h2>
+<p>The soft margin classifier is constructed as a solution to an optimization problem modifying that of the maximal margin classifier:</p>
+<p><span class="math display">\[
+\text{maximize}_{\beta_0,\beta_{1},\ldots, \beta_{p}, \epsilon_{1},\ldots, \epsilon_{n}} M
+\]</span></p>
+<p>subject to</p>
+<p><span class="math display">\[
+\begin{align*}
+&amp; \sum_{j=1}^{p} \beta_{j}^{2} = 1 \\
+&amp; y_{i}\left(\beta_{0} + \sum_{j=1}^{p} \beta_{j} x_{ij}\right) \geq M(1 - \epsilon_{i}), \\
+&amp; \epsilon_{i} \geq 0, \quad \sum_{i=1}^{n} \epsilon_{i} \leq C,
+\end{align*}
+\]</span></p>
+<p>for all <span class="math inline">\(i = 1, 2, \ldots, n\)</span>. The hyperparameter <span class="math inline">\(C\)</span> is a non-negative tuning parameter that controls the amount of softening. The larger the value of <span class="math inline">\(C\)</span>, the more points are allowed to be on the wrong side of the margin. The parameter <span class="math inline">\(C\)</span> is often referred to as the <strong>budget</strong>. The larger the budget, the more we are willing to pay for misclassification. The hyperparameter <span class="math inline">\(C\)</span> is often chosen via cross-validation. This is illustrated in <a href="#fig-smc">Figure&nbsp;4</a>. The left panel shows the maximal margin classifier. The right panel shows the soft margin classifier with a budget of <span class="math inline">\(C = \infty\)</span>. The solid black points represent the support vectors that define the margin boundaries.</p>
 <div class="cell" data-fig-out.width="100%" data-fig.asp="0.5">
 <details>
 <summary>Code</summary>
@@ -459,7 +476,7 @@ f({\bf x}) = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots + \beta_p x_p = 0
 <div id="fig-smc" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="index_files/figure-html/fig-smc-1.png" class="img-fluid figure-img" width="768"></p>
-<figcaption class="figure-caption">Figure&nbsp;4: Soft margin classifier. (Left) Zero budget for overlap (i.e., the HMC). (Right) Maximumn allowable overlap. The solid black points represent the support vectors that define the margin boundaries.</figcaption>
+<figcaption class="figure-caption">Figure&nbsp;4: Soft margin classifier. (Left) Zero budget for overlap (i.e., the maximal margin). (Right) Maximumn allowable overlap. The solid black points represent the support vectors that define the margin boundaries.</figcaption>
 </figure>
 </div>
 </div>
@@ -467,6 +484,7 @@ f({\bf x}) = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots + \beta_p x_p = 0
 </section>
 <section id="support-vector-machines" class="level2">
 <h2 class="anchored" data-anchor-id="support-vector-machines">Support Vector Machines</h2>
+<p>How should we handle situations where there is clearly a need for a nonlinear decision boundary? One approach is to use the so-called kernel trick. The idea is to enlarge the feature space by adding nonlinear transformations of the original features. This is illustrated in <a href="#fig-svm-circle">Figure&nbsp;5</a>. The left panel shows the two classes in the original feature space. The middle panel shows the two classes in the enlarged feature space. The right panel shows the decision boundary from the maximal margin in the enlarged feature space projected back into the original feature space. The decision boundary in the original feature space is nonlinear.</p>
 <div class="cell" data-fig-out.width="100%" data-fig.asp="0.33">
 <details>
 <summary>Code</summary>
@@ -577,10 +595,31 @@ f({\bf x}) = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots + \beta_p x_p = 0
 </div>
 </div>
 </div>
+<p>Support vector machines (SVMs) are methods that automate using kernels to enlarge the feature space. The idea is to find a hyperplane that separates the classes in the enlarged feature space. The hyperplane is then projected back into the original feature space. The decision boundary in the original feature space is nonlinear. The hyperplane is chosen to maximize the margin between the classes. The support vectors are the points that are closest to the hyperplane. The support vectors are the only points that influence the hyperplane.</p>
+<p>We will not go into the full mathematical detail of SVMs here but take a moment to describe some of the different kernel options that are used frequently in practice. First, recall the notation for an inner product:</p>
+<p><span class="math display">\[
+\langle {\bf x}_{i}, {\bf x}_{i'} \rangle = \sum_{j=1}^{p} x_{ij} x_{i'j}
+\]</span> An inner product is a type of <strong>kernel</strong> and we generally write <span class="math inline">\(K({\bf x}_{i}, {\bf x}_{i'})\)</span> to denote a kernel function. Then, with some kernel we consider functions of the form</p>
+<p><span class="math display">\[
+f({\bf x}) = \beta_{0} + \sum_{i \in \mathcal{S}} \alpha_{i} K({\bf x}_{i}, {\bf x})
+\]</span> where <span class="math inline">\(\mathcal{S}\)</span> is the set of support vectors. The most common kernels are:</p>
+<ul>
+<li><p><strong>Linear kernel</strong>: <span class="math inline">\(K({\bf x}_{i}, {\bf x}_{i'}) = \langle {\bf x}_{i}, {\bf x}_{i'} \rangle\)</span></p></li>
+<li><p><strong>Polynomial kernel</strong>: <span class="math inline">\(K({\bf x}_{i}, {\bf x}_{i'}) = (1 + \langle {\bf x}_{i}, {\bf x}_{i'} \rangle)^{d}\)</span></p></li>
+<li><p><strong>Radial basis function kernel</strong>: <span class="math inline">\(K({\bf x}_{i}, {\bf x}_{i'}) = \exp(-\gamma \langle {\bf x}_{i} - {\bf x}_{i'}, {\bf x}_{i} - {\bf x}_{i'} \rangle)\)</span></p></li>
+</ul>
+<section id="more-than-two-classes" class="level3">
+<h3 class="anchored" data-anchor-id="more-than-two-classes">More Than Two Classes</h3>
+<p>SVMs can be extended to more than two classes using the <strong>one-versus-one</strong> approach. In this approach, we fit a separate SVM for each pair of classes. Then, to classify a new observation, we use a majority vote approach.</p>
+</section>
+<section id="support-vector-regression" class="level3">
+<h3 class="anchored" data-anchor-id="support-vector-regression">Support Vector Regression</h3>
+<p>SVMs can also be used for regression. The idea is to find a hyperplane that is as close as possible to the data points. The hyperplane is chosen to minimize the sum of the distances between the hyperplane and the data points. The support vectors are the points that are closest to the hyperplane. The support vectors are the only points that influence the hyperplane.</p>
+</section>
 </section>
 <section id="summary" class="level2">
 <h2 class="anchored" data-anchor-id="summary">Summary</h2>
-<p>Support Vector Machines (SVM) are a powerful and versatile class of supervised machine learning algorithms for classification.</p>
+<p>Support Vector Machines (SVM) are a powerful and versatile class of supervised machine learning algorithms for classification. SVMs are based on the concept of decision planes that define decision boundaries. A decision plane is one that separates between a set of objects having different class memberships. SVMs are used for both classification and regression tasks. SVMs are particularly well suited for classification of complex but small- or medium-sized datasets.</p>
 <section id="key-concepts" class="level3">
 <h3 class="anchored" data-anchor-id="key-concepts">Key Concepts</h3>
 <ol type="1">
