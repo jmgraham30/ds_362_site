@@ -26,6 +26,8 @@ library(vip)
 library(pdp)
 library(kernlab)
 library(svmpath)
+library(grid)
+library(lattice)
 
 tidymodels_prefer()
 
@@ -103,6 +105,8 @@ After this lesson, students will be able to:
 
 - Describe the support vector machine (SVM) approach to classification. 
 
+- Understand the role of kernels in SVM.
+
 - Use the `tidymodels` workflow to fit and tune various SVM classification models. 
 
 
@@ -110,7 +114,7 @@ After this lesson, students will be able to:
 
 For this lesson, refer to the following readings, etc.:
 
-- Read chapter 9 from of *An Introduction to Statistical Learning* [@tibshirani2017introduction]. You may also want to read chapter 9 of *Statistical Learning with Math and R* [@suzuki2020statistical].
+- Read chapter 9 from of *An Introduction to Statistical Learning* [@tibshirani2017introduction]. You may also want to read chapter 14 of [Hands-On Machine Learning with R*](https://bradleyboehmke.github.io/HOML/) [@boehmke2019hands].
 
 - [View Support Vector Classifier video on YouTube](https://youtu.be/pjvnCEfAswc?si=5I-xmhB3Y006RP0Y).
 
@@ -133,15 +137,24 @@ vembedr::embed_youtube(id="WCRwbrNWrpw?si=rkEz30HgpeBK9VTD",height=450) %>%
     
 ## Overview    
 
-[Support Vector Machines (SVM)](https://en.wikipedia.org/wiki/Support_vector_machine) are a class of powerful machine learning algorithms commonly used for classification tasks. The fundamental principle behind SVM is to find a hyperplane that maximizes the margin between different classes in the data. This hyperplane serves as the decision boundary, where data points are classified into one of two or more classes based on their position relative to the hyperplane. SVM is particularly effective in scenarios where the classes are well-separated and works well in high-dimensional spaces. The choice of the kernel function in SVM allows it to handle non-linear data by mapping it to a higher-dimensional space, making it versatile for a wide range of classification problems.
+[Support Vector Machines (SVM)](https://en.wikipedia.org/wiki/Support_vector_machine) are a class of powerful machine learning algorithms commonly used for classification tasks but can also be used for regression. The fundamental principle behind SVM is to find a hyperplane that maximizes the so-called margin between different classes in the data. This hyperplane serves as the decision boundary, where data points are classified into one of two or more classes based on their position relative to the hyperplane. SVM is particularly effective in scenarios where the classes are well-separated and works well in high-dimensional spaces. The choice of the kernel function in SVM allows it to handle non-linear data by mapping it to a higher-dimensional space, making it versatile for a wide range of classification problems.
 
 Variations of SVM include:
 - [Support Vector Machine with a Linear Kernel (Linear SVM)](https://en.wikipedia.org/wiki/Support_vector_machine#Linear_SVM)
 - [Support Vector Machine with a Polynomial Kernel (Polynomial SVM)](https://en.wikipedia.org/wiki/Support_vector_machine#Polynomial_kernel)
 - [Support Vector Machine with a Radial Basis Function Kernel (RBF SVM)](https://en.wikipedia.org/wiki/Support_vector_machine#RBF_kernel)
 
-These variations offer flexibility to adapt to different data distributions. Additionally, SVM can be extended to multiclass classification by using techniques like one-vs-all. Despite its effectiveness, SVM's performance can be sensitive to the choice of kernel and hyperparameters, and it may be computationally expensive for large datasets. However, it remains a valuable tool in the machine learning toolkit, especially when dealing with well-defined classes and both linear and non-linear data.
+These variations offer flexibility to adapt to different data distributions. Additionally, SVM can be extended to multiclass classification by using techniques like one-vs-all. Despite its effectiveness, SVM's performance can be sensitive to the choice of kernel and hyperparameters, and it may be computationally expensive for large data sets. However, it remains a valuable tool in the machine learning toolkit, especially when dealing with well-defined classes and both linear and non-linear data.
 
+## Hyperplanes and Margins
+
+Recall that a linear equataion like
+
+$$
+f({\bf x}) = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots + \beta_p x_p = 0
+$$
+
+determines a hyperplane in $p$-dimensional space. @fig-hyperplanes shows examples of hyperplanes in 2-D and 3-D feature space.
 
 ```{r}
 #| code-fold: true
@@ -185,26 +198,264 @@ gridExtra::grid.arrange(p1, p2, nrow = 1)
 ```
 
 
-  
+Further, a hyperplane separates the feature space into two half-spaces. Namely, $f({\bf x}) > 0$ and $f({\bf x}) < 0$. We can try to use this geometric fact to classify observations into two classes. For example, we can classify an observation ${\bf x}_i$ as belonging to class $y_{i} = 1$ if $f({\bf x}_i) > 0$ and as belonging to class $y_{i} = -1$ if $f({\bf x}_i) < 0$. Note that this can be summarized as:  
 
-## Support Vector Machine Approaches
+> ${\bf x}_i$ belongs to class $y_{i}$ if $y_i \times f({\bf x}_i) > 0$
+
+
+In such a case, we refer to the hyperplane as a **decision boundary**. If a hyperplane separates the feature space into two half-spaces in such a way as to distinguish binary classes, then we call that hyperplane a **separating hyperplane**. The problem is that in general there can be an infinite number of separating hyperplanes for a given data set. For example, @fig-svm-separating-hyperplanes shows multiple separating hyperplanes for a simulated data set with two classes.
+
+
+```{r}
+#| code-fold: true
+#| label: fig-svm-separating-hyperplanes
+#| fig-cap: Simulated binary classification data with two separable classes.
+#| warning: false
+#| message: false
+
+# Simulate data
+set.seed(805)
+norm2d <- as.data.frame(mlbench::mlbench.2dnormals(
+  n = 100,
+  cl = 2,
+  r = 4,
+  sd = 1
+))
+names(norm2d) <- c("x1", "x2", "y")  # rename columns
+
+# Scatterplot
+p1 <- ggplot(norm2d, aes(x = x1, y = x2)) +
+  geom_point(aes(shape = y, color = y), size = 3, alpha = 0.75) +
+  xlab("Income (standardized)") +
+  ylab("Lot size (standardized)") +
+  xlim(-6, 6) +
+  ylim(-6, 6) +
+  coord_fixed() +
+  theme(legend.position = "none") +
+  theme_bw() +
+  scale_shape_discrete(
+    name = "Owns a riding\nmower?",
+    breaks = c(1, 2),
+    labels = c("Yes", "No")
+  ) +
+  scale_color_brewer(
+    name = "Owns a riding\nmower?",
+    palette = "Dark2",
+    breaks = c(1, 2),
+    labels = c("Yes", "No")
+  )
+
+# Fit a Logistic regression, linear discriminant analysis (LDA), and optimal
+# separating hyperplane (OSH). Note: we sometimes refer to the OSH as the hard 
+# margin classifier
+fit_glm <- glm(as.factor(y) ~ ., data = norm2d, family = binomial)
+fit_lda <- MASS::lda(as.factor(y) ~ ., data = norm2d)
+invisible(capture.output(fit_hmc <- ksvm(  # use ksvm() to find the OSH
+  x = data.matrix(norm2d[c("x1", "x2")]),
+  y = as.factor(norm2d$y), 
+  kernel = "vanilladot",  # no fancy kernel, just ordinary dot product
+  C = Inf,                # to approximate hard margin classifier
+  prob.model = TRUE       # needed to obtain predicted probabilities
+)))
+
+# Grid over which to evaluate decision boundaries
+npts <- 500
+xgrid <- expand.grid(
+  x1 = seq(from = -6, 6, length = npts),
+  x2 = seq(from = -6, 6, length = npts)
+)
+
+# Predicted probabilities (as a two-column matrix)
+prob_glm <- predict(fit_glm, newdata = xgrid, type = "response")
+prob_glm <- cbind("1" = 1 - prob_glm, "2" = prob_glm)
+prob_lda <- predict(fit_lda, newdata = xgrid)$posterior
+prob_hmc <- predict(fit_hmc, newdata = xgrid, type = "probabilities")
+
+# Add predicted class probabilities
+xgrid2 <- xgrid %>%
+  cbind("GLM" = prob_glm[, 1L], 
+        "LDA" = prob_lda[, 1L], 
+        "HMC" = prob_hmc[, 1L]) %>%
+  tidyr::gather(Model, Prob, -x1, -x2)
+
+# Scatterplot with decision boundaries
+p2 <- p1 + 
+  stat_contour(data = xgrid2, aes(x = x1, y = x2, z = Prob, linetype = Model), 
+               breaks = 0.5, color = "black")
+
+# Display plots side by side
+p2
+```
     
+Thus, our problem is to find a separating hyperplane that is "best" in some particular sense. Of course, whatever "best" means it should be with respect to performance on a test set and not with respect to performance on the training set. Otherwise, we will overfit the training data. The intuitive idea is to find a separating hyperplane which as a decision boundary  provides the maximum separation between the two classes. 
     
 ### Maximal Marginal Classifier
 
-![Left: Separating hyperplanes for binary data. Right: The decision rule based on a separating hyperplane.](https://www.dropbox.com/scl/fi/zzqb6rbbkput1wegmuaj7/9_2.jpg?rlkey=ke0owlerrfm7xyk2momwo8mv5&raw=1){#fig-sep-hyperplane}
-
+This is illustrated in @fig-max-margin. The solid line is the decision boundary and the dotted lines are the margins. The margin is the distance between the decision boundary and the closest observation from either class. The observations that are closest to the decision boundary are called **support vectors**. The decision boundary is called the **maximal margin classifier**. 
 
 
 ![The solid lines shows the maximal margin hyperplane. The margin is the distance between the two dotted lines.](https://www.dropbox.com/scl/fi/z6bfo6dl85hddo7kceqf9/9_3.jpg?rlkey=erj5245hguu6zfn6yx8y39u4p&raw=1){#fig-max-margin width=75% height=75%}    
 
 
+The maximal margin classifier is constructed as a solution to the following optimization problem:
+
+$$
+\text{maximize}_{\beta_0,\beta_{1},\ldots, \beta_{p}} M 
+$$
+
+subject to 
 
 
+$$
+\begin{align*}
+& \sum_{j=1}^{p} \beta_{j}^{2} = 1 \\
+& y_{i}\left(\beta_{0} + \sum_{j=1}^{p} \beta_{j} x_{ij}\right) \geq M, 
+\end{align*}
+$$
 
-
+for all $i = 1, 2, \ldots, n$. Put differently, the maximal margin classifier finds the separating hyperplane that provides the largest margin/gap between the two classes. The width of both margin boundaries is  
+$M$.
+ 
+What is it is not possible to perfectly separate the two classes? That is, what if there is no separating hyperplane? In this case, we can allow some observations to be on the wrong side of the margin boundaries. This is called a **soft margin classifier** or **support vector classifier**. The soft margin classifier is constructed as a solution to the following optimization problem:
     
-    
+## Support Vector Classifier
+
+```{r}
+#| code-fold: true
+#| message: false
+#| warning: false
+#| label: fig-smc
+#| fig-cap: Soft margin classifier. (Left) Zero budget for overlap (i.e., the HMC). (Right) Maximumn allowable overlap. The solid black points represent the support vectors that define the margin boundaries.
+#| fig-asp: 0.5
+#| fig-width: 8
+#| fig-out.width: 100%
+
+# Fit the entire regularization path
+fit_smc <- svmpath(
+  x = data.matrix(norm2d[c("x1", "x2")]), 
+  y = ifelse(norm2d$y == 1, 1, -1)
+)
+# Plot both extremes
+p1 <- plot_svmpath(fit_smc, step = max(fit_smc$Step), main = expression(C == 0))
+p2 <- plot_svmpath(fit_smc, step = min(fit_smc$Step), main = expression(C == infinity))
+gridExtra::grid.arrange(p1, p2, nrow = 1)
+```
+
+
+
+
+## Support Vector Machines
+
+```{r}
+#| code-fold: true
+#| message: false
+#| warning: false
+#| label: fig-svm-circle
+#| fig-cap: Simulated nested circle data. (Left) The two classes in the original (2-D) feature space. (Middle) The two classes in the enlarged (3-D) feature space. (Right) The decision boundary from the maximal margin in the enlarged feature space projected back into the original feature space.
+#| fig-asp: 0.33
+#| fig-width: 12
+#| fig-out.width: 100%
+
+# Simulate data
+set.seed(1432)
+circle <- as.data.frame(mlbench::mlbench.circle(
+  n = 200,
+  d = 2
+))
+names(circle) <- c("x1", "x2", "y")  # rename columns
+
+# Fit a support vector machine (SVM)
+fit_svm_poly <- ksvm( 
+  x = data.matrix(circle[c("x1", "x2")]),
+  y = as.factor(circle$y), 
+  kernel = "polydot",       # polynomial kernel
+  kpar = list(degree = 2),  # kernel parameters
+  C = Inf,                  # to approximate maximal margin classifier
+  prob.model = TRUE         # needed to obtain predicted probabilities
+)
+
+# Grid over which to evaluate decision boundaries
+npts <- 500
+xgrid <- expand.grid(
+  x1 = seq(from = -1.25, 1.25, length = npts),
+  x2 = seq(from = -1.25, 1.25, length = npts)
+)
+
+# Predicted probabilities (as a two-column matrix)
+prob_svm_poly <- predict(fit_svm_poly, newdata = xgrid, type = "probabilities")
+
+# Scatterplot
+p1 <- contourplot(
+  x = prob_svm_poly[, 1] ~ x1 * x2, 
+  data = xgrid, 
+  at = 0, 
+  labels = FALSE,
+  scales = list(tck = c(1, 0)),
+  xlab = "x1",
+  ylab = "x2",
+  main = "Original feature space",
+  panel = function(x, y, z, ...) {
+    panel.contourplot(x, y, z, ...)
+    panel.xyplot(
+      x = circle$x1, 
+      y = circle$x2, 
+      groups = circle$y, 
+      pch = 19, 
+      cex = 1,
+      col = adjustcolor(dark2[1L:2L], alpha.f = 0.5),
+      ...
+    )
+  }
+)
+
+# Enlarge feature space
+circle_3d <- circle
+circle_3d$x3 <- circle_3d$x1^2 + circle_3d$x2^2
+
+# 3-D scatterplot
+p2 <- cloud(
+  x = x3 ~ x1 * x2, 
+  data = circle_3d, 
+  groups = y,
+  main = "Enlarged feature space",
+  par.settings = list(
+    superpose.symbol = list(
+      pch = 19,
+      cex = 1,
+      col = adjustcolor(dark2[1L:2L], alpha.f = 0.5)
+    )
+  )
+) 
+
+# Scatterplot with decision boundary
+p3 <- contourplot(
+  x = prob_svm_poly[, 1] ~ x1 * x2, 
+  data = xgrid, 
+  at = 0.5, 
+  labels = FALSE,
+  scales = list(tck = c(1, 0)),
+  xlab = "x1",
+  ylab = "x2",
+  main = "Non-linear decision boundary",
+  panel = function(x, y, z, ...) {
+    panel.contourplot(x, y, z, ...)
+    panel.xyplot(
+      x = circle$x1, 
+      y = circle$x2, 
+      groups = circle$y, 
+      pch = 19, 
+      cex = 1,
+      col = adjustcolor(dark2[1L:2L], alpha.f = 0.5),
+      ...
+    )
+  }
+) 
+
+# Combine plots
+gridExtra::grid.arrange(p1, p2, p3, nrow = 1)
+```
+
+
 
 ## Summary    
 

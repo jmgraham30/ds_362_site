@@ -178,10 +178,12 @@ div.csl-indent {
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
   <li><a href="#readings-etc." id="toc-readings-etc." class="nav-link" data-scroll-target="#readings-etc.">Readings, etc.</a></li>
   <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#support-vector-machine-approaches" id="toc-support-vector-machine-approaches" class="nav-link" data-scroll-target="#support-vector-machine-approaches">Support Vector Machine Approaches</a>
+  <li><a href="#hyperplanes-and-margins" id="toc-hyperplanes-and-margins" class="nav-link" data-scroll-target="#hyperplanes-and-margins">Hyperplanes and Margins</a>
   <ul class="collapse">
   <li><a href="#maximal-marginal-classifier" id="toc-maximal-marginal-classifier" class="nav-link" data-scroll-target="#maximal-marginal-classifier">Maximal Marginal Classifier</a></li>
   </ul></li>
+  <li><a href="#support-vector-classifier" id="toc-support-vector-classifier" class="nav-link" data-scroll-target="#support-vector-classifier">Support Vector Classifier</a></li>
+  <li><a href="#support-vector-machines" id="toc-support-vector-machines" class="nav-link" data-scroll-target="#support-vector-machines">Support Vector Machines</a></li>
   <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a>
   <ul class="collapse">
   <li><a href="#key-concepts" id="toc-key-concepts" class="nav-link" data-scroll-target="#key-concepts">Key Concepts</a></li>
@@ -230,6 +232,7 @@ div.csl-indent {
 <p>After this lesson, students will be able to:</p>
 <ul>
 <li><p>Describe the support vector machine (SVM) approach to classification.</p></li>
+<li><p>Understand the role of kernels in SVM.</p></li>
 <li><p>Use the <code>tidymodels</code> workflow to fit and tune various SVM classification models.</p></li>
 </ul>
 </section>
@@ -237,7 +240,7 @@ div.csl-indent {
 <h2 class="anchored" data-anchor-id="readings-etc.">Readings, etc.</h2>
 <p>For this lesson, refer to the following readings, etc.:</p>
 <ul>
-<li><p>Read chapter 9 from of <em>An Introduction to Statistical Learning</em> <span class="citation" data-cites="tibshirani2017introduction">(<a href="#ref-tibshirani2017introduction" role="doc-biblioref">Tibshirani, James, and Trevor 2017</a>)</span>. You may also want to read chapter 9 of <em>Statistical Learning with Math and R</em> <span class="citation" data-cites="suzuki2020statistical">(<a href="#ref-suzuki2020statistical" role="doc-biblioref">Suzuki 2020</a>)</span>.</p></li>
+<li><p>Read chapter 9 from of <em>An Introduction to Statistical Learning</em> <span class="citation" data-cites="tibshirani2017introduction">(<a href="#ref-tibshirani2017introduction" role="doc-biblioref">Tibshirani, James, and Trevor 2017</a>)</span>. You may also want to read chapter 14 of <a href="https://bradleyboehmke.github.io/HOML/">Hands-On Machine Learning with R*</a> <span class="citation" data-cites="boehmke2019hands">(<a href="#ref-boehmke2019hands" role="doc-biblioref">Boehmke and Greenwell 2019</a>)</span>.</p></li>
 <li><p><a href="https://youtu.be/pjvnCEfAswc?si=5I-xmhB3Y006RP0Y">View Support Vector Classifier video on YouTube</a>.</p></li>
 </ul>
 <div class="cell">
@@ -264,9 +267,17 @@ div.csl-indent {
 </section>
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p><a href="https://en.wikipedia.org/wiki/Support_vector_machine">Support Vector Machines (SVM)</a> are a class of powerful machine learning algorithms commonly used for classification tasks. The fundamental principle behind SVM is to find a hyperplane that maximizes the margin between different classes in the data. This hyperplane serves as the decision boundary, where data points are classified into one of two or more classes based on their position relative to the hyperplane. SVM is particularly effective in scenarios where the classes are well-separated and works well in high-dimensional spaces. The choice of the kernel function in SVM allows it to handle non-linear data by mapping it to a higher-dimensional space, making it versatile for a wide range of classification problems.</p>
+<p><a href="https://en.wikipedia.org/wiki/Support_vector_machine">Support Vector Machines (SVM)</a> are a class of powerful machine learning algorithms commonly used for classification tasks but can also be used for regression. The fundamental principle behind SVM is to find a hyperplane that maximizes the so-called margin between different classes in the data. This hyperplane serves as the decision boundary, where data points are classified into one of two or more classes based on their position relative to the hyperplane. SVM is particularly effective in scenarios where the classes are well-separated and works well in high-dimensional spaces. The choice of the kernel function in SVM allows it to handle non-linear data by mapping it to a higher-dimensional space, making it versatile for a wide range of classification problems.</p>
 <p>Variations of SVM include: - <a href="https://en.wikipedia.org/wiki/Support_vector_machine#Linear_SVM">Support Vector Machine with a Linear Kernel (Linear SVM)</a> - <a href="https://en.wikipedia.org/wiki/Support_vector_machine#Polynomial_kernel">Support Vector Machine with a Polynomial Kernel (Polynomial SVM)</a> - <a href="https://en.wikipedia.org/wiki/Support_vector_machine#RBF_kernel">Support Vector Machine with a Radial Basis Function Kernel (RBF SVM)</a></p>
-<p>These variations offer flexibility to adapt to different data distributions. Additionally, SVM can be extended to multiclass classification by using techniques like one-vs-all. Despite its effectiveness, SVM’s performance can be sensitive to the choice of kernel and hyperparameters, and it may be computationally expensive for large datasets. However, it remains a valuable tool in the machine learning toolkit, especially when dealing with well-defined classes and both linear and non-linear data.</p>
+<p>These variations offer flexibility to adapt to different data distributions. Additionally, SVM can be extended to multiclass classification by using techniques like one-vs-all. Despite its effectiveness, SVM’s performance can be sensitive to the choice of kernel and hyperparameters, and it may be computationally expensive for large data sets. However, it remains a valuable tool in the machine learning toolkit, especially when dealing with well-defined classes and both linear and non-linear data.</p>
+</section>
+<section id="hyperplanes-and-margins" class="level2">
+<h2 class="anchored" data-anchor-id="hyperplanes-and-margins">Hyperplanes and Margins</h2>
+<p>Recall that a linear equataion like</p>
+<p><span class="math display">\[
+f({\bf x}) = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + \cdots + \beta_p x_p = 0
+\]</span></p>
+<p>determines a hyperplane in <span class="math inline">\(p\)</span>-dimensional space. <a href="#fig-hyperplanes">Figure&nbsp;1</a> shows examples of hyperplanes in 2-D and 3-D feature space.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -313,24 +324,259 @@ div.csl-indent {
 </div>
 </div>
 </div>
-</section>
-<section id="support-vector-machine-approaches" class="level2">
-<h2 class="anchored" data-anchor-id="support-vector-machine-approaches">Support Vector Machine Approaches</h2>
-<section id="maximal-marginal-classifier" class="level3">
-<h3 class="anchored" data-anchor-id="maximal-marginal-classifier">Maximal Marginal Classifier</h3>
-<div id="fig-sep-hyperplane" class="quarto-figure quarto-figure-center anchored">
+<p>Further, a hyperplane separates the feature space into two half-spaces. Namely, <span class="math inline">\(f({\bf x}) &gt; 0\)</span> and <span class="math inline">\(f({\bf x}) &lt; 0\)</span>. We can try to use this geometric fact to classify observations into two classes. For example, we can classify an observation <span class="math inline">\({\bf x}_i\)</span> as belonging to class <span class="math inline">\(y_{i} = 1\)</span> if <span class="math inline">\(f({\bf x}_i) &gt; 0\)</span> and as belonging to class <span class="math inline">\(y_{i} = -1\)</span> if <span class="math inline">\(f({\bf x}_i) &lt; 0\)</span>. Note that this can be summarized as:</p>
+<blockquote class="blockquote">
+<p><span class="math inline">\({\bf x}_i\)</span> belongs to class <span class="math inline">\(y_{i}\)</span> if <span class="math inline">\(y_i \times f({\bf x}_i) &gt; 0\)</span></p>
+</blockquote>
+<p>In such a case, we refer to the hyperplane as a <strong>decision boundary</strong>. If a hyperplane separates the feature space into two half-spaces in such a way as to distinguish binary classes, then we call that hyperplane a <strong>separating hyperplane</strong>. The problem is that in general there can be an infinite number of separating hyperplanes for a given data set. For example, <a href="#fig-svm-separating-hyperplanes">Figure&nbsp;2</a> shows multiple separating hyperplanes for a simulated data set with two classes.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate data</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">805</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>norm2d <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(mlbench<span class="sc">::</span><span class="fu">mlbench.2dnormals</span>(</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">100</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">cl =</span> <span class="dv">2</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">r =</span> <span class="dv">4</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd =</span> <span class="dv">1</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(norm2d) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"x1"</span>, <span class="st">"x2"</span>, <span class="st">"y"</span>)  <span class="co"># rename columns</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatterplot</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(norm2d, <span class="fu">aes</span>(<span class="at">x =</span> x1, <span class="at">y =</span> x2)) <span class="sc">+</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">shape =</span> y, <span class="at">color =</span> y), <span class="at">size =</span> <span class="dv">3</span>, <span class="at">alpha =</span> <span class="fl">0.75</span>) <span class="sc">+</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Income (standardized)"</span>) <span class="sc">+</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Lot size (standardized)"</span>) <span class="sc">+</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="sc">-</span><span class="dv">6</span>, <span class="dv">6</span>) <span class="sc">+</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="sc">-</span><span class="dv">6</span>, <span class="dv">6</span>) <span class="sc">+</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_fixed</span>() <span class="sc">+</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_shape_discrete</span>(</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Owns a riding</span><span class="sc">\n</span><span class="st">mower?"</span>,</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>),</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Yes"</span>, <span class="st">"No"</span>)</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"Owns a riding</span><span class="sc">\n</span><span class="st">mower?"</span>,</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">palette =</span> <span class="st">"Dark2"</span>,</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>),</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Yes"</span>, <span class="st">"No"</span>)</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a Logistic regression, linear discriminant analysis (LDA), and optimal</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="co"># separating hyperplane (OSH). Note: we sometimes refer to the OSH as the hard </span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="co"># margin classifier</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>fit_glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(<span class="fu">as.factor</span>(y) <span class="sc">~</span> ., <span class="at">data =</span> norm2d, <span class="at">family =</span> binomial)</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>fit_lda <span class="ot">&lt;-</span> MASS<span class="sc">::</span><span class="fu">lda</span>(<span class="fu">as.factor</span>(y) <span class="sc">~</span> ., <span class="at">data =</span> norm2d)</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="fu">invisible</span>(<span class="fu">capture.output</span>(fit_hmc <span class="ot">&lt;-</span> <span class="fu">ksvm</span>(  <span class="co"># use ksvm() to find the OSH</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">data.matrix</span>(norm2d[<span class="fu">c</span>(<span class="st">"x1"</span>, <span class="st">"x2"</span>)]),</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">as.factor</span>(norm2d<span class="sc">$</span>y), </span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>  <span class="at">kernel =</span> <span class="st">"vanilladot"</span>,  <span class="co"># no fancy kernel, just ordinary dot product</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>  <span class="at">C =</span> <span class="cn">Inf</span>,                <span class="co"># to approximate hard margin classifier</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>  <span class="at">prob.model =</span> <span class="cn">TRUE</span>       <span class="co"># needed to obtain predicted probabilities</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>)))</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Grid over which to evaluate decision boundaries</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>npts <span class="ot">&lt;-</span> <span class="dv">500</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>xgrid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>  <span class="at">x1 =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="dv">6</span>, <span class="dv">6</span>, <span class="at">length =</span> npts),</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>  <span class="at">x2 =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="dv">6</span>, <span class="dv">6</span>, <span class="at">length =</span> npts)</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="co"># Predicted probabilities (as a two-column matrix)</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>prob_glm <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit_glm, <span class="at">newdata =</span> xgrid, <span class="at">type =</span> <span class="st">"response"</span>)</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>prob_glm <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="st">"1"</span> <span class="ot">=</span> <span class="dv">1</span> <span class="sc">-</span> prob_glm, <span class="st">"2"</span> <span class="ot">=</span> prob_glm)</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>prob_lda <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit_lda, <span class="at">newdata =</span> xgrid)<span class="sc">$</span>posterior</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>prob_hmc <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit_hmc, <span class="at">newdata =</span> xgrid, <span class="at">type =</span> <span class="st">"probabilities"</span>)</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a><span class="co"># Add predicted class probabilities</span></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>xgrid2 <span class="ot">&lt;-</span> xgrid <span class="sc">%&gt;%</span></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cbind</span>(<span class="st">"GLM"</span> <span class="ot">=</span> prob_glm[, 1L], </span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>        <span class="st">"LDA"</span> <span class="ot">=</span> prob_lda[, 1L], </span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>        <span class="st">"HMC"</span> <span class="ot">=</span> prob_hmc[, 1L]) <span class="sc">%&gt;%</span></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">gather</span>(Model, Prob, <span class="sc">-</span>x1, <span class="sc">-</span>x2)</span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatterplot with decision boundaries</span></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> p1 <span class="sc">+</span> </span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_contour</span>(<span class="at">data =</span> xgrid2, <span class="fu">aes</span>(<span class="at">x =</span> x1, <span class="at">y =</span> x2, <span class="at">z =</span> Prob, <span class="at">linetype =</span> Model), </span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>               <span class="at">breaks =</span> <span class="fl">0.5</span>, <span class="at">color =</span> <span class="st">"black"</span>)</span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a><span class="co"># Display plots side by side</span></span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>p2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-svm-separating-hyperplanes" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
-<p><img src="https://www.dropbox.com/scl/fi/zzqb6rbbkput1wegmuaj7/9_2.jpg?rlkey=ke0owlerrfm7xyk2momwo8mv5&amp;raw=1" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;2: Left: Separating hyperplanes for binary data. Right: The decision rule based on a separating hyperplane.</figcaption>
+<p><img src="index_files/figure-html/fig-svm-separating-hyperplanes-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;2: Simulated binary classification data with two separable classes.</figcaption>
 </figure>
 </div>
+</div>
+</div>
+<p>Thus, our problem is to find a separating hyperplane that is “best” in some particular sense. Of course, whatever “best” means it should be with respect to performance on a test set and not with respect to performance on the training set. Otherwise, we will overfit the training data. The intuitive idea is to find a separating hyperplane which as a decision boundary provides the maximum separation between the two classes.</p>
+<section id="maximal-marginal-classifier" class="level3">
+<h3 class="anchored" data-anchor-id="maximal-marginal-classifier">Maximal Marginal Classifier</h3>
+<p>This is illustrated in <a href="#fig-max-margin">Figure&nbsp;3</a>. The solid line is the decision boundary and the dotted lines are the margins. The margin is the distance between the decision boundary and the closest observation from either class. The observations that are closest to the decision boundary are called <strong>support vectors</strong>. The decision boundary is called the <strong>maximal margin classifier</strong>.</p>
 <div id="fig-max-margin" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="https://www.dropbox.com/scl/fi/z6bfo6dl85hddo7kceqf9/9_3.jpg?rlkey=erj5245hguu6zfn6yx8y39u4p&amp;raw=1" style="width:75.0%;height:75.0%" class="figure-img"></p>
 <figcaption class="figure-caption">Figure&nbsp;3: The solid lines shows the maximal margin hyperplane. The margin is the distance between the two dotted lines.</figcaption>
 </figure>
 </div>
+<p>The maximal margin classifier is constructed as a solution to the following optimization problem:</p>
+<p><span class="math display">\[
+\text{maximize}_{\beta_0,\beta_{1},\ldots, \beta_{p}} M
+\]</span></p>
+<p>subject to</p>
+<p><span class="math display">\[
+\begin{align*}
+&amp; \sum_{j=1}^{p} \beta_{j}^{2} = 1 \\
+&amp; y_{i}\left(\beta_{0} + \sum_{j=1}^{p} \beta_{j} x_{ij}\right) \geq M,
+\end{align*}
+\]</span></p>
+<p>for all <span class="math inline">\(i = 1, 2, \ldots, n\)</span>. Put differently, the maximal margin classifier finds the separating hyperplane that provides the largest margin/gap between the two classes. The width of both margin boundaries is<br>
+<span class="math inline">\(M\)</span>.</p>
+<p>What is it is not possible to perfectly separate the two classes? That is, what if there is no separating hyperplane? In this case, we can allow some observations to be on the wrong side of the margin boundaries. This is called a <strong>soft margin classifier</strong> or <strong>support vector classifier</strong>. The soft margin classifier is constructed as a solution to the following optimization problem:</p>
 </section>
+</section>
+<section id="support-vector-classifier" class="level2">
+<h2 class="anchored" data-anchor-id="support-vector-classifier">Support Vector Classifier</h2>
+<div class="cell" data-fig-out.width="100%" data-fig.asp="0.5">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the entire regularization path</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>fit_smc <span class="ot">&lt;-</span> <span class="fu">svmpath</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">data.matrix</span>(norm2d[<span class="fu">c</span>(<span class="st">"x1"</span>, <span class="st">"x2"</span>)]), </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">ifelse</span>(norm2d<span class="sc">$</span>y <span class="sc">==</span> <span class="dv">1</span>, <span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot both extremes</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">plot_svmpath</span>(fit_smc, <span class="at">step =</span> <span class="fu">max</span>(fit_smc<span class="sc">$</span>Step), <span class="at">main =</span> <span class="fu">expression</span>(C <span class="sc">==</span> <span class="dv">0</span>))</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">plot_svmpath</span>(fit_smc, <span class="at">step =</span> <span class="fu">min</span>(fit_smc<span class="sc">$</span>Step), <span class="at">main =</span> <span class="fu">expression</span>(C <span class="sc">==</span> infinity))</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(p1, p2, <span class="at">nrow =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-smc" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="index_files/figure-html/fig-smc-1.png" class="img-fluid figure-img" width="768"></p>
+<figcaption class="figure-caption">Figure&nbsp;4: Soft margin classifier. (Left) Zero budget for overlap (i.e., the HMC). (Right) Maximumn allowable overlap. The solid black points represent the support vectors that define the margin boundaries.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell" data-fig-out.width="100%" data-fig.asp="0.33">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate data</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1432</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>circle <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(mlbench<span class="sc">::</span><span class="fu">mlbench.circle</span>(</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">200</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">d =</span> <span class="dv">2</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(circle) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"x1"</span>, <span class="st">"x2"</span>, <span class="st">"y"</span>)  <span class="co"># rename columns</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit a support vector machine (SVM)</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>fit_svm_poly <span class="ot">&lt;-</span> <span class="fu">ksvm</span>( </span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">data.matrix</span>(circle[<span class="fu">c</span>(<span class="st">"x1"</span>, <span class="st">"x2"</span>)]),</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">as.factor</span>(circle<span class="sc">$</span>y), </span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">kernel =</span> <span class="st">"polydot"</span>,       <span class="co"># polynomial kernel</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">kpar =</span> <span class="fu">list</span>(<span class="at">degree =</span> <span class="dv">2</span>),  <span class="co"># kernel parameters</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">C =</span> <span class="cn">Inf</span>,                  <span class="co"># to approximate maximal margin classifier</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">prob.model =</span> <span class="cn">TRUE</span>         <span class="co"># needed to obtain predicted probabilities</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Grid over which to evaluate decision boundaries</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>npts <span class="ot">&lt;-</span> <span class="dv">500</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>xgrid <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">x1 =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="fl">1.25</span>, <span class="fl">1.25</span>, <span class="at">length =</span> npts),</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">x2 =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="fl">1.25</span>, <span class="fl">1.25</span>, <span class="at">length =</span> npts)</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Predicted probabilities (as a two-column matrix)</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>prob_svm_poly <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit_svm_poly, <span class="at">newdata =</span> xgrid, <span class="at">type =</span> <span class="st">"probabilities"</span>)</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatterplot</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">contourplot</span>(</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> prob_svm_poly[, <span class="dv">1</span>] <span class="sc">~</span> x1 <span class="sc">*</span> x2, </span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> xgrid, </span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">at =</span> <span class="dv">0</span>, </span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">labels =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">scales =</span> <span class="fu">list</span>(<span class="at">tck =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>)),</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"x1"</span>,</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"x2"</span>,</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Original feature space"</span>,</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>  <span class="at">panel =</span> <span class="cf">function</span>(x, y, z, ...) {</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>    <span class="fu">panel.contourplot</span>(x, y, z, ...)</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>    <span class="fu">panel.xyplot</span>(</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> circle<span class="sc">$</span>x1, </span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> circle<span class="sc">$</span>x2, </span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>      <span class="at">groups =</span> circle<span class="sc">$</span>y, </span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>      <span class="at">pch =</span> <span class="dv">19</span>, </span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>      <span class="at">cex =</span> <span class="dv">1</span>,</span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>      <span class="at">col =</span> <span class="fu">adjustcolor</span>(dark2[1L<span class="sc">:</span>2L], <span class="at">alpha.f =</span> <span class="fl">0.5</span>),</span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>      ...</span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a><span class="co"># Enlarge feature space</span></span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>circle_3d <span class="ot">&lt;-</span> circle</span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>circle_3d<span class="sc">$</span>x3 <span class="ot">&lt;-</span> circle_3d<span class="sc">$</span>x1<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> circle_3d<span class="sc">$</span>x2<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a><span class="co"># 3-D scatterplot</span></span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">cloud</span>(</span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> x3 <span class="sc">~</span> x1 <span class="sc">*</span> x2, </span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> circle_3d, </span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>  <span class="at">groups =</span> y,</span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Enlarged feature space"</span>,</span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>  <span class="at">par.settings =</span> <span class="fu">list</span>(</span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>    <span class="at">superpose.symbol =</span> <span class="fu">list</span>(</span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>      <span class="at">pch =</span> <span class="dv">19</span>,</span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>      <span class="at">cex =</span> <span class="dv">1</span>,</span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>      <span class="at">col =</span> <span class="fu">adjustcolor</span>(dark2[1L<span class="sc">:</span>2L], <span class="at">alpha.f =</span> <span class="fl">0.5</span>)</span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>) </span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatterplot with decision boundary</span></span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">contourplot</span>(</span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> prob_svm_poly[, <span class="dv">1</span>] <span class="sc">~</span> x1 <span class="sc">*</span> x2, </span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> xgrid, </span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a>  <span class="at">at =</span> <span class="fl">0.5</span>, </span>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>  <span class="at">labels =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>  <span class="at">scales =</span> <span class="fu">list</span>(<span class="at">tck =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>)),</span>
+<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"x1"</span>,</span>
+<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"x2"</span>,</span>
+<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Non-linear decision boundary"</span>,</span>
+<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a>  <span class="at">panel =</span> <span class="cf">function</span>(x, y, z, ...) {</span>
+<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a>    <span class="fu">panel.contourplot</span>(x, y, z, ...)</span>
+<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a>    <span class="fu">panel.xyplot</span>(</span>
+<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> circle<span class="sc">$</span>x1, </span>
+<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> circle<span class="sc">$</span>x2, </span>
+<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a>      <span class="at">groups =</span> circle<span class="sc">$</span>y, </span>
+<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a>      <span class="at">pch =</span> <span class="dv">19</span>, </span>
+<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a>      <span class="at">cex =</span> <span class="dv">1</span>,</span>
+<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a>      <span class="at">col =</span> <span class="fu">adjustcolor</span>(dark2[1L<span class="sc">:</span>2L], <span class="at">alpha.f =</span> <span class="fl">0.5</span>),</span>
+<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a>      ...</span>
+<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a>) </span>
+<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine plots</span></span>
+<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(p1, p2, p3, <span class="at">nrow =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-svm-circle" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="index_files/figure-html/fig-svm-circle-1.png" class="img-fluid figure-img" width="1152"></p>
+<figcaption class="figure-caption">Figure&nbsp;5: Simulated nested circle data. (Left) The two classes in the original (2-D) feature space. (Middle) The two classes in the enlarged (3-D) feature space. (Right) The decision boundary from the maximal margin in the enlarged feature space projected back into the original feature space.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="support-vector-machines" class="level2">
+<h2 class="anchored" data-anchor-id="support-vector-machines">Support Vector Machines</h2>
 </section>
 <section id="summary" class="level2">
 <h2 class="anchored" data-anchor-id="summary">Summary</h2>
@@ -382,8 +628,8 @@ div.csl-indent {
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>
 <div id="refs" class="references csl-bib-body hanging-indent" role="list">
-<div id="ref-suzuki2020statistical" class="csl-entry" role="listitem">
-Suzuki, Joe. 2020. <em>Statistical Learning with Math and r</em>. Springer.
+<div id="ref-boehmke2019hands" class="csl-entry" role="listitem">
+Boehmke, Brad, and Brandon M Greenwell. 2019. <em>Hands-on Machine Learning with r</em>. CRC press.
 </div>
 <div id="ref-tibshirani2017introduction" class="csl-entry" role="listitem">
 Tibshirani, Hastie Robert, Gareth James, and Daniela Witten Trevor. 2017. <em>An Introduction to Statistical Learning</em>. springer publication.
@@ -413,7 +659,7 @@ Expand for Session Info
  collate  en_US.UTF-8
  ctype    en_US.UTF-8
  tz       America/New_York
- date     2023-10-24
+ date     2023-10-27
  pandoc   3.1.8 @ /opt/homebrew/bin/ (via rmarkdown)
  quarto   1.3.450 @ /usr/local/bin/quarto
 
@@ -428,7 +674,7 @@ Expand for Session Info
  infer        * 1.0.5   2023-09-06 [1] CRAN (R 4.3.0)
  ISLR2        * 1.3-2   2022-11-20 [1] CRAN (R 4.3.0)
  kernlab      * 0.9-32  2023-01-31 [1] CRAN (R 4.3.0)
- lattice      * 0.21-9  2023-10-01 [1] CRAN (R 4.3.1)
+ lattice      * 0.22-5  2023-10-24 [1] CRAN (R 4.3.1)
  lubridate    * 1.9.3   2023-09-27 [1] CRAN (R 4.3.1)
  modeldata    * 1.2.0   2023-08-09 [1] CRAN (R 4.3.0)
  parsnip      * 1.1.1   2023-08-17 [1] CRAN (R 4.3.0)
