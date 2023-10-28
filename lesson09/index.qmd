@@ -67,6 +67,15 @@ vembedr::embed_youtube(id="ded_NQqOe7I?si=7mi3VTkSLjZWgfCD",height=450) %>%
 ```
 
 
+## Overview
+
+
+### Principal Component Analysis (PCA)
+
+
+### Clustering
+
+
 ## References
 
 ::: {#refs}
