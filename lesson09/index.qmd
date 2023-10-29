@@ -69,11 +69,58 @@ vembedr::embed_youtube(id="ded_NQqOe7I?si=7mi3VTkSLjZWgfCD",height=450) %>%
 
 ## Overview
 
+Unsupervised learning focuses on finding patterns in data without a response variable.  This is in contrast to supervised learning where we have a response variable and are trying to predict it.  Unsupervised learning is often used for exploratory data analysis (EDA) and data reduction. Some common questions that can be addressed via unsupervised learning include:
+
+1. Is there an informative way to visualize the data?
+
+2. Are there groups of observations that are similar to each other?
+
+3. Can we discover subgroups of observations that are distinct from each other?
+
+
+Unsupervised learning can be much more challenging than supervised learning because there isn't necessarily a clear and simple goal such as prediction. Furthermore, there is a lack of established methods for evaluating the performance of an unsupervised learning method. That is, there isn't really a way for us to check our work in unsupervised learning. 
+
+
+In this lesson, we will focus on two unsupervised learning methods: principal component analysis (PCA) and clustering.  PCA is a data reduction technique that finds a low-dimensional representation of the data that captures as much of the variation in the data as possible.  Clustering is a method that groups observations into clusters based on their similarity.  We will use the `tidymodels` and `tidyclust` packages for PCA and clustering in practice.
+
 
 ### Principal Component Analysis (PCA)
 
+Suppose we have a large set of correlated variables. [Principal component analysis](https://en.wikipedia.org/wiki/Principal_component_analysis) (PCA) allows us to summarize this set with a smaller number of representative variables that collectively explain most of the variability in the original set. This is what we call dimension reduction. The principal component directions are the directions along which the original data vary the most. Often, the first few principal components are sufficient to summarize most of the variation in the data. This is particularly useful for data visualization. Another interpretation of principal components that is also very useful is: principal components provide low-dimensional linear surfaces that are *closest* to the observations.
+
+We note that PCA is a matrix factorization of the data derived from a basic result in linear algebra known as the [singular value decomposition](https://en.wikipedia.org/wiki/Singular_value_decomposition) (SVD).  We will not go into the details of the SVD here, but we will discuss the results of the SVD and how they relate to PCA.
+
+
 
 ### Clustering
+
+[Clustering](https://en.wikipedia.org/wiki/Cluster_analysis) refers to a very broad set of techniques for finding subgroups, or clusters, in a data set. When we cluster the observations of a data set, we seek to partition them into distinct groups so that the observations within each group are quite similar to each other, while observations in different groups are quite different from each other. There are many different clustering methods, some common ones include:
+
+- [k-means clustering](https://en.wikipedia.org/wiki/K-means_clustering), and
+
+- [hierarchical clustering](https://en.wikipedia.org/wiki/Hierarchical_clustering)
+
+Both clustering and PCA seek to simplify the data via a small number of summaries, but their mechanisms are different:
+
+-  PCA looks to find a low-dimensional representation of the observations that explain a good fraction of the variance;
+
+- Clustering looks to find homogeneous subgroups among the observations.
+
+
+## Principal Component Analysis (PCA)
+
+
+
+
+## Clustering
+
+
+
+### k-means Clustering
+
+
+### Hierarchical Clustering
+
 
 
 ## References
