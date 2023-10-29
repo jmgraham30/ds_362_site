@@ -27,7 +27,7 @@ tidymodels_prefer()
 theme_set(theme_minimal(base_size = 12))
 
 
-
+penguins <- na.omit(penguins)
 
 ```
 
@@ -110,6 +110,7 @@ Both clustering and PCA seek to simplify the data via a small number of summarie
 ## Principal Component Analysis (PCA)
 
 
+### Singular Value Decomposition (SVD)
 
 
 ## Clustering
