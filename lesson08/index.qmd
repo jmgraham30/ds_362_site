@@ -137,7 +137,7 @@ vembedr::embed_youtube(id="WCRwbrNWrpw?si=rkEz30HgpeBK9VTD",height=450) %>%
     
 ## Overview    
 
-[Support Vector Machines (SVM)](https://en.wikipedia.org/wiki/Support_vector_machine) are a class of powerful machine learning algorithms commonly used for classification tasks but can also be used for regression. The fundamental principle behind SVM is to find a hyperplane that maximizes the so-called margin between different classes in the data. This hyperplane serves as the decision boundary, where data points are classified into one of two or more classes based on their position relative to the hyperplane. SVM is particularly effective in scenarios where the classes are well-separated and works well in high-dimensional spaces. The choice of the kernel function in SVM allows it to handle non-linear data by mapping it to a higher-dimensional space, making it versatile for a wide range of classification problems.
+[Support Vector Machines (SVM)](https://en.wikipedia.org/wiki/Support_vector_machine) are a class of powerful machine learning algorithms commonly used for classification tasks but can also be used for regression. The fundamental principle behind SVM is to find a hyperplane that maximizes the so-called margin between different classes in the data. This hyperplane serves as the decision boundary, where data points are classified into one of two or more classes based on their position relative to the hyperplane. SVM is particularly effective in scenarios where the classes are well-separated and works well in high-dimensional spaces. The choice of the kernel function in SVM allows for handling nonlinear data by mapping it to a higher-dimensional space, making it versatile for a wide range of problems.
 
 Variations of SVM include:
 - [Support Vector Machine with a Linear Kernel (Linear SVM)](https://en.wikipedia.org/wiki/Support_vector_machine#Linear_SVM)
@@ -339,9 +339,10 @@ $$
     
 for all $i = 1, 2, \ldots, n$. The hyperparameter $C$ is a non-negative tuning parameter that controls the amount of softening. The larger the value of $C$, the more points are allowed to be on the wrong side of the margin. The parameter $C$ is often referred to as the **budget**. The larger the budget, the more we are willing to pay for misclassification. The hyperparameter $C$ is often chosen via cross-validation. This is illustrated in @fig-smc. The left panel shows the maximal margin classifier. The right panel shows the soft margin classifier with a budget of $C = \infty$. The solid black points represent the support vectors that define the margin boundaries.   
     
-
+![Soft margin classifier. (Left) Zero budget for overlap (i.e., the maximal margin). (Right) Maximumn allowable overlap. The solid black points represent the support vectors that define the margin boundaries.](https://bradleyboehmke.github.io/HOML/11b-svm_files/figure-html/smc-1.png){#fig-smc}
 
 ```{r}
+#| include: false
 #| code-fold: true
 #| message: false
 #| warning: false
