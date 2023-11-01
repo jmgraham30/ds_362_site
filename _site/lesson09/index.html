@@ -10627,11 +10627,38 @@ Z_{1} = \sigma_{11}X_{1} + \sigma_{21}X_{2} + \ldots + \sigma_{p1}X_{p}
 </section>
 <section id="clustering-1" class="level2">
 <h2 class="anchored" data-anchor-id="clustering-1">Clustering</h2>
+<p>In this section, we will explore the concept of clustering and how it can be used to discover patterns in data. Clustering is an unsupervised learning technique that aims to group similar data points together in a way that is meaningful or useful. It is often used as an exploratory data analysis technique to discover patterns in unlabeled data, such as in market segmentation, social network analysis, and image segmentation. Clustering is also used as a preprocessing step for other machine learning algorithms, such as anomaly detection and dimensionality reduction. In this lesson, we will explore two of the most popular clustering algorithms: k-means clustering and hierarchical clustering.</p>
 <section id="k-means-clustering" class="level3">
 <h3 class="anchored" data-anchor-id="k-means-clustering">k-means Clustering</h3>
+<p><a href="https://en.wikipedia.org/wiki/K-means_clustering">k-means clustering</a> is a simple and popular clustering algorithm that aims to partition <span class="math inline">\(n\)</span> observations into <span class="math inline">\(k\)</span> clusters in which each observation belongs to the cluster with the nearest mean, serving as a prototype of the cluster. The number of clusters <span class="math inline">\(k\)</span> is specified by the user, and the algorithm assigns each observation to exactly one cluster. The algorithm works as follows:</p>
+<ol type="1">
+<li><p>Randomly assign a number, from 1 to <span class="math inline">\(k\)</span>, to each of the observations. These serve as initial cluster assignments for the observations.</p></li>
+<li><p>Iterate until the clusters stop changing:</p>
+<ol type="a">
+<li><p>For each cluster, compute the cluster centroid by taking the mean vector of points in the cluster.</p></li>
+<li><p>Assign each data point to the cluster for which the centroid is the closest.</p></li>
+</ol></li>
+</ol>
+<p><a href="#fig-k-means">Figure&nbsp;2</a> shows an example of the k-means clustering algorithm steps with <span class="math inline">\(k=3\)</span>.</p>
+<div id="fig-k-means" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="https://www.dropbox.com/scl/fi/buy1bg61fcfv3lmg8dkm4/12_8.png?rlkey=c2uu761sns0yyl3neq3uoxof2&amp;raw=1" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;2: The progress of the k-means algorithm.</figcaption>
+</figure>
+</div>
+<p>The algorithm is guaranteed to converge to a result, but the result may be a local optimum rather than a global optimum. Therefore, it is common to run the algorithm multiple times from different random initializations. The final result is chosen to be the one with the lowest within-cluster sum of squares, which is a measure of the compactness of the clusters. The within-cluster sum of squares is defined as the sum of the squared Euclidean distances between each point in the cluster and the cluster centroid. The algorithm is sensitive to the initial cluster assignments, so it is common to run the algorithm multiple times from different random initializations. The final result is chosen to be the one with the lowest within-cluster sum of squares, which is a measure of the compactness of the clusters. The within-cluster sum of squares is defined as the sum of the squared Euclidean distances between each point in the cluster and the cluster centroid.</p>
 </section>
 <section id="hierarchical-clustering" class="level3">
 <h3 class="anchored" data-anchor-id="hierarchical-clustering">Hierarchical Clustering</h3>
+<p><a href="https://en.wikipedia.org/wiki/Hierarchical_clustering">Hierarchical clustering</a> is another popular clustering algorithm that aims to build a hierarchy of clusters. The algorithm starts by treating each observation as its own cluster. Then, it repeatedly merges the two closest clusters until only one cluster remains. The result is a tree-based representation of the observations, called a dendrogram, which allows us to view the results of hierarchical clustering at different levels of granularity. The algorithm starts with the smallest units (individual observations) and merges them together to form larger clusters. The algorithm can be summarized as follows:</p>
+<ol type="1">
+<li><p>Begin with <span class="math inline">\(n\)</span> observations and a measure (such as Euclidean distance) of all the <span class="math inline">\(n(n-1)/2\)</span> pairwise dissimilarities. Treat each observation as its own cluster.</p></li>
+<li><p>For <span class="math inline">\(i = n, n-1, \ldots, 2\)</span>:</p>
+<ol type="a">
+<li><p>Examine all pairwise inter-cluster dissimilarities among the <span class="math inline">\(i\)</span> clusters and identify the pair of clusters that are least dissimilar (that is, most similar). Merge these two clusters. The dissimilarity between these two clusters indicates the height in the dendrogram at which the fusion line should be placed.</p></li>
+<li><p>Compute the new pairwise inter-cluster dissimilarities among the <span class="math inline">\(i-1\)</span> remaining clusters.</p></li>
+</ol></li>
+</ol>
 </section>
 </section>
 <section id="references" class="level2">
