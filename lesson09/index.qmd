@@ -21,13 +21,19 @@ license: "CC BY-NC-SA 4.0"
 library(tidyverse)
 library(tidymodels)
 library(ISLR2)
+library(kableExtra)
+library(ggthemes)
 
 tidymodels_prefer()
 
 theme_set(theme_minimal(base_size = 12))
 
 
-penguins <- na.omit(penguins)
+penguins <- penguins %>%
+  drop_na()
+
+penguins_X <- penguins %>%
+  select(flipper_length_mm, body_mass_g, bill_length_mm, bill_depth_mm)
 
 ```
 
@@ -109,9 +115,114 @@ Both clustering and PCA seek to simplify the data via a small number of summarie
 
 ## Principal Component Analysis (PCA)
 
+Before we explain what principal components are, let's consider an example data set. We will work with the four numerical columns from the `penguins` data set which we've stored in a data frame named `penguins_X`. The first few rows of `penguins_X` are shown below.
+
+```{r}
+#| code-fold: true
+
+penguins_X %>% 
+  head() %>%
+  kable() %>%
+  kable_styling() %>%
+  scroll_box(width = "100%", height = "200px")
+
+```
+
+We can compute the PCA for this data using the `prcomp` function as follows:
+
+```{r}
+penguins_pca <- prcomp(penguins_X, scale = TRUE)
+
+```
+
+Let's consider what is stored in the `penguins_pca` object. If we examine the object, we will see that it has to components: `rotation` and `x`. The rotation matrix will be of size $4 \times 4$ while the $x$ matrix will be the same size as the original data set which is $333 \times 4$.
+
+
+First, we can look at the `rotation` component which contains the principal component directions. Each column of `rotation` contains a principal component direction. The `rotation` matrix is shown below.
+
+```{r}
+#| code-fold: true
+
+penguins_pca$rotation %>% 
+  kable() %>%
+  kable_styling() %>%
+  scroll_box(width = "100%", height = "200px")
+
+```
+
+We can also look at the `x` component which contains the principal component scores. Each column of `x` contains the principal component scores for a given principal component direction. The first few rows of `x` are shown below.
+
+```{r}
+#| code-fold: true
+
+penguins_pca$x %>% 
+  head() %>%
+  kable() %>%
+  kable_styling() %>%
+  scroll_box(width = "100%", height = "200px")
+
+
+```
+
+
+Let's see what happens when we multiply the $x$ matrix by the transpose of the `rotation` matrix. The first few rows of the resulting matrix are shown below.
+
+```{r}
+penguins_pca$x %*% t(penguins_pca$rotation) %>%
+  head() %>%
+  kable() %>%
+  kable_styling() %>%
+  scroll_box(width = "100%", height = "200px")
+```
+
+Now, we will see that the previous result is related to the original data set. The first few rows of the normalized original data set are shown below.
+
+```{r}
+penguins %>%
+  select(flipper_length_mm, body_mass_g, bill_length_mm, bill_depth_mm) %>%
+  scale() %>%
+  head() %>%
+  kable() %>%
+  kable_styling() %>%
+  scroll_box(width = "100%", height = "200px")
+
+```
+
+
+What we have just discovered, at least for this example is that the principal component analysis is a factorization of our data matrix into a product of two matrices. The first matrix is the $x$ matrix which contains what we call the principal components or scores. The second matrix is the transpose of the `rotation` matrix which contains the principal component directions or what are sometimes called the loadings. The product of these two matrices is equal to the normalized original data set. 
+
+There is some additional information stored in the `penguins_pca` object. We can see the **proportion of variance explained** by each principal component direction using the `summary` function as follows:
+
+```{r}
+
+summary(penguins_pca)
+
+```
+
+The proportion of variance explained by each principal component direction provides information about how much of the information in the original data set is captured using each principal component direction. We see that for our data, a very large proportion of the variance is explained by the first two principal components. Let's add the principal components to the original data set and plot the first two principal components against each other.
+
+```{r}
+#| label: fig-penguins-pca-plot
+#| fig-cap: Plot of the first two principal components for the penguins data set.
+
+penguins_pca %>%
+  augment(penguins) %>%
+  ggplot(aes(x = .fittedPC1, y = .fittedPC2, color = species)) +
+  geom_point() + 
+  scale_color_colorblind()
+
+```
+
+From @fig-penguins-pca-plot, we see that the first two principal components do a good job of separating the penguins by species.
 
 ### Singular Value Decomposition (SVD)
 
+
+The [singular value decomposition](https://en.wikipedia.org/wiki/Singular_value_decomposition) (SVD) of a matrix is a very important result in linear algebra and is used in many different applications. We will not go into the details of the SVD here, but we will discuss the results of the SVD and how they relate to PCA. 
+
+
+
+### How PCA Works
 
 ## Clustering
 

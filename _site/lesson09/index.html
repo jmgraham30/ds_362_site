@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 /* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
@@ -81,8 +115,13 @@ div.csl-indent {
     "search-label": "Search"
   }
 }</script>
-<link href="../site_libs/vembedr-0.1.5/css/vembedr.css" rel="stylesheet">
 
+<link href="../site_libs/vembedr-0.1.5/css/vembedr.css" rel="stylesheet">
+<script src="../site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -259,8 +298,351 @@ div.csl-indent {
 </section>
 <section id="principal-component-analysis-pca-1" class="level2">
 <h2 class="anchored" data-anchor-id="principal-component-analysis-pca-1">Principal Component Analysis (PCA)</h2>
+<p>Before we explain what principal components are, let’s consider an example data set. We will work with the four numerical columns from the <code>penguins</code> data set which we’ve stored in a data frame named <code>penguins_X</code>. The first few rows of <code>penguins_X</code> are shown below.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>penguins_X <span class="sc">%&gt;%</span> </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">"100%"</span>, <span class="at">height =</span> <span class="st">"200px"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:200px; overflow-x: scroll; width:100%; ">
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">flipper_length_mm</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">body_mass_g</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">bill_length_mm</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">bill_depth_mm</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">181</td>
+<td style="text-align: right;">3750</td>
+<td style="text-align: right;">39.1</td>
+<td style="text-align: right;">18.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">186</td>
+<td style="text-align: right;">3800</td>
+<td style="text-align: right;">39.5</td>
+<td style="text-align: right;">17.4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">195</td>
+<td style="text-align: right;">3250</td>
+<td style="text-align: right;">40.3</td>
+<td style="text-align: right;">18.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">193</td>
+<td style="text-align: right;">3450</td>
+<td style="text-align: right;">36.7</td>
+<td style="text-align: right;">19.3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">190</td>
+<td style="text-align: right;">3650</td>
+<td style="text-align: right;">39.3</td>
+<td style="text-align: right;">20.6</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">181</td>
+<td style="text-align: right;">3625</td>
+<td style="text-align: right;">38.9</td>
+<td style="text-align: right;">17.8</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+</div>
+</div>
+<p>We can compute the PCA for this data using the <code>prcomp</code> function as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>penguins_pca <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(penguins_X, <span class="at">scale =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s consider what is stored in the <code>penguins_pca</code> object. If we examine the object, we will see that it has to components: <code>rotation</code> and <code>x</code>. The rotation matrix will be of size <span class="math inline">\(4 \times 4\)</span> while the <span class="math inline">\(x\)</span> matrix will be the same size as the original data set which is <span class="math inline">\(333 \times 4\)</span>.</p>
+<p>First, we can look at the <code>rotation</code> component which contains the principal component directions. Each column of <code>rotation</code> contains a principal component direction. The <code>rotation</code> matrix is shown below.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>penguins_pca<span class="sc">$</span>rotation <span class="sc">%&gt;%</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">"100%"</span>, <span class="at">height =</span> <span class="st">"200px"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:200px; overflow-x: scroll; width:100%; ">
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="text-align: left; position: sticky; top: 0; background-color: #FFFFFF;"></th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">PC1</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">PC2</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">PC3</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">PC4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">flipper_length_mm</td>
+<td style="text-align: right;">0.5768250</td>
+<td style="text-align: right;">-0.0057882</td>
+<td style="text-align: right;">0.2360952</td>
+<td style="text-align: right;">-0.7819837</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">body_mass_g</td>
+<td style="text-align: right;">0.5496747</td>
+<td style="text-align: right;">-0.0764637</td>
+<td style="text-align: right;">0.5917374</td>
+<td style="text-align: right;">0.5846861</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">bill_length_mm</td>
+<td style="text-align: right;">0.4537532</td>
+<td style="text-align: right;">-0.6001949</td>
+<td style="text-align: right;">-0.6424951</td>
+<td style="text-align: right;">0.1451695</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">bill_depth_mm</td>
+<td style="text-align: right;">-0.3990472</td>
+<td style="text-align: right;">-0.7961695</td>
+<td style="text-align: right;">0.4258004</td>
+<td style="text-align: right;">-0.1599044</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+</div>
+</div>
+<p>We can also look at the <code>x</code> component which contains the principal component scores. Each column of <code>x</code> contains the principal component scores for a given principal component direction. The first few rows of <code>x</code> are shown below.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>penguins_pca<span class="sc">$</span>x <span class="sc">%&gt;%</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">"100%"</span>, <span class="at">height =</span> <span class="st">"200px"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:200px; overflow-x: scroll; width:100%; ">
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">PC1</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">PC2</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">PC3</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">PC4</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">-1.850808</td>
+<td style="text-align: right;">-0.0320212</td>
+<td style="text-align: right;">0.2345487</td>
+<td style="text-align: right;">0.5276026</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-1.314276</td>
+<td style="text-align: right;">0.4428603</td>
+<td style="text-align: right;">0.0274288</td>
+<td style="text-align: right;">0.4011230</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">-1.374537</td>
+<td style="text-align: right;">0.1609882</td>
+<td style="text-align: right;">-0.1894042</td>
+<td style="text-align: right;">-0.5278675</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-1.882456</td>
+<td style="text-align: right;">0.0123327</td>
+<td style="text-align: right;">0.6279277</td>
+<td style="text-align: right;">-0.4721826</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">-1.917096</td>
+<td style="text-align: right;">-0.8163696</td>
+<td style="text-align: right;">0.6999980</td>
+<td style="text-align: right;">-0.1961213</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-1.770356</td>
+<td style="text-align: right;">0.3656727</td>
+<td style="text-align: right;">-0.0284177</td>
+<td style="text-align: right;">0.5046092</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+</div>
+</div>
+<p>Let’s see what happens when we multiply the <span class="math inline">\(x\)</span> matrix by the transpose of the <code>rotation</code> matrix. The first few rows of the resulting matrix are shown below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>penguins_pca<span class="sc">$</span>x <span class="sc">%*%</span> <span class="fu">t</span>(penguins_pca<span class="sc">$</span>rotation) <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">"100%"</span>, <span class="at">height =</span> <span class="st">"200px"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:200px; overflow-x: scroll; width:100%; ">
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">flipper_length_mm</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">body_mass_g</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">bill_length_mm</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">bill_depth_mm</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">-1.4246077</td>
+<td style="text-align: right;">-0.5676206</td>
+<td style="text-align: right;">-0.8946955</td>
+<td style="text-align: right;">0.7795590</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-1.0678666</td>
+<td style="text-align: right;">-0.5055254</td>
+<td style="text-align: right;">-0.8215515</td>
+<td style="text-align: right;">0.1194043</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">-0.4257325</td>
+<td style="text-align: right;">-1.1885721</td>
+<td style="text-align: right;">-0.6752636</td>
+<td style="text-align: right;">0.4240910</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-0.5684290</td>
+<td style="text-align: right;">-0.9401915</td>
+<td style="text-align: right;">-1.3335592</td>
+<td style="text-align: right;">1.0842457</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">-0.7824736</td>
+<td style="text-align: right;">-0.6918109</td>
+<td style="text-align: right;">-0.8581235</td>
+<td style="text-align: right;">1.7444004</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-1.4246077</td>
+<td style="text-align: right;">-0.7228585</td>
+<td style="text-align: right;">-0.9312674</td>
+<td style="text-align: right;">0.3225288</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+</div>
+</div>
+<p>Now, we will see that the previous result is related to the original data set. The first few rows of the normalized original data set are shown below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(flipper_length_mm, body_mass_g, bill_length_mm, bill_depth_mm) <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">"100%"</span>, <span class="at">height =</span> <span class="st">"200px"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:200px; overflow-x: scroll; width:100%; ">
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">flipper_length_mm</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">body_mass_g</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">bill_length_mm</th>
+<th data-quarto-table-cell-role="th" style="text-align: right; position: sticky; top: 0; background-color: #FFFFFF;">bill_depth_mm</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">-1.4246077</td>
+<td style="text-align: right;">-0.5676206</td>
+<td style="text-align: right;">-0.8946955</td>
+<td style="text-align: right;">0.7795590</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-1.0678666</td>
+<td style="text-align: right;">-0.5055254</td>
+<td style="text-align: right;">-0.8215515</td>
+<td style="text-align: right;">0.1194043</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">-0.4257325</td>
+<td style="text-align: right;">-1.1885721</td>
+<td style="text-align: right;">-0.6752636</td>
+<td style="text-align: right;">0.4240910</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-0.5684290</td>
+<td style="text-align: right;">-0.9401915</td>
+<td style="text-align: right;">-1.3335592</td>
+<td style="text-align: right;">1.0842457</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">-0.7824736</td>
+<td style="text-align: right;">-0.6918109</td>
+<td style="text-align: right;">-0.8581235</td>
+<td style="text-align: right;">1.7444004</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-1.4246077</td>
+<td style="text-align: right;">-0.7228585</td>
+<td style="text-align: right;">-0.9312674</td>
+<td style="text-align: right;">0.3225288</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+</div>
+</div>
+<p>What we have just discovered, at least for this example is that the principal component analysis is a factorization of our data matrix into a product of two matrices. The first matrix is the <span class="math inline">\(x\)</span> matrix which contains what we call the principal components or scores. The second matrix is the transpose of the <code>rotation</code> matrix which contains the principal component directions or what are sometimes called the loadings. The product of these two matrices is equal to the normalized original data set.</p>
+<p>There is some additional information stored in the <code>penguins_pca</code> object. We can see the <strong>proportion of variance explained</strong> by each principal component direction using the <code>summary</code> function as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(penguins_pca)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Importance of components:
+                          PC1    PC2     PC3     PC4
+Standard deviation     1.6569 0.8821 0.60716 0.32846
+Proportion of Variance 0.6863 0.1945 0.09216 0.02697
+Cumulative Proportion  0.6863 0.8809 0.97303 1.00000</code></pre>
+</div>
+</div>
+<p>The proportion of variance explained by each principal component direction provides information about how much of the information in the original data set is captured using each principal component direction. We see that for our data, a very large proportion of the variance is explained by the first two principal components. Let’s add the principal components to the original data set and plot the first two principal components against each other.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>penguins_pca <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">augment</span>(penguins) <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> .fittedPC1, <span class="at">y =</span> .fittedPC2, <span class="at">color =</span> species)) <span class="sc">+</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_colorblind</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-penguins-pca-plot" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="index_files/figure-html/fig-penguins-pca-plot-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;1: Plot of the first two principal components for the penguins data set.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>From <a href="#fig-penguins-pca-plot">Figure&nbsp;1</a>, we see that the first two principal components do a good job of separating the penguins by species.</p>
 <section id="singular-value-decomposition-svd" class="level3">
 <h3 class="anchored" data-anchor-id="singular-value-decomposition-svd">Singular Value Decomposition (SVD)</h3>
+<p>The <a href="https://en.wikipedia.org/wiki/Singular_value_decomposition">singular value decomposition</a> (SVD) of a matrix is a very important result in linear algebra and is used in many different applications. We will not go into the details of the SVD here, but we will discuss the results of the SVD and how they relate to PCA.</p>
 </section>
 </section>
 <section id="clustering-1" class="level2">
@@ -306,7 +688,7 @@ Expand for Session Info
  collate  en_US.UTF-8
  ctype    en_US.UTF-8
  tz       America/New_York
- date     2023-10-29
+ date     2023-11-01
  pandoc   3.1.9 @ /opt/homebrew/bin/ (via rmarkdown)
  quarto   1.3.450 @ /usr/local/bin/quarto
 
@@ -317,8 +699,10 @@ Expand for Session Info
  dplyr        * 1.1.3   2023-09-03 [1] CRAN (R 4.3.0)
  forcats      * 1.0.0   2023-01-29 [1] CRAN (R 4.3.0)
  ggplot2      * 3.4.4   2023-10-12 [1] CRAN (R 4.3.1)
+ ggthemes     * 4.2.4   2021-01-20 [1] CRAN (R 4.3.0)
  infer        * 1.0.5   2023-09-06 [1] CRAN (R 4.3.0)
  ISLR2        * 1.3-2   2022-11-20 [1] CRAN (R 4.3.0)
+ kableExtra   * 1.3.4   2021-02-20 [1] CRAN (R 4.3.0)
  lubridate    * 1.9.3   2023-09-27 [1] CRAN (R 4.3.1)
  modeldata    * 1.2.0   2023-08-09 [1] CRAN (R 4.3.0)
  parsnip      * 1.1.1   2023-08-17 [1] CRAN (R 4.3.0)
