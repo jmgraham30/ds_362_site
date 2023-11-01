@@ -276,7 +276,49 @@ This process continues until we have obtained $p$ principal components.
 
 ### Other Methods for Dimension Reduction
 
+PCA works well when the features are approximately linearly related to each other. There are many other methods for dimension reduction that work well when the features are not linearly related to each other. For reference, here is a list of some of the more popular methods for dimension reduction:
 
+
+#### Common Dimension Reduction Methods
+
+1. [Principal Component Analysis (PCA)](https://en.wikipedia.org/wiki/Principal_component_analysis)
+   - R Package: `prcomp` (in base R)
+   - Description: PCA is a linear dimension reduction method that identifies the most significant orthogonal components in the data, reducing the data's dimensionality while preserving the most important information.
+   - Use Case: Use PCA to reduce the number of features while retaining most of the variance in the data, making it useful for data visualization, noise reduction, and feature selection.
+
+2. [t-Distributed Stochastic Neighbor Embedding (t-SNE)](https://en.wikipedia.org/wiki/T-distributed_stochastic_neighbor_embedding)
+   - R Package: `Rtsne`
+   - Description: t-SNE is a nonlinear dimension reduction technique that aims to preserve the pairwise similarities between data points in lower-dimensional space, making it effective for visualizing high-dimensional data clusters.
+   - Use Case: Use t-SNE for visualizing high-dimensional data in 2D or 3D, often in applications like clustering analysis and visualization of complex datasets.
+
+3. [Uniform Manifold Approximation and Projection (UMAP)](https://en.wikipedia.org/wiki/Uniform_manifold_approximation_and_projection)
+   - R Package: `umap`
+   - Description: UMAP is a dimension reduction method similar to t-SNE, but it uses a different mathematical framework. It's known for its speed and scalability while maintaining data structure.
+   - Use Case: UMAP is suitable for visualizing and exploring high-dimensional data, often applied in clustering, visualization, and reducing dimensions for machine learning.
+
+4. [Autoencoders](https://en.wikipedia.org/wiki/Autoencoder)
+   - R Package: `keras`, `tfautodiff`, `h2o`
+   - Description: Autoencoders are neural network architectures that aim to learn a compressed representation of the input data by training an encoder-decoder model.
+   - Use Case: Autoencoders are versatile and can be used for feature extraction, denoising, anomaly detection, and generating new data samples.
+
+5. [Linear Discriminant Analysis (LDA)](https://en.wikipedia.org/wiki/Linear_discriminant_analysis)
+   - R Package: `MASS`
+   - Description: LDA is a supervised method that can also be used for dimension reduction. It finds linear combinations of features that maximize class separability.
+   - Use Case: LDA is often used in classification problems, but it can also be used for dimension reduction when there's a clear class structure in the data.
+
+6. [Multidimensional Scaling (MDS)](https://en.wikipedia.org/wiki/Multidimensional_scaling)
+   - R Package: `MASS`, `cmdscale`
+   - Description: MDS reduces dimensionality by finding a lower-dimensional representation that best preserves pairwise distances between data points.
+   - Use Case: MDS is useful for visualizing dissimilarity or distance matrices, such as in psychology, geography, or genomics.
+
+7. [Independent Component Analysis (ICA)](https://en.wikipedia.org/wiki/Independent_component_analysis)
+   - R Package: `fastICA`
+   - Description: ICA is used to separate a multivariate signal into additive, independent components, which can be seen as a form of dimension reduction.
+   - Use Case: ICA is applied in signal processing, blind source separation, and extracting underlying sources from mixed signals.
+
+
+
+In our lab for this lesson, we will explore another dimension reduction technique known as [uniform manifold approximation and projection](https://en.wikipedia.org/wiki/Nonlinear_dimensionality_reduction#Uniform_manifold_approximation_and_projection)  (UMAP) that works well when the features are not linearly related to each other. UMAP operates by constructing a high-dimensional representation of the data, mapping it to a lower-dimensional space, and optimizing the embedding to maintain the density of data points in a manner that is both globally and locally consistent. It focuses on capturing the global structure of the data while also preserving fine-grained local relationships, making it well-suited for visualizing high-dimensional data and discovering clusters or patterns. UMAP's ability to balance global and local aspects of data structure distinguishes it as a valuable tool for exploratory data analysis, clustering, and manifold learning. The technical details of UMAP are beyond the scope of this course, but we will explore how to use it in the lab for this lesson.
 
 ## Clustering
 
