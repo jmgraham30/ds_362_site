@@ -230,7 +230,14 @@ penguins_X %>%
   scroll_box(width = "100%", height = "200px")
 ```
 
+
 ### How PCA Works
+
+
+
+### Other Methods for Dimension Reduction
+
+
 
 ## Clustering
 
