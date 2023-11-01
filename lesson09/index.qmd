@@ -220,7 +220,15 @@ From @fig-penguins-pca-plot, we see that the first two principal components do a
 
 The [singular value decomposition](https://en.wikipedia.org/wiki/Singular_value_decomposition) (SVD) of a matrix is a very important result in linear algebra and is used in many different applications. We will not go into the details of the SVD here, but we will discuss the results of the SVD and how they relate to PCA. 
 
-
+```{r}
+penguins_X %>%
+  scale() %>%
+  svd() %>%
+  .$v %>%
+  kable() %>%
+  kable_styling() %>%
+  scroll_box(width = "100%", height = "200px")
+```
 
 ### How PCA Works
 

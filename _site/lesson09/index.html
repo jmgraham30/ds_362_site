@@ -188,6 +188,7 @@ div.csl-indent {
   <li><a href="#principal-component-analysis-pca-1" id="toc-principal-component-analysis-pca-1" class="nav-link" data-scroll-target="#principal-component-analysis-pca-1">Principal Component Analysis (PCA)</a>
   <ul class="collapse">
   <li><a href="#singular-value-decomposition-svd" id="toc-singular-value-decomposition-svd" class="nav-link" data-scroll-target="#singular-value-decomposition-svd">Singular Value Decomposition (SVD)</a></li>
+  <li><a href="#how-pca-works" id="toc-how-pca-works" class="nav-link" data-scroll-target="#how-pca-works">How PCA Works</a></li>
   </ul></li>
   <li><a href="#clustering-1" id="toc-clustering-1" class="nav-link" data-scroll-target="#clustering-1">Clustering</a>
   <ul class="collapse">
@@ -643,6 +644,51 @@ Cumulative Proportion  0.6863 0.8809 0.97303 1.00000</code></pre>
 <section id="singular-value-decomposition-svd" class="level3">
 <h3 class="anchored" data-anchor-id="singular-value-decomposition-svd">Singular Value Decomposition (SVD)</h3>
 <p>The <a href="https://en.wikipedia.org/wiki/Singular_value_decomposition">singular value decomposition</a> (SVD) of a matrix is a very important result in linear algebra and is used in many different applications. We will not go into the details of the SVD here, but we will discuss the results of the SVD and how they relate to PCA.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>penguins_X <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">svd</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  .<span class="sc">$</span>v <span class="sc">%&gt;%</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">"100%"</span>, <span class="at">height =</span> <span class="st">"200px"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:200px; overflow-x: scroll; width:100%; ">
+<table class="table table-sm table-striped small" data-quarto-postprocess="true">
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.5768250</td>
+<td style="text-align: right;">-0.0057882</td>
+<td style="text-align: right;">0.2360952</td>
+<td style="text-align: right;">-0.7819837</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0.5496747</td>
+<td style="text-align: right;">-0.0764637</td>
+<td style="text-align: right;">0.5917374</td>
+<td style="text-align: right;">0.5846861</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0.4537532</td>
+<td style="text-align: right;">-0.6001949</td>
+<td style="text-align: right;">-0.6424951</td>
+<td style="text-align: right;">0.1451695</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">-0.3990472</td>
+<td style="text-align: right;">-0.7961695</td>
+<td style="text-align: right;">0.4258004</td>
+<td style="text-align: right;">-0.1599044</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+</div>
+</div>
+</section>
+<section id="how-pca-works" class="level3">
+<h3 class="anchored" data-anchor-id="how-pca-works">How PCA Works</h3>
 </section>
 </section>
 <section id="clustering-1" class="level2">
