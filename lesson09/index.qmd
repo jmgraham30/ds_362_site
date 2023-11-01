@@ -357,7 +357,7 @@ The algorithm is guaranteed to converge to a result, but the result may be a loc
      b. Compute the new pairwise inter-cluster dissimilarities among the $i-1$ remaining clusters.
      
 
-
+We will explore both k-means and hierarchical clustering further in the lab for this lesson.
 
 ## References
 
