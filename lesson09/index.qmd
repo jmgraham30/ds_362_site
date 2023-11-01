@@ -115,13 +115,12 @@ Both clustering and PCA seek to simplify the data via a small number of summarie
 
 ## Principal Component Analysis (PCA)
 
-Before we explain what principal components are, let's consider an example data set. We will work with the four numerical columns from the `penguins` data set which we've stored in a data frame named `penguins_X`. The first few rows of `penguins_X` are shown below.
+Before we explain what principal components are, let's consider an example data set. We will work with the four numerical columns from the `penguins` data set which we've stored in a data frame named `penguins_X`. The rows of `penguins_X` are shown below.
 
 ```{r}
 #| code-fold: true
 
 penguins_X %>% 
-  head() %>%
   kable() %>%
   kable_styling() %>%
   scroll_box(width = "100%", height = "200px")
@@ -150,13 +149,12 @@ penguins_pca$rotation %>%
 
 ```
 
-We can also look at the `x` component which contains the principal component scores. Each column of `x` contains the principal component scores for a given principal component direction. The first few rows of `x` are shown below.
+We can also look at the `x` component which contains the principal component scores. Each column of `x` contains the principal component scores for a given principal component direction. The rows of `x` are shown below.
 
 ```{r}
 #| code-fold: true
 
 penguins_pca$x %>% 
-  head() %>%
   kable() %>%
   kable_styling() %>%
   scroll_box(width = "100%", height = "200px")
@@ -165,23 +163,21 @@ penguins_pca$x %>%
 ```
 
 
-Let's see what happens when we multiply the $x$ matrix by the transpose of the `rotation` matrix. The first few rows of the resulting matrix are shown below.
+Let's see what happens when we multiply the $x$ matrix by the transpose of the `rotation` matrix. The rows of the resulting matrix are shown below.
 
 ```{r}
 penguins_pca$x %*% t(penguins_pca$rotation) %>%
-  head() %>%
   kable() %>%
   kable_styling() %>%
   scroll_box(width = "100%", height = "200px")
 ```
 
-Now, we will see that the previous result is related to the original data set. The first few rows of the normalized original data set are shown below.
+Now, we will see that the previous result is related to the original data set. The first rows of the normalized original data set are shown below.
 
 ```{r}
 penguins %>%
   select(flipper_length_mm, body_mass_g, bill_length_mm, bill_depth_mm) %>%
   scale() %>%
-  head() %>%
   kable() %>%
   kable_styling() %>%
   scroll_box(width = "100%", height = "200px")
@@ -220,6 +216,17 @@ From @fig-penguins-pca-plot, we see that the first two principal components do a
 
 The [singular value decomposition](https://en.wikipedia.org/wiki/Singular_value_decomposition) (SVD) of a matrix is a very important result in linear algebra and is used in many different applications. We will not go into the details of the SVD here, but we will discuss the results of the SVD and how they relate to PCA. 
 
+Let $A$ be an $m \times n$ matrix with entries from the real numbers. Further, suppose that $A$ has rank $r$. Then, there exists matrices $U$, $V$, and $\Sigma$ such that
+
+$$
+A = U \Sigma V^T
+$$
+
+where $U$ is an $m \times r$ orthogonal matrix, $V$ is an $n \times r$ orthogonal matrix, and $\Sigma$ is an $r \times r$ diagonal matrix. The diagonal entries of $\Sigma$ are non-negative numbers called the singular values of $A$ and are denoted by $\sigma_1, \sigma_2, \ldots, \sigma_r$. The singular values are ordered such that $\sigma_1 \geq \sigma_2 \geq \ldots \geq \sigma_r \geq 0$. 
+
+Let's explore in the context of our example the relationship between the SVD and PCA. The following shows matrix $V$ from the SVD of the normalized penguins data set.
+
+
 ```{r}
 penguins_X %>%
   scale() %>%
@@ -230,10 +237,42 @@ penguins_X %>%
   scroll_box(width = "100%", height = "200px")
 ```
 
+Note that this is the same as the `rotation` matrix from the PCA. The following shows the matrix product $U\Sigma$ from the SVD of the normalized penguins data set.
+
+
+```{r}
+penguins_svd <- penguins_X %>%
+  scale() %>%
+  svd()
+
+penguins_svd$u %*% diag(penguins_svd$d) %>%
+  kable() %>%
+  kable_styling() %>%
+  scroll_box(width = "100%", height = "200px")
+```
+
+Note that this is the same as the `x` matrix from the PCA. 
 
 ### How PCA Works
 
+Suppose that we have a data matrix $X$. We will assume that the columns of $X$ have been centered so that the column means are zero. We now describe how to obtain the principal components of $X$, proceeding in sequential order. The first principal component of our features $X_{1}, X_{2}, \ldots , X_{p}$, that is, the columns of $X$ is the linear combination
 
+$$
+Z_{1} = \sigma_{11}X_{1} + \sigma_{21}X_{2} + \ldots + \sigma_{p1}X_{p}
+$$
+
+that has the largest variance and is normalized so that $\sum_{j=1}^{p}\sigma_{j1}^{2} = 1$. That is, the first principal component is the linear combination of the features that solves the optimization problem
+
+$$
+\text{maximize}_{\sigma_{11},\sigma_{21}, \ldots, \sigma_{p1}}\left\{\frac{1}{n}\sum_{i=1}^{n}\left(\sum_{j=1}^{p}\sigma_{j1}x_{ij} \right)^{2} \right\} \ \text{subject to } \sum_{j=1}^{p}\sigma_{j1}^{2} = 1
+$$
+and this optimization problem can be solved via linear algebra. After the first principal component $Z_{1}$ of $X$ has been determined, the second principal component of $Z_{2}$ is the linear combination of $X_{1},\ldots, X_{p}$ that has maximal variance out of all linear combinations that are uncorrelated with $Z_{1}$. This happens exactly when the second load vector $\sigma_{2} = (\sigma_{12},\sigma_{22}, \ldots, \sigma_{p2})^{T}$ is orthogonal to the first one $\sigma_{1} = (\sigma_{11},\sigma_{21}, \ldots, \sigma_{p1})^{T}$. In other words, $Z_{2}$ solves the optimization problem
+
+$$
+\text{maximize}_{\sigma_{12},\sigma_{22}, \ldots, \sigma_{p2}}\left\{\frac{1}{n}\sum_{i=1}^{n}\left(\sum_{j=1}^{p}\sigma_{j2}x_{ij} \right)^{2} \right\} \ \text{subject to } \sum_{j=1}^{p}\sigma_{j2}^{2} = 1 \text{ and } \sum_{j=1}^{p}\sigma_{j1}\sigma_{j2} = 0
+$$
+
+This process continues until we have obtained $p$ principal components.
 
 ### Other Methods for Dimension Reduction
 
