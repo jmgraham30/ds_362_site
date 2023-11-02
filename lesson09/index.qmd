@@ -346,7 +346,7 @@ The algorithm is guaranteed to converge to a result, but the result may be a loc
 
 ### Hierarchical Clustering
 
-[Hierarchical clustering](https://en.wikipedia.org/wiki/Hierarchical_clustering) is another popular clustering algorithm that aims to build a hierarchy of clusters. The algorithm starts by treating each observation as its own cluster. Then, it repeatedly merges the two closest clusters until only one cluster remains. The result is a tree-based representation of the observations, called a dendrogram, which allows us to view the results of hierarchical clustering at different levels of granularity. The algorithm starts with the smallest units (individual observations) and merges them together to form larger clusters. The algorithm can be summarized as follows:
+[Hierarchical clustering](https://en.wikipedia.org/wiki/Hierarchical_clustering) is another popular clustering algorithm that aims to build a hierarchy of clusters. The algorithm starts by treating each observation as its own cluster. Then, it repeatedly merges the two closest clusters until only one cluster remains. The result is a tree-based representation of the observations, called a *dendrogram*, which allows us to view the results of hierarchical clustering at different levels of granularity. The algorithm starts with the smallest units (individual observations) and merges them together to form larger clusters. We will focus on bottom-up or *agglomerative*  hierarchical clustering. The algorithm can be summarized as follows:
 
 1. Begin with $n$ observations and a measure (such as Euclidean distance) of all the $n(n-1)/2$ pairwise dissimilarities. Treat each observation as its own cluster.
 
@@ -355,6 +355,8 @@ The algorithm is guaranteed to converge to a result, but the result may be a loc
      a. Examine all pairwise inter-cluster dissimilarities among the $i$ clusters and identify the pair of clusters that are least dissimilar (that is, most similar). Merge these two clusters. The dissimilarity between these two clusters indicates the height in the dendrogram at which the fusion line should be placed.
 
      b. Compute the new pairwise inter-cluster dissimilarities among the $i-1$ remaining clusters.
+     
+Let's describe how to interpret a dendrogram. 
      
 
 We will explore both k-means and hierarchical clustering further in the lab for this lesson.
