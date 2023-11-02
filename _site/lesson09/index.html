@@ -10659,7 +10659,37 @@ Z_{1} = \sigma_{11}X_{1} + \sigma_{21}X_{2} + \ldots + \sigma_{p1}X_{p}
 <li><p>Compute the new pairwise inter-cluster dissimilarities among the <span class="math inline">\(i-1\)</span> remaining clusters.</p></li>
 </ol></li>
 </ol>
-<p>Let’s describe how to interpret a dendrogram.</p>
+<p>Let’s describe how to interpret a dendrogram. <a href="#fig-dendrogram">Figure&nbsp;3</a> shows a denrogram obtained through hierarchical clustering of the four physical measurements in the <code>penguins</code> data set. Note that the colors are added to the plot after the fact and are not a result of the clustering algorithm.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>res_hclust_complete <span class="ot">&lt;-</span> <span class="fu">hier_clust</span>(<span class="at">linkage_method =</span> <span class="st">"complete"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(<span class="sc">~</span>., <span class="at">data =</span> penguins_X)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the dendrogram</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>res_hclust_complete <span class="sc">%&gt;%</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract_fit_engine</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fviz_dend</span>(<span class="at">main =</span> <span class="st">"complete"</span>,<span class="at">k=</span><span class="dv">3</span>,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">palette=</span><span class="fu">c</span>(<span class="st">"#E69F00"</span>, <span class="st">"#56B4E9"</span>, <span class="st">"#009E73"</span>)) <span class="sc">+</span> </span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">2000</span>,<span class="at">linetype=</span><span class="st">"dashed"</span>,<span class="at">color=</span><span class="st">"darkgray"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-dendrogram" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="index_files/figure-html/fig-dendrogram-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;3: A dendrogram showing the hierarchical clustering of the observations for the four physical measurement variables from the <code>penguins</code> data set. The hieght along the vertical axis indicates how different observations are. The height of the horizontal dashed line shows the distance at which the algorithm would cut the dendrogram to form three distinct clusters. The colors are added to the plot after the fact and are not a result of the clustering algorithm.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The leaves at the very bottom of the dendrogram are each of the individual observations in the data. As one moves up the tree, leaves and branches fuse with earlier fusions indicating greater similarity between observations. Note that for any two observations, we can look for the point in the dendrogram where the two branches that contain them fuse. The height of the fusion line at that point indicates how different the two observations are. The height of this fusion, as measured on the vertical axis, indicates how different the two observations are. Thus, observations that fuse at the very bottom of the tree are quite similar to each other, whereas observations that fuse close to the top of the tree will tend to be quite different.</p>
+<p><a href="#fig-dendrogram-interpretation">Figure&nbsp;4</a> shows an example of how to interpret a dendrogram with nine observations in two-dimensional space. One can see that observations 5 and 7 are quite similar to each other, since they fuse at the lowest point on the dendrogram. Obser- vations 1 and 6 are also quite similar to each other. However, it is tempting but incorrect to conclude from the figure that observations 9 and 2 are quite similar to each other on the basis that they are located near each other on the dendrogram. In fact, based on the information contained in the dendrogram, observation 9 is no more similar to observation 2 than it is to observations 8, 5, and 7.</p>
+<div id="fig-dendrogram-interpretation" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="https://www.dropbox.com/scl/fi/zrpir4mf6uwg7pwl9mhtf/12_12.png?rlkey=9cy27dlr3r4ixzw7ak073qfmw&amp;raw=1" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Figure&nbsp;4: An illustration of how to properly interpret a dendrogram with nine observations in two-dimensional space. (Left) a dendrogram generated using Euclidean distance and complete linkage. Observations 5 and 7 are quite similar to each other, as are observations 1 and 6. However, observation 9 is no more similar to observation 2 than it is to observations 8, 5, and 7, even though observations 9 and 2 are close together in terms of horizontal distance. This is because observations 2,8,5, and 7 all fuse with observation 9 at the same height, approximately 1.8. (Right) the raw data used to generate the dendrogram can be used to confirm that indeed, observation 9 is no more similar to observation 2 than it is to observations 8, 5, and 7.</figcaption>
+</figure>
+</div>
 <p>We will explore both k-means and hierarchical clustering further in the lab for this lesson.</p>
 </section>
 </section>
@@ -10706,6 +10736,7 @@ Expand for Session Info
  broom        * 1.0.5   2023-06-09 [1] CRAN (R 4.3.0)
  dials        * 1.2.0   2023-04-03 [1] CRAN (R 4.3.0)
  dplyr        * 1.1.3   2023-09-03 [1] CRAN (R 4.3.0)
+ factoextra   * 1.0.7   2020-04-01 [1] CRAN (R 4.3.0)
  forcats      * 1.0.0   2023-01-29 [1] CRAN (R 4.3.0)
  ggplot2      * 3.4.4   2023-10-12 [1] CRAN (R 4.3.1)
  ggthemes     * 4.2.4   2021-01-20 [1] CRAN (R 4.3.0)
@@ -10723,6 +10754,7 @@ Expand for Session Info
  sessioninfo  * 1.2.2   2021-12-06 [1] CRAN (R 4.3.0)
  stringr      * 1.5.0   2022-12-02 [1] CRAN (R 4.3.0)
  tibble       * 3.2.1   2023-03-20 [1] CRAN (R 4.3.0)
+ tidyclust    * 0.2.0   2023-09-25 [1] CRAN (R 4.3.1)
  tidymodels   * 1.1.1   2023-08-24 [1] CRAN (R 4.3.0)
  tidyr        * 1.3.0   2023-01-24 [1] CRAN (R 4.3.0)
  tidyverse    * 2.0.0   2023-02-22 [1] CRAN (R 4.3.0)
