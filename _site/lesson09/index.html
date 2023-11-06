@@ -2329,7 +2329,7 @@ div.csl-indent {
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>penguins_pca <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(penguins_X, <span class="at">scale =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Let’s consider what is stored in the <code>penguins_pca</code> object. If we examine the object, we will see that it has to components: <code>rotation</code> and <code>x</code>. The rotation matrix will be of size <span class="math inline">\(4 \times 4\)</span> while the <span class="math inline">\(x\)</span> matrix will be the same size as the original data set which is <span class="math inline">\(333 \times 4\)</span>.</p>
+<p>Let’s consider what is stored in the <code>penguins_pca</code> object. If we examine the object, we will see that it has two components: <code>rotation</code> and <code>x</code>. The rotation matrix will be of size <span class="math inline">\(4 \times 4\)</span> while the <span class="math inline">\(x\)</span> matrix will be the same size as the original data set which is <span class="math inline">\(333 \times 4\)</span>.</p>
 <p>First, we can look at the <code>rotation</code> component which contains the principal component directions. Each column of <code>rotation</code> contains a principal component direction. The <code>rotation</code> matrix is shown below.</p>
 <div class="cell">
 <details>
@@ -4413,10 +4413,13 @@ div.csl-indent {
 </div>
 <p>Let’s see what happens when we multiply the <span class="math inline">\(x\)</span> matrix by the transpose of the <code>rotation</code> matrix. The rows of the resulting matrix are shown below.</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>penguins_pca<span class="sc">$</span>x <span class="sc">%*%</span> <span class="fu">t</span>(penguins_pca<span class="sc">$</span>rotation) <span class="sc">%&gt;%</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">"100%"</span>, <span class="at">height =</span> <span class="st">"200px"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:200px; overflow-x: scroll; width:100%; ">
 <table class="table table-sm table-striped small" data-quarto-postprocess="true">
@@ -6435,12 +6438,15 @@ div.csl-indent {
 </div>
 <p>Now, we will see that the previous result is related to the original data set. The first rows of the normalized original data set are shown below.</p>
 <div class="cell">
+<details>
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="sc">%&gt;%</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(flipper_length_mm, body_mass_g, bill_length_mm, bill_depth_mm) <span class="sc">%&gt;%</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">"100%"</span>, <span class="at">height =</span> <span class="st">"200px"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:200px; overflow-x: scroll; width:100%; ">
 <table class="table table-sm table-striped small" data-quarto-postprocess="true">
@@ -8486,6 +8492,7 @@ Cumulative Proportion  0.6863 0.8809 0.97303 1.00000</code></pre>
 </div>
 </div>
 <p>From <a href="#fig-penguins-pca-plot">Figure&nbsp;1</a>, we see that the first two principal components do a good job of separating the penguins by species.</p>
+<p>Now you should have a well-developed intuition for what principal components are. We will now discuss some of the mathematics behind principal components.</p>
 <section id="singular-value-decomposition-svd" class="level3">
 <h3 class="anchored" data-anchor-id="singular-value-decomposition-svd">Singular Value Decomposition (SVD)</h3>
 <p>The <a href="https://en.wikipedia.org/wiki/Singular_value_decomposition">singular value decomposition</a> (SVD) of a matrix is a very important result in linear algebra and is used in many different applications. We will not go into the details of the SVD here, but we will discuss the results of the SVD and how they relate to PCA.</p>
@@ -10727,7 +10734,7 @@ Expand for Session Info
  collate  en_US.UTF-8
  ctype    en_US.UTF-8
  tz       America/New_York
- date     2023-11-02
+ date     2023-11-06
  pandoc   3.1.9 @ /opt/homebrew/bin/ (via rmarkdown)
  quarto   1.3.450 @ /usr/local/bin/quarto
 

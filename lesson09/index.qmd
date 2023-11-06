@@ -136,7 +136,7 @@ penguins_pca <- prcomp(penguins_X, scale = TRUE)
 
 ```
 
-Let's consider what is stored in the `penguins_pca` object. If we examine the object, we will see that it has to components: `rotation` and `x`. The rotation matrix will be of size $4 \times 4$ while the $x$ matrix will be the same size as the original data set which is $333 \times 4$.
+Let's consider what is stored in the `penguins_pca` object. If we examine the object, we will see that it has two components: `rotation` and `x`. The rotation matrix will be of size $4 \times 4$ while the $x$ matrix will be the same size as the original data set which is $333 \times 4$.
 
 
 First, we can look at the `rotation` component which contains the principal component directions. Each column of `rotation` contains a principal component direction. The `rotation` matrix is shown below.
@@ -168,6 +168,9 @@ penguins_pca$x %>%
 Let's see what happens when we multiply the $x$ matrix by the transpose of the `rotation` matrix. The rows of the resulting matrix are shown below.
 
 ```{r}
+#| code-fold: true
+
+
 penguins_pca$x %*% t(penguins_pca$rotation) %>%
   kable() %>%
   kable_styling() %>%
@@ -177,6 +180,8 @@ penguins_pca$x %*% t(penguins_pca$rotation) %>%
 Now, we will see that the previous result is related to the original data set. The first rows of the normalized original data set are shown below.
 
 ```{r}
+#| code-fold: true
+
 penguins %>%
   select(flipper_length_mm, body_mass_g, bill_length_mm, bill_depth_mm) %>%
   scale() %>%
@@ -212,6 +217,8 @@ penguins_pca %>%
 ```
 
 From @fig-penguins-pca-plot, we see that the first two principal components do a good job of separating the penguins by species.
+
+Now you should have a well-developed intuition for what principal components are. We will now discuss some of the mathematics behind principal components.
 
 ### Singular Value Decomposition (SVD)
 
