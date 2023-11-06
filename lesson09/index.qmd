@@ -350,7 +350,7 @@ In this section, we will explore the concept of clustering and how it can be use
   
 ![The progress of the k-means algorithm. ](https://www.dropbox.com/scl/fi/buy1bg61fcfv3lmg8dkm4/12_8.png?rlkey=c2uu761sns0yyl3neq3uoxof2&raw=1){#fig-k-means}
 
-The algorithm is guaranteed to converge to a result, but the result may be a local optimum rather than a global optimum. Therefore, it is common to run the algorithm multiple times from different random initializations. The final result is chosen to be the one with the lowest within-cluster sum of squares, which is a measure of the compactness of the clusters. The within-cluster sum of squares is defined as the sum of the squared Euclidean distances between each point in the cluster and the cluster centroid. The algorithm is sensitive to the initial cluster assignments, so it is common to run the algorithm multiple times from different random initializations. The final result is chosen to be the one with the lowest within-cluster sum of squares, which is a measure of the compactness of the clusters. The within-cluster sum of squares is defined as the sum of the squared Euclidean distances between each point in the cluster and the cluster centroid.
+The algorithm is guaranteed to converge to a result, but the result may be a local optimum rather than a global optimum. Therefore, it is common to run the algorithm multiple times from different random initializations. The final result is chosen to be the one with the lowest within-cluster sum of squares, which is a measure of the compactness of the clusters. The within-cluster sum of squares is defined as the sum of the squared Euclidean distances between each point in the cluster and the cluster centroid. 
 
 
 ### Hierarchical Clustering
