@@ -1,0 +1,118 @@
+---
+title: "Lesson 10"
+subtitle: "Reinforcement Learning"
+author: "JMG"
+format:
+  html:
+    echo: true
+    code-fold: false
+    code-summary: "Show the code"
+    toc: true
+    toc-location: left
+bibliography: lesson10.bib
+license: "CC BY-NC-SA 4.0"
+---
+
+```{r}
+#| include: false
+#| message: false
+#| warning: false
+
+library(tidyverse)
+library(tidymodels)
+library(kableExtra)
+library(ggthemes)
+library(ReinforcementLearning)
+
+tidymodels_prefer()
+
+theme_set(theme_minimal(base_size = 12))
+
+
+penguins <- penguins %>%
+  drop_na()
+
+penguins_X <- penguins %>%
+  select(flipper_length_mm, body_mass_g, bill_length_mm, bill_depth_mm)
+
+```
+
+## Learning Objectives
+
+After this lesson, students will be able to: 
+
+- Describe the [reinforcement learning](https://en.wikipedia.org/wiki/Reinforcement_learning) paradigm in machine learning and how it compares and contrasts with supervised and unsupervised learning.  
+
+- Use [`ReinforcementLearning`](https://cran.r-project.org/web/packages/ReinforcementLearning/vignettes/ReinforcementLearning.html) R package. 
+
+
+## Readings, etc.
+
+For this lesson, refer to the following readings, etc.:
+
+- Read chapter 1 from of *Reinforcement Learning: An Introduction* by Sutton and Barto [@sutton2018reinforcement]. This book is available online [here](http://incompleteideas.net/book/the-book-2nd.html).
+
+- [View reinforcement learning video by Craash Coruse AI on YouTube](https://youtu.be/nIgIv4IfJ6s?si=oCuyZD28P-KlzBPD).
+
+```{r}
+#| echo: false
+
+vembedr::embed_youtube(id="nIgIv4IfJ6s?si=oCuyZD28P-KlzBPD",height=450) %>%
+  vembedr::use_align("center")
+```
+
+- [View intro to reinforcement learning video by David Silver on YouTube](https://youtu.be/2pWv7GOvuf0?si=SiwX8SRl15nGsOu-).
+
+```{r}
+#| echo: false
+
+vembedr::embed_youtube(id="2pWv7GOvuf0?si=SiwX8SRl15nGsOu-",height=450) %>%
+  vembedr::use_align("center")
+
+```
+
+
+## Overview
+
+
+
+
+
+
+
+
+
+## References
+
+::: {#refs}
+:::
+
+
+:::{.callout-tip collapse="true"}
+## Expand for Session Info
+```{r}
+#| echo: false
+
+
+library(sessioninfo)
+# save the session info as an object
+pkg_sesh <- session_info(pkgs = "attached")
+
+# get the quarto version
+quarto_version <- system("quarto --version", intern = TRUE)
+
+# inject the quarto info
+pkg_sesh$platform$quarto <- paste(
+  system("quarto --version", intern = TRUE), 
+  "@", 
+  quarto::quarto_path()
+  )
+
+# print it out
+pkg_sesh
+```
+
+:::
+
+
+[![](http://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-nc-sa.png?raw=1){fig-align="left" width=15%}](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode)
