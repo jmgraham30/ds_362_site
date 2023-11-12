@@ -61,15 +61,8 @@ vembedr::embed_youtube(id="nIgIv4IfJ6s?si=oCuyZD28P-KlzBPD",height=450) %>%
   vembedr::use_align("center")
 ```
 
-- [View intro to reinforcement learning video by David Silver on YouTube](https://youtu.be/2pWv7GOvuf0?si=SiwX8SRl15nGsOu-).
+- [View lecture 1 of intro to reinforcement learning course by Emma Brunskill on YouTube](https://youtu.be/FgzM3zpZ55o?si=JaWnWnU-zPA6LPoc).
 
-```{r}
-#| echo: false
-
-vembedr::embed_youtube(id="2pWv7GOvuf0?si=SiwX8SRl15nGsOu-",height=450) %>%
-  vembedr::use_align("center")
-
-```
 
 
 ## Overview
