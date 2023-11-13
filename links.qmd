@@ -35,6 +35,11 @@ library(tidyverse)
 * Python for Data Analysis, 3E, [view the free online version of the text](https://wesmckinney.com/book/)
 
 
+## Podcasts
+
+* Ezra Klein Show [episode featuring Brian Christian](https://podcasts.apple.com/us/podcast/best-of-is-a-i-the-problem-or-are-we/id1548604447?i=1000590729601)
+
+
 ## Videos
 
 *  Getting started with Quarto YouTube video, [watch video on YouTube](https://youtu.be/YK6IjJkjkiI).
@@ -64,3 +69,15 @@ vembedr::embed_youtube(id="go5Au01Jrvs",height=450) %>%
   vembedr::use_align("center")
 ```
 
+* Stanford CS234: Reinforcement Learning | Winter 2019 | Lecture 1 - Introduction - Emma Brunskill, [watch the video on YouTube](https://youtu.be/FgzM3zpZ55o?si=8fAvUmtk7T3KLKOk).
+
+
+
+* The Alignment Problem: Machine Learning and Human Values with [Brian Christian](), [watch the video on YouTube](https://youtu.be/z6atNBhItBs?si=yU4D-E4yiXgg7dXA).
+
+```{r}
+#| echo: false
+
+vembedr::embed_youtube(id="z6atNBhItBs?si=yU4D-E4yiXgg7dXA",height=450) %>%
+  vembedr::use_align("center")
+```
