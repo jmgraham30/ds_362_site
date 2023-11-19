@@ -28,6 +28,8 @@ Here are the links to the rendered versions of the course materials:
 
 - [Lesson 10](https://knowledge-discovery.netlify.app/lesson10/) - Reinforcement Learning
 
+Assignments for the course are available at [this repository](https://github.com/jmgraham30/ds_201_assignments).
+
 ## License
 
 [![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]
