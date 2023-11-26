@@ -1,0 +1,150 @@
+---
+title: "Lesson 11"
+subtitle: "Ethical Considerations in Machine Learning"
+author: "JMG"
+format:
+  html:
+    echo: true
+    code-fold: false
+    code-summary: "Show the code"
+    toc: true
+    toc-location: left
+license: "CC BY-NC-SA 4.0"
+---
+
+```{r}
+#| include: false
+#| message: false
+#| warning: false
+
+library(tidyverse)
+library(kableExtra)
+library(ggthemes)
+
+
+theme_set(theme_minimal(base_size = 12))
+
+
+```
+
+
+[Watch *Algorithmic Bias and Fairness* video on YouTube](https://youtu.be/gV0_raKR2UQ?si=oCyVg8a7bmlLiN8-).
+
+```{r}
+#| echo: false
+
+vembedr::embed_youtube(id="gV0_raKR2UQ?si=oCyVg8a7bmlLiN8-",height=450) %>%
+  vembedr::use_align("center")
+```
+
+
+## Ethical Considerations in Machine Learning
+
+
+1. **Bias in Algorithmic Decision-Making:**
+   - **Prompt:** Investigate instances where machine learning algorithms have exhibited bias in decision-making processes, leading to unfair outcomes for certain groups. Consider how biases might be introduced during data collection, model training, or in the design of the algorithms. Discuss the ethical implications of biased algorithms and potential strategies to mitigate bias in machine learning systems.
+   - **Resource:** [AI Now Institute - Algorithmic Accountability: A Primer](https://ainowinstitute.org/aiareport2019.pdf)
+
+2. **Ethical Considerations in Automated Hiring Systems:**
+   - **Prompt:** Explore the ethical challenges associated with the use of machine learning in automated hiring systems. Consider issues such as fairness, transparency, and potential biases in the recruitment process. Discuss how the use of AI in hiring might impact diversity and inclusion and explore guidelines or best practices for ethical use in employment-related decision-making.
+   - **Resource:** [Algorithmic Accountability: A Primer for Employment](https://datasociety.net/pubs/ia/DataAndSociety_Algorithmic_Accountability_Primer_2016.pdf)
+
+3. **Privacy Concerns in AI-Powered Surveillance:**
+   - **Prompt:** Investigate the ethical considerations surrounding the use of artificial intelligence in surveillance systems. Examine how facial recognition and other AI technologies may impact individuals' privacy and civil liberties. Discuss the balance between security concerns and the protection of individual rights. Explore cases where AI-powered surveillance has raised ethical concerns and consider regulatory approaches.
+   - **Resource:** [Surveillance Technology Oversight Project (STOP) - Facial Recognition](https://stopspying.org/facial-recognition/)
+
+4. **Explainability and Transparency in AI Models:**
+   - **Prompt:** Explore the ethical implications of using complex machine learning models that lack transparency and explainability. Discuss the challenges associated with making AI systems understandable to non-experts, especially in critical domains such as healthcare and finance. Consider the trade-offs between model accuracy and interpretability and investigate approaches to ensure transparency in AI decision-making.
+   - **Resource:** [Interpretable Machine Learning: A Guide for Making Black Box Models Explainable](https://christophm.github.io/interpretable-ml-book/)
+
+5. **AI and Disinformation:**
+   - **Prompt:** Investigate how artificial intelligence is used in the generation and dissemination of disinformation. Explore cases where AI technologies have been employed to create deepfakes or generate misleading content. Discuss the ethical concerns related to the potential misuse of AI in spreading misinformation and the challenges in developing countermeasures. Consider the role of AI practitioners in addressing this issue.
+   - **Resource:** [Deepfakes and Synthetic Media: Mapping the Landscape](https://www.weforum.org/reports/deepfakes-and-synthetic-media-mapping-the-landscape-and-understanding-the-risks)
+   
+   
+## Case Studies
+
+1. **Amazon's Gender-Biased Recruitment Tool:**
+   - **Description:** Amazon's attempt to use machine learning for automated hiring was criticized for bias against female candidates.
+   - **Resource:** [Amazon scraps secret AI recruiting tool that showed bias against women](https://www.reuters.com/article/us-amazon-com-jobs-automation-insight-idUSKCN1MK08G)
+
+2. **ProPublica's Analysis of COMPAS (Correctional Offender Management Profiling for Alternative Sanctions):**
+   - **Description:** ProPublica's investigation revealed racial bias in the COMPAS algorithm used in criminal sentencing, leading to unfair predictions.
+   - **Resource:** [Machine Bias](https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing)
+
+3. **Google Photos Mislabeling:**
+   - **Description:** Google Photos' image recognition system mislabeled photos of people, including categorizing individuals of certain ethnicities as animals.
+   - **Resource:** [Google Photos, racial bias, and flawed machine learning](https://www.theverge.com/2015/7/1/8880363/google-apologizes-racially-insensitive-image-recognition)
+
+4. **AI-Powered Facial Recognition and Surveillance:**
+   - **Description:** The use of facial recognition technology in surveillance systems has raised concerns about privacy, civil liberties, and the potential for mass surveillance.
+   - **Resource:** [Facial Recognition Technology: Current State of the Art and Ethical Considerations](https://arxiv.org/abs/1801.03842)
+
+5. **Predictive Policing and Bias:**
+   - **Description:** Predictive policing algorithms have been criticized for reinforcing biases and disproportionately targeting certain communities, raising concerns about fairness and discrimination.
+   - **Resource:** [The Perils of Predictive Policing](https://www.scientificamerican.com/article/the-perils-of-predictive-policing/)
+
+6. **Microsoft's Tay Chatbot:**
+   - **Description:** Microsoft's AI-powered chatbot, Tay, was shut down after it started posting offensive and inappropriate content, highlighting the risks of unsupervised learning.
+   - **Resource:** [Microsoft's AI chatbot Tay suspended after Internet 'abuse'](https://www.bbc.com/news/technology-35902104)
+
+7. **Deepfake Technology for Misinformation:**
+   - **Description:** The use of deepfake technology to create realistic but fake videos has raised concerns about the potential for spreading misinformation and manipulating public opinion.
+   - **Resource:** [Deepfakes and Synthetic Media: Mapping the Landscape](https://www.weforum.org/reports/deepfakes-and-synthetic-media-mapping-the-landscape-and-understanding-the-risks)
+
+8. **Automated Content Moderation on Social Media:**
+   - **Description:** AI-powered content moderation systems on social media platforms have been criticized for both overcensorship and failure to prevent the spread of harmful content.
+   - **Resource:** [The challenges of AI content moderation](https://www.theverge.com/2020/6/24/21302263/facebook-ai-content-moderation-mistakes-terrorism-extremist-content)
+
+9. **Automated Grading Bias in Education:**
+   - **Description:** Machine learning algorithms used for automated grading have been found to exhibit biases, potentially disadvantaging certain students.
+   - **Resource:** [Automated essay grading in the presence of biased ratings](https://www.researchgate.net/publication/350328763_Automated_essay_grading_in_the_presence_of_biased_ratings)
+
+10. **Autonomous Vehicles and Ethical Dilemmas:**
+    - **Description:** The development of autonomous vehicles raises ethical dilemmas regarding decision-making in situations where harm is inevitable, leading to debates about prioritizing different stakeholders.
+    - **Resource:** [The Moral Machine Experiment](https://www.nature.com/articles/s41586-018-0637-6)
+
+
+## Approaches to Ethical Machine Learning
+   
+   
+1. **Ethical AI Principles by Leading Organizations:**
+   - **Description:** Many leading organizations have established ethical AI principles to guide the responsible development and deployment of artificial intelligence.
+   - **Resource:** [Principles of AI - Future of Life Institute](https://futureoflife.org/ai-principles/)
+
+2. **Explainable AI (XAI):**
+   - **Description:** Developing machine learning models that are interpretable and provide explanations for their decisions, enhancing transparency and accountability.
+   - **Resource:** [Interpretable Machine Learning: Overview, Challenges, and Opportunities](https://arxiv.org/abs/1901.04592)
+
+3. **Fairness and Bias Mitigation Techniques:**
+   - **Description:** Techniques to identify and mitigate biases in machine learning models to ensure fair outcomes across different demographic groups.
+   - **Resource:** [AI Fairness 360 - Toolkit for Fair and Explainable AI](https://aif360.mybluemix.net/)
+
+4. **AI Ethics Committees and Impact Assessments:**
+   - **Description:** Establishment of AI ethics committees and the implementation of impact assessments to evaluate the ethical implications of AI projects before deployment.
+   - **Resource:** [OECD AI Principles](https://www.oecd.org/going-digital/ai/principles/)
+
+5. **Data Governance and Responsible Data Practices:**
+   - **Description:** Implementing robust data governance frameworks and responsible data practices to ensure the ethical collection, storage, and usage of data in AI projects.
+   - **Resource:** [Data Ethics and the Role of Data Stewards](https://www.datastewardshipwizard.org/dsw_blog/data-ethics-and-the-role-of-data-stewards/)
+
+6. **AI for Social Good and Impact Assessment:**
+   - **Description:** Encouraging the development and application of AI for social good, along with assessing the impact of AI technologies on society and the environment.
+   - **Resource:** [AI for Social Good: The Responsible AI Lifecycle](https://www.microsoft.com/en-us/research/project/ai-for-social-good/)
+
+7. **Responsible AI Certification and Standards:**
+   - **Description:** Certification programs and standards that assess and verify the ethical and responsible practices of AI systems.
+   - **Resource:** [IEEE P7003 - Standard for Algorithmic Bias Considerations](https://standards.ieee.org/project/7003.html)
+
+8. **Public Awareness and Education Initiatives:**
+   - **Description:** Public awareness campaigns and educational initiatives to inform the general public, policymakers, and developers about the ethical considerations of AI.
+   - **Resource:** [AI Ethics Guidelines for Policymakers](https://www.weforum.org/whitepapers/ai-ethics-guidelines-for-policymakers/)
+
+9. **AI Transparency and Open Source Practices:**
+   - **Description:** Advocacy for transparency in AI development, including open-sourcing AI models and sharing code to facilitate scrutiny and collaboration.
+   - **Resource:** [OpenAI’s Charter](https://www.openai.com/charter/)
+
+10. **Collaborative and Multidisciplinary Approaches:**
+   - **Description:** Encouraging collaboration between AI researchers, ethicists, policymakers, and other stakeholders to address ethical challenges from diverse perspectives.
+   - **Resource:** [Partnership on AI](https://www.partnershiponai.org/)
+
