@@ -91,7 +91,7 @@ Here the agent must navigate from a random starting position to a final position
 
 Each cell on the grid reflects one state, yielding a total of 4 different states. In each state, the agent can perform one out of four possible actions: to move up, down, left, or right, with the only restriction being that it must remain on the grid. In other words, the grid is surrounded by a wall, which makes it impossible for the agent to move off the grid. A wall between s1 and s4 hinders direct movements between these states. Finally, the reward structures is as follows: each movement leads to a negative reward of -1 in order to penalize routes that are not the shortest path. If the agent reaches the goal position, it earns a reward of 10.
 
-We first define the sets of available states (states) and actions (actions).
+We first define the sets of available states (`states`) and actions (`actions`).
 
 ```{r}
 # Define state and action sets

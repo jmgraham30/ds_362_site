@@ -268,7 +268,7 @@ div.csl-indent {
 </tbody>
 </table>
 <p>Each cell on the grid reflects one state, yielding a total of 4 different states. In each state, the agent can perform one out of four possible actions: to move up, down, left, or right, with the only restriction being that it must remain on the grid. In other words, the grid is surrounded by a wall, which makes it impossible for the agent to move off the grid. A wall between s1 and s4 hinders direct movements between these states. Finally, the reward structures is as follows: each movement leads to a negative reward of -1 in order to penalize routes that are not the shortest path. If the agent reaches the goal position, it earns a reward of 10.</p>
-<p>We first define the sets of available states (states) and actions (actions).</p>
+<p>We first define the sets of available states (<code>states</code>) and actions (<code>actions</code>).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define state and action sets</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>states <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"s1"</span>, <span class="st">"s2"</span>, <span class="st">"s3"</span>, <span class="st">"s4"</span>)</span>
@@ -302,7 +302,7 @@ div.csl-indent {
     out &lt;- list(NextState = next_state, Reward = reward)
     return(out)
 }
-&lt;bytecode: 0x158df5a80&gt;
+&lt;bytecode: 0x13c1ab468&gt;
 &lt;environment: namespace:ReinforcementLearning&gt;</code></pre>
 </div>
 </div>
@@ -316,12 +316,12 @@ div.csl-indent {
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  State Action Reward NextState
-1    s4   left     -1        s4
-2    s2     up     -1        s1
-3    s4  right     -1        s4
-4    s1  right     -1        s1
-5    s3     up     10        s4
-6    s2   left     -1        s2</code></pre>
+1    s1     up     -1        s1
+2    s3   down     -1        s3
+3    s1   left     -1        s1
+4    s1   down     -1        s2
+5    s2   left     -1        s2
+6    s4   left     -1        s4</code></pre>
 </div>
 </div>
 <p>We can now use the observation sequence in data in order to learn the optimal behavior of the agent. For this purpose, we first customize the learning behavior of the agent by defining a control object. We follow the default parameter choices and set the learning rate alpha to 0.1, the discount factor gamma to 0.5 and the exploration greediness epsilon to 0.1. Subsequently, we use the <code>ReinforcementLearning()</code> function to learn the best possible policy for the the input data.</p>
@@ -343,7 +343,7 @@ div.csl-indent {
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">computePolicy</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     s1      s2      s3      s4 
- "down" "right"    "up" "right" </code></pre>
+ "down" "right"    "up"    "up" </code></pre>
 </div>
 </div>
 <div class="cell">
@@ -352,17 +352,17 @@ div.csl-indent {
 <div class="cell-output cell-output-stdout">
 <pre><code>State-Action function Q
         right         up       down       left
-s1 -0.7318882 -0.7007791  0.7204639 -0.7190629
-s2  3.5966366 -0.7266456  0.7799772  0.7426842
-s3  3.5912954  9.1711692  3.5924400  0.7641220
-s4 -1.7695876 -1.8309604 -1.7882949 -1.8294700
+s1 -0.7806282 -0.7187088  0.7031033 -0.6955867
+s2  3.5449202 -0.7563086  0.6773714  0.6880484
+s3  3.5301395  9.0898446  3.5176874  0.6987833
+s4 -1.9156868 -1.8958446 -1.9097816 -1.9040378
 
 Policy
      s1      s2      s3      s4 
- "down" "right"    "up" "right" 
+ "down" "right"    "up"    "up" 
 
 Reward (last iteration)
-[1] -296</code></pre>
+[1] -307</code></pre>
 </div>
 </div>
 <p>Ultimately, we can use <code>summary(model)</code> to inspect the model further. This command outputs additional diagnostics regarding the model such as the number of states and actions. Moreover, it allows us to analyze the distribution of rewards. For instance, we see that the total reward in our sample (<em>i.e.</em> the sum of the rewards column <code>r</code>) is highly negative. This indicates that the random policy used to generate the state transition samples deviates from the optimal case. Hence, the next section explains how to apply and update a learned policy with new data samples.</p>
@@ -376,13 +376,13 @@ Learning rule:           experienceReplay
 Learning iterations:     1
 Number of states:        4
 Number of actions:       4
-Total Reward:            -296
+Total Reward:            -307
 
 Reward details (per iteration)
-Min:                     -296
-Max:                     -296
-Average:                 -296
-Median:                  -296
+Min:                     -307
+Max:                     -307
+Average:                 -307
+Median:                  -307
 Standard deviation:      NA</code></pre>
 </div>
 </div>
@@ -430,18 +430,18 @@ Standard deviation:      NA</code></pre>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(model_new)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>State-Action function Q
-       right         up       down       left
-s1 -0.672282 -0.6553020  0.7716232 -0.6498042
-s2  3.543147 -0.6568728  0.7762635  0.7576520
-s3  3.575227  9.0862229  3.5662817  0.7681950
-s4 -1.913763 -1.8576439 -1.8275648 -1.8494374
+        right         up       down       left
+s1 -0.7142893 -0.6577779  0.7595179 -0.6748781
+s2  3.5187272 -0.7426023  0.7216218  0.7176458
+s3  3.5277219  9.0372200  3.5206891  0.7323016
+s4 -1.9260006 -1.9627441 -1.9274361 -1.9257462
 
 Policy
      s1      s2      s3      s4 
- "down" "right"    "up"  "down" 
+ "down" "right"    "up"  "left" 
 
 Reward (last iteration)
-[1] 1563</code></pre>
+[1] 1750</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -483,7 +483,7 @@ Expand for Session Info
  collate  en_US.UTF-8
  ctype    en_US.UTF-8
  tz       America/New_York
- date     2023-11-20
+ date     2023-11-27
  pandoc   3.1.9 @ /opt/homebrew/bin/ (via rmarkdown)
  quarto   1.3.450 @ /usr/local/bin/quarto
 
@@ -494,7 +494,7 @@ Expand for Session Info
  dplyr                 * 1.1.4   2023-11-17 [1] CRAN (R 4.3.1)
  forcats               * 1.0.0   2023-01-29 [1] CRAN (R 4.3.0)
  ggplot2               * 3.4.4   2023-10-12 [1] CRAN (R 4.3.1)
- ggthemes              * 4.2.4   2021-01-20 [1] CRAN (R 4.3.0)
+ ggthemes              * 5.0.0   2023-11-21 [1] CRAN (R 4.3.1)
  infer                 * 1.0.5   2023-09-06 [1] CRAN (R 4.3.0)
  kableExtra            * 1.3.4   2021-02-20 [1] CRAN (R 4.3.0)
  lubridate             * 1.9.3   2023-09-27 [1] CRAN (R 4.3.1)
