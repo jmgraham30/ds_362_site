@@ -119,7 +119,7 @@ head(data)
 ```
 
 
-We can now use the observation sequence in data in order to learn the optimal behavior of the agent. For this purpose, we first customize the learning behavior of the agent by defining a control object. We follow the default parameter choices and set the learning rate alpha to 0.1, the discount factor gamma to 0.5 and the exploration greediness epsilon to 0.1. Subsequently, we use the `ReinforcementLearning()` function to learn the best possible policy for the the input data.
+We can now use the observation sequence in `data` in order to learn the optimal behavior of the agent. For this purpose, we first customize the learning behavior of the agent by defining a control object. We follow the default parameter choices and set the learning rate alpha to 0.1, the discount factor gamma to 0.5 and the exploration greediness epsilon to 0.1. Subsequently, we use the `ReinforcementLearning()` function to learn the best possible policy for the the input data.
 
 ```{r}
 # Define reinforcement learning parameters

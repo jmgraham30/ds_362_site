@@ -302,7 +302,7 @@ div.csl-indent {
     out &lt;- list(NextState = next_state, Reward = reward)
     return(out)
 }
-&lt;bytecode: 0x13c1ab468&gt;
+&lt;bytecode: 0x1396f4540&gt;
 &lt;environment: namespace:ReinforcementLearning&gt;</code></pre>
 </div>
 </div>
@@ -316,15 +316,15 @@ div.csl-indent {
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  State Action Reward NextState
-1    s1     up     -1        s1
-2    s3   down     -1        s3
+1    s2   down     -1        s2
+2    s2   left     -1        s2
 3    s1   left     -1        s1
-4    s1   down     -1        s2
-5    s2   left     -1        s2
-6    s4   left     -1        s4</code></pre>
+4    s1   left     -1        s1
+5    s3  right     -1        s3
+6    s1     up     -1        s1</code></pre>
 </div>
 </div>
-<p>We can now use the observation sequence in data in order to learn the optimal behavior of the agent. For this purpose, we first customize the learning behavior of the agent by defining a control object. We follow the default parameter choices and set the learning rate alpha to 0.1, the discount factor gamma to 0.5 and the exploration greediness epsilon to 0.1. Subsequently, we use the <code>ReinforcementLearning()</code> function to learn the best possible policy for the the input data.</p>
+<p>We can now use the observation sequence in <code>data</code> in order to learn the optimal behavior of the agent. For this purpose, we first customize the learning behavior of the agent by defining a control object. We follow the default parameter choices and set the learning rate alpha to 0.1, the discount factor gamma to 0.5 and the exploration greediness epsilon to 0.1. Subsequently, we use the <code>ReinforcementLearning()</code> function to learn the best possible policy for the the input data.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define reinforcement learning parameters</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>control <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>, <span class="at">gamma =</span> <span class="fl">0.5</span>, <span class="at">epsilon =</span> <span class="fl">0.1</span>)</span>
@@ -343,7 +343,7 @@ div.csl-indent {
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">computePolicy</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     s1      s2      s3      s4 
- "down" "right"    "up"    "up" </code></pre>
+ "down" "right"    "up"  "down" </code></pre>
 </div>
 </div>
 <div class="cell">
@@ -351,18 +351,18 @@ div.csl-indent {
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>State-Action function Q
-        right         up       down       left
-s1 -0.7806282 -0.7187088  0.7031033 -0.6955867
-s2  3.5449202 -0.7563086  0.6773714  0.6880484
-s3  3.5301395  9.0898446  3.5176874  0.6987833
-s4 -1.9156868 -1.8958446 -1.9097816 -1.9040378
+       right         up       down       left
+s1 -0.666559 -0.7217265  0.7478086 -0.6731656
+s2  3.544597 -0.6613608  0.7321788  0.7128637
+s3  3.549969  9.1240922  3.5719605  0.7102793
+s4 -1.874111 -1.8797471 -1.8537329 -1.8736648
 
 Policy
      s1      s2      s3      s4 
- "down" "right"    "up"    "up" 
+ "down" "right"    "up"  "down" 
 
 Reward (last iteration)
-[1] -307</code></pre>
+[1] -351</code></pre>
 </div>
 </div>
 <p>Ultimately, we can use <code>summary(model)</code> to inspect the model further. This command outputs additional diagnostics regarding the model such as the number of states and actions. Moreover, it allows us to analyze the distribution of rewards. For instance, we see that the total reward in our sample (<em>i.e.</em> the sum of the rewards column <code>r</code>) is highly negative. This indicates that the random policy used to generate the state transition samples deviates from the optimal case. Hence, the next section explains how to apply and update a learned policy with new data samples.</p>
@@ -376,13 +376,13 @@ Learning rule:           experienceReplay
 Learning iterations:     1
 Number of states:        4
 Number of actions:       4
-Total Reward:            -307
+Total Reward:            -351
 
 Reward details (per iteration)
-Min:                     -307
-Max:                     -307
-Average:                 -307
-Median:                  -307
+Min:                     -351
+Max:                     -351
+Average:                 -351
+Median:                  -351
 Standard deviation:      NA</code></pre>
 </div>
 </div>
@@ -431,17 +431,17 @@ Standard deviation:      NA</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>State-Action function Q
         right         up       down       left
-s1 -0.7142893 -0.6577779  0.7595179 -0.6748781
-s2  3.5187272 -0.7426023  0.7216218  0.7176458
-s3  3.5277219  9.0372200  3.5206891  0.7323016
-s4 -1.9260006 -1.9627441 -1.9274361 -1.9257462
+s1 -0.6347337 -0.6580153  0.7634123 -0.6470626
+s2  3.5263991 -0.6385753  0.7483114  0.7314178
+s3  3.5386849  9.0521775  3.5450369  0.7289712
+s4 -1.8965530 -1.9154654 -1.9478678 -1.9062823
 
 Policy
      s1      s2      s3      s4 
- "down" "right"    "up"  "left" 
+ "down" "right"    "up" "right" 
 
 Reward (last iteration)
-[1] 1750</code></pre>
+[1] 1772</code></pre>
 </div>
 </div>
 <div class="cell">
