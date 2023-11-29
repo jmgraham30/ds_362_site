@@ -34,6 +34,8 @@ library(tidyverse)
 
 * Python for Data Analysis, 3E, [view the free online version of the text](https://wesmckinney.com/book/)
 
+* A Working Example of Tuning a Decision Tree with Python, [view the document](https://jmgxtalks.netlify.app/python_ml_example/).
+
 
 ## Podcasts
 
