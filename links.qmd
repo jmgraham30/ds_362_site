@@ -22,6 +22,8 @@ library(tidyverse)
 
 * [Julia Silge's](https://juliasilge.com/) blog posts (mostly) on TidyTuesday data analyses, [view the website](https://juliasilge.com/blog/).
 
+* [Course website](https://people.eecs.berkeley.edu/~jrs/189/) for CS 189/289A *Introduction to Machine Learning* at UC Berkeley as taught by Professor [Jonathan Shewchuk](https://people.eecs.berkeley.edu/~jrs/), [view the website]((https://people.eecs.berkeley.edu/~jrs/189/).
+
 ## Texts
 
 ### R Related
