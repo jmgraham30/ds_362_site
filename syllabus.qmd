@@ -178,8 +178,6 @@ A complete project, counting for 30% of the overall course grade will consist of
 
 - A project report developed using Quarto.
 
-- Slides for a presentation summarizing your project. You will not actually present the slides. 
-
 - A GitHub repository containing all code (appropriately documented) written and used in your project.
 
 Your project report and presentation should be written as if it is addressed to a stake holder with some subject matter knowledge in the domain of application but not necessarily with a quantitative or programming background. Further details on the semester project such as the parameters of the assignment and a grade rubric will be posted on the course learning management system. 
