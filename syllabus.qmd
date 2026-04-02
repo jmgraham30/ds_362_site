@@ -77,7 +77,7 @@ Max Kuhn & Julia Silge, [view the free online version of the text](https://www.t
 
 ## Prerequisites
 
-> DS 201 and DS 210
+> CMPS 240, DS 201, and DS 210
 
 ## Course Overview
 
