@@ -10,21 +10,21 @@ license: "CC BY-NC-SA 4.0"
 library(kableExtra)
 ```
 
-# DS 362 Data-Driven Knowledge Discovery
+# DS 362 Introduction to Machine Learning
 
 
 # Instructor Information
 
-* **Instructor:** Dr. Jason M. Graham
+* **Instructor:** 
 
-* **Office:** LSC 319A 
-    + **Office Hours:** Mondays 12:30-1:30, Wednesdays 9:30-10:30 and 12:30-1:30. You may also make an appointment to meet with me outside of scheduled office hours. Appointments are not necessary for regularly scheduled office hours.
+* **Office:** 
+    + **Office Hours:** 
     
-* **Instructor Schedule:** [View my weekly schedule](https://docs.google.com/spreadsheets/d/1yj1OrNuLHq7CILUpIIgj6uHqQ9IYmA3hiCaiThPXB1Y/edit?usp=sharing)
+* **Instructor Schedule:** 
 
-* **Email:** <jason.graham@scranton.edu>
+* **Email:** 
 
-* **Phone:** (570) 941-7491
+* **Phone:** 
 
 * **Course Page:** [View course webpage](https://knowledge-discovery.netlify.app/)
 
@@ -73,11 +73,15 @@ Max Kuhn & Julia Silge, [view the free online version of the text](https://www.t
 
 ## Course Description
 
-> This course covers the process of knowledge discovery including data selection, pre-processing, transformation, data mining, evaluation, and validation, with an emphasis on data mining concepts, algorithms, and techniques for common tasks such as association rule learning, classification, regression, clustering, and outlier detection.
+> This course provides an introduction to machine learning, covering topics such as data selection, pre-processing, and transformation; supervised learning methods such as classification and regression; unsupervised methods such as clustering and dimensionality reduction; and model selection and validation. Additional relevant topics may also be covered. 
 
-### Prerequisites
+## Prerequisites
 
-> CMPS 240 and DS 201 and DS 210
+> DS 201 and DS 210
+
+## Course Overview
+
+> DS 362 builds on the foundations estbalished in DS 201 and DS 210 to introduce students to the field of machine learning. The course will cover a variety of machine learning methods and applications. Machine learning is the basis for many of the most powerful contemporary approaches to artificial intelligence and data science. After taking this course students will be well-prepared to apply machine learning methods in a variety of contexts and to pursue further study in data science, machine learning and artificial intelligence. 
 
 ## Student Learning Objectives and Assessment:
 
@@ -225,7 +229,7 @@ Your project report and presentation should be written as if it is addressed to 
 
 
 events <- c("Classes begin","Last day to add classes","Holiday, no classes","100% tuition refund","Drop (no grade)","Fall break","Mid-semester","Withdraw with W","Thanksgiving break","Last week","Finals")
-event_date <- c("08-28","90-01","09-04","09-06","09-27","10-07 to 10-10","10-18","11-10","11-22 to 11-26","12-05 to 12-11","12-12 to 12-16")
+event_date <- c("","","","",""," to ","",""," to "," to "," to ")
 important_dates_df <- tibble::tibble("Event"=events,"Date"=event_date)
 ```
 

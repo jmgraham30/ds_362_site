@@ -29,7 +29,7 @@ tidymodels_prefer()
 theme_set(theme_minimal(base_size = 12))
 
 
-penguins <- penguins %>%
+penguins <- modeldata::penguins %>%
   drop_na()
 
 penguins_X <- penguins %>%

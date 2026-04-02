@@ -436,7 +436,7 @@ Consider again the `penguins` data set, the first few rows of which are displaye
 #| label: tbl-pengs-data
 #| tbl-cap: The first few rows of the Palmer Penguins data set.
 
-penguins %>%
+modeldata::penguins %>%
   head() %>%
   kable()
 ```

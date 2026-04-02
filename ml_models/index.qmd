@@ -561,7 +561,7 @@ Now we will select a final model based on the tuning results.
 #| echo: true
 #| code-fold: true
 
-best_rmse <- select_best(tune_res, "rmse")
+best_rmse <- select_best(tune_res, metric="rmse")
 
 final_rf <- finalize_model(
   rf_spec,

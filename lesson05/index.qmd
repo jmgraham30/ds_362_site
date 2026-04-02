@@ -26,6 +26,8 @@ library(kableExtra)
 tidymodels_prefer()
 
 theme_set(theme_minimal(base_size = 13))
+
+penguins <- modeldata::penguins
 ```
 
 ## Learning Objectives

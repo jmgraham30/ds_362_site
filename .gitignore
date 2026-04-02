@@ -8,3 +8,5 @@ esl_data
 R
 
 islr_files
+
+**/*.quarto_ipynb
