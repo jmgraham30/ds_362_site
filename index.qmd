@@ -1,12 +1,12 @@
 ---
-title: "DS 362: Data-Driven Knowledge Discovery"
+title: "DS 362: Introduction to Machine Learning"
 ---
 
 ## Welcome!
 
-Welcome to the course website for DS 362: Data-Driven Knowledge Discovery for Fall 2023.
+Welcome to the course website for DS 362: Introduction to Machine Learning for Fall 2027.
 
-This course provides an introduction to machine learning and is offered at the [University of Scranton](https://www.scranton.edu/) as taught by [Mathematics Department](https://www.scranton.edu/academics/cas/math/index.shtml) faculty member [Jason M. Graham](https://sites.google.com/site/jasonmgrahamus/) during the Fall 2023 semester.
+This course builds on the foundations established in DS 201 *Intro to Data Science* and DS 210 *Math Methods for Data Science* to introduce students to the field of machine learning. The course will cover a variety of machine learning methods and applications. Machine learning is the basis for many of the most powerful contemporary approaches to artificial intelligence and data science. After taking this course students will be well-prepared to apply machine learning methods in a variety of contexts and to pursue further study in data science, machine learning and artificial intelligence.
 
 
 
